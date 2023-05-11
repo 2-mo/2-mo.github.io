@@ -1,0 +1,1 @@
+import{_ as a,X as t,Y as c,a1 as e,a2 as r}from"./framework-84dd2d5e.js";const s={},o=e("h1",{id:"vad",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#vad","aria-hidden":"true"},"#"),r(" VAD")],-1),n=[o];function _(d,i){return t(),c("div",null,n)}const l=a(s,[["render",_],["__file","VAD.html.vue"]]);export{l as default};
