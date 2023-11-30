@@ -1,0 +1,2 @@
+import{_ as e,X as n,Y as s,Z as a}from"./framework-5a8052d6.js";const t={},o=a(`<div class="language-python line-numbers-mode" data-ext="py"><pre class="language-python"><code><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>`,1),c=[o];function d(i,r){return n(),s("div",null,c)}const p=e(t,[["render",d],["__file","index.html.vue"]]);export{p as default};
