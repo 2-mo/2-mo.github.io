@@ -5,7 +5,7 @@ export default defineUserConfig({
   base: "/",
 
   lang: "en-US",
-  title: "Blog Demo",
+  title: "Tiu Mo's Blog",
   description: "A blog demo for vuepress-theme-hope",
 
   theme,

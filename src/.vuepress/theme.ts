@@ -13,7 +13,7 @@ export default hopeTheme({
 
   iconAssets: "fontawesome-with-brands",
 
-  logo: "assets/icon/raccoon5.png",
+  logo: "assets/icon/3806.JPG",
 
   repo: "https://github.com/2-mo/2-mo.github.io",
 

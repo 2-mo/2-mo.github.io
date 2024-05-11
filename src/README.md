@@ -2,10 +2,11 @@
 home: true
 layout: BlogHome
 icon: home
-title: Blog Home
-heroImage: assets/icon/raccoon6a.png
-heroText: The name of your blog
+title: Home
+heroImage: assets/icon/DA.svg
+heroText: Tiu Mo
 tagline: You can put your slogan here
+bgImage: assets/images/cover2.jpg
 heroFullScreen: true
 projects:
   - icon: project
