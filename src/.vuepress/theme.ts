@@ -4,18 +4,18 @@ import sidebar from "./sidebar.js";
 import { MR_HOPE_AVATAR } from "./logo.js";
 
 export default hopeTheme({
-  hostname: "https://mister-hope.github.io",
+  hostname: "https://2-mo.github.io",
 
   author: {
     name: "Tiu Mo",
-    url: "https://mister-hope.com",
+    url: "https://2-mo.github.io",
   },
 
   iconAssets: "fontawesome-with-brands",
 
-  logo: "https://theme-hope-assets.vuejs.press/logo.svg",
+  logo: "assets/icon/raccoon5.png",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "https://github.com/2-mo/2-mo.github.io",
 
   docsDir: "src",
 
@@ -23,7 +23,8 @@ export default hopeTheme({
   navbar,
 
   // sidebar
-  sidebar,
+  // sidebar,
+  sidebar: "structure",
 
   footer: "Default footer",
 
@@ -46,21 +47,21 @@ export default hopeTheme({
       Discord: "https://example.com",
       Dribbble: "https://example.com",
       Email: "mailto:info@example.com",
-      Evernote: "https://example.com",
-      Facebook: "https://example.com",
-      Flipboard: "https://example.com",
-      Gitee: "https://example.com",
-      GitHub: "https://example.com",
-      Gitlab: "https://example.com",
-      Gmail: "mailto:info@example.com",
-      Instagram: "https://example.com",
-      Lark: "https://example.com",
-      Lines: "https://example.com",
-      Linkedin: "https://example.com",
-      Pinterest: "https://example.com",
-      Pocket: "https://example.com",
-      QQ: "https://example.com",
-      Qzone: "https://example.com",
+      // Evernote: "https://example.com",
+      // Facebook: "https://example.com",
+      // Flipboard: "https://example.com",
+      // Gitee: "https://example.com",
+      // GitHub: "https://example.com",
+      // Gitlab: "https://example.com",
+      // Gmail: "mailto:info@example.com",
+      // Instagram: "https://example.com",
+      // Lark: "https://example.com",
+      // Lines: "https://example.com",
+      // Linkedin: "https://example.com",
+      // Pinterest: "https://example.com",
+      // Pocket: "https://example.com",
+      // QQ: "https://example.com",
+      // Qzone: "https://example.com",
       Reddit: "https://example.com",
       Rss: "https://example.com",
       Steam: "https://example.com",
