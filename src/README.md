@@ -6,7 +6,7 @@ title: Home
 heroImage: assets/icon/DA.svg
 heroText: Tiu Mo
 tagline: You can put your slogan here
-bgImage: assets/images/cover2.jpg
+bgImage: assets/images/2307-min.jpg
 heroFullScreen: true
 projects:
   - icon: project
