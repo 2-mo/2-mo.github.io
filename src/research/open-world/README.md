@@ -14,6 +14,8 @@ https://github.com/gudovskiy/cflow-ad/tree/master
 https://github.com/Fanghua-Yu/SUPIR/tree/master (盲超分)
 https://github.com/lixinustc/Awesome-diffusion-model-for-image-processing
 
+https://github.com/LTH14/mage (This is a PyTorch/GPU re-implementation of the paper MAGE: MAsked Generative Encoder to Unify Representation Learning and Image Synthesis (to appear in CVPR 2023))
+
 
 ## 大模型
 大模型价值对齐：

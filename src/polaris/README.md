@@ -26,6 +26,9 @@ dir:
 `会议论文` > [CVF Open Access](https://openaccess.thecvf.com/menu) &emsp;
 `开源代码` > [Paper With Code](https://paperswithcode.com) &emsp;
 
+`论文关联` > [connectedpapers](https://www.connectedpapers.com/) &emsp;
+
+
 
 ## ⚓️论文下载
 

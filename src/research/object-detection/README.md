@@ -1,5 +1,5 @@
 ---
-title: 目标检测
+title: Object Detection
 ---
 
 # 目标检测（Object Detection）

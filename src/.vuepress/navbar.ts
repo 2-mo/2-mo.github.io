@@ -7,40 +7,37 @@ export default navbar([
   {
     text: "Reading",
     icon: "road",
-    prefix: "/posts/",
+    prefix: "research/",
     children: [
       {
         text: "Open World",
         icon: "pen-to-square",
         prefix: "open-world/",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "overview", icon: "pen-to-square", link: "README.md" },
         ],
       },
       {
-        text: "Open World",
+        text: "Object Detection",
         icon: "pen-to-square",
-        prefix: "open-world/",
+        prefix: "object-detection/",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "overview", icon: "pen-to-square", link: "README.md" },
         ],
       },
       {
-        text: "Open World",
+        text: "Anomaly Discovery",
         icon: "pen-to-square",
-        prefix: "open-world/",
+        prefix: "anomaly-discovery/",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "overview", icon: "pen-to-square", link: "README.md" },
         ],
       },
       {
-        text: "-",
+        text: "Embodied Intelligence",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "Autonomous Driving", icon: "pen-to-square", link: "1" },
+          { text: "Robot", icon: "pen-to-square", link: "2" },
         ],
       },
     ],
@@ -55,7 +52,7 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "ubuntu/",
         children: [
-          { text: "环境配置", icon: "pen-to-square", link: "README.md" },
+          { text: "ubuntu", icon: "pen-to-square", link: "README.md" },
           { text: "Apple2", icon: "pen-to-square", link: "2" },
         ],
       },
@@ -73,10 +70,11 @@ export default navbar([
   {
     text: "Uncovering",
     icon: "fire",
-    prefix: "/posts/",
+    prefix: "/uncover/",
     children: [
+      { text: "overview", icon: "pen-to-square", link: "README.md" },
       {
-        text: "Ubuntu",
+        text: "Big Model",
         icon: "pen-to-square",
         prefix: "open-world/",
         children: [
@@ -85,7 +83,7 @@ export default navbar([
         ],
       },
       {
-        text: "Open World",
+        text: "Handy Kit",
         icon: "pen-to-square",
         prefix: "open-world/",
         children: [

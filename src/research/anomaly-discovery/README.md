@@ -60,3 +60,6 @@ https://github.com/jinwchoi/awesome-action-recognition
 
 https://github.com/fjchange/awesome-video-anomaly-detection/blob/master/README.md
 
+
+### 人脸识别算法
+https://github.com/ageitgey/face_recognition
