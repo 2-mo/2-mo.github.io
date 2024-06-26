@@ -116,6 +116,8 @@ For more examples and ideas, visit: https://docs.docker.com/get-started/
 docker pull pytorch/pytorch
 ```
 
+https://hub.docker.com/search?q=pytorch
+
 #### 准备 requirements.txt
 
 ```bash
@@ -163,10 +165,10 @@ docker login 172.20.5.95:38080
 # 输入正确的用户名和密码。
 
 # 3. 标记本地镜像
-docker tag unimatch:latest 172.20.5.95:38080/a2d/unimatch:latest
+docker tag ori:latest 172.20.5.95:38080/a2d/ori:latest
 
 # 4. 推送镜像到仓库
-docker push 172.20.5.95:38080/a2d/unimatch:latest
+docker push 172.20.5.95:38080/a2d/ori:latest
 ```
 
 # TODO
@@ -249,14 +251,13 @@ docker login http://172.20.5.95:38080
 标记本地镜像
 
 ```bash
-docker tag <镜像名称>:<版本>
-http://172.20.5.95:38080/<分组名称>/<镜像名称>:<版本>
+docker tag <镜像名称>:<版本> 172.20.5.95:38080/<分组名称>/<镜像名称>:<版本>
 ```
 
 推送至镜像仓库
 
 ```bash
-docker push http://172.20.5.95:38080/<分组名称>/<镜像名称>:<版本>
+docker push 172.20.5.95:38080/<分组名称>/<镜像名称>:<版本>
 ```
 
 镜像适配

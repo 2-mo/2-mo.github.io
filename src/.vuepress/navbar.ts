@@ -72,13 +72,13 @@ export default navbar([
     icon: "fire",
     prefix: "/uncover/",
     children: [
-      { text: "overview", icon: "pen-to-square", link: "README.md" },
+      { text: "overview", icon: "eye", link: "README.md" },
       {
         text: "Big Model",
-        icon: "pen-to-square",
+        icon: "eye",
         prefix: "open-world/",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
+          { text: "ICL/CoT/GoT", icon: "fire", link: "1" },
           { text: "Apple2", icon: "pen-to-square", link: "2" },
         ],
       },

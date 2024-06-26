@@ -8,7 +8,9 @@ dir:
 # Polaris
 
 科研常用网站
+
 ## DEADLINE
+
 `会议截稿` > [CCF-DDL](https://ccfddl.github.io/) &emsp;
 
 ## 🔍论文检索
@@ -28,8 +30,6 @@ dir:
 
 `论文关联` > [connectedpapers](https://www.connectedpapers.com/) &emsp;
 
-
-
 ## ⚓️论文下载
 
 `英文论文` > [企鹅论文](https://doi.qqsci.com) &emsp;
@@ -40,10 +40,10 @@ dir:
 
 `PDF` > [OCEANOF](https://oceanofpdf.com) &emsp;
 
-
 `文献互助群(QQ群:700078187)` > [纬度重邮](http://spis.hnlat.com/) &emsp;
 
 ## 研究机构
+
 `Google` > [Google Research](https://ai.googleblog.com/) &emsp;
 `Meta` > [FaceBook Research](https://research.facebook.com/research-areas/machine-learning/) &emsp;
 
@@ -53,26 +53,26 @@ dir:
 `Blog` > [Distill](https://distill.pub/) &emsp;
 `Blog` > [Lil'Log](https://lilianweng.github.io/) &emsp;
 
-
 ## 🔨科研工具
 
 ### 软件合集
+
 `工作流` > [Mac](https://github.com/Louiszhai/tool/blob/master/README.md) &emsp;
 `工作流` > [Windows](https://github.com/Awesome-Windows/Awesome/blob/master/README-cn.md) &emsp;
 `工作流` > [Linux](https://github.com/luong-komorebi/Awesome-Linux-Software/blob/master/README_zh-CN.md) &emsp;
 
 ## 2K显示器HiDpi开启
-https://github.com/waydabber/BetterDisplay
-https://github.com/xzhih/one-key-hidpi
-
+<https://github.com/waydabber/BetterDisplay>
+<https://github.com/xzhih/one-key-hidpi>
 
 ### 实用软件
+
 `IDE` > [VS Code](https://code.visualstudio.com/) &emsp;
 `爬虫` > [八爪鱼](https://www.bazhuayu.com/) &emsp;
 
 ### 科学上网
-`VPN指南` > [海豚湾机场](https://help.hitun.io/zh/) &emsp;
 
+`VPN指南` > [海豚湾机场](https://help.hitun.io/zh/) &emsp;
 
 ## 🔧在线工具
 
@@ -84,8 +84,8 @@ https://github.com/xzhih/one-key-hidpi
 `PDF压缩` > [PDF Compressor](https://pdfcompressor.com/zh/) &emsp;
 `词云` > [Word Art](https://wordart.com/) &emsp;
 
-
 ### 格式转换
+
 `Latex` > [表格生成器](https://tableconvert.com/zh-CN/latex-generator) &emsp;
 `PDF` > [Smallpdf](https://smallpdf.com/cn) &emsp;
 
@@ -97,8 +97,6 @@ https://github.com/xzhih/one-key-hidpi
 `通用格式转换` > [Convertio](https://convertio.co/zh/) &emsp;
 
 `中文期刊格式` > [CNKI格式精灵](https://author.cnki.net/#/index) &emsp;
-
-
 
 ## 🌈绘图配色
 
@@ -115,8 +113,6 @@ https://github.com/xzhih/one-key-hidpi
 
 `项目` > [优秀绘图示例](https://www.heywhale.com/mw/project/5f4b3f146476cf0036f7e51e) &emsp;
 `API` > [Seabron](https://seaborn.pydata.org/examples/index.html) &emsp;
-
-
 
 ## 🧱常用素材
 
@@ -135,19 +131,20 @@ https://github.com/xzhih/one-key-hidpi
 `字体` > [优设](https://uiiiuiii.com/tool/typeface) &emsp;
 `特殊符号` > [符号大全](http://www.fhdq.net/) &emsp;
 
+`插图` > [SOCO-ST](https://soco-st.com/) &emsp;
 
 ## 📜辅助写作
-`在线 Latex` > [Overleaf](https://www.overleaf.com/) &emsp; 
-`语法检查` > [Grammarly](https://www.grammarly.com/) &emsp; 
-`词汇` > [万词王](https://wantwords.net/) &emsp; 
-`句子` > [据意查句](https://wantquotes.net/) &emsp; 
+
+`在线 Latex` > [Overleaf](https://www.overleaf.com/) &emsp;
+`语法检查` > [Grammarly](https://www.grammarly.com/) &emsp;
+`词汇` > [万词王](https://wantwords.net/) &emsp;
+`句子` > [据意查句](https://wantquotes.net/) &emsp;
 
 `中文校对` > [爱校对](https://www.ijiaodui.com/home) &emsp;
 
-
 ## 📟公众号编辑
-`后台` > [公众号](https://mp.weixin.qq.com/) &emsp;
-`编辑器` > [135编辑器](https://www.135editor.com/beautify_editor.html) &emsp; 
-`插件` > [壹伴](https://yiban.io/) &emsp; 
-`绘图` > [图怪兽](https://818ps.com/)&emsp;
 
+`后台` > [公众号](https://mp.weixin.qq.com/) &emsp;
+`编辑器` > [135编辑器](https://www.135editor.com/beautify_editor.html) &emsp;
+`插件` > [壹伴](https://yiban.io/) &emsp;
+`绘图` > [图怪兽](https://818ps.com/)&emsp;

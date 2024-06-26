@@ -8,8 +8,8 @@ dir:
 # nihaonihao
 
 ### 好用的代码库
-[ViT](https://github.com/lucidrains/vit-pytorch)
 
+[ViT](https://github.com/lucidrains/vit-pytorch)
 
 ### 统计代码数量
 
@@ -18,7 +18,8 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 ```
 
 ### 统计提交次数
-```
+
+```bash
 git log --pretty='%aN' | sort | uniq -c | sort -k1 -n -r
 ```
 
