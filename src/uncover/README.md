@@ -12,6 +12,10 @@ title: Uncovering
 
 <https://palm-e.github.io/>
 
+### 写代码
+
+<https://www.cursor.com/>
+
 ## Handy Kit
 
 人脸识别： <https://github.com/ageitgey/face_recognition>
@@ -31,3 +35,7 @@ title: Uncovering
 
 
 
+https://fontawesome.com/search?p=3&o=r&m=free
+
+
+https://github.com/Akascape/py-window-styles

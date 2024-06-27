@@ -116,7 +116,8 @@ For more examples and ideas, visit: https://docs.docker.com/get-started/
 docker pull pytorch/pytorch
 ```
 
-https://hub.docker.com/search?q=pytorch
+<https://www.docker.com/products/docker-hub/>
+<https://hub.docker.com/search?q=pytorch>
 
 #### 准备 requirements.txt
 

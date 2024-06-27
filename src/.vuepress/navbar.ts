@@ -78,8 +78,8 @@ export default navbar([
         icon: "eye",
         prefix: "open-world/",
         children: [
-          { text: "ICL/CoT/GoT", icon: "fire", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "ICL/CoT/GoT", icon: "code-branch", link: "1" },
+          { text: "Awesome Model", icon: "cable-car", link: "2" },
         ],
       },
       {
@@ -87,8 +87,8 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "open-world/",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "Invoke", icon: "robot", link: "1" },
+          { text: "Deployment", icon: "cube", link: "2" },
         ],
       },
     ],
