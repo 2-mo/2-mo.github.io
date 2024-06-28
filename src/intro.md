@@ -19,9 +19,9 @@ dir:
     order: -1
 ---
 
-# Intro Page
+Intro Page
 
-Place your introduction and profile here.
+Mengjingcheng Mo received the B.S. degree from Chongqing University of Posts and Telecommunications. He received the M.S. degree from the School of Computer Science, Chongqing University of Posts and Telecommunications, where he is currently pursuing the Ph.D. degree. His research interests include small object detection and anomaly detection in road scenes.
 
 [1] Jiaxu Leng, **Mengjingcheng Mo**, Yinghua Zhou, Chenqiang Gao, Weisheng Li and Xinbo Gao*. Pareto Refocusing for Drone-view Object Detection[J].  IEEE Transactions on Circuits and Systems for Video Technology (TCSVT), 2022. (SCI一区TOP，视频技术领域顶刊)
 

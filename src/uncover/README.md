@@ -33,9 +33,6 @@ title: Uncovering
 人脸识别
 <https://github.com/serengil/deepface>
 
+<https://fontawesome.com/search?p=3&o=r&m=free>
 
-
-https://fontawesome.com/search?p=3&o=r&m=free
-
-
-https://github.com/Akascape/py-window-styles
+<https://github.com/Akascape/py-window-styles>
