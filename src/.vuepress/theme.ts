@@ -35,7 +35,6 @@ export default hopeTheme({
       "/demo/encrypt.html": ["1234"],
     },
   },
-
   blog: {
     description: "A FrontEnd programmer",
     intro: "/intro.html",
@@ -224,4 +223,9 @@ export default hopeTheme({
     //   },
     // },
   },
-});
+},
+{
+  custom: true,
+  compact: true,
+},
+);
