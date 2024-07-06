@@ -10,6 +10,4 @@ order: 1
   <small> (ICRA'24, IEEE International Conference on Robotics and Automation 2024) @Wayve </small>  
   [[Paper]](https://arxiv.org/abs/2312.12345)  [[Code]](https://github.com/wayveai/Driving-with-LLMs)
 
-
-
 [OmniDrive](https://github.com/NVlabs/OmniDrive)
