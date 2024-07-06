@@ -11,7 +11,6 @@ export default navbar([
     children: [
       {
         text: "Open World",
-        icon: "pen-to-square",
         prefix: "open-world/",
         children: [
           { text: "Object Detection", icon: "expand", link: "README.md" },
@@ -19,7 +18,6 @@ export default navbar([
       },
       {
         text: "Anomaly Discovery",
-        icon: "pen-to-square",
         prefix: "anomaly-discovery/",
         children: [
           { text: "Unsupervised Video", icon: "video", link: "README.md" },
@@ -28,9 +26,10 @@ export default navbar([
       },
       {
         text: "Embodied Intelligence",
+        prefix: "embodied_intelligence/",
         children: [
-          { text: "Autonomous Driving", icon: "car", link: "1" },
-          { text: "Robot", icon: "robot", link: "2" },
+          { text: "Autonomous Driving", icon: "car", link: "ad.md" },
+          { text: "Robot", icon: "robot", link: "robot.md" },
         ],
       },
     ],
@@ -54,7 +53,7 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "mac/",
         children: [
-          { text: "Apple1", icon: "rainbow", link: "1" },
+          { text: "Almost", icon: "rainbow", link: "README.md" },
         ],
       },
     ],

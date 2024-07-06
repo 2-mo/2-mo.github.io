@@ -21,6 +21,16 @@ image: "/assets/images/cover3.jpg"
 ```
 
 ```component MyBookmark
+title: InternVideo
+desc: ViCLIP 预训练在 InternVideo 项目中
+link: https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo1/Pretrain/ViCLIP
+tags: ['Visual Language', 'Multimodal']
+background: rgba(1, 95, 195, 0.15)
+image: "/assets/images/cover3.jpg"
+```
+
+
+```component MyBookmark
 title: GroundingDINO
 desc: 视觉定位大模型
 link: https://github.com/IDEA-Research/GroundingDINO
