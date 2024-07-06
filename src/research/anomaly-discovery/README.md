@@ -4,15 +4,16 @@ title: Anomaly Detection
 
 # 自动驾驶异常检测
 
-https://github.com/okankop/Driver-Anomaly-Detection
+<https://github.com/okankop/Driver-Anomaly-Detection>
 
 数据集：Driving Anomaly Detection Honda Research Institute
-https://usa.honda-ri.com/hdd#Videos
+<https://usa.honda-ri.com/hdd#Videos>
 
 可解释性: Explainability of Deep Vision-Based Autonomous Driving Systems:
 Review and Challenges （IJCV'2022）
 
 ## Datasets
+
 0. UMN [`Download link`](http://mha.cs.umn.edu/)
 1. UCSD [`Download link`](http://www.svcl.ucsd.edu/projects/anomaly/dataset.html)
 2. Subway Entrance/Exit [`Download link`](http://vision.eecs.yorku.ca/research/anomalous-behaviour-data/)
@@ -40,26 +41,22 @@ The Datasets belowed are about Traffic Accidents Anticipating in Dashcam videos 
 5. DoTA   [`Download_link`](https://github.com/MoonBlvd/Detection-of-Traffic-Anomaly)
 6. Iowa DOT [`Download_link`](https://www.aicitychallenge.org/2018-ai-city-challenge/)
 
-
 ## 视频异常检测开源代码
 
-
-https://github.com/LiUzHiAn/hf2vad (ICCV23)
-
+<https://github.com/LiUzHiAn/hf2vad> (ICCV23)
 
 ## anomaly detection
 
-https://github.com/zhangzjn/ader
+<https://github.com/zhangzjn/ader>
 
-https://github.com/fjchange/awesome-video-anomaly-detection
+<https://github.com/fjchange/awesome-video-anomaly-detection>
 
 ## Github 论文合集（Awesome Action Recognition）
 
+<https://github.com/jinwchoi/awesome-action-recognition>
 
-https://github.com/jinwchoi/awesome-action-recognition
-
-https://github.com/fjchange/awesome-video-anomaly-detection/blob/master/README.md
-
+<https://github.com/fjchange/awesome-video-anomaly-detection/blob/master/README.md>
 
 ### 人脸识别算法
-https://github.com/ageitgey/face_recognition
+
+<https://github.com/ageitgey/face_recognition>

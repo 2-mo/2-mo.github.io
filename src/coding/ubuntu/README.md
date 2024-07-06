@@ -1,19 +1,22 @@
-# 服务器配置及使用
+---
+title: 服务器配置及使用
+order: 1
+---
 
 ## 配置基础环境（sudo 用户）
 
 ### 基础设置
 
 ```bash
-$ sudo apt install vim  # 安装vim，vi太难用
+sudo apt install vim  # 安装vim，vi太难用
 
-$ sudo apt install net-tools
+sudo apt install net-tools
 
-$ sudo apt install gpustat
+sudo apt install gpustat
 
-$ sudo apt install tmux
+sudo apt install tmux
 
-$ sudo apt install screen
+sudo apt install screen
 ```
 
 ### 配置ssh监控端口
@@ -76,13 +79,9 @@ $ umount /home
 $ reboot
 ```
 
-
-
 ```
-$ sudo usermod -d /userHome/guest -m guest
+sudo usermod -d /userHome/guest -m guest
 ```
-
-
 
 ### 安装 cuda `可选`
 
@@ -99,10 +98,8 @@ $ sudo sh cuda_12.1.0_530.30.02_linux.run
 
 <!-- ![image-20230320203122342](步骤.assets/:Users:tiumo:Library:Application Support:typora-user-images:image-20230320203122342.png) -->
 
-
-
 ```bash
-$ vim ~/.bashrc
+vim ~/.bashrc
 ```
 
 > ```yaml
@@ -120,8 +117,6 @@ $ vim ~/.bashrc
 >                                          
 > ```
 
-
-
 ### 配置conda
 
 #### 下载miniconda
@@ -130,14 +125,12 @@ $ vim ~/.bashrc
 
 <!-- <img src="步骤.assets/:Users:tiumo:Library:Application Support:typora-user-images:image-20230320144038499.png" alt="image-20230320144038499" style="zoom:50%;" /> -->
 
-
-
 #### 终端安装
 
 ````bash
-$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-$ sh Miniconda3-latest-Linux-x86_64.sh
-$ source .bashrc
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sh Miniconda3-latest-Linux-x86_64.sh
+source .bashrc
 ````
 
 ### 设置anaconda组
@@ -156,11 +149,7 @@ $ sudo chgrp -R anaconda /data
 $ sudo chmod 777 -R /data
 ```
 
-
-
 ## 创建新用户
-
-
 
 ```bash
 $ sudo adduser 'USERNAME'
@@ -177,8 +166,8 @@ $ sudo deluser --remove-all-files 'USERNAME'  # 删除用户所有
 #### .bashrc
 
 ```bash
-$ sudo cp /home/guest/.bashrc /home/nemo/.bashrc 
-$ sudo chown nemo:nemo /home/nemo/.bashrc
+sudo cp /home/guest/.bashrc /home/nemo/.bashrc 
+sudo chown nemo:nemo /home/nemo/.bashrc
 ```
 
 > ```yaml
@@ -200,13 +189,11 @@ $ sudo chown nemo:nemo /home/nemo/.bashrc
 > # <<< conda initialize <<<
 > ```
 
-
-
 #### .condarc  ==User==
 
 ```bash
-$ vim ~/.condarc
-$ source ~/.bashrc
+vim ~/.condarc
+source ~/.bashrc
 ```
 
 > ```yaml
@@ -224,8 +211,6 @@ $ source ~/.bashrc
 >   - /home/'YOURNAME'/.conda/pkgs
 > ```
 
-
-
 #### .pip ==User==
 
 ```bash
@@ -242,8 +227,6 @@ $ mkdir .pip && cd .pip && vim pip.conf
 > mirrors =http://pypi.douban.com/simple/ 
 > trusted-host =pypi.douban.com
 > ```
-
-
 
 ### conda ==User==
 
@@ -271,8 +254,6 @@ $ print(cudnn.is_available())  #返回True则说明已经安装了cuDNN
 ctrl+d 退出
 ```
 
-
-
 ```bash
 export http_proxy="http://10.16.0.81:8888/"
 export https_proxy="http://10.16.0.81:8888/"
@@ -297,8 +278,6 @@ unset __conda_setup
 conda activate tai
 ```
 
-
-
 ```
 1.如何把一个挂载好的200g目录，假设是/data 变成/work
 （1）df -Th （查看/data挂载目录的磁盘大小有200g满足需求）
@@ -312,14 +291,14 @@ UUID=498ccf9b-926b-43f9-9839-2099cd9b0878 /boot xfs defaults 0 0
 （5）mount -a
 ```
 
-
-
 ### 免密链接
 
 ```shell
 # 本地终端
 $ ssh-keygen -t rsa -C "ANYTHING"  # 一路 Enter
 $ vim "USERPATH/.ssh/id_rsa.pub" #e.g. /Users/tiumo/.ssh/id_rsa.pub # 打开密钥，手动复制
+
+$ cat /Users/tiumo/.ssh/id_rsa.pub | pbcopy  # Mac OS
 
 # 远程终端
 $ mkdir .ssh 

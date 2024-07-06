@@ -5,6 +5,12 @@ dir:
     text: Nav
     order: 1
 ---
+<!-- markdownlint-disable MD033 -->
+
+<script setup>
+import MyBookmark from "@MyBookmark";
+</script>
+
 # Polaris
 
 科研常用网站
@@ -12,6 +18,14 @@ dir:
 ## DEADLINE
 
 `会议截稿` > [CCF-DDL](https://ccfddl.github.io/) &emsp;
+
+```component MyBookmark
+title: CCF-DDL
+desc: 中国计算机学会分布式与并行处理学术会议，关注分布式计算、并行处理等领域的最新研究成果和应用。
+link: https://ccfddl.github.io/
+tags: ['分布式计算', '学术会议']
+background: rgba(255, 165, 0, 0.15)
+```
 
 ## 🔍论文检索
 

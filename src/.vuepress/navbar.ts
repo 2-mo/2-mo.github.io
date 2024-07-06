@@ -6,7 +6,7 @@ export default navbar([
   { text: "Leaning", link: "/learning/README.md", icon: "chalkboard"},
   {
     text: "Reading",
-    icon: "road",
+    icon: "lightbulb",
     prefix: "research/",
     children: [
       {
@@ -14,15 +14,7 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "open-world/",
         children: [
-          { text: "overview", icon: "pen-to-square", link: "README.md" },
-        ],
-      },
-      {
-        text: "Object Detection",
-        icon: "pen-to-square",
-        prefix: "object-detection/",
-        children: [
-          { text: "overview", icon: "pen-to-square", link: "README.md" },
+          { text: "Object Detection", icon: "expand", link: "README.md" },
         ],
       },
       {
@@ -30,14 +22,15 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "anomaly-discovery/",
         children: [
-          { text: "overview", icon: "pen-to-square", link: "README.md" },
+          { text: "Unsupervised Video", icon: "video", link: "README.md" },
+          { text: "Road Scenes", icon: "road", link: "README.md" },
         ],
       },
       {
         text: "Embodied Intelligence",
         children: [
-          { text: "Autonomous Driving", icon: "pen-to-square", link: "1" },
-          { text: "Robot", icon: "pen-to-square", link: "2" },
+          { text: "Autonomous Driving", icon: "car", link: "1" },
+          { text: "Robot", icon: "robot", link: "2" },
         ],
       },
     ],
@@ -52,8 +45,8 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "ubuntu/",
         children: [
-          { text: "ubuntu", icon: "pen-to-square", link: "README.md" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "ubuntu", icon: "computer", link: "README.md" },
+          { text: "docker", icon: "shapes", link: "docker.md" },
         ],
       },
       {
@@ -61,8 +54,7 @@ export default navbar([
         icon: "pen-to-square",
         prefix: "mac/",
         children: [
-          { text: "Apple1", icon: "pen-to-square", link: "1" },
-          { text: "Apple2", icon: "pen-to-square", link: "2" },
+          { text: "Apple1", icon: "rainbow", link: "1" },
         ],
       },
     ],
@@ -76,9 +68,9 @@ export default navbar([
       {
         text: "Big Model",
         icon: "eye",
-        prefix: "open-world/",
+        prefix: "",
         children: [
-          { text: "ICL/CoT/GoT", icon: "code-branch", link: "1" },
+          { text: "ICL/CoT/GoT", icon: "code-branch", link: "CoT.md" },
           { text: "Awesome Model", icon: "cable-car", link: "2" },
         ],
       },
