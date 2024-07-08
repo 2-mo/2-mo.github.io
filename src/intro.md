@@ -16,7 +16,7 @@ content: true
 footer: false
 dir:
     text: Portfolio
-    order: -1
+    order: -3
 ---
 <!-- markdownlint-disable MD033 -->
 
