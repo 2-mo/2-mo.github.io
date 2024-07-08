@@ -4,6 +4,13 @@ title: Object Detection
 
 # 目标检测（Object Detection）
 
+
+You Can Ground Earlier than See: An Effective and Efficient Pipeline for
+Temporal Sentence Grounding in Compressed Videos
+
+https://openaccess.thecvf.com/content/CVPR2023/papers/Fang_You_Can_Ground_Earlier_Than_See_An_Effective_and_Efficient_CVPR_2023_paper.pdf
+
+
 <Badge text="beta" type="warning"/> <Badge text="默认主题"/>
 
 ```txt

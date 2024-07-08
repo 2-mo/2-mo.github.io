@@ -48,14 +48,6 @@ background: rgba(0, 100, 207, 0.15)
 image: "/assets/images/cover2.jpg"
 ```
 
-<!-- ```component MyBookmark
-title: APPLE 大模型
-desc: Road-scenes Anomaly Detection
-link: https://github.com/apple/ml-4m
-tags: ['Big Model', 'Multimodal', 'Visual']
-background: rgba(1, 95, 195, 0.15)
-image: "/assets/images/cover3.jpg"
-``` -->
 
 ### 机械臂-谷歌
 
@@ -80,6 +72,11 @@ image: "https://www.cursor.com/static/media/cursor-logo.19a7c3b1.png"
 ```
 
 ## Handy Kit
+
+https://github.com/tinyproxy/tinyproxy
+
+
+https://github.com/IDEA-Research/GroundingDINO
 
 人脸识别：
 
@@ -135,6 +132,7 @@ image: "https://github.com/microsoft/nni/raw/master/docs/img/nni_logo.png"
 ```
 
 
+
 ```component MyBookmark
 title: Font Awesome
 desc: 一个流行的图标库和工具包，提供免费和高级的图标、字体和工具。
@@ -151,14 +149,59 @@ link: https://github.com/Akascape/py-window-styles
 tags: ['Python', 'Windows', '工具']
 background: rgba(1, 95, 195, 0.15)
 image: "https://repository-images.githubusercontent.com/338073290/10a92780-8dc6-11eb-8d64-c74786d33864"
+
+
+```component MyBookmark
+title: X-AnyLabeling
+desc: 标注软件
+link: https://github.com/CVHub520/X-AnyLabeling/tree/main
+tags: ['标注软件']
+background: rgba(1, 95, 195, 0.15)
+image: "https://avatars.githubusercontent.com/u/7068954?s=200&v=4"
+```
+
+```component MyBookmark
+title: Whisper
+desc: OpenAI 开源的自动语音识别（ASR）系统，能够识别多种语言的语音。
+link: https://github.com/openai/whisper
+tags: ['自动语音识别', 'ASR', '多语言']
+background: rgba(1, 95, 195, 0.15)
+image: "https://avatars.githubusercontent.com/u/31817733?s=200&v=4"
+```
+
+```component MyBookmark
+title: MMEngine Eval
+desc: OpenMMLab 开源的模型评估工具，支持多种深度学习框架。
+link: https://github.com/open-mmlab/mmeval
+tags: ['模型评估', '深度学习']
+background: rgba(1, 95, 195, 0.15)
+image: "https://avatars.githubusercontent.com/u/35628848?s=200&v=4"
 ```
 
 
-美学质量评价（值得关注的组）
+```component MyBookmark
+title: GroundingDINO
+desc: IDEA Research 开源的视觉定位工具，结合了 DETR 和 DINO 的优势。
+link: https://github.com/IDEA-Research/GroundingDINO
+tags: ['视觉定位', 'DETR', 'DINO']
+background: rgba(1, 95, 195, 0.15)
+image: "https://avatars.githubusercontent.com/u/74695206?s=200&v=4"
+```
+
+值得关注的组
+
+```component MyBookmark
+title: OpenDriveLab
+desc: 专注于自动驾驶和智能交通系统研究的开放平台。
+link: https://opendrivelab.com/
+tags: ['自动驾驶', '智能交通系统']
+background: rgba(1, 95, 195, 0.15)
+image: "https://opendrivelab.com/img/logo-2x.png"
+```
 
 ```component MyBookmark
 title: Woshidandan
-desc: 一位GitHub用户，拥有多个关于数据科学和机器学习的开源项目。
+desc: 美学质量评价
 link: https://github.com/woshidandan
 tags: ['数据科学', '机器学习', '开源']
 background: rgba(1, 95, 195, 0.15)
