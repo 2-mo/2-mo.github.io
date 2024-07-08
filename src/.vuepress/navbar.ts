@@ -45,7 +45,7 @@ export default navbar([
         prefix: "ubuntu/",
         children: [
           { text: "ubuntu", icon: "computer", link: "README.md" },
-          { text: "docker", icon: "shapes", link: "docker.md" },
+          { text: "docker", icon: "shapes", link: "process/docker.md" },
         ],
       },
       {
