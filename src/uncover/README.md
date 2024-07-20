@@ -208,3 +208,16 @@ tags: ['数据科学', '机器学习', '开源']
 background: rgba(1, 95, 195, 0.15)
 image: "https://avatars.githubusercontent.com/u/50855272?v=4"
 ```
+
+
+https://github.com/lucidrains?tab=repositories
+Working with Attention. It's all we need
+
+
+https://github.com/marketplace/actions/remote-ssh-commands
+github action ssh 小工具
+
+
+https://github.com/IDEA-Research/T-Rex
+
+标注软件
