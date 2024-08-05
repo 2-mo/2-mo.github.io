@@ -10,6 +10,10 @@ import MyBookmark from "@MyBookmark";
 
 ## Big Model
 
+https://huggingface.co/black-forest-labs/FLUX.1-dev
+
+https://docs.midjourney.com/docs/quick-start
+
 ### InternVL
 
 ```component MyBookmark

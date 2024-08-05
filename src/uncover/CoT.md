@@ -4,6 +4,11 @@ title: ICL/CoT/GoT
 
 <!-- markdownlint-disable MD033 -->
 
+
+https://www.langchain.asia/
+
+https://www.cnblogs.com/AlwaysSui/p/18144181
+
 ## 复杂推理
 
 复杂推理：大语言模型的北极星能力

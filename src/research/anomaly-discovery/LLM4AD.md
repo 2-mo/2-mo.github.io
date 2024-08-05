@@ -11,6 +11,13 @@ https://github.com/fesvhtr/CUVA
 
 
 
+https://hananshafi.github.io/vane-benchmark/
+
+
+
+
+
+
 Holmes-VAD: Towards Unbiased and Explainable Video Anomaly Detection via Multi-modal LLM
 https://github.com/pipixin321/HolmesVAD
 
