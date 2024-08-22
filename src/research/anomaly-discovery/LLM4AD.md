@@ -9,11 +9,12 @@ https://github.com/fesvhtr/CUVA
 
 
 
-
-
+VANE-Bench: Video Anomaly Evaluation Benchmark for Conversational LMMs
 https://hananshafi.github.io/vane-benchmark/
+https://github.com/jqtangust/hawk?tab=readme-ov-file
 
 
+HAWK: Learning to Understand Open-World Video Anomalies
 
 
 
