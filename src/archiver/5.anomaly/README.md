@@ -1,5 +1,7 @@
 ---
-title: Anomaly Detection
+title: Overview
+dir:
+    text: 5.anomaly
 ---
 
 # 自动驾驶异常检测

@@ -3,41 +3,70 @@ import { navbar } from "vuepress-theme-hope";
 export default navbar([
   // "/",
   { text: "Polaris", link: "/polaris/README.md", icon: "meteor" },
-  { text: "Leaning", link: "/learning/README.md", icon: "chalkboard"},
-  {
-    text: "Reading",
-    icon: "lightbulb",
-    prefix: "research/",
+  { text: "Archiver", 
+    link: "archiver/README.md", 
+    icon: "box-archive", 
+    prefix: "archiver/",
     children: [
       {
-        text: "Open World",
-        prefix: "open-world/",
+        text: "survey",
+        prefix: "1.survey/",
         children: [
-          { text: "Object Detection", icon: "expand", link: "README.md" },
+          // { text: "Object Detection", icon: "expand", link: "README.md" },
         ],
       },
       {
-        text: "Anomaly Discovery",
-        prefix: "anomaly-discovery/",
+        text: "dataset",
+        prefix: "2.datset/",
         children: [
-          { text: "Unsupervised Video", icon: "video", link: "README.md" },
-          { text: "Road Scenes", icon: "road", link: "README.md" },
+          // { text: "Object Detection", icon: "expand", link: "README.md" },
         ],
       },
       {
-        text: "Embodied Intelligence",
-        prefix: "embodied_intelligence/",
+        text: "intelligence",
+        prefix: "3.intelligence/",
         children: [
-          { text: "Autonomous Driving", icon: "car", link: "ad.md" },
-          { text: "Robot", icon: "robot", link: "robot.md" },
+          { text: "Autonomous Driving", icon: "expand", link: "ad.md" },
+          { text: "Robotic Arms", icon: "expand", link: "robot.md" },
+        ],
+      },
+      {
+        text: "perception",
+        prefix: "4.perception/",
+        children: [
+          { text: "Object Detection", icon: "expand", link: "object_detection.md" },
+        ],
+      },
+      {
+        text: "anomaly",
+        prefix: "5.anomaly",
+        children: [
+          { text: "Road Anomaly", icon: "expand", link: "README.md" },
+          { text: "Video Anomaly", icon: "expand", link: "README.md" },
+          { text: "LLM4Anomaly", icon: "expand", link: "LLM4AD.md" },
+        ],
+      },
+    ]
+},
+  {
+    text: "Browser",
+    icon: "lightbulb",
+    prefix: "browser/",
+    children: [
+      {
+        text: "learning",
+        prefix: "learning/",
+        children: [
+          { text: "Road Anomaly", icon: "expand", link: "README.md" },
+          { text: "Video Anomaly", icon: "expand", link: "README.md" },
         ],
       },
     ],
   },
   {
-    text: "Coding",
+    text: "Coooder",
     icon: "code",
-    prefix: "/coding/",
+    prefix: "docs/coooder/",
     children: [
       {
         text: "Ubuntu",
@@ -59,9 +88,9 @@ export default navbar([
     ],
   },
   {
-    text: "Uncovering",
+    text: "Discover",
     icon: "fire",
-    prefix: "/uncover/",
+    prefix: "discover/uncover/",
     children: [
       { text: "overview", icon: "eye", link: "README.md" },
       {

@@ -1,3 +1,11 @@
+---
+title: Video Anomaly
+# icon: box-archive
+dir:
+    text: 5.anomaly
+    order: 1
+---
+
 ## 视频异常检测开源代码
 
 ANOMALYCLIP: OBJECT-AGNOSTIC PROMPT LEARNING FOR ZERO-SHOT ANOMALY DETECTION(ICLR'24)
@@ -6,7 +14,7 @@ Open-Vocabulary Video Anomaly Detection
 
 Self-Distilled Masked Auto-Encoders are Efficient Video Anomaly Detectors (CVPR'24) [[Code]](https://github.com/ristea/aed-mae)
 
-Self-Supervised Masked Convolutional  Transformer Block for Anomaly Detection(TPAMI'22)
+Self-Supervised Masked Convolutional  Transformer Block for Anomaly Detection (TPAMI'22)
 
 https://github.com/LiUzHiAn/hf2vad (ICCV'21)
 
