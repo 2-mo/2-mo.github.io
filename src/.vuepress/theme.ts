@@ -23,10 +23,9 @@ export default hopeTheme({
   navbar,
 
   // sidebar
-  // sidebar,
   sidebar: "structure",
 
-  footer: "Default footer",
+  footer: "ᕦ(ò_óˇ)ᕤ",
 
   displayFooter: true,
 
@@ -36,7 +35,7 @@ export default hopeTheme({
     },
   },
   blog: {
-    description: "A FrontEnd programmer",
+    description: "The slave to time",
     intro: "/intro.html",
     medias: {
       Baidu: "https://example.com",
@@ -79,7 +78,7 @@ export default hopeTheme({
   },
 
   // enable it to preview all changes in time
-  // hotReload: true,
+  hotReload: true,
 
   plugins: {
     blog: true,

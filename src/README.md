@@ -5,7 +5,7 @@ icon: home
 title: Home
 heroImage: assets/icon/DA.svg
 heroText: Tiu Mo
-tagline: You can put your slogan here
+tagline: Only with a mind free from distractions can one see the Way.
 bgImage: assets/images/2307-min.jpg
 heroFullScreen: true
 projects:
@@ -39,7 +39,7 @@ projects:
     desc: Detailed description of this custom item
     link: https://link.to.your.friend
 
-footer: customize your footer text
+footer: 🌌 the stars my destination
 ---
 
 This is a blog home page demo.

@@ -10,9 +10,7 @@ tag:
 ---
 ## ✧ 视频异常检测 (Video Anomaly Detection)
 
-::: tip 作者
-谭明圮 tane
-:::
+
 
 ## ➢ 论文汇总  
 
@@ -107,6 +105,4 @@ The aim of this TASK is to detect and automatically generate high-level explanat
 [2] X-MAN: Explaining multiple sources of anomalies in video (CVPR workshop 2021)  
 [3] Discrete neural representations for explainable anomaly detection (WACV 2022)
 
-::: slot footer
-MIT Licensed | Copyright © 2018-present [Evan You](https://github.com/yyx990803)
-:::
+

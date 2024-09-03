@@ -5,32 +5,21 @@ dir:
     text: Nav
     order: 1
 ---
-<!-- markdownlint-disable MD033 -->
-
-<script setup>
-import MyBookmark from "@MyBookmark";
-</script>
 
 # Polaris
 
 科研常用网站
 
-## DEADLINE
+## ⏰ DEADLINE
 
 `会议截稿` > [CCF-DDL](https://ccfddl.github.io/) &emsp;
-
 `会议截稿` > [AI-DL](https://aideadlin.es/?sub=ML,CV,CG,NLP,RO,SP,DM,AP,KR,HCI) &emsp;
 
+`投稿流程` > [IEEE Publication](https://www.computer.org/publications/author-resources) &emsp;
+`手稿分析` > [IEEE LaTeX Analyzer](https://latexqc.ieee.org/) &emsp;
 
-```component MyBookmark
-title: CCF-DDL
-link: https://ccfddl.github.io/
-tags: ['分布式计算', '学术会议']
-background: rgba(255, 165, 0, 0.15)
-image: "/assets/images/cover3.jpg"
-```
 
-## 🔍论文检索
+## 🔍 论文检索
 
 `会议查询` > [会伴](https://www.myhuiban.com/) &emsp;
 `期刊查询` > [LetPub](http://www.letpub.com.cn/index.php?page=journalapp) &emsp;
@@ -47,7 +36,7 @@ image: "/assets/images/cover3.jpg"
 
 `论文关联` > [connectedpapers](https://www.connectedpapers.com/) &emsp;
 
-## ⚓️论文下载
+## ⚓️ 论文下载
 
 `英文论文` > [企鹅论文](https://doi.qqsci.com) &emsp;
 `英文论文` > [Sci-Hub](https://sci-hub.shop/)&emsp;
@@ -59,7 +48,7 @@ image: "/assets/images/cover3.jpg"
 
 `文献互助群(QQ群:700078187)` > [纬度重邮](http://spis.hnlat.com/) &emsp;
 
-## 研究机构
+## 🏠 研究机构
 
 `Google` > [Google Research](https://ai.googleblog.com/) &emsp;
 `Meta` > [FaceBook Research](https://research.facebook.com/research-areas/machine-learning/) &emsp;
@@ -70,7 +59,7 @@ image: "/assets/images/cover3.jpg"
 `Blog` > [Distill](https://distill.pub/) &emsp;
 `Blog` > [Lil'Log](https://lilianweng.github.io/) &emsp;
 
-## 🔨科研工具
+## 🔨 科研工具
 
 ### 软件合集
 
@@ -91,13 +80,16 @@ image: "/assets/images/cover3.jpg"
 
 `VPN指南` > [海豚湾机场](https://help.hitun.io/zh/) &emsp;
 
-## 🔧在线工具
+## 🔧 在线工具
 
 `抠图` > [佐糖](https://picwish.cn/) &emsp;
 `超分` > [Big-JPG](https://bigjpg.com) &emsp;
+
 `文字识别` > [白描](https://web.baimiaoapp.com) &emsp;
+
 `截图美化` > [Screen Gurut](https://screen.guru/) &emsp;
 `截图美化` > [Screenzy](https://screenzy.io/) &emsp;
+
 `PDF压缩` > [PDF Compressor](https://pdfcompressor.com/zh/) &emsp;
 `词云` > [Word Art](https://wordart.com/) &emsp;
 
@@ -108,6 +100,7 @@ image: "/assets/images/cover3.jpg"
 
 `代码高亮` > [CodeInWord](http://www.codeinword.com/#) &emsp;
 `代码高亮` > [HighlightCode](https://highlightcode.com) &emsp;
+
 `代码截图` > [Carbon](https://carbon.now.sh/) &emsp;
 `代码截图` > [Ray.so](https://ray.so/) &emsp;
 
@@ -115,7 +108,7 @@ image: "/assets/images/cover3.jpg"
 
 `中文期刊格式` > [CNKI格式精灵](https://author.cnki.net/#/index) &emsp;
 
-## 🌈绘图配色
+## 🌈 绘图配色
 
 `配色` > [Color Design](https://colordesigner.io/) &emsp;
 `配色` > [Adobe](https://color.adobe.com/zh/create) &emsp;
@@ -131,7 +124,7 @@ image: "/assets/images/cover3.jpg"
 `项目` > [优秀绘图示例](https://www.heywhale.com/mw/project/5f4b3f146476cf0036f7e51e) &emsp;
 `API` > [Seabron](https://seaborn.pydata.org/examples/index.html) &emsp;
 
-## 🧱常用素材
+## 🧱 常用素材
 
 `PPT` > [Office 模版](https://www.officeplus.cn/) &emsp;
 
@@ -150,7 +143,7 @@ image: "/assets/images/cover3.jpg"
 
 `插图` > [SOCO-ST](https://soco-st.com/) &emsp;
 
-## 📜辅助写作
+## 📜 辅助写作
 
 `在线 Latex` > [Overleaf](https://www.overleaf.com/) &emsp;
 `语法检查` > [Grammarly](https://www.grammarly.com/) &emsp;
@@ -159,7 +152,7 @@ image: "/assets/images/cover3.jpg"
 
 `中文校对` > [爱校对](https://www.ijiaodui.com/home) &emsp;
 
-## 📟公众号编辑
+## 📟 公众号编辑
 
 `后台` > [公众号](https://mp.weixin.qq.com/) &emsp;
 `编辑器` > [135编辑器](https://www.135editor.com/beautify_editor.html) &emsp;

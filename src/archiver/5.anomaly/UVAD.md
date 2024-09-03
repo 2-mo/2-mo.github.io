@@ -8,9 +8,6 @@ dir:
 
 ## 视频异常检测开源代码
 
-ANOMALYCLIP: OBJECT-AGNOSTIC PROMPT LEARNING FOR ZERO-SHOT ANOMALY DETECTION(ICLR'24)
-
-Open-Vocabulary Video Anomaly Detection
 
 Self-Distilled Masked Auto-Encoders are Efficient Video Anomaly Detectors (CVPR'24) [[Code]](https://github.com/ristea/aed-mae)
 
