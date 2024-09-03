@@ -1,9 +1,8 @@
 ---
-# sidebar: False
 icon: meteor
 dir:
-    text: Nav
-    order: 1
+  text: Nav
+  order: 1
 ---
 
 # Polaris
@@ -68,6 +67,7 @@ dir:
 `工作流` > [Linux](https://github.com/luong-komorebi/Awesome-Linux-Software/blob/master/README_zh-CN.md) &emsp;
 
 ## 2K显示器HiDpi开启
+
 <https://github.com/waydabber/BetterDisplay>
 <https://github.com/xzhih/one-key-hidpi>
 
