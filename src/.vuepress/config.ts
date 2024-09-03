@@ -8,7 +8,7 @@ export default defineUserConfig({
   base: "/",
 
   lang: "en-US",
-  title: "Open Mobility",
+  title: "Tiu Mo's Blog",
   description: "Tiu Mo's Blog",
 
   theme,
