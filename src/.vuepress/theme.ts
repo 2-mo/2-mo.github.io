@@ -89,8 +89,8 @@ export default hopeTheme({
     comment: {
       provider: "Giscus",
       repo: "2-mo/comments2blog",
-      repoId: "R_kgDOMs5Z9g",
-      category: "Comments",
+      repoId: "R_kgDOMs5Z9g", 
+      category: "Announcements",
       categoryId: "DIC_kwDOMs5Z9s4CiNDk",
     },
 
