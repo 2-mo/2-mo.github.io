@@ -9,6 +9,9 @@ dir:
 
 科研常用网站
 
+## 搜索引擎
+https://felo.ai/search
+
 ## ⏰ DEADLINE
 
 `会议截稿` > [CCF-DDL](https://ccfddl.github.io/) &emsp;
@@ -146,6 +149,7 @@ dir:
 ## 📜 辅助写作
 
 `在线 Latex` > [Overleaf](https://www.overleaf.com/) &emsp;
+`VS Code & Latex` > [Overleaf-Workshop](https://github.com/iamhyc/Overleaf-Workshop) &emsp;
 `语法检查` > [Grammarly](https://www.grammarly.com/) &emsp;
 `词汇` > [万词王](https://wantwords.net/) &emsp;
 `句子` > [据意查句](https://wantquotes.net/) &emsp;

@@ -11,3 +11,14 @@ order: 1
   [[Paper]](https://arxiv.org/abs/2312.12345)  [[Code]](https://github.com/wayveai/Driving-with-LLMs)
 
 [OmniDrive](https://github.com/NVlabs/OmniDrive)
+
+
+# 自动驾驶异常检测
+
+<https://github.com/okankop/Driver-Anomaly-Detection>
+
+数据集：Driving Anomaly Detection Honda Research Institute
+<https://usa.honda-ri.com/hdd#Videos>
+
+可解释性: Explainability of Deep Vision-Based Autonomous Driving Systems:
+Review and Challenges （IJCV'2022）
