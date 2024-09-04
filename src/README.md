@@ -29,7 +29,7 @@ projects:
     desc: Detailed description of the article
     link: https://link.to.your.article
 
-  - icon: friend
+  - icon: friendddddd
     name: friend name
     desc: Detailed description of friend
     link: https://link.to.your.friend
