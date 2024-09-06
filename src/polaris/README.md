@@ -12,6 +12,8 @@ dir:
 ## 搜索引擎
 https://felo.ai/search
 
+https://github.com/cvpr-org/author-kit/releases
+
 ## ⏰ DEADLINE
 
 `会议截稿` > [CCF-DDL](https://ccfddl.github.io/) &emsp;
