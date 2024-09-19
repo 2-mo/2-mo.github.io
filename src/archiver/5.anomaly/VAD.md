@@ -1,12 +1,5 @@
 ---
-title: 视频异常检测
-author: Tane (谭明圮)
-category:
-  - HTML
-  - Web
-tag:
-  - HTML
-  - Web 
+title: 视频异常检测 
 ---
 ## ✧ 视频异常检测 (Video Anomaly Detection)
 

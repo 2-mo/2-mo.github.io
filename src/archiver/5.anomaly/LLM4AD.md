@@ -15,6 +15,8 @@ star: true
 
 ## 期刊会议
 
+https://air-discover.github.io/Hint-AD/
+
 ### Uncovering What Why and How: A Comprehensive Benchmark for Causation Understanding of Video Anomaly
 
 `CVPR'24` `BUPT` &nbsp;

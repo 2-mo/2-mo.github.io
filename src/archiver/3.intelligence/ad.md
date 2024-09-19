@@ -3,6 +3,7 @@ title: 自动驾驶
 order: 1
 ---
 <!-- markdownlint-disable MD033 -->
+https://github.com/OpenDriveLab/End-to-end-Autonomous-Driving?tab=readme-ov-file
 
 ## Driving with LLM
 
