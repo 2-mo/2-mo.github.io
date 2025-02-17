@@ -225,3 +225,6 @@ github action ssh 小工具
 https://github.com/IDEA-Research/T-Rex
 
 标注软件
+
+
+https://github.com/pipixin321 航电-视频异常检测
