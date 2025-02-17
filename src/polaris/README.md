@@ -40,6 +40,9 @@ https://github.com/cvpr-org/author-kit/releases
 
 `论文关联` > [connectedpapers](https://www.connectedpapers.com/) &emsp;
 
+## 模版下载
+https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions
+
 ## ⚓️ 论文下载
 
 `英文论文` > [企鹅论文](https://doi.qqsci.com) &emsp;
