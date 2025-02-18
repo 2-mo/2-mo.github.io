@@ -228,3 +228,8 @@ https://github.com/IDEA-Research/T-Rex
 
 
 https://github.com/pipixin321 航电-视频异常检测
+
+
+在 Notion 使用熱力圖工具 Heat Map 呈現各種打卡追蹤數據
+https://muki.tw/notion-heat-map-habit-tracker/
+https://www.lifeofdiscipline.com/my-habits
