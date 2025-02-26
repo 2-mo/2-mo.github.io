@@ -32,6 +32,9 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: Update Corepack
+        run: npm install -g corepack
+  
       - name: Install Deps
         run: |
           corepack enable
