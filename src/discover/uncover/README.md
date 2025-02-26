@@ -4,9 +4,7 @@ order: 4
 ---
 <!-- markdownlint-disable MD033 -->
 
-<script setup>
-import MyBookmark from "@MyBookmark";
-</script>
+
 
 ## Big Model
 
