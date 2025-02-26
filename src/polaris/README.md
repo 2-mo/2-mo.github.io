@@ -167,3 +167,6 @@ https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instruc
 `编辑器` > [135编辑器](https://www.135editor.com/beautify_editor.html) &emsp;
 `插件` > [壹伴](https://yiban.io/) &emsp;
 `绘图` > [图怪兽](https://818ps.com/)&emsp;
+
+
+https://www.cnblogs.com/helong-123/p/16426406.html ubuntu 系统休眠
