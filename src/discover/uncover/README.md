@@ -198,3 +198,8 @@ https://muki.tw/notion-heat-map-habit-tracker/
 https://www.lifeofdiscipline.com/my-habits
 
 
+https://github.com/fjwillemsen/NativeOverleaf?tab=readme-ov-file
+
+overleaf 客户端
+
+南开大学 程明明老师项目模版 https://github.com/MCG-NKU/NSFC-LaTex
