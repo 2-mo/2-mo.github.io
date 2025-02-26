@@ -55,29 +55,21 @@ bio: Mengjingcheng Mo received the B.S. degree and the M.S. degree from the Scho
 
 ## 个人信息
 
-```component MyCollaborator
 name: "John Doe"
 avatar: "/assets/images/2307-min.jpg"
 bio: "John Doe received his degree from..."
-```
 
-```component MyCollaborator
 name: "John Doe"
 avatar: "/assets/images/2307-min.jpg"
 bio: "John Doe received his degree from..."
-```
 
-```component MyCollaborator
 name: "John Doe"
 avatar: "/assets/images/2307-min.jpg"
 bio: "John Doe received his degree from..."
-```
 
-```component MyCollaborator
 name: "John Doe"
 avatar: "/assets/images/2307-min.jpg"
 bio: "John Doe received his degree from..."
-```
 
 Intro Page <Badge text="Drove-view Object Detection" type="note" vertical="middle" />
 
