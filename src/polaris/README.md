@@ -170,3 +170,10 @@ https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instruc
 
 
 https://www.cnblogs.com/helong-123/p/16426406.html ubuntu 系统休眠
+
+
+https://zhuanlan.zhihu.com/p/23139933250 具身智能相关会议
+
+
+
+————+++++
