@@ -164,4 +164,7 @@ https://mp.weixin.qq.com/s/IznY5Zpk_dhOk-oyx6Nnsg
 谈谈DeepSeek对自动驾驶的影响
 
 
-https://github.com/cduck/hyperbolic 画双曲图的
+
+
+https://drive-bench.github.io/ Are VLMs Ready for Autonomous Driving?
+An Empirical Study from the Reliability, Data, and Metric Perspectives

@@ -27,3 +27,10 @@ https://github.com/MinaGhadimiAtigh/hyperbolic_representation_learning
 https://github.com/junhocho/HGCAE
 Hyperbolic Graph Convolutional Auto-Encoders
 Accepted to CVPR2021 
+
+
+https://github.com/cduck/hyperbolic 画双曲图的
+
+
+https://github.com/marlin-codes/HypLLM/tree/main
+
