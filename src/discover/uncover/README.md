@@ -203,3 +203,30 @@ https://github.com/fjwillemsen/NativeOverleaf?tab=readme-ov-file
 overleaf 客户端
 
 南开大学 程明明老师项目模版 https://github.com/MCG-NKU/NSFC-LaTex
+
+
+clip 可视化
+https://all-things-vits.github.io/atv/
+
+https://colab.research.google.com/github/all-things-vits/code-samples/blob/main/explainability/CLIP_explainability.ipynb#scrollTo=2abGIlwSBeqf
+
+https://github.com/all-things-vits/code-samples
+
+
+
+自动驾驶综述
+https://github.com/Thinklab-SJTU/Awesome-LLM4AD
+
+自动驾驶数据集
+https://zod.zenseact.com/
+
+聚类可视化
+https://github.com/CHDers/sklearn-cluster/blob/main/cluster.ipynb
+
+
+学术主页模版
+https://github.com/eliahuhorwitz/Academic-project-page-template
+
+
+论文追踪
+https://www.alphaxiv.org/explore

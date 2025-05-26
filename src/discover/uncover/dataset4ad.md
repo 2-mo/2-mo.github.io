@@ -55,3 +55,13 @@ https://platform.openai.com/docs/guides/audio
 项目页面：https://github.com/PathFoundation/PathGen-1.6M
 
 
+
+https://github.com/THUNLP-AIPoet/PaperList (到2020年)
+https://github.com/THUNLP-AIPoet/Datasets 九歌数据集
+https://github.com/THUNLP-AIPoet/BERT-CCPoem 诗歌语句相似度计算(BERT)
+https://xiaoyuanyi.github.io/ (九歌作者)
+
+### 复制文件，显示进度
+rsync -ah --info=progress2 /data4/r1/workspace/datasets/ad/BDDX_vide
+o_process/BDDX_Train/image /data4/r1/workspace/papers/HyperMem/src/rags/retrial/vis/static/ima
+ge_train

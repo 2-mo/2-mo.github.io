@@ -2,6 +2,13 @@
 
 A curated list of resources dedicated to hyperbolic representation learning and its applications across various domains. Hyperbolic spaces are particularly suited for representing hierarchical data and tree-like structures, offering advantages over Euclidean embeddings for many complex data types.
 
+
+https://github.com/samacqua/hyperbolic-vqvae
+Hyperbolic space is well fit to reduce the dimensionality of codebook vectors in VQ-VAEs. This repo implements training hyperbolic VQ-VAEs and benchmarks performance on various tasks.
+This is the final project for 9.58: Projects in the Science of Intelligence at MIT in the fall of 2022.
+
+
+
 ## Table of Contents
 - [Awesome Hyperbolic Representation Learning](#awesome-hyperbolic-representation-learning)
   - [Table of Contents](#table-of-contents)
@@ -225,6 +232,7 @@ _Additional applications of hyperbolic representation learning across various fi
 #### Other Venues
 - [Hyperbolic-Generative-Adversarial-Network](https://github.com/facundolazcano/Hyperbolic-Generative-Adversarial-Network) - Hyperbolic Generative Adversarial Network (IEEE Access 2021)
 - [pvae](https://github.com/emilemathieu/pvae) - Continuous Hierarchical Representations with Poincaré Variational Auto-Encoders
+- https://github.com/grisaitis/hyperbolic-vae (新pytorch版本)
 - [Hyperbolic_Sliced-Wasserstein_via_Geodesic_and_Horospherical_Projections](https://github.com/clbonet/Hyperbolic_Sliced-Wasserstein_via_Geodesic_and_Horospherical_Projections) - Hyperbolic Sliced-Wasserstein via Geodesic and Horospherical Projections (PMLR 2023)
 - [hyp-oc](https://github.com/Kartik-3004/hyp-oc) - Hyp-OC : Hyperbolic One Class Classification for Face Anti-Spoofing (FG 2024)
 - [hilbert-contrastive-learning](https://github.com/jaeeun-n/hilbert-contrastive-learning) - Hyperbolic Contrastive Learning for Document Representations (ECAI 2024)

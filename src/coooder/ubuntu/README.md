@@ -3,6 +3,10 @@ title: 服务器配置及使用
 order: 1
 ---
 
+测试显卡
+import torch 
+print(torch.tensor(45).cuda(1)*torch.tensor(89).cuda(1))
+
 ## 配置基础环境（sudo 用户）
 
 ### 基础设置

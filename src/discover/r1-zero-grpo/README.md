@@ -16,11 +16,20 @@ A curated collection of resources related to R1 Zero and GRPO (Generative Reward
 - [VERL](https://github.com/volcengine/verl) - Volcengine's implementation
 - [VLM-R1](https://github.com/om-ai-lab/VLM-R1/) - Vision-Language Model implementation
 
+T2I-R1: Reinforcing Image Generation with Collaborative Semantic-level and Token-level CoT
+https://github.com/CaraJ7/T2I-R1
+
 ## Documentation
 
 - [Swift GRPO Documentation](https://swift.readthedocs.io/en/latest/Instruction/GRPO.html) - Official GRPO documentation
+
+
 
 ## Additional Resources
 
 - [Awesome LLM Resources](https://github.com/WangRongsheng/awesome-LLM-resourses) - Comprehensive collection of LLM resources
 
+https://github.com/qiwang067/awesome-visual-rl
+
+https://github.com/datawhalechina/easy-rl?tab=readme-ov-file
+强化学习教程

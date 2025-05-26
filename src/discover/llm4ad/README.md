@@ -15,3 +15,7 @@ https://openreview.net/forum?id=s0vHSq5QEv
 
 
 https://swift.readthedocs.io/zh-cn/latest/Instruction/%E4%BA%BA%E7%B1%BB%E5%AF%B9%E9%BD%90.html
+
+
+https://github.com/daniel-bogdoll/phd
+道路异常检测方向博士
