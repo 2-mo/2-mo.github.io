@@ -33,3 +33,11 @@ https://github.com/qiwang067/awesome-visual-rl
 
 https://github.com/datawhalechina/easy-rl?tab=readme-ov-file
 强化学习教程
+
+
+# 训练框架
+https://github.com/Simple-Efficient/RL-Factory
+
+
+物理规则推理模型
+https://github.com/nvidia-cosmos/cosmos-reason1

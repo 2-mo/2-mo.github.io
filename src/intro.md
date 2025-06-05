@@ -5,7 +5,7 @@ icon: circle-info
 layout: PortfolioHome
 title: Portfolio Home
 name: Mengjingcheng Mo
-avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
+avatar: /imgs/intro/nemo_doll.PNG
 titles:
   - aaaa
   - bbb

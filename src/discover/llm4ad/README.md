@@ -1,4 +1,4 @@
-
+https://github.com/Charmve/OpenCC 道路极端场景综述
 
 https://github.com/Thinklab-SJTU/Awesome-LLM4AD 综述地址
 
@@ -13,9 +13,16 @@ https://openreview.net/forum?id=s0vHSq5QEv
 
 
 
+https://github.com/OpenGVLab/DriveMLM OpenGVLab 王文海团队
+
 
 https://swift.readthedocs.io/zh-cn/latest/Instruction/%E4%BA%BA%E7%B1%BB%E5%AF%B9%E9%BD%90.html
 
 
 https://github.com/daniel-bogdoll/phd
 道路异常检测方向博士
+
+
+https://zhuanlan.zhihu.com/p/30204993641 【CVPR 2025】异常检测论文汇总
+
+

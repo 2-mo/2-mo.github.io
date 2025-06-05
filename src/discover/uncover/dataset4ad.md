@@ -65,3 +65,7 @@ https://xiaoyuanyi.github.io/ (九歌作者)
 rsync -ah --info=progress2 /data4/r1/workspace/datasets/ad/BDDX_vide
 o_process/BDDX_Train/image /data4/r1/workspace/papers/HyperMem/src/rags/retrial/vis/static/ima
 ge_train
+
+
+## OOD 检测
+https://github.com/sotif-ma/OOD-Detection-Methods-and-Datasets
