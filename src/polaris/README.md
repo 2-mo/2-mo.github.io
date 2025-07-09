@@ -9,7 +9,7 @@ dir:
 
 科研常用网站
 
-
+https://github.com/Lionelsy/Conference-Accepted-Paper-List
 
 | **Conf.** | **Guid.** | **2025** | **2024** | **2023** | **2022** | **2021** | **2020** |
 | -: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -278,3 +278,7 @@ https://yugeten.github.io/posts/2025/01/ppogrpo/
 
 https://www.wolai.com/matplotlib/uecbhR3MHhaZkK55za779h
 MPL在线手册-2025
+
+
+https://valser.org/webinar/slide/index.php/Home/
+VALSE 文件存档

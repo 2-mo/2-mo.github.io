@@ -19,6 +19,49 @@ A curated collection of resources related to R1 Zero and GRPO (Generative Reward
 T2I-R1: Reinforcing Image Generation with Collaborative Semantic-level and Token-level CoT
 https://github.com/CaraJ7/T2I-R1
 
+
+
+
+## Thinking with Images
+
+DeepEyes: Incentivizing "Thinking with Images" via Reinforcement Learning  
+[paper](https://arxiv.org/abs/2505.14362)
+[project](https://visual-agent.github.io/)
+[code](https://github.com/Visual-Agent/DeepEyes)
+[wechat](https://mp.weixin.qq.com/s/yyfeEmxmIaA7Qu5raGVHyA?scene=1)
+
+
+Pixel Reasoner: Incentivizing Pixel-Space Reasoning with Curiosity-Driven Reinforcement Learning
+[project](https://tiger-ai-lab.github.io/Pixel-Reasoner/)
+[paper](https://arxiv.org/abs/2505.15966)
+[code](https://github.com/TIGER-AI-Lab/Pixel-Reasoner)
+
+
+VisualToolAgent (VisTA): A Reinforcement Learning Framework for Visual‘Tool Selection
+
+Thinking with Generated Images
+
+
+•SAM-R1: Leveraging SAM for Reward Feedback in Multimodal Segmentation via Reinforcement Learning
+
+•Omni-R1: Reinforcement Learning for Omnimodal Reasoning via Two-System Collaboration
+
+•GRIT: Teaching MLLMs to Think with Images
+
+•Chain-of-Focus: Adaptive Visual Search and Zooming for Multimodal Reasoning via RL
+
+•Pixel Reasoner: Incentivizing Pixel-Space Reasoning with Curiosity-Driven Reinforcement Learning
+
+•UniVG-R1: Reasoning Guided Universal Visual Grounding with Reinforcement Learning
+
+•OpenThinkIMG: Learning to Think with Images via Visual Tool Reinforcement Learning
+
+•Perception-R1: Pioneering Perception Policy with Reinforcement Learning
+
+
+
+
+
 ## Documentation
 
 - [Swift GRPO Documentation](https://swift.readthedocs.io/en/latest/Instruction/GRPO.html) - Official GRPO documentation
