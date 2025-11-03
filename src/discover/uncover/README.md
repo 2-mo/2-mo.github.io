@@ -230,3 +230,7 @@ https://github.com/eliahuhorwitz/Academic-project-page-template
 
 论文追踪
 https://www.alphaxiv.org/explore
+
+
+大模型自我认知微调数据集
+https://huggingface.co/datasets/modelscope/self-cognition

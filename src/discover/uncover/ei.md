@@ -15,3 +15,7 @@ https://say-can.github.io/
 
 
 https://voxposer.github.io/
+
+
+
+[![Guide](https://img.shields.io/badge/Guide-Embodied--AI--Guide-brightgreen?logo=github)](https://github.com/TianxingChen/Embodied-AI-Guide)

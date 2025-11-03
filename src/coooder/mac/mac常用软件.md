@@ -17,3 +17,6 @@ tree -N 防止中文名乱码
 
 tree -N -d -I "node_modules" > 目录结构.md
 
+
+Mac Office Autoupdate 显示 更新暂时不可用，请在几分钟后重试
+https://learn.microsoft.com/zh-cn/answers/questions/5080744/mac-office-autoupdate

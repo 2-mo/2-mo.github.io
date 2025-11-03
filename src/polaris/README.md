@@ -11,27 +11,6 @@ dir:
 
 https://github.com/Lionelsy/Conference-Accepted-Paper-List
 
-| **Conf.** | **Guid.** | **2025** | **2024** | **2023** | **2022** | **2021** | **2020** |
-| -: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| CVPR | [🚀]()  <br> [⏰]()  |   [🌟](https://cvpr.thecvf.com/Conferences/2025)    | [🔗](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers) | [🔗](https://cvpr.thecvf.com/Conferences/2023/AcceptedPapers) | [🔗](https://cvpr2022.thecvf.com/accepted-papers) <br> [📎](https://github.com/52CV/CVPR-2022-Papers) | [📎](https://papercopilot.com/paper-list/cvpr-paper-list/cvpr-2021-paper-list/) <br>  [📎](https://github.com/52CV/CVPR-2021-Papers) | [📎](https://github.com/52CV/CVPR-2020-Papers)      |
-| ICCV   | [🚀]() |      | -   | [🔗](https://openaccess.thecvf.com/ICCV2023?day=all) | -   | -  | -    |
-| NeurIPS  | [🌟](https://neurips.cc/) |      | [🔗](https://nips.cc/virtual/2024/papers.html)           | [🔗](https://neurips.cc/virtual/2023/papers.html?filter=titles) | [🔗](https://neurips.cc/virtual/2022/papers.html?filter=titles) | [🔗](https://neurips.cc/virtual/2021/papers.html?filter=titles) | [🔗](https://nips.cc/virtual/2020/public/papers.html?filter=titles) |
-| ICML     | [⏰](https://icml.cc/Conferences/2025) [🚀](https://icml.cc/Conferences/2025/CallForPapers) |      | [🔗](https://icml.cc/virtual/2024/papers.html?filter=titles) | [🔗](https://icml.cc/virtual/2023/papers.html?filter=titles) | [🔗](https://icml.cc/virtual/2022/papers.html?filter=titles) | [🔗](https://icml.cc/Conferences/2021/Schedule?type=Poster) | [🔗](https://icml.cc/virtual/2020/papers.html?filter=titles) |
-| ICLR     | -                                                            |      | [🔗](https://iclr.cc/virtual/2024/papers.html?filter=titles) | -                                                            | -                                                            | -                                                            | -                                                            |
-| AAAI     | [🌟](https://ojs.aaai.org/index.php/AAAI/issue/archive)  |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| IJCAI    | -                                                            |      | [🔗](https://www.ijcai.org/Proceedings/2024/)            | [🔗](https://ijcai-23.org/main-track-accepted-papers/) | -                                                            | -                                                            | -                                                            |
-| ECCV     | [🌟](https://eccv2024.ecva.net/Conferences/2026)           | - | [2024](https://github.com/amusi/ECCV2024-Papers-with-Code)   | -                                                            | [2022](https://github.com/amusi/ECCV2024-Papers-with-Code/blob/master/ECCV2022-Papers-with-Code.md) | -                                                            | [2020](https://github.com/amusi/ECCV2024-Papers-with-Code/blob/master/ECCV2020-Papers-with-Code.md) |
-| IROS     | [main](https://ieeexplore.ieee.org/xpl/conhome/1000393/all-proceedings) |      | [2024](https://github.com/ryanbgriffiths/IROS2024PaperList)  | [2023](https://ieeexplore.ieee.org/xpl/conhome/10341341/proceeding) | [2022](https://ieeexplore.ieee.org/xpl/conhome/9981026/proceeding) | [2021](https://ieeexplore.ieee.org/xpl/conhome/9635848/proceeding) | [2020](https://ieeexplore.ieee.org/xpl/conhome/9340668/proceeding) |
-| ICRA     | [main](https://iclr.cc/Conferences/2025)                     |      | [2024](https://iclr.cc/virtual/2024/papers.html?filter=titles) | [2023](https://iclr.cc/virtual/2023/papers.html?filter=titles) | [2022](https://iclr.cc/virtual/2022/papers.html?filter=titles) | [2021](https://iclr.cc/virtual/2021/papers.html?filter=titles) | [2020](https://iclr.cc/virtual/2020/papers.html?filter=titles) |
-| CoRL     | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| RSS      | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| ACL | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| ICASSP | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| EMNLP | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| ICME | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-| NAACL | -                                                            |      | -                                                            | -                                                            | -                                                            | -                                                            | -                                                            |
-
-
 
 ## 搜索引擎 🔎
 - https://felo.ai/search
@@ -282,3 +261,26 @@ MPL在线手册-2025
 
 https://valser.org/webinar/slide/index.php/Home/
 VALSE 文件存档
+
+科研相关集合（找文献专利基金的网站可以看看，其它基本没用）
+https://yanweb.top/
+
+
+TorchStat2: PyTorch Model Analyzer PyTorch模型分析工具，统计参数量、FLOPs、内存、推理性能等。
+
+
+## 2. langextract（Google开源Python库）
+**论文/项目标题**: langextract（Google开源Python库）
+**Title**: langextract: Google Open Source Python Library for Text Extraction
+**主要内容**: 智能文本内容提取库，支持精确定位和交互式可视化，适合自动化文本处理。
+**链接**: /google/langextract
+
+
+
+https://github.com/QuentinFuxa/WhisperLiveKit
+实时语音转文字
+
+
+https://research.swtch.com/qr/draw/
+头像二维码生成
+

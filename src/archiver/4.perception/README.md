@@ -56,8 +56,7 @@ https://nullmax-vision.github.io/
 https://github.com/facebookresearch/mae_st/tree/main
 
 
-## 感兴趣的
-https://github.com/NVlabs/RADIO
+
 
 
 ## 量子力学
