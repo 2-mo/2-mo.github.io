@@ -1,13 +1,46 @@
-name: Get Citation Data
+name: Deploy GitHub Pages
 
-on: 
- page_build: 
- schedule:
-  - cron:  '0 8 * * *'
+on:
+  push:
+    branches:
+      - main  # 监听 main 分支的推送
+  schedule:
+    - cron: '0 8 * * *'  # 定时任务
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    steps:
+    # 检出代码
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 设置 Ruby 环境
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2  # 替换为你的 Ruby 版本
+        bundler-cache: true
+
+    # 安装依赖
+    - name: Install dependencies
+      run: bundle install
+
+    # 构建 Jekyll 网站
+    - name: Build site
+      run: bundle exec jekyll build
+
+    # 部署到 GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site  # Jekyll 默认的输出目录
+
+  update_citation_data:
+    runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
     - name: Install Reqs
@@ -25,5 +58,5 @@ jobs:
         git add *.json
         git commit -m "Updated Citation Data"
         git push "${remote_repo}" HEAD:google-scholar-stats --force
-      env: 
+      env:
         GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
