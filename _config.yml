@@ -12,7 +12,7 @@ repository               : "RayeRen/acad-homepage.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
-google_analytics_id      : m6wKAtcAAAAJ # get google_analytics_id from https://analytics.google.com/analytics/
+# google_analytics_id      : m6wKAtcAAAAJ # get google_analytics_id from https://analytics.google.com/analytics/
 
 # SEO Related
 # google_site_verification :  # get google_site_verification from https://search.google.com/search-console/about
@@ -27,7 +27,7 @@ author:
   location         : "Beijing, China"
   employer         :
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID"
+  googlescholar    : "https://scholar.google.com/citations?user=m6wKAtcAAAAJ"
   email            : "Lorem@ipsum.com"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
