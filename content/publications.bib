@@ -1,89 +1,125 @@
-@article{liu2024stability,
-  selected={true},
-  title = {Numerical Stability Analysis of High-Order Runge-Kutta Methods in Quantum Dynamics},
-  author = {Jiale Liu and Sarah O'Connor*},
-  year = {2024},
-  month = mar,
-  journal = {Journal of Computational Physics},
-  volume = {450},
-  pages = {110832},
-  issn = {0021-9991},
-  doi = {10.1016/j.jcp.2023.110832},
-  urldate = {2024-12-02},
-  langid = {english},
-  abstract = {The precise time-evolution of quantum systems is a cornerstone of computational physics. This paper investigates the numerical stability of high-order Runge-Kutta (RK) methods when applied to the time-dependent Schrödinger equation. We derive rigorous stability boundaries for symplectic and non-symplectic RK integrators and demonstrate that specific implicit schemes preserve unitarity over extended simulation times. By analyzing the spectral properties of the Hamiltonian operator, we establish a relationship between the Courant-Friedrichs-Lewy (CFL) condition and the imaginary eigenvalues characteristic of quantum propagators. Our findings are validated through simulations of wave packet scattering and harmonic oscillator dynamics, showing that our proposed optimized RK coefficients significantly reduce phase error accumulation compared to standard integrators.},
-  description={A rigorous analysis of numerical stability boundaries for high-order Runge-Kutta integrators in the context of time-dependent quantum mechanics.},
-  keywords={Computational Physics, Quantum Dynamics, Numerical Analysis, Runge-Kutta Methods}
-}
-
-@inproceedings{smith2024constructive,
-  title = {A Constructive Proof of the Generalized Riemann Hypothesis for Function Fields over Finite Constants},
-  booktitle = {Proceedings of the 2024 International Congress of Mathematicians (ICM)},
-  author = {John Smith# and Jiale Liu#* and Alan Turing},
-  year = {2024},
-  month = jun,
-  pages = {205--218},
-  publisher = {EMS Press},
-  address = {Paris, France},
-  doi = {10.4171/ICM2024/102},
-  urldate = {2024-12-02},
-  isbn = {978-3-03719-202-8},
-  abstract = {We present a novel constructive proof for the Generalized Riemann Hypothesis (GRH) specifically within the context of function fields over finite constants. Unlike previous existential approaches, our method utilizes the spectral interpretation of the Frobenius automorphism acting on étale cohomology groups. We explicitly construct the L-functions associated with algebraic curves and demonstrate that their zeros lie strictly on the critical line Re(s) = 1/2. This work bridges the gap between classical analytic number theory and geometric invariant theory, offering new insights into the distribution of prime polynomials. The constructive nature of our proof allows for the algorithmic verification of L-function properties for curves of genus g > 100, which was previously computationally intractable.},
-  preview={example.png},
-  description={A constructive proof demonstrating the validity of the Generalized Riemann Hypothesis for function fields using spectral interpretation of the Frobenius automorphism.},
-  keywords={Number Theory, Riemann Hypothesis, Function Fields, Algebraic Geometry}
-}
-
-@inproceedings{brown2023monte,
-  selected={true},
-  title = {Monte Carlo Simulations of Phase Transitions in 2D Ising Models on Non-Euclidean Lattices},
-  shorttitle = {Ising on Hyperbolic Planes},
-  booktitle = {2023 International Conference on Computational Physics (ICCP)},
-  author = {Charlie Brown and Jiale Liu*},
-  year = {2023},
-  month = dec,
-  pages = {45--52},
-  publisher = {APS},
-  address = {Tokyo, Japan},
-  doi = {10.1103/ICCP.2023.0045},
-  urldate = {2024-12-02},
-  isbn = {978-0-7354-2000-1},
-  abstract = {The behavior of spin systems on curved geometries offers a unique window into the interplay between topology and statistical mechanics. This study employs extensive Monte Carlo simulations to explore the phase transitions of the 2D Ising model mapped onto hyperbolic lattices (Poincaré disk). We utilize the Wolff cluster algorithm to overcome critical slowing down near the phase transition temperature. Our results indicate that the critical exponents on negatively curved surfaces deviate significantly from the standard Onsager solution for flat Euclidean lattices. Specifically, we observe a suppression of the correlation length divergence, suggesting a mean-field-like behavior induced by the exponential expansion of the lattice volume. These findings have implications for understanding quantum gravity models and holographic duality.},
-  preview={example.png},
-  description={Monte Carlo study revealing mean-field-like phase transitions and critical exponent deviations for Ising models on hyperbolic non-Euclidean lattices.},
-  keywords={Statistical Mechanics, Monte Carlo Simulation, Ising Model, Non-Euclidean Geometry}
-}
-
-@article{doe2025existence,
-  title = {On the Existence and Uniqueness of Solutions to Non-Linear Stochastic Partial Differential Equations},
-  author = {Jane Doe and Jiale Liu and Richard Feynman},
-  year = {2025},
-  month = jun,
-  journal = {Annals of Probability},
-  volume = {53},
-  number = {4},
-  pages = {1201--1245},
-  issn = {0091-1798},
-  doi = {10.1214/25-AOP1201},
-  copyright = {https://imstat.org/journals-and-publications/annals-of-probability/},
-  abstract={We establish the existence and uniqueness of strong solutions for a class of non-linear Stochastic Partial Differential Equations (SPDEs) driven by multiplicative Lévy noise. The equations under consideration model turbulent fluid flow and heat transport in random media. By employing a Galerkin approximation scheme combined with a compact embedding theorem, we prove the convergence of the approximate solutions in appropriate Hilbert spaces. Furthermore, we derive a priori estimates that ensure the global regularity of the solution almost surely. A key contribution of this work is the treatment of non-Lipschitz coefficients using a stochastic Gronwall inequality, extending the applicability of the theory to more singular physical models. We also discuss the ergodic properties of the invariant measures associated with the SPDEs.},
-  preview={example.png},
-  description={Mathematical proof of existence and uniqueness for non-linear SPDEs with multiplicative Lévy noise, extending theory to non-Lipschitz coefficients.},
-  keywords={Stochastic Analysis, SPDE, Existence Theorems, Probability Theory}
-}
-
-@article{liu2025algorithmic,
-  title = {Algorithmic Complexity of Tensor Network Contractions in Many-Body Localization},
-  author = {Jiale Liu and Ada Lovelace*},
-  year = {2025},
-  month = sep,
-  journal = {Physical Review E},
-  issn = {2470-0045},
-  publisher = {APS},
-  abstract = {Simulating the dynamics of many-body localized (MBL) systems poses a significant challenge due to the logarithmic growth of entanglement entropy. This paper analyzes the algorithmic complexity of contracting Tensor Networks, specifically Matrix Product States (MPS) and Projected Entangled Pair States (PEPS), when applied to MBL Hamiltonians. We prove that while the exact contraction is #P-complete, approximate contraction schemes based on singular value decomposition (SVD) truncation exhibit polynomial time complexity with bounded error for short-time evolution. However, we identify a "complexity phase transition" at the ergodic-MBL transition point, where the bond dimension required for a fixed accuracy diverges exponentially. We propose a novel adaptive bond-dimension algorithm that optimizes computational resources by exploiting the area law of entanglement in the localized phase, demonstrating superior performance on Heisenberg spin chains.},
-  description={Complexity analysis of tensor network contractions in MBL systems, identifying a complexity phase transition and proposing an adaptive algorithm.},
-  keywords={Tensor Networks, Many-Body Localization, Complexity Theory, Quantum Information},
-  doi = {10.1103/PhysRevE.112.092101},
+@article{mo2025a2seek,
   selected = {true},
-  code = {https://github.com/xyjoey/Tensor_Network_Complexity_MBL},
+  title = {A2Seek: Towards Reasoning-Centric Benchmark for Aerial Anomaly Understanding},
+  author = {Mo, Mengjingcheng and Tong, Xinyang and Tan, Mingpi and Leng, Jiaxu* and Zheng, Jiankang and Liu, Yiran and Chen, Haosheng and Gan, Ji and Li, Weisheng and Gao, Xinbo*},
+  journal = {arXiv preprint arXiv:2505.21962},
+  year = {2025},
+  preview = {cover-a2seek.png}
+}
+
+@inproceedings{mo2024nexusad,
+  selected = {true},
+  title = {NexusAD: Exploring the Nexus for Multimodal Perception and Comprehension of Corner Cases in Autonomous Driving},
+  author = {Mo, Mengjingcheng and Wang, Jingxin and Wang, Like and Chen, Haosheng and Gu, Changjun and Leng, Jiaxu and Gao, Xinbo*},
+  booktitle = {ECCV 2024 Workshop on Multimodal Perception and Comprehension of Corner Cases in Autonomous Driving},
+  year = {2024}
+}
+
+@article{leng2022pareto,
+  selected = {true},
+  title = {Pareto Refocusing for Drone-View Object Detection},
+  author = {Leng, Jiaxu and Mo, Mengjingcheng and Zhou, Yinghua and Gao, Chenqiang and Li, Weisheng and Gao, Xinbo},
+  journal = {IEEE Transactions on Circuits and Systems for Video Technology},
+  volume = {33},
+  number = {3},
+  pages = {1320--1334},
+  year = {2022},
+  publisher = {IEEE}
+}
+
+@article{li2025shape,
+  title = {Shape-Centered Representation Learning for Visible-Infrared Person Re-Identification},
+  author = {Li, Shuang and Leng, Jiaxu and Gan, Ji and Mo, Mengjingcheng and Gao, Xinbo},
+  journal = {Pattern Recognition},
+  pages = {111756},
+  year = {2025},
+  publisher = {Pergamon}
+}
+
+@article{leng2024difficulty,
+  title = {Difficulty-Guided Variant Degradation Learning for Blind Image Super-Resolution},
+  author = {Leng, Jiaxu and Wang, Jia and Mo, Mengjingcheng and Gan, Ji and Lu, Wen and Gao, Xinbo},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  year = {2024},
+  publisher = {IEEE}
+}
+
+@article{leng2024recent,
+  title = {Recent Advances for Aerial Object Detection: A Survey},
+  author = {Leng, Jiaxu and Ye, Yongming and Mo†, Mengjingcheng and Gao, Chenqiang and Gan, Ji and Xiao, Bin and Gao, Xinbo},
+  journal = {ACM Computing Surveys},
+  volume = {56},
+  number = {12},
+  pages = {1--36},
+  year = {2024},
+  publisher = {ACM}
+}
+
+@article{leng2023look,
+  title = {Where to Look: Multi-Granularity Occlusion-Aware for Video Person Re-Identification},
+  author = {Leng, Jiaxu and Wang, Haitao and Gao, Xinbo and Zhang, Yan and Wang, Ye and Mo, Mengjingcheng},
+  journal = {Neurocomputing},
+  volume = {536},
+  pages = {137--151},
+  year = {2023},
+  publisher = {Elsevier}
+}
+
+@article{chen2023atomic,
+  title = {Atomic Number Prior Guided Network for Prohibited Items Detection from Heavily Cluttered X-Ray Imagery},
+  author = {Chen, Jinwen and Leng, Jiaxu and Gao, Xinbo and Mo, Mengjingcheng and Guan, Shibo},
+  journal = {Frontiers in Physics},
+  volume = {10},
+  pages = {1117261},
+  year = {2023},
+  publisher = {Frontiers Media SA}
+}
+
+@article{leng2022sampling,
+  title = {Sampling-Invariant Fully Metric Learning for Few-Shot Object Detection},
+  author = {Leng, Jiaxu and Chen, Taiyue and Gao, Xinbo and Mo, Mengjingcheng and Yu, Yongtao and Zhang, Yan},
+  journal = {Neurocomputing},
+  volume = {511},
+  pages = {54--66},
+  year = {2022},
+  publisher = {Elsevier}
+}
+
+@article{gao2021recent,
+  selected = {true},
+  title = {Recent Advances in Small Object Detection},
+  author = {Gao, Xinbo and Mo, Mengjingcheng and Wang, Haitao and Leng, Jiaxu},
+  journal = {Journal of Data Acquisition and Processing},
+  volume = {36},
+  number = {3},
+  pages = {391--417},
+  year = {2021}
+}
+
+@inproceedings{liu2024dual,
+  title = {Dual Space Embedding Learning for Weakly Supervised Audio-Visual Violence Detection},
+  author = {Liu, Yiran and Wu, Zhanjie and Mo, Mengjingcheng and Gan, Ji and Leng, Jiaxu and Gao, Xinbo},
+  booktitle = {2024 IEEE International Conference on Multimedia and Expo (ICME)},
+  pages = {1--6},
+  year = {2024},
+  organization = {IEEE}
+}
+
+@article{dongbevlm,
+  title = {BeVLM: GoT-Based Integration of BEV and LLM for Driving with Language},
+  author = {Dong, Yang and Liang, Hansheng and Zhai, Mingliang and Li, Cheng and Xia, Meng and Liu, Xinglin and Mo, Mengjingcheng and Leng, Jiaxu and Tao, Ji and Gao, Xinbo}
+}
+
+@article{chen2025ehgcn,
+  title = {EHGCN: Hierarchical Euclidean-Hyperbolic Fusion via Motion-Aware GCN for Hybrid Event Stream Perception},
+  author = {Chen, Haosheng and Luo, Lian and Mo, Mengjingcheng and Wu, Zhanjie and Xiao, Guobao and Gan, Ji and Leng, Jiaxu and Gao, Xinbo},
+  journal = {arXiv preprint arXiv:2504.16616},
+  year = {2025}
+}
+
+@article{leng2025piercingeye,
+  title = {PiercingEye: Dual-Space Video Violence Detection with Hyperbolic Vision-Language Guidance},
+  author = {Leng, Jiaxu and Wu, Zhanjie and Tan, Mingpi and Mo, Mengjingcheng and Zheng, Jiankang and Li, Qingqing and Gan, Ji and Gao, Xinbo},
+  journal = {arXiv preprint arXiv:2504.18866},
+  year = {2025}
 }

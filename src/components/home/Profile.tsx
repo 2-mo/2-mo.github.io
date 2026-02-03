@@ -35,6 +35,10 @@ interface ProfileProps {
 
 export default function Profile({ author, social, features, researchInterests }: ProfileProps) {
 
+    const nameMatch = author.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+    const nameLinePrimary = nameMatch?.[1] || author.name;
+    const nameLineSecondary = nameMatch?.[2];
+
     const [hasLiked, setHasLiked] = useState(false);
     const [showThanks, setShowThanks] = useState(false);
     const [showAddress, setShowAddress] = useState(false);
@@ -123,8 +127,11 @@ export default function Profile({ author, social, features, researchInterests }:
 
             {/* Name and Title */}
             <div className="text-center mb-6">
-                <h1 className="text-3xl font-serif font-bold text-primary mb-2">
-                    {author.name}
+                <h1 className="text-3xl font-serif font-bold text-primary mb-2 leading-tight">
+                    <span className="block">{nameLinePrimary}</span>
+                    {nameLineSecondary && (
+                        <span className="block">{nameLineSecondary}</span>
+                    )}
                 </h1>
                 <p className="text-lg text-accent font-medium mb-1">
                     {author.title}
@@ -267,7 +274,7 @@ export default function Profile({ author, social, features, researchInterests }:
                                                         </div>
                                                     )}
                                                 </div>
-                                                <p className="break-words">{social.email?.replace('@', ' (at) ')}</p>
+                                                <p className="break-words">{social.email}</p>
                                                 <div className="mt-2">
                                                     <a
                                                         href={link.href}

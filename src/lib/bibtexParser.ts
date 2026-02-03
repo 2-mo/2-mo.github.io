@@ -121,6 +121,40 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
 function parseAuthors(authorsStr: string, highlightName?: string): Array<{ name: string; isHighlighted?: boolean; isCorresponding?: boolean; isCoAuthor?: boolean }> {
   if (!authorsStr) return [];
 
+  const normalizeName = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  const buildHighlightCandidates = (value?: string): string[] => {
+    if (!value) return [];
+
+    const candidates: string[] = [value];
+    const parenMatch = value.match(/\(([^)]+)\)/);
+    if (parenMatch?.[1]) candidates.push(parenMatch[1]);
+    const cnParenMatch = value.match(/（([^）]+)）/);
+    if (cnParenMatch?.[1]) candidates.push(cnParenMatch[1]);
+
+    const normalized = candidates
+      .map(item => normalizeName(item))
+      .filter(Boolean);
+
+    const expanded: string[] = [];
+    normalized.forEach(name => {
+      expanded.push(name);
+      const parts = name.split(' ').filter(Boolean);
+      if (parts.length === 2) {
+        expanded.push(`${parts[1]} ${parts[0]}`);
+      }
+    });
+
+    return Array.from(new Set(expanded));
+  };
+
+  const highlightCandidates = buildHighlightCandidates(highlightName);
+
   // Split by "and" and clean up
   return authorsStr
     .split(/\sand\s/)
@@ -145,20 +179,9 @@ function parseAuthors(authorsStr: string, highlightName?: string): Array<{ name:
 
       // Check if this is the site owner (to highlight)
       let isHighlighted = false;
-      if (highlightName) {
-        const lowerName = name.toLowerCase();
-        const lowerHighlight = highlightName.toLowerCase();
-        isHighlighted = lowerName.includes(lowerHighlight);
-
-        // Also check for reversed order (Last First) if not found
-        if (!isHighlighted && lowerHighlight.includes(' ')) {
-          const parts = lowerHighlight.split(' ');
-          // Handle simple First Last case
-          if (parts.length === 2) {
-            const reversed = `${parts[1]} ${parts[0]}`;
-            isHighlighted = lowerName.includes(reversed);
-          }
-        }
+      if (highlightCandidates.length > 0) {
+        const normalizedName = normalizeName(name);
+        isHighlighted = highlightCandidates.some(candidate => normalizedName.includes(candidate));
       }
 
       return {

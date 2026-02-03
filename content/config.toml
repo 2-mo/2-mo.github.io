@@ -1,29 +1,28 @@
 [site]
-title = "Jiale Liu"
-description = "PhD student at the University of Example."
-favicon = "/favicon.svg"
-last_updated = "November 18, 2025"
+title = "Mo Mengjingcheng"
+description = "PhD student at Chongqing University of Posts and Telecommunications focusing on video anomaly understanding and embodied intelligence."
+favicon = "/DALL.svg"
+last_updated = "February 3, 2026"
 
 [author]
-name = "Jiale Liu"
+name = "Mo Mengjingcheng (莫梦竟成)"
 title = "PhD Student"
-institution = "University of Example"
-avatar = "/bio.jpg"
+institution = "Chongqing University of Posts and Telecommunications"
+avatar = "/raccoon.webp"
 
 [social]
 # Contact information (leave blank or delete to hide)
 
-email = "john.doe@example.com"
-location = "City, Country"
-location_url = "https://maps.google.com"
+email = "mo1031@live.com"
+location = "Chongqing, China"
+location_url = "https://maps.google.com/?q=Chongqing"
 location_details = [
-  "Room 123, Science Building,",
-  "University Avenue, City, Country"
+  "Chongqing University of Posts and Telecommunications"
 ]
-google_scholar = "https://scholar.google.com"
-orcid = "https://orcid.org"
-github = "https://github.com"
-linkedin = "https://linkedin.com"
+google_scholar = "https://scholar.google.com/citations?hl=en&user=m6wKAtcAAAAJ&view_op=list_works&sortby=pubdate"
+orcid = ""
+github = "https://2-mo.github.io/"
+linkedin = ""
 
 [features]
 # Show a like button on the about page

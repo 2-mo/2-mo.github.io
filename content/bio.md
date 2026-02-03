@@ -1,5 +1,3 @@
-I am a PhD student at the School of Science, University of Example, advised by [Prof. Advisor One](https://example.com) and [Dr. Advisor Two](https://example.com).
+I am a PhD student at Chongqing University of Posts and Telecommunications, advised by Prof. **[Xinbo Gao](https://web.xidian.edu.cn/xbgao/)** and Associate Prof. **[Jiaxu Leng](https://faculty.cqupt.edu.cn/lengjiaxu/zh_CN/index.htm)**. My research focuses on **Video Anomaly Understanding (VAU)** and embodied intelligence, aiming to build practical multimodal perception systems for challenging real-world scenarios.
 
-Prior to this, I obtained a BSc degree with First Class Honours in Natural Science from the University of Example.
-
-My current research focuses on investigating the mathematical principles of natural philosophy.
+我目前在重庆邮电大学攻读博士学位，导师为 **[高新波](https://web.xidian.edu.cn/xbgao/)** 教授 和 **[冷佳旭](https://faculty.cqupt.edu.cn/lengjiaxu/zh_CN/index.htm)** 副教授，主要研究方向为**视频异常理解**和具身智能，致力于面向复杂真实场景的多模态感知与智能系统研发。
