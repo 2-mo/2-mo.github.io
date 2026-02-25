@@ -11,7 +11,8 @@ export interface PublicationPageConfig extends BasePageConfig {
 
 export interface TextPageConfig extends BasePageConfig {
     type: 'text';
-    source: string;
+    source?: string;
+    content?: string;
 }
 
 export interface CardItem {
@@ -24,7 +25,15 @@ export interface CardItem {
     image?: string;
 }
 
+export interface CardGroup {
+    title: string;
+    items: CardItem[];
+}
+
 export interface CardPageConfig extends BasePageConfig {
     type: 'card';
-    items: CardItem[];
+    grouped?: boolean;
+    variant?: 'default' | 'portal';
+    items?: CardItem[];
+    groups?: CardGroup[];
 }

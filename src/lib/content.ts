@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'smol-toml';
+import { TextPageConfig } from '@/types/page';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -37,4 +38,16 @@ export function getTomlContent<T>(filename: string): T | null {
 
 export function getPageConfig<T = unknown>(pageName: string): T | null {
     return getTomlContent<T>(`${pageName}.toml`);
+}
+
+export function getTextPageContent(config: TextPageConfig): string {
+    if (typeof config.content === 'string' && config.content.trim().length > 0) {
+        return config.content;
+    }
+
+    if (typeof config.source === 'string' && config.source.trim().length > 0) {
+        return getMarkdownContent(config.source);
+    }
+
+    return '';
 }

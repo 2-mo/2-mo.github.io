@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getPageConfig, getMarkdownContent, getBibtexContent } from '@/lib/content';
+import { getPageConfig, getBibtexContent, getTextPageContent } from '@/lib/content';
 import { getConfig } from '@/lib/config';
 import { parseBibTeX } from '@/lib/bibtexParser';
 import PublicationsList from '@/components/publications/PublicationsList';
@@ -67,6 +67,6 @@ function PublicationPage({ config }: { config: PublicationPageConfig }) {
 }
 
 function TextPageWrapper({ config }: { config: TextPageConfig }) {
-    const content = getMarkdownContent(config.source);
+    const content = getTextPageContent(config);
     return <TextPage config={config} content={content} />;
 }

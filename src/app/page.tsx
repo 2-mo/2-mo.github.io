@@ -1,5 +1,5 @@
 import { getConfig } from '@/lib/config';
-import { getMarkdownContent, getBibtexContent, getTomlContent, getPageConfig } from '@/lib/content';
+import { getMarkdownContent, getBibtexContent, getTomlContent, getPageConfig, getTextPageContent } from '@/lib/content';
 import { parseBibTeX } from '@/lib/bibtexParser';
 import Profile from '@/components/home/Profile';
 import About from '@/components/home/About';
@@ -105,7 +105,7 @@ export default function Home() {
             type: 'text',
             id: item.target,
             config: textConfig,
-            content: getMarkdownContent(textConfig.source)
+            content: getTextPageContent(textConfig)
           } as PageData;
         } else if (pageConfig.type === 'card') {
           return {
