@@ -1,5 +1,5 @@
 type = "card"
-title = "科研常用导航"
+title = "常用导航"
 description = "常用的科研检索、写作、工具与资源导航。"
 grouped = true
 variant = "portal"
@@ -12,6 +12,12 @@ title = "Conference-Accepted-Paper-List"
 subtitle = "科研常用网站"
 link = "https://github.com/Lionelsy/Conference-Accepted-Paper-List"
 content = "会议录用论文汇总索引。"
+
+[[groups.items]]
+title = "Github-Student-Certification-Guide"
+subtitle = "Github学生认证指南"
+link = "https://github.com/JimmyLing233/Github-Student-Certification-Guide"
+content = "GitHub 学生认证申请与材料整理指南。"
 
 [[groups]]
 title = "搜索引擎 🔎"
@@ -147,6 +153,12 @@ title = "Elsevier LaTeX Instructions"
 subtitle = "模版下载"
 link = "https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions"
 content = "Elsevier LaTeX 模板与投稿说明。"
+
+[[groups.items]]
+title = "NSFC-LaTeX"
+subtitle = "NSFC 基金申请 LaTeX 模版"
+link = "https://github.com/MCG-NKU/NSFC-LaTex"
+content = "南开大学程明明老师开源的国家自然科学基金撰写 LaTeX 模版。"
 
 [[groups]]
 title = "⚓️ 论文下载"
@@ -307,6 +319,24 @@ link = "https://bigjpg.com"
 content = "图片无损放大与超分辨率。"
 
 [[groups.items]]
+title = "Iconscout"
+subtitle = "图标素材"
+link = "https://iconscout.com/"
+content = "图标、插画与 3D 素材搜索下载。"
+
+[[groups.items]]
+title = "Icons8"
+subtitle = "图标素材"
+link = "https://icons8.com/"
+content = "多风格图标与设计素材平台。"
+
+[[groups.items]]
+title = "Voyager"
+subtitle = "在线工具"
+link = "https://voyager.nagi.fun/en/"
+content = "可视化网页探索与导航工具。"
+
+[[groups.items]]
 title = "白描"
 subtitle = "文字识别"
 link = "https://web.baimiaoapp.com"
@@ -390,6 +420,13 @@ title = "CNKI格式精灵"
 subtitle = "中文期刊格式"
 link = "https://author.cnki.net/#/index"
 content = "中文期刊参考文献格式校验。"
+tags = ["格式转换"]
+
+[[groups.items]]
+title = "docformat-gui"
+subtitle = "文档格式化"
+link = "https://github.com/KaguraNanaga/docformat-gui"
+content = "文档格式规范与排版辅助工具。"
 tags = ["格式转换"]
 
 [[groups]]
@@ -580,6 +617,18 @@ title = "Paper-Writing-Tips"
 subtitle = "写作技巧"
 link = "https://github.com/MLNLP-World/Paper-Writing-Tips"
 content = "论文写作经验与模板合集。"
+
+[[groups.items]]
+title = "Cheng's Writing"
+subtitle = "写作技巧"
+link = "https://mmcheng.net/writing/"
+content = "学术写作建议与论文撰写经验整理。"
+
+[[groups.items]]
+title = "Awesome AI Research Writing"
+subtitle = "写作提示词"
+link = "https://github.com/Leey21/awesome-ai-research-writing"
+content = "AI 论文写作提示词合集。"
 
 [[groups]]
 title = "📟 公众号编辑"
