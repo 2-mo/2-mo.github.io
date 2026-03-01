@@ -76,6 +76,12 @@ subtitle = "公式编辑器"
 link = "https://www.latexlive.com/"
 content = "在线 LaTeX 公式编辑与预览。"
 
+[[groups.items]]
+title = "LosslessCut"
+subtitle = "视频剪辑"
+link = "https://github.com/mifi/lossless-cut"
+content = "开源无损视频裁剪与片段导出工具。"
+
 [[groups]]
 title = "🔍 论文检索"
 
@@ -159,6 +165,12 @@ title = "NSFC-LaTeX"
 subtitle = "NSFC 基金申请 LaTeX 模版"
 link = "https://github.com/MCG-NKU/NSFC-LaTex"
 content = "南开大学程明明老师开源的国家自然科学基金撰写 LaTeX 模版。"
+
+[[groups.items]]
+title = "ChineseResearchLaTeX"
+subtitle = "中文科研 LaTeX 模版"
+link = "https://github.com/huangwb8/ChineseResearchLaTeX"
+content = "中文科研论文写作的 LaTeX 模版与示例。"
 
 [[groups]]
 title = "⚓️ 论文下载"
@@ -287,6 +299,13 @@ title = "VS Code"
 subtitle = "IDE"
 link = "https://code.visualstudio.com/"
 content = "跨平台代码编辑与调试环境。"
+tags = ["实用软件"]
+
+[[groups.items]]
+title = "StructAI"
+subtitle = "LLM 工具库"
+link = "https://github.com/black-yt/structai"
+content = "全面的实用程序库，用于加速 LLM 应用与多智能体系统开发，提供结构化输出、上下文管理与并行执行能力，支持可扩展的生产级 AI 系统部署。"
 tags = ["实用软件"]
 
 [[groups.items]]
