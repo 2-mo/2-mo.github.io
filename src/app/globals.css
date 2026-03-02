@@ -160,14 +160,33 @@
 }
 
 
-body {
+html {
   background: var(--background);
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body {
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-sans);
   line-height: var(--line-height-normal);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  z-index: 1;
 }
 
 /* Typography utilities */
