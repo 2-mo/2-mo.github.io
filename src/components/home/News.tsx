@@ -15,7 +15,7 @@ interface NewsProps {
 export default function News({ items, title = 'News' }: NewsProps) {
     return (
         <motion.section
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
         >

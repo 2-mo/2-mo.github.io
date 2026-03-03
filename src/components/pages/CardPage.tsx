@@ -35,8 +35,8 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
         const previewText = item.content?.trim();
         const tags = config.groups && groupName ? item.tags : (groupName ? item.tags?.filter(tag => tag !== groupName) : item.tags);
         const cardClassName = portalMode
-            ? `group bg-white dark:bg-neutral-900 ${embedded ? "p-2.5" : "p-3"} rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-200`
-            : `bg-white dark:bg-neutral-900 ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`;
+            ? `group ${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-2.5" : "p-3"} rounded-lg border hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-200`
+            : `${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`;
 
         const cardContent = (
             <>
@@ -58,11 +58,11 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                 )}
                 {portalMode && previewText && (
                     <div className="mt-0 max-h-0 opacity-0 overflow-hidden group-hover:mt-2 group-hover:max-h-20 group-hover:opacity-100 group-focus-within:mt-2 group-focus-within:max-h-20 group-focus-within:opacity-100 transition-all duration-200">
-                        <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">{previewText}</p>
+                        <p className="text-xs text-neutral-600 dark:text-neutral-600 leading-relaxed">{previewText}</p>
                     </div>
                 )}
                 {item.content && !portalMode && (
-                    <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-500 leading-relaxed`}>
+                    <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-600 leading-relaxed`}>
                         {item.content}
                     </p>
                 )}
@@ -84,7 +84,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 * index }}
                 className={`block ${cardClassName}`}
@@ -94,7 +94,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
         ) : (
             <motion.div
                 key={`${groupName || 'default'}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 * index }}
                 className={cardClassName}
@@ -106,14 +106,14 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
         >
             <div className={embedded ? "mb-4" : portalMode ? "mb-4" : "mb-8"}>
                 <h1 className={`${embedded ? "text-2xl" : portalMode ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-2`}>{config.title}</h1>
                 {config.description && (
-                    <p className={`${embedded ? "text-sm" : portalMode ? "text-sm" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl`}>
+                    <p className={`${embedded ? "text-sm" : portalMode ? "text-sm" : "text-lg"} text-neutral-600 dark:text-neutral-600 max-w-2xl`}>
                         {config.description}
                     </p>
                 )}

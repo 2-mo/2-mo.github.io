@@ -167,6 +167,18 @@ link = "https://github.com/huangwb8/ChineseResearchLaTeX"
 content = "中文科研论文写作的 LaTeX 模版与示例。"
 
 [[groups.items]]
+title = "academic-project-page-template-vue"
+subtitle = "论文主页模版"
+link = "https://github.com/JunyaoHu/academic-project-page-template-vue"
+content = "基于 Vue 的学术项目主页模板。"
+
+[[groups.items]]
+title = "Academic-project-page-template"
+subtitle = "论文主页模版"
+link = "https://github.com/eliahuhorwitz/Academic-project-page-template"
+content = "简洁的学术项目主页模板。"
+
+[[groups.items]]
 title = "Elsevier LaTeX Instructions"
 subtitle = "模版下载"
 link = "https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions"
@@ -294,6 +306,13 @@ title = "海豚湾机场"
 subtitle = "VPN指南"
 link = "https://help.hitun.io/zh/"
 content = "科学上网客户端使用文档。"
+tags = ["科学上网"]
+
+[[groups.items]]
+title = "vpnfast"
+subtitle = "VPN指南"
+link = "https://github.com/vpnfast/vpnfast.github.io"
+content = "VPNFast 相关仓库与使用资源。"
 tags = ["科学上网"]
 
 [[groups.items]]
@@ -848,7 +867,7 @@ link = "https://www.runoob.com/matplotlib/matplotlib-pie.html"
 content = "Matplotlib 饼图基础教程。"
 
 [[groups.items]]
-title = "图纸店画图参考"
+title = "图之典画图参考"
 subtitle = "画图参考"
 link = "http://www.tuzhidian.com:3000/chart?id=5c56e2434a8c5e048189c6a5"
 content = "图表设计案例与样式参考。"

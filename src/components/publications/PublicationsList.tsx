@@ -58,7 +58,7 @@ export default function PublicationsList({ config, publications, embedded = fals
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
         >
@@ -191,10 +191,15 @@ export default function PublicationsList({ config, publications, embedded = fals
                     filteredPublications.map((pub, index) => (
                         <motion.div
                             key={pub.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: 0.1 * index }}
-                            className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200"
+                            className={cn(
+                                "p-6 rounded-xl shadow-sm border hover:shadow-md transition-all duration-200",
+                                embedded
+                                    ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800"
+                                    : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-700"
+                            )}
                         >
                             <div className="flex flex-col md:flex-row gap-6">
                                 {pub.preview && (
@@ -214,17 +219,17 @@ export default function PublicationsList({ config, publications, embedded = fals
                                     <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary mb-2 leading-tight`}>
                                         {pub.title}
                                     </h3>
-                                    <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-400 mb-2`}>
+                                    <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-700 dark:text-neutral-600 mb-2`}>
                                         {pub.authors.map((author, idx) => (
                                             <span key={idx}>
-                                                <span className={`${author.isHighlighted ? 'font-semibold text-accent' : ''}`}>
+                                                <span className={`${author.isHighlighted ? 'font-semibold text-accent' : 'text-neutral-700 dark:text-neutral-600'}`}>
                                                     {author.name}
                                                 </span>
                                                 {author.isCoAuthor && (
-                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-600 dark:text-neutral-400'}`}>†</sup>
+                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-700 dark:text-neutral-600'}`}>†</sup>
                                                 )}
                                                 {author.isCorresponding && (
-                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-600 dark:text-neutral-400'}`}>*</sup>
+                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-700 dark:text-neutral-600'}`}>*</sup>
                                                 )}
                                                 {idx < pub.authors.length - 1 && ', '}
                                             </span>
@@ -246,7 +251,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 href={`https://doi.org/${pub.doi}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
+                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-700 border border-neutral-200 dark:border-neutral-600 hover:bg-accent hover:text-white hover:border-accent transition-colors"
                                             >
                                                 DOI
                                             </a>
@@ -256,7 +261,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 href={pub.code}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
+                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-700 border border-neutral-200 dark:border-neutral-600 hover:bg-accent hover:text-white hover:border-accent transition-colors"
                                             >
                                                 Code
                                             </a>
@@ -268,7 +273,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                     "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
                                                     expandedAbstractId === pub.id
                                                         ? "bg-accent text-white"
-                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white"
+                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-700 border border-neutral-200 dark:border-neutral-600 hover:bg-accent hover:text-white hover:border-accent"
                                                 )}
                                             >
                                                 <DocumentTextIcon className="h-3 w-3 mr-1.5" />
@@ -282,7 +287,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                     "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
                                                     expandedBibtexId === pub.id
                                                         ? "bg-accent text-white"
-                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white"
+                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-700 border border-neutral-200 dark:border-neutral-600 hover:bg-accent hover:text-white hover:border-accent"
                                                 )}
                                             >
                                                 <BookOpenIcon className="h-3 w-3 mr-1.5" />

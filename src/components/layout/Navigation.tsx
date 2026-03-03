@@ -83,7 +83,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
       {({ open }) => (
         <>
           <motion.div
-            initial={{ y: -100 }}
+            initial={false}
             animate={{ y: 0 }}
             transition={{ duration: 0.6 }}
             className={cn(

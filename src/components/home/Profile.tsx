@@ -108,7 +108,7 @@ export default function Profile({ author, social, features, researchInterests }:
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="sticky top-8"
@@ -159,9 +159,9 @@ export default function Profile({ author, social, features, researchInterests }:
                                         setShowAddress(!isAddressPinned);
                                         setLastClickedTooltip('address');
                                     }}
-                                    className={`p-2 sm:p-2 transition-colors duration-200 ${isAddressPinned
-                                        ? 'text-accent'
-                                        : 'text-neutral-600 dark:text-neutral-400 hover:text-accent'
+                                    className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isAddressPinned
+                                        ? 'text-accent bg-accent/10'
+                                        : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
                                         }`}
                                     aria-label={link.name}
                                 >
@@ -236,9 +236,9 @@ export default function Profile({ author, social, features, researchInterests }:
                                         setShowEmail(!isEmailPinned);
                                         setLastClickedTooltip('email');
                                     }}
-                                    className={`p-2 sm:p-2 transition-colors duration-200 ${isEmailPinned
-                                        ? 'text-accent'
-                                        : 'text-neutral-600 dark:text-neutral-400 hover:text-accent'
+                                    className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isEmailPinned
+                                        ? 'text-accent bg-accent/10'
+                                        : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
                                         }`}
                                     aria-label={link.name}
                                 >
@@ -299,7 +299,7 @@ export default function Profile({ author, social, features, researchInterests }:
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 sm:p-2 text-neutral-600 dark:text-neutral-400 hover:text-accent transition-colors duration-200"
+                            className="p-2 sm:p-2 rounded-md text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent transition-colors duration-200"
                             aria-label={link.name}
                         >
                             <IconComponent className="h-5 w-5" />
