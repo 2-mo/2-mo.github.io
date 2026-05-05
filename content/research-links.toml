@@ -82,6 +82,12 @@ subtitle = "视频剪辑"
 link = "https://github.com/mifi/lossless-cut"
 content = "开源无损视频裁剪与片段导出工具。"
 
+[[groups.items]]
+title = "Powerlevel10k"
+subtitle = "终端美化"
+link = "https://github.com/romkatv/powerlevel10k"
+content = "高性能 Zsh 主题与命令行提示符定制工具。"
+
 [[groups]]
 title = "🔍 论文检索"
 
@@ -302,6 +308,13 @@ content = "Weights & Biases 开源 LLM 追踪与评估工具。"
 tags = ["实用软件"]
 
 [[groups.items]]
+title = "LightRAG"
+subtitle = "RAG 框架"
+link = "https://github.com/hkuds/lightrag"
+content = "开源轻量级检索增强生成框架，适合知识库问答与多阶段检索。"
+tags = ["实用软件"]
+
+[[groups.items]]
 title = "海豚湾机场"
 subtitle = "VPN指南"
 link = "https://help.hitun.io/zh/"
@@ -344,10 +357,38 @@ content = "Mac 科研常用工具与效率流整理。"
 tags = ["软件合集"]
 
 [[groups.items]]
+title = "pubtab"
+subtitle = "论文主页工具"
+link = "https://github.com/galaxy-dawn/pubtab"
+content = "学术论文主页生成与展示工具。"
+tags = ["实用软件"]
+
+[[groups.items]]
+title = "Anonymous Open Science"
+subtitle = "匿名论文主页"
+link = "https://anonymous.4open.science/"
+content = "为双盲投稿创建匿名论文主页与项目展示。"
+tags = ["实用软件"]
+
+[[groups.items]]
+title = "llmfit"
+subtitle = "LLM 微调"
+link = "https://github.com/alexsjones/llmfit"
+content = "大语言模型微调与训练工具库。"
+tags = ["实用软件"]
+
+[[groups.items]]
 title = "langextract"
 subtitle = "文本抽取"
 link = "https://github.com/google/langextract"
 content = "Google 开源文本结构化抽取库。"
+tags = ["实用软件"]
+
+[[groups.items]]
+title = "webdataset"
+subtitle = "数据集工具"
+link = "https://github.com/webdataset/webdataset"
+content = "用于大规模数据集打包、读取与流式训练的数据管线工具。"
 tags = ["实用软件"]
 
 [[groups.items]]
@@ -872,3 +913,11 @@ subtitle = "画图参考"
 link = "http://www.tuzhidian.com:3000/chart?id=5c56e2434a8c5e048189c6a5"
 content = "图表设计案例与样式参考。"
 
+[[groups]]
+title = "研究者主页"
+
+[[groups.items]]
+title = "Xiaogang Peng"
+subtitle = "研究者主页"
+link = "https://xiaogangpeng.github.io/"
+content = "HyperVD作者"
