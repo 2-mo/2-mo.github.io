@@ -315,6 +315,13 @@ content = "开源轻量级检索增强生成框架，适合知识库问答与多
 tags = ["实用软件"]
 
 [[groups.items]]
+title = "MiniMind-O"
+subtitle = "LLM 项目"
+link = "https://github.com/jingyaogong/minimind-o"
+content = "轻量级大语言模型项目与实践仓库。"
+tags = ["实用软件"]
+
+[[groups.items]]
 title = "海豚湾机场"
 subtitle = "VPN指南"
 link = "https://help.hitun.io/zh/"
