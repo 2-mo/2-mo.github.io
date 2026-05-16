@@ -398,6 +398,15 @@ link = "https://github.com/webdataset/webdataset"
 content = "用于大规模数据集打包、读取与流式训练的数据管线工具。"
 tags = ["实用软件"]
 
+[[groups]]
+title = "基座工作"
+
+[[groups.items]]
+title = "Phy-Agent OS"
+subtitle = "机械臂操作系统"
+link = "https://phy-agent-os.net/"
+content = "类似于RobotClaw"
+
 [[groups.items]]
 title = "八爪鱼"
 subtitle = "爬虫"
