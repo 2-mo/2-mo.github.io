@@ -1,0 +1,1663 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CCFDDL 顶会截止同步</title>
+  <style>
+    :root {
+      --paper: #f3ecdd;
+      --paper-strong: #fff8e9;
+      --ink: #10201d;
+      --muted: #6e685c;
+      --line: #d8c9b4;
+      --line-strong: #a89984;
+      --green: #0b6f63;
+      --blue: #245f8f;
+      --amber: #b86824;
+      --red: #a93831;
+      --rush: #c3432f;
+      --black: #101514;
+      --sage: #dfe8d8;
+      --shadow: 0 22px 62px rgba(42, 32, 18, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      min-height: 100%;
+      background:
+        linear-gradient(115deg, rgba(11, 111, 99, 0.10), transparent 34%),
+        linear-gradient(292deg, rgba(184, 104, 36, 0.10), transparent 42%),
+        linear-gradient(90deg, rgba(16, 32, 29, 0.04) 1px, transparent 1px) 0 0 / 34px 34px,
+        linear-gradient(180deg, rgba(16, 32, 29, 0.035) 1px, transparent 1px) 0 0 / 34px 34px,
+        var(--paper);
+      color: var(--ink);
+      font-family: "Avenir Next", "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1360px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 38px;
+    }
+
+    .masthead {
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--green);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-size: 2.82rem;
+      line-height: 0.98;
+      font-weight: 800;
+    }
+
+    .subline {
+      margin: 8px 0 0;
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .refresh {
+      min-height: 42px;
+      border: 1px solid var(--ink);
+      background: linear-gradient(135deg, #0b6f63, #174f73);
+      color: #fffaf0;
+      padding: 0 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 800;
+      box-shadow: 3px 3px 0 var(--black);
+    }
+
+    .refresh:disabled {
+      cursor: wait;
+      opacity: 0.7;
+    }
+
+    .status-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .source-link {
+      color: var(--blue);
+      font-weight: 750;
+      border-bottom: 1px solid currentColor;
+    }
+
+    .year-timeline {
+      margin-top: 16px;
+      border: 1px solid rgba(16, 32, 29, 0.72);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 252, 244, 0.94), rgba(246, 235, 214, 0.82)),
+        var(--paper-strong);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .timeline-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 11px 14px 7px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-title {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-size: 1.12rem;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .timeline-window {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .timeline-body {
+      --axis-top: 180px;
+      position: relative;
+      min-height: 248px;
+      padding: 12px 18px 16px;
+    }
+
+    .timeline-axis {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: var(--axis-top);
+      height: 16px;
+      border: 1px solid rgba(16, 32, 29, 0.22);
+      border-radius: 999px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 8.1%, rgba(16, 32, 29, 0.18) 8.1% calc(8.1% + 1px), transparent calc(8.1% + 1px) 8.33%),
+        linear-gradient(90deg, rgba(11, 111, 99, 0.22), rgba(36, 95, 143, 0.18) 42%, rgba(184, 104, 36, 0.20) 74%, rgba(195, 67, 47, 0.22));
+      box-shadow:
+        inset 0 2px 4px rgba(16, 32, 29, 0.14),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.58);
+    }
+
+    .timeline-now,
+    .timeline-end {
+      position: absolute;
+      top: calc(var(--axis-top) - 10px);
+      width: 2px;
+      height: 36px;
+      background: var(--ink);
+    }
+
+    .timeline-now {
+      left: 18px;
+    }
+
+    .timeline-end {
+      right: 18px;
+      background: var(--line-strong);
+    }
+
+    .timeline-end-label,
+    .timeline-now-label {
+      position: absolute;
+      top: calc(var(--axis-top) + 30px);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 850;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+
+    .timeline-now-label {
+      left: 18px;
+    }
+
+    .timeline-end-label {
+      right: 18px;
+      text-align: right;
+    }
+
+    .timeline-now-time {
+      display: block;
+      color: var(--ink);
+      font-size: 0.78rem;
+    }
+
+    .timeline-event {
+      --event-left: 0%;
+      --event-accent: var(--green);
+      position: absolute;
+      left: calc(18px + (100% - 36px) * var(--event-left) / 100);
+      top: var(--event-top, 18px);
+      transform: translateX(-50%);
+      z-index: 2;
+      min-width: 76px;
+      max-width: 112px;
+    }
+
+    .timeline-event.align-start {
+      transform: translateX(0);
+    }
+
+    .timeline-event.align-end {
+      transform: translateX(-100%);
+    }
+
+    .timeline-event::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: calc(100% - 1px);
+      width: 2px;
+      height: calc(var(--axis-top) - var(--event-top, 18px));
+      background: color-mix(in srgb, var(--event-accent) 68%, transparent);
+      transform: translateX(-50%);
+    }
+
+    .timeline-event.align-start::after {
+      left: 12px;
+    }
+
+    .timeline-event.align-end::after {
+      left: calc(100% - 12px);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: calc(var(--axis-top) - var(--event-top, 18px) + 11px);
+      width: 13px;
+      height: 13px;
+      border: 2px solid var(--paper-strong);
+      border-radius: 999px;
+      background: var(--event-accent);
+      box-shadow:
+        0 0 0 1px rgba(16, 32, 29, 0.24),
+        0 4px 10px rgba(16, 32, 29, 0.18);
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .timeline-event.align-start .timeline-dot {
+      left: 12px;
+    }
+
+    .timeline-event.align-end .timeline-dot {
+      left: calc(100% - 12px);
+    }
+
+    .timeline-chip {
+      position: relative;
+      z-index: 4;
+      border: 1px solid rgba(16, 32, 29, 0.18);
+      border-left: 5px solid var(--event-accent);
+      border-radius: 7px;
+      background: rgba(255, 250, 240, 0.92);
+      padding: 5px 7px;
+      box-shadow: 0 10px 22px rgba(48, 35, 20, 0.10);
+    }
+
+    .timeline-chip strong {
+      display: block;
+      font-size: 0.76rem;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .timeline-chip span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.62rem;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .timeline-event.is-outside .timeline-chip {
+      opacity: 0.74;
+      border-style: dashed;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+      grid-auto-rows: 1fr;
+      margin-top: 16px;
+    }
+
+    .card {
+      --card-accent: var(--green);
+      min-width: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid rgba(16, 32, 29, 0.88);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(255, 247, 232, 0.9)),
+        var(--paper-strong);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      height: 4px;
+      flex: 0 0 auto;
+      background: var(--card-accent);
+    }
+
+    .card.is-live {
+      border-color: rgba(195, 67, 47, 0.92);
+      box-shadow: 0 28px 74px rgba(69, 30, 18, 0.20);
+    }
+
+    .card.is-live::before {
+      height: 6px;
+      background: linear-gradient(90deg, var(--rush), var(--amber), var(--green));
+    }
+
+    .card.is-estimate {
+      background:
+        linear-gradient(135deg, rgba(184, 104, 36, 0.10), transparent 42%),
+        linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(255, 247, 232, 0.9));
+    }
+
+    .card.is-closed {
+      background:
+        linear-gradient(135deg, rgba(169, 56, 49, 0.10), transparent 46%),
+        linear-gradient(180deg, rgba(255, 252, 244, 0.92), rgba(255, 247, 232, 0.86));
+    }
+
+    .card-top {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+      min-height: 112px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .venue-identity {
+      display: grid;
+      grid-template-columns: 104px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .logo-box {
+      width: 104px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(17, 17, 17, 0.38);
+      border-radius: 7px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.03)),
+        var(--venue-bg, var(--ink));
+      overflow: hidden;
+      padding: 10px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    }
+
+    .logo-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: var(--logo-filter, none);
+      transform: scale(var(--logo-scale, 1));
+    }
+
+    .logo-fallback {
+      display: none;
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #fffaf0;
+    }
+
+    .venue-title {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-size: 1.65rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .venue-desc {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
+      min-height: 3.3em;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 0.72rem;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .badge.official {
+      color: var(--green);
+      background: rgba(23, 109, 85, 0.08);
+    }
+
+    .badge.estimate {
+      color: var(--amber);
+      background: rgba(166, 95, 0, 0.10);
+    }
+
+    .badge.missed {
+      color: var(--red);
+      background: rgba(167, 52, 46, 0.08);
+    }
+
+    .deadline-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+    }
+
+    .deadline-hero {
+      margin-bottom: 14px;
+    }
+
+    .countdown {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(16, 32, 29, 0.18);
+      border-radius: 7px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(244, 232, 209, 0.72)),
+        linear-gradient(90deg, rgba(11, 111, 99, 0.08), transparent);
+      padding: 14px 14px 12px;
+      display: grid;
+      align-content: center;
+      min-height: 138px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.72),
+        0 10px 28px rgba(50, 37, 19, 0.08);
+    }
+
+    .countdown::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: var(--card-accent);
+    }
+
+    .countdown strong {
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-size: 4.05rem;
+      line-height: 0.86;
+    }
+
+    .card.is-estimate .countdown {
+      min-height: 104px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(245, 236, 219, 0.62)),
+        linear-gradient(90deg, rgba(184, 104, 36, 0.045), transparent);
+    }
+
+    .card.is-estimate .countdown strong {
+      color: rgba(16, 32, 29, 0.66);
+      font-size: 2.18rem;
+      line-height: 0.92;
+    }
+
+    .card.is-estimate .countdown span {
+      color: rgba(110, 104, 92, 0.78);
+      font-size: 0.74rem;
+    }
+
+    .card.is-live .countdown {
+      border-color: rgba(195, 67, 47, 0.35);
+      background:
+        linear-gradient(135deg, rgba(255, 250, 239, 0.98), rgba(253, 227, 210, 0.82)),
+        linear-gradient(90deg, rgba(195, 67, 47, 0.10), transparent);
+      min-height: 154px;
+    }
+
+    .card.is-live .countdown strong {
+      color: var(--rush);
+      font-size: 3.2rem;
+      line-height: 1.02;
+    }
+
+    .live-countdown {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .live-unit {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .live-unit b {
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-size: 2.36rem;
+      line-height: 0.95;
+      font-weight: 900;
+    }
+
+    .live-unit i {
+      font-family: "Avenir Next", "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 0.72rem;
+      line-height: 1;
+      font-style: normal;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .countdown span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 750;
+    }
+
+    .deadline-note {
+      margin: 11px 0 0;
+      padding-top: 9px;
+      border-top: 1px solid rgba(16, 32, 29, 0.12);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
+      font-weight: 750;
+    }
+
+    .deadline-note b {
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+      margin: 0;
+    }
+
+    .meta-item {
+      min-width: 0;
+      padding-top: 7px;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-item.is-wide {
+      grid-column: 1 / -1;
+    }
+
+    .meta-grid dt {
+      color: var(--muted);
+      font-size: 0.71rem;
+      font-weight: 850;
+    }
+
+    .meta-grid dd {
+      min-width: 0;
+      margin: 3px 0 0;
+      line-height: 1.28;
+      font-size: 0.8rem;
+      word-break: break-word;
+    }
+
+    .meta-strong {
+      font-weight: 850;
+    }
+
+    .meta-muted {
+      color: var(--muted);
+      font-size: 0.74rem;
+    }
+
+    .estimate-note {
+      margin-top: 9px;
+      color: var(--amber);
+      font-size: 0.78rem;
+      line-height: 1.42;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 12px;
+    }
+
+    .action-link {
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      padding: 0 10px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.35);
+      font-size: 0.76rem;
+      font-weight: 850;
+    }
+
+    details.history {
+      border-top: 1px solid var(--line);
+      padding: 0 14px 12px;
+    }
+
+    details.history summary {
+      cursor: pointer;
+      padding: 10px 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+      table-layout: fixed;
+    }
+
+    .history-table th,
+    .history-table td {
+      border-top: 1px solid var(--line);
+      padding: 6px 4px;
+      text-align: left;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    .history-table th {
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      border: 1px solid var(--ink);
+      background: var(--paper-strong);
+      padding: 24px;
+      box-shadow: 5px 5px 0 rgba(17, 17, 17, 0.14);
+      line-height: 1.6;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1180px) {
+      .board {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .title-row {
+        align-items: start;
+      }
+
+      .timeline-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 24px, 1360px);
+        padding-top: 16px;
+      }
+
+      h1 {
+        max-width: calc(100vw - 158px);
+        font-size: clamp(1.48rem, 6.2vw, 2rem);
+      }
+
+      .subline {
+        font-size: 0.78rem;
+        line-height: 1.42;
+      }
+
+      .status-line {
+        font-size: 0.72rem;
+      }
+
+      .title-row {
+        gap: 10px;
+      }
+
+      .refresh {
+        width: auto;
+        min-width: 110px;
+        min-height: 44px;
+        padding: 0 12px;
+        box-shadow: 3px 3px 0 var(--black);
+      }
+
+      .year-timeline {
+        overflow-x: auto;
+      }
+
+      .timeline-head,
+      .timeline-body {
+        min-width: 840px;
+      }
+
+      .timeline-body {
+        --axis-top: 180px;
+        min-height: 252px;
+        overflow-x: auto;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .timeline-axis,
+      .timeline-now {
+        left: 14px;
+      }
+
+      .timeline-axis,
+      .timeline-end {
+        right: 14px;
+      }
+
+      .timeline-now-label {
+        left: 14px;
+      }
+
+      .timeline-end-label {
+        right: 14px;
+      }
+
+      .timeline-event {
+        min-width: 84px;
+        max-width: 104px;
+      }
+
+      .board {
+        grid-template-columns: 1fr;
+      }
+
+      .venue-identity {
+        grid-template-columns: 92px minmax(0, 1fr);
+      }
+
+      .logo-box {
+        width: 92px;
+        height: 68px;
+      }
+
+      .countdown strong {
+        font-size: 3.45rem;
+      }
+
+      .card.is-live .countdown strong {
+        font-size: 2.9rem;
+      }
+
+      .live-countdown {
+        gap: 4px;
+      }
+
+      .live-unit b {
+        font-size: 1.78rem;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="masthead">
+      <div class="title-row">
+        <div>
+          <p class="eyebrow">ccfddl live sync</p>
+          <h1>顶会论文时间轴</h1>
+        </div>
+        <button class="refresh" id="refreshButton" type="button">刷新同步</button>
+      </div>
+      <p class="subline">同步 CCFDDL 数据；仅展示 AAAI、CVPR、ICLR、ICML、ICCV、ACM MM、ECCV、NeurIPS 的下一次投稿截止，统一换算为新加坡时间 SGT / UTC+8。</p>
+      <div class="status-line" id="statusLine">准备同步数据。</div>
+    </section>
+
+    <section class="year-timeline" id="yearTimeline" aria-label="未来一年会议截止时间轴"></section>
+
+    <section class="board" id="board" aria-live="polite"></section>
+
+    <footer class="footer">
+      数据源：
+      <a class="source-link" href="https://ccfddl.com/" target="_blank" rel="noreferrer">ccfddl.com</a>
+      /
+      <a class="source-link" href="https://github.com/ccfddl/ccf-deadlines" target="_blank" rel="noreferrer">ccfddl/ccf-deadlines</a>。
+      页面不依赖第三方 JS 库；刷新时直接拉取 GitHub raw YAML。
+    </footer>
+  </main>
+
+  <script>
+    const VENUES = [
+      {
+        key: "aaai",
+        label: "AAAI",
+        path: "conference/AI/aaai.yml",
+        logo: "https://aaai.org/wp-content/uploads/2024/03/AAAI-Logo-Title-White.svg",
+        bg: "#183d6b",
+        accent: "#183d6b",
+        scale: "1.18"
+      },
+      {
+        key: "cvpr",
+        label: "CVPR",
+        path: "conference/AI/cvpr.yml",
+        logo: "https://cvpr.thecvf.com/static/core/img/cvpr-navbar-logo.svg",
+        bg: "#253b73",
+        accent: "#253b73",
+        scale: "1.14"
+      },
+      {
+        key: "iclr",
+        label: "ICLR",
+        path: "conference/AI/iclr.yml",
+        logo: "https://iclr.cc/static/core/img/ICLR-logo.svg",
+        bg: "#f2e6d4",
+        accent: "#9a4b34",
+        scale: "1.10"
+      },
+      {
+        key: "icml",
+        label: "ICML",
+        path: "conference/AI/icml.yml",
+        logo: "https://icml.cc/static/core/img/ICML-logo.svg",
+        bg: "#e9eef4",
+        accent: "#245f8f",
+        scale: "1.12"
+      },
+      {
+        key: "iccv",
+        label: "ICCV",
+        path: "conference/AI/iccv.yml",
+        logo: "https://iccv.thecvf.com/static/core/img/iccv-navbar-logo.svg",
+        bg: "#eaf2ee",
+        accent: "#0b6f63",
+        scale: "1.10"
+      },
+      {
+        key: "acmm",
+        label: "ACM MM",
+        path: "conference/CG/mm.yml",
+        logo: "https://2026.acmmm.org/assets/LOGO-ACM-2026-V2.png",
+        bg: "#edf5ee",
+        accent: "#1f7b48",
+        scale: "1.12"
+      },
+      {
+        key: "eccv",
+        label: "ECCV",
+        path: "conference/AI/eccv.yml",
+        logo: "https://eccv.ecva.net/static/core/img/eccv-navbar-logo.svg",
+        bg: "#2c5c7d",
+        accent: "#2c5c7d",
+        scale: "1.16"
+      },
+      {
+        key: "neurips",
+        label: "NeurIPS",
+        path: "conference/AI/nips.yml",
+        logo: "https://neurips.cc/static/core/img/NeurIPS-logo.svg",
+        bg: "#432765",
+        accent: "#432765",
+        scale: "1.24",
+        filter: "brightness(0) invert(1)"
+      }
+    ];
+
+    const RAW_BASES = [
+      "https://raw.githubusercontent.com/ccfddl/ccf-deadlines/main/",
+      "https://cdn.jsdelivr.net/gh/ccfddl/ccf-deadlines@main/"
+    ];
+
+    const DAY = 24 * 60 * 60 * 1000;
+    const state = {
+      conferences: [],
+      errors: [],
+      syncing: false,
+      syncedAt: null,
+      liveTimer: null
+    };
+
+    const board = document.getElementById("board");
+    const yearTimeline = document.getElementById("yearTimeline");
+    const statusLine = document.getElementById("statusLine");
+    const refreshButton = document.getElementById("refreshButton");
+
+    refreshButton.addEventListener("click", () => loadAll(true));
+
+    loadAll(false);
+
+    async function loadAll(force) {
+      if (state.syncing) return;
+      state.syncing = true;
+      refreshButton.disabled = true;
+      statusLine.textContent = "正在同步 ccfddl 数据...";
+      yearTimeline.innerHTML = '<div class="empty">正在生成未来一年时间轴。</div>';
+      board.innerHTML = '<div class="empty">正在从 ccfddl/ccf-deadlines 拉取会议 YAML。</div>';
+
+      const results = await Promise.allSettled(VENUES.map(fetchVenue));
+      state.conferences = [];
+      state.errors = [];
+
+      results.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+          state.conferences.push(result.value);
+        } else {
+          state.errors.push({ venue: VENUES[index], error: result.reason });
+        }
+      });
+
+      state.conferences.sort((a, b) => VENUES.findIndex((venue) => venue.key === a.key) - VENUES.findIndex((venue) => venue.key === b.key));
+      state.syncedAt = new Date();
+      state.syncing = false;
+      refreshButton.disabled = false;
+      render();
+    }
+
+    async function fetchVenue(venue) {
+      let lastError = null;
+      for (const base of RAW_BASES) {
+        const url = base + venue.path + "?sync=" + Date.now();
+        try {
+          const yaml = await fetchText(url);
+          const parsed = parseConferenceYaml(yaml, venue);
+          parsed.rawUrl = RAW_BASES[0] + venue.path;
+          return parsed;
+        } catch (error) {
+          lastError = error;
+        }
+      }
+      throw lastError || new Error("同步失败");
+    }
+
+    async function fetchText(url) {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 12000);
+      try {
+        const response = await fetch(url, {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        if (!response.ok) {
+          throw new Error("HTTP " + response.status);
+        }
+        return await response.text();
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    }
+
+    function parseConferenceYaml(yaml, venue) {
+      const text = yaml.replace(/\r/g, "");
+      const header = text.split(/\n\s{2}confs:\s*\n/)[0] || text;
+      const confsText = text.slice(text.search(/\n\s{2}confs:\s*\n/) + 1);
+
+      const conference = {
+        key: venue.key,
+        label: venue.label,
+        title: readAnyField(header, "title") || venue.label,
+        logo: venue.logo || "",
+        bg: venue.bg || "#161616",
+        accent: venue.accent || venue.bg || "#161616",
+        scale: venue.scale || "1",
+        filter: venue.filter || "none",
+        description: readAnyField(header, "description") || "",
+        sub: readAnyField(header, "sub") || "",
+        dblp: readAnyField(header, "dblp") || "",
+        rank: {
+          ccf: readRank(header, "ccf"),
+          core: readRank(header, "core"),
+          thcpl: readRank(header, "thcpl")
+        },
+        confs: [],
+        rawUrl: ""
+      };
+
+      const blocks = confsText
+        .split(/\n(?=\s{4}- year:)/)
+        .filter((block) => /^\s{4}- year:\s*\d+/m.test(block));
+
+      conference.confs = blocks.map((block) => {
+        const timezone = readBlockField(block, "timezone") || "UTC+0";
+        const timeline = [];
+        block.split("\n").forEach((line) => {
+          const trimmed = line.trim();
+          if (!trimmed || trimmed.startsWith("#")) return;
+          const match = line.match(/^\s{8,}(?:-\s*)?([A-Za-z_]*deadline):\s*(.+?)\s*$/);
+          if (!match) return;
+          const value = cleanScalar(match[2]);
+          const date = parseDeadline(value, timezone);
+          if (date) {
+            timeline.push({ type: match[1], value, date });
+          }
+        });
+
+        return {
+          year: Number(readBlockYear(block)),
+          id: readBlockField(block, "id") || "",
+          link: readBlockField(block, "link") || "",
+          timezone,
+          date: readBlockField(block, "date") || "",
+          place: readBlockField(block, "place") || "",
+          timeline
+        };
+      }).filter((conf) => conf.year && conf.timeline.length);
+
+      conference.events = buildEvents(conference);
+      conference.cadence = inferCadence(conference.events);
+      return conference;
+    }
+
+    function readAnyField(text, key) {
+      const regex = new RegExp("^\\s*(?:-\\s*)?" + escapeRegExp(key) + ":\\s*(.+?)\\s*$", "m");
+      const match = text.match(regex);
+      return match ? cleanScalar(match[1]) : "";
+    }
+
+    function readRank(text, key) {
+      const regex = new RegExp("^\\s{4}" + escapeRegExp(key) + ":\\s*(.+?)\\s*$", "m");
+      const match = text.match(regex);
+      return match ? cleanScalar(match[1]) : "";
+    }
+
+    function readBlockYear(block) {
+      const match = block.match(/^\s{4}- year:\s*(\d+)/m);
+      return match ? match[1] : "";
+    }
+
+    function readBlockField(block, key) {
+      const regex = new RegExp("^\\s{6}" + escapeRegExp(key) + ":\\s*(.+?)\\s*$", "m");
+      const match = block.match(regex);
+      return match ? cleanScalar(match[1]) : "";
+    }
+
+    function cleanScalar(value) {
+      let output = String(value || "").trim();
+      output = output.replace(/\s+#.*$/, "").trim();
+      if ((output.startsWith("'") && output.endsWith("'")) || (output.startsWith('"') && output.endsWith('"'))) {
+        output = output.slice(1, -1);
+      }
+      return output.trim();
+    }
+
+    function buildEvents(conference) {
+      return conference.confs.map((conf) => {
+        const paperDeadlines = conf.timeline.filter((item) => item.type === "deadline");
+        const main = paperDeadlines[paperDeadlines.length - 1] || conf.timeline[conf.timeline.length - 1];
+        const abstract = conf.timeline.find((item) => item.type === "abstract_deadline") || null;
+        if (!main) return null;
+        return {
+          conference,
+          conf,
+          confYear: conf.year,
+          id: conf.id,
+          title: conference.title,
+          label: conference.label,
+          description: conference.description,
+          rank: conference.rank,
+          source: "official",
+          noCycleInTargetYear: false,
+          basedOnYear: null,
+          basedOnDeadlineYear: null,
+          main,
+          abstract,
+          timezone: conf.timezone,
+          deadlineDate: main.date,
+          deadlineLocalYear: readLocalYear(main.value),
+          link: conf.link,
+          rawUrl: conference.rawUrl,
+          date: conf.date,
+          place: conf.place,
+          timeline: conf.timeline
+        };
+      }).filter(Boolean).sort((a, b) => a.deadlineDate - b.deadlineDate);
+    }
+
+    function inferCadence(events) {
+      if (events.length < 2) return 1;
+      const byConfYear = [...events].sort((a, b) => a.confYear - b.confYear);
+      const latest = byConfYear[byConfYear.length - 1];
+      const previous = byConfYear[byConfYear.length - 2];
+      const diff = latest.confYear - previous.confYear;
+      if (diff >= 2) return diff;
+      return 1;
+    }
+
+    function selectNext(conference, now) {
+      const events = conference.events || [];
+      if (!events.length) return null;
+
+      const nextOfficial = events
+        .filter((event) => event.deadlineDate >= now)
+        .sort((a, b) => a.deadlineDate - b.deadlineDate)[0];
+
+      if (nextOfficial) return nextOfficial;
+
+      const base = events[events.length - 1];
+      const cadence = conference.cadence || 1;
+      let yearsToAdd = cadence;
+      let estimate = shiftEvent(base, yearsToAdd, "estimate");
+      while (estimate.deadlineDate < now) {
+        yearsToAdd += cadence;
+        estimate = shiftEvent(base, yearsToAdd, "estimate");
+      }
+      return estimate;
+    }
+
+    function shiftEvent(base, yearsToAdd, source) {
+      const mainValue = shiftLocalDateString(base.main.value, yearsToAdd);
+      const abstractValue = base.abstract ? shiftLocalDateString(base.abstract.value, yearsToAdd) : "";
+      const main = {
+        type: base.main.type,
+        value: mainValue,
+        date: parseDeadline(mainValue, base.timezone)
+      };
+      const abstract = base.abstract ? {
+        type: base.abstract.type,
+        value: abstractValue,
+        date: parseDeadline(abstractValue, base.timezone)
+      } : null;
+
+      return {
+        ...base,
+        source,
+        confYear: base.confYear + yearsToAdd,
+        id: base.id ? base.id.replace(String(base.confYear).slice(-2), String(base.confYear + yearsToAdd).slice(-2)) : "",
+        basedOnYear: base.confYear,
+        basedOnDeadlineYear: base.deadlineLocalYear,
+        main,
+        abstract,
+        deadlineDate: main.date,
+        deadlineLocalYear: readLocalYear(main.value),
+        timeline: [abstract, main].filter(Boolean),
+        noCycleInTargetYear: false
+      };
+    }
+
+    function parseDeadline(value, timezone) {
+      const parts = parseLocalParts(value);
+      if (!parts) return null;
+      const offset = timezoneOffsetHours(timezone);
+      return new Date(Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second) - offset * 60 * 60 * 1000);
+    }
+
+    function parseLocalParts(value) {
+      const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/);
+      if (!match) return null;
+      return {
+        year: Number(match[1]),
+        month: Number(match[2]),
+        day: Number(match[3]),
+        hour: Number(match[4]),
+        minute: Number(match[5]),
+        second: Number(match[6] || 0)
+      };
+    }
+
+    function readLocalYear(value) {
+      const parts = parseLocalParts(value);
+      return parts ? parts.year : NaN;
+    }
+
+    function shiftLocalDateString(value, yearsToAdd) {
+      const parts = parseLocalParts(value);
+      if (!parts) return value;
+      const targetYear = parts.year + yearsToAdd;
+      const day = Math.min(parts.day, daysInMonth(targetYear, parts.month));
+      return [
+        targetYear,
+        pad2(parts.month),
+        pad2(day)
+      ].join("-") + " " + [
+        pad2(parts.hour),
+        pad2(parts.minute),
+        pad2(parts.second)
+      ].join(":");
+    }
+
+    function daysInMonth(year, month) {
+      return new Date(Date.UTC(year, month, 0)).getUTCDate();
+    }
+
+    function timezoneOffsetHours(timezone) {
+      const normalized = String(timezone || "").trim();
+      if (/^AoE$/i.test(normalized)) return -12;
+      const match = normalized.match(/^UTC([+-])(\d{1,2})(?::?(\d{2}))?$/i);
+      if (!match) return 0;
+      const sign = match[1] === "-" ? -1 : 1;
+      const hours = Number(match[2]);
+      const minutes = Number(match[3] || 0) / 60;
+      return sign * (hours + minutes);
+    }
+
+    function render() {
+      const now = new Date();
+      const selected = state.conferences
+        .map((conference) => selectNext(conference, now))
+        .filter(Boolean);
+
+      const sorted = sortDisplayEvents(selected, now);
+      renderStatus();
+      renderYearTimeline(sorted, now);
+
+      if (!sorted.length) {
+        stopLiveTicker();
+        yearTimeline.innerHTML = "";
+        board.innerHTML = '<div class="empty">没有可展示的会议数据。</div>';
+        return;
+      }
+
+      board.innerHTML = sorted.map((event, index) => renderCard(event, now, index === 0)).join("");
+      startLiveTicker();
+    }
+
+    function sortDisplayEvents(events, now) {
+      const future = events.filter((event) => event.deadlineDate >= now).sort((a, b) => a.deadlineDate - b.deadlineDate);
+      const past = events.filter((event) => event.deadlineDate < now).sort((a, b) => b.deadlineDate - a.deadlineDate);
+      return [...future, ...past];
+    }
+
+    function renderYearTimeline(events, now) {
+      if (!events.length) {
+        yearTimeline.innerHTML = "";
+        return;
+      }
+
+      const yearEnd = new Date(now.getTime() + 365 * DAY);
+      const visibleEvents = events.slice().sort((a, b) => a.deadlineDate - b.deadlineDate);
+      const placements = placeTimelineEvents(visibleEvents, now);
+      const markers = placements.map(({ event, percent, laneTop }) => {
+        const isOutside = event.deadlineDate > yearEnd;
+        const alignClass = percent < 6 ? " align-start" : percent > 94 ? " align-end" : "";
+        const days = daysUntil(event.deadlineDate, now);
+        const distance = isOutside ? ">1 年" : compactCountdownText(days);
+        const accent = event.conference.accent || event.conference.bg || "var(--green)";
+        return `
+          <div class="timeline-event${alignClass}${isOutside ? " is-outside" : ""}" style="--event-left:${escapeAttr(percent)};--event-top:${escapeAttr(laneTop + "px")};--event-accent:${escapeAttr(accent)}">
+            <div class="timeline-chip">
+              <strong>${escapeHtml(event.label)}</strong>
+              <span>${escapeHtml(formatMonthDaySGT(event.deadlineDate) + " · " + distance)}</span>
+            </div>
+            <i class="timeline-dot" aria-hidden="true"></i>
+          </div>
+        `;
+      }).join("");
+
+      yearTimeline.innerHTML = `
+        <div class="timeline-head">
+          <h2 class="timeline-title">未来一年截止分布</h2>
+          <span class="timeline-window">${escapeHtml(formatCompactDateSGT(now))} 至 ${escapeHtml(formatCompactDateSGT(yearEnd))}</span>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-axis" aria-hidden="true"></div>
+          <div class="timeline-now" aria-hidden="true"></div>
+          <div class="timeline-end" aria-hidden="true"></div>
+          ${markers}
+          <div class="timeline-now-label">当前<span class="timeline-now-time">${escapeHtml(formatCompactDateTimeSGT(now))}</span></div>
+          <div class="timeline-end-label">一年后<span>${escapeHtml(formatCompactDateSGT(yearEnd))}</span></div>
+        </div>
+      `;
+    }
+
+    function placeTimelineEvents(events, now) {
+      const lanes = [8, 72, 136];
+      const lastPercentByLane = lanes.map(() => -Infinity);
+      const minGap = 8.5;
+      return events.map((event) => {
+        const offset = event.deadlineDate.getTime() - now.getTime();
+        const percent = Math.max(0, Math.min(100, (offset / (365 * DAY)) * 100));
+        let lane = lastPercentByLane.findIndex((lastPercent) => percent - lastPercent >= minGap);
+        if (lane === -1) {
+          lane = lastPercentByLane.indexOf(Math.min(...lastPercentByLane));
+        }
+        lastPercentByLane[lane] = percent;
+        return { event, percent, laneTop: lanes[lane] };
+      });
+    }
+
+    function renderStatus() {
+      const synced = state.syncedAt ? formatDateTimeSGT(state.syncedAt) : "未同步";
+      const failed = state.errors.length ? "，失败 " + state.errors.length + " 项" : "";
+      statusLine.innerHTML = [
+        "同步 " + state.conferences.length + "/" + VENUES.length + failed,
+        escapeHtml(synced)
+      ].join(" · ");
+    }
+
+    function renderCard(event, now, isLive) {
+      const days = daysUntil(event.deadlineDate, now);
+      const countdown = isLive ? liveCountdownParts(event.deadlineDate, now) : countdownParts(days);
+      const isClosed = days < 0;
+      const cardClass = [
+        "card",
+        isLive ? "is-live" : "",
+        event.source === "estimate" ? "is-estimate" : "",
+        isClosed ? "is-closed" : ""
+      ].filter(Boolean).join(" ");
+      const badgeClass = event.source === "estimate" ? "badge estimate" : isClosed ? "badge missed" : "badge official";
+      const badgeText = event.source === "estimate" ? "预估" : isClosed ? "官方已过" : "官方";
+      const note = estimateNote(event);
+      const history = renderHistory(event.conference.events || []);
+      const website = safeUrl(event.link);
+      const rawUrl = safeUrl(event.conference.rawUrl || event.rawUrl);
+      const logo = renderLogo(event);
+      const accent = event.conference.accent || event.conference.bg || "var(--green)";
+      const countdownBody = isLive
+        ? `<strong class="live-countdown" data-deadline="${escapeAttr(event.deadlineDate.toISOString())}">
+            <span class="live-unit live-days"><b>${escapeHtml(countdown.days)}</b><i>天</i></span>
+            <span class="live-unit live-hours"><b>${escapeHtml(countdown.hours)}</b><i>时</i></span>
+            <span class="live-unit live-minutes"><b>${escapeHtml(countdown.minutes)}</b><i>分</i></span>
+            <span class="live-unit live-seconds"><b>${escapeHtml(countdown.seconds)}</b><i>秒</i></span>
+          </strong>`
+        : `<strong>${escapeHtml(countdown.value)}</strong><span>${escapeHtml(countdown.label)}</span>`;
+
+      return `
+        <article class="${cardClass}" style="--card-accent:${escapeAttr(accent)}">
+          <div class="card-top">
+            <div class="venue-identity">
+              ${logo}
+              <div>
+                <h2 class="venue-title">${escapeHtml(event.label)}</h2>
+                <p class="venue-desc">${escapeHtml(event.description || event.title)}</p>
+              </div>
+            </div>
+            <span class="${badgeClass}">${escapeHtml(badgeText)}</span>
+          </div>
+          <div class="deadline-block">
+            <div class="deadline-hero">
+              <div class="countdown">
+                ${countdownBody}
+                <p class="deadline-note"><b>投稿截止</b> ${escapeHtml(formatDateTimeSGT(event.deadlineDate))}</p>
+              </div>
+            </div>
+            <dl class="meta-grid">
+              ${event.abstract ? `
+              <div class="meta-item">
+                <dt>摘要截止</dt>
+                <dd>
+                  <span class="meta-strong">${escapeHtml(formatDateTimeSGT(event.abstract.date))}</span>
+                </dd>
+              </div>` : ""}
+              <div class="meta-item">
+                <dt>原始投稿</dt>
+                <dd>
+                  <span class="meta-muted">${escapeHtml(event.main.value + " " + event.timezone)}</span>
+                </dd>
+              </div>
+              <div class="meta-item is-wide">
+                <dt>会期</dt>
+                <dd>${escapeHtml([event.date, event.place].filter(Boolean).join(" · ") || "-")}</dd>
+              </div>
+            </dl>
+            ${note ? `<div class="estimate-note">${escapeHtml(note)}</div>` : ""}
+            <div class="actions">
+              ${website ? `<a class="action-link" href="${escapeAttr(website)}" target="_blank" rel="noreferrer">会议页</a>` : ""}
+              ${rawUrl ? `<a class="action-link" href="${escapeAttr(rawUrl)}" target="_blank" rel="noreferrer">YAML</a>` : ""}
+            </div>
+          </div>
+          ${history}
+        </article>
+      `;
+    }
+
+    function renderLogo(event) {
+      const logo = safeUrl(event.conference.logo);
+      const label = event.label;
+      const background = event.conference.bg || "#161616";
+      const scale = event.conference.scale || "1";
+      const filter = event.conference.filter || "none";
+      if (!logo) {
+        return `<div class="logo-box" style="--venue-bg:${escapeAttr(background)};--logo-scale:${escapeAttr(scale)};--logo-filter:${escapeAttr(filter)}"><span class="logo-fallback" style="display:inline">${escapeHtml(label)}</span></div>`;
+      }
+      return `
+        <div class="logo-box" style="--venue-bg:${escapeAttr(background)};--logo-scale:${escapeAttr(scale)};--logo-filter:${escapeAttr(filter)}">
+          <img src="${escapeAttr(logo)}" alt="${escapeAttr(label + " official logo")}" referrerpolicy="no-referrer" loading="lazy" onerror="this.remove(); this.nextElementSibling.style.display='inline';">
+          <span class="logo-fallback">${escapeHtml(label)}</span>
+        </div>
+      `;
+    }
+
+    function estimateNote(event) {
+      if (event.source !== "estimate") return "";
+      return "根据 " + event.basedOnYear + " 轮（截止日年份 " + event.basedOnDeadlineYear + "）平移估算。";
+    }
+
+    function renderHistory(events) {
+      const rows = events
+        .slice()
+        .sort((a, b) => b.confYear - a.confYear)
+        .map((event) => `
+          <tr>
+            <td>${escapeHtml(String(event.confYear))}</td>
+            <td>${escapeHtml(event.abstract ? event.abstract.value : "-")}</td>
+            <td>${escapeHtml(event.main.value)}</td>
+            <td>${escapeHtml(event.timezone)}</td>
+          </tr>
+        `).join("");
+
+      return `
+        <details class="history">
+          <summary>官方记录</summary>
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>轮次</th>
+                <th>摘要</th>
+                <th>投稿</th>
+                <th>时区</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </details>
+      `;
+    }
+
+    function daysUntil(date, now) {
+      const diff = date - now;
+      if (diff >= 0) return Math.ceil(diff / DAY);
+      return -Math.ceil(Math.abs(diff) / DAY);
+    }
+
+    function startLiveTicker() {
+      stopLiveTicker();
+      updateLiveCountdowns();
+      if (document.querySelector(".live-countdown")) {
+        state.liveTimer = window.setInterval(updateLiveCountdowns, 1000);
+      }
+    }
+
+    function stopLiveTicker() {
+      if (state.liveTimer) {
+        window.clearInterval(state.liveTimer);
+        state.liveTimer = null;
+      }
+    }
+
+    function updateLiveCountdowns() {
+      const now = new Date();
+      document.querySelectorAll(".timeline-now-time").forEach((node) => {
+        node.textContent = formatCompactDateTimeSGT(now);
+      });
+      document.querySelectorAll(".live-countdown").forEach((node) => {
+        const deadline = new Date(node.dataset.deadline);
+        const parts = liveCountdownParts(deadline, now);
+        const daysNode = node.querySelector(".live-days b");
+        const hoursNode = node.querySelector(".live-hours b");
+        const minutesNode = node.querySelector(".live-minutes b");
+        const secondsNode = node.querySelector(".live-seconds b");
+        if (daysNode) daysNode.textContent = parts.days;
+        if (hoursNode) hoursNode.textContent = parts.hours;
+        if (minutesNode) minutesNode.textContent = parts.minutes;
+        if (secondsNode) secondsNode.textContent = parts.seconds;
+      });
+    }
+
+    function countdownParts(days) {
+      if (days > 0) {
+        return { value: String(days), label: "天后" };
+      }
+      if (days === 0) {
+        return { value: "今天", label: "截止" };
+      }
+      return { value: String(Math.abs(days)), label: "天前" };
+    }
+
+    function liveCountdownParts(deadline, now) {
+      const remaining = Math.max(0, deadline.getTime() - now.getTime());
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      return {
+        days: String(days),
+        hours: pad2(hours),
+        minutes: pad2(minutes),
+        seconds: pad2(seconds)
+      };
+    }
+
+    function countdownText(days) {
+      if (days > 0) return days + " 天后";
+      if (days === 0) return "今天";
+      return "已过 " + Math.abs(days) + " 天";
+    }
+
+    function compactCountdownText(days) {
+      if (days > 0) return days + "天";
+      if (days === 0) return "今天";
+      return "过 " + Math.abs(days) + "天";
+    }
+
+    function formatDateTimeSGT(date) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Singapore",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23",
+        hour12: false
+      }).formatToParts(date).reduce((map, part) => {
+        map[part.type] = part.value;
+        return map;
+      }, {});
+      return parts.year + "-" + parts.month + "-" + parts.day + " " + parts.hour + ":" + parts.minute + ":" + parts.second + " SGT";
+    }
+
+    function formatCompactDateSGT(date) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
+      const parts = getSGTParts(date);
+      return parts.year + "/" + parts.month + "/" + parts.day;
+    }
+
+    function formatMonthDaySGT(date) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
+      const parts = getSGTParts(date);
+      return parts.month + "/" + parts.day;
+    }
+
+    function formatCompactDateTimeSGT(date) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
+      const parts = getSGTParts(date);
+      return parts.year + "/" + parts.month + "/" + parts.day + " " + parts.hour + ":" + parts.minute + ":" + parts.second + " SGT";
+    }
+
+    function getSGTParts(date) {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Singapore",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23",
+        hour12: false
+      }).formatToParts(date).reduce((map, part) => {
+        map[part.type] = part.value;
+        return map;
+      }, {});
+    }
+
+    function safeUrl(url) {
+      const value = String(url || "").trim();
+      return /^https?:\/\//i.test(value) ? value : "";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(/`/g, "&#96;");
+    }
+
+    function escapeRegExp(value) {
+      return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function pad2(value) {
+      return String(value).padStart(2, "0");
+    }
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { SiteConfig } from '@/lib/config';
@@ -154,12 +154,28 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         );
                       })}
                     </div>
-                    <ThemeToggle />
+                    <div className="flex items-center space-x-2">
+                      <a
+                        href="/ccfddl_deadlines.html"
+                        title="CCF DDL Deadlines"
+                        className="p-2 text-neutral-600 hover:text-primary transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg"
+                      >
+                        <CalendarIcon className="w-5 h-5" />
+                      </a>
+                      <ThemeToggle />
+                    </div>
                   </div>
                 </div>
 
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
+                  <a
+                    href="/ccfddl_deadlines.html"
+                    title="CCF DDL Deadlines"
+                    className="p-2 text-neutral-600 hover:text-primary transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg"
+                  >
+                    <CalendarIcon className="w-5 h-5" />
+                  </a>
                   <ThemeToggle />
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
