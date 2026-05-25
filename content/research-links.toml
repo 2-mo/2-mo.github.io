@@ -398,6 +398,13 @@ link = "https://github.com/webdataset/webdataset"
 content = "用于大规模数据集打包、读取与流式训练的数据管线工具。"
 tags = ["实用软件"]
 
+[[groups.items]]
+title = "caveman"
+subtitle = "LLM Token 压缩"
+link = "https://github.com/JuliusBrussee/caveman"
+content = "让 AI 智能体（如 Claude Code）精简输出的插件，可大幅降低 Token 消耗并提升响应速度。"
+tags = ["实用软件"]
+
 [[groups]]
 title = "基座工作"
 
