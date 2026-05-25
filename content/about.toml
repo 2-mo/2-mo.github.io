@@ -3,8 +3,10 @@ title = "About"
 
 [profile]
 research_interests = [
+  "Agentic Anomaly Understanding",
   "Video Anomaly Understanding",
-  "Embodied Intelligence"
+  "Active Visual Reasoning",
+  "Multimodal Large Language Models"
 ]
 
 [[sections]]
@@ -25,4 +27,3 @@ id = "news"
 type = "list"
 title = "News"
 source = "news.toml"
-

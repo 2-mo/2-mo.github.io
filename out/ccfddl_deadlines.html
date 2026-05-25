@@ -55,9 +55,9 @@
     }
 
     .shell {
-      width: min(1360px, calc(100% - 40px));
+      width: min(1480px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 24px 0 38px;
+      padding: 18px 0 30px;
     }
 
     .masthead {
@@ -131,7 +131,7 @@
     }
 
     .year-timeline {
-      margin-top: 16px;
+      margin-top: 12px;
       border: 1px solid rgba(16, 32, 29, 0.72);
       border-radius: 8px;
       background:
@@ -168,7 +168,7 @@
       --axis-top: 180px;
       position: relative;
       min-height: 248px;
-      padding: 12px 18px 16px;
+      padding: 20px 18px 16px;
     }
 
     .timeline-axis {
@@ -197,7 +197,9 @@
     }
 
     .timeline-now {
-      left: 18px;
+      left: calc(18px + (100% - 36px) * var(--now-left, 0) / 100);
+      background: var(--rush);
+      box-shadow: 0 0 0 4px rgba(195, 67, 47, 0.12);
     }
 
     .timeline-end {
@@ -218,6 +220,17 @@
 
     .timeline-now-label {
       left: 18px;
+      top: calc(var(--axis-top) + 28px);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(195, 67, 47, 0.42);
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.95);
+      color: var(--ink);
+      padding: 5px 8px;
+      box-shadow: 0 8px 20px rgba(48, 35, 20, 0.12);
+      transform: none;
     }
 
     .timeline-end-label {
@@ -226,9 +239,27 @@
     }
 
     .timeline-now-time {
-      display: block;
+      display: inline;
       color: var(--ink);
-      font-size: 0.78rem;
+      font-size: 0.72rem;
+    }
+
+    .timeline-now-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timeline-now-icon {
+      width: 13px;
+      height: 13px;
+      display: inline-block;
+      border: 2px solid var(--paper-strong);
+      border-radius: 999px;
+      background: var(--rush);
+      box-shadow:
+        0 0 0 1px rgba(16, 32, 29, 0.3),
+        0 0 0 5px rgba(195, 67, 47, 0.14);
     }
 
     .timeline-event {
@@ -326,13 +357,17 @@
       border-style: dashed;
     }
 
+    .timeline-list {
+      display: none;
+    }
+
     .board {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 10px;
       align-items: stretch;
       grid-auto-rows: 1fr;
-      margin-top: 16px;
+      margin-top: 12px;
     }
 
     .card {
@@ -348,14 +383,20 @@
         linear-gradient(180deg, rgba(255, 252, 244, 0.96), rgba(255, 247, 232, 0.9)),
         var(--paper-strong);
       box-shadow: var(--shadow);
-      overflow: hidden;
+      overflow: visible;
     }
 
     .card::before {
       content: "";
-      height: 4px;
-      flex: 0 0 auto;
+      position: absolute;
+      left: -1px;
+      right: -1px;
+      top: -1px;
+      z-index: 1;
+      height: 5px;
+      border-radius: 8px 8px 0 0;
       background: var(--card-accent);
+      pointer-events: none;
     }
 
     .card.is-live {
@@ -364,7 +405,7 @@
     }
 
     .card.is-live::before {
-      height: 6px;
+      height: 7px;
       background: linear-gradient(90deg, var(--rush), var(--amber), var(--green));
     }
 
@@ -382,25 +423,25 @@
 
     .card-top {
       display: flex;
-      gap: 12px;
-      align-items: flex-start;
+      gap: 8px;
+      align-items: center;
       justify-content: space-between;
-      min-height: 112px;
-      padding: 14px 14px 10px;
+      min-height: 50px;
+      padding: 8px 10px 7px;
       border-bottom: 1px solid var(--line);
     }
 
     .venue-identity {
       display: grid;
-      grid-template-columns: 104px minmax(0, 1fr);
-      gap: 12px;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 9px;
       align-items: center;
       min-width: 0;
     }
 
     .logo-box {
-      width: 104px;
-      height: 76px;
+      width: 58px;
+      height: 42px;
       display: grid;
       place-items: center;
       border: 1px solid rgba(17, 17, 17, 0.38);
@@ -409,7 +450,7 @@
         linear-gradient(135deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.03)),
         var(--venue-bg, var(--ink));
       overflow: hidden;
-      padding: 10px;
+      padding: 6px;
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
     }
 
@@ -425,27 +466,35 @@
     .logo-fallback {
       display: none;
       font-weight: 900;
-      font-size: 0.9rem;
+      font-size: 0.76rem;
       text-align: center;
       color: #fffaf0;
+    }
+
+    .logo-fallback:empty {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 250, 240, 0.82);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 3px rgba(255, 250, 240, 0.18);
     }
 
     .venue-title {
       margin: 0;
       font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-      font-size: 1.65rem;
+      font-size: 1.12rem;
       line-height: 1;
       font-weight: 800;
     }
 
-    .venue-desc {
-      margin: 6px 0 0;
+    .venue-subline {
+      margin: 4px 0 0;
       color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.35;
-      min-height: 3.3em;
+      font-size: 0.68rem;
+      line-height: 1.2;
+      font-weight: 800;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -454,8 +503,8 @@
       flex: 0 0 auto;
       border: 1px solid currentColor;
       border-radius: 999px;
-      padding: 5px 8px;
-      font-size: 0.72rem;
+      padding: 4px 7px;
+      font-size: 0.66rem;
       font-weight: 850;
       white-space: nowrap;
     }
@@ -479,11 +528,11 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 14px;
+      padding: 8px 9px 9px;
     }
 
     .deadline-hero {
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
 
     .countdown {
@@ -494,10 +543,9 @@
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(244, 232, 209, 0.72)),
         linear-gradient(90deg, rgba(11, 111, 99, 0.08), transparent);
-      padding: 14px 14px 12px;
-      display: grid;
-      align-content: center;
-      min-height: 138px;
+      padding: 10px 10px 9px 14px;
+      display: block;
+      min-height: 76px;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.72),
         0 10px 28px rgba(50, 37, 19, 0.08);
@@ -513,12 +561,27 @@
 
     .countdown strong {
       font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-      font-size: 4.05rem;
-      line-height: 0.86;
+      font-size: 2rem;
+      line-height: 0.9;
+    }
+
+    .countdown-metric {
+      min-width: 0;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .countdown-metric > span {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 850;
     }
 
     .card.is-estimate .countdown {
-      min-height: 104px;
+      min-height: 70px;
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(245, 236, 219, 0.62)),
         linear-gradient(90deg, rgba(184, 104, 36, 0.045), transparent);
@@ -527,12 +590,18 @@
     .card.is-estimate .countdown strong {
       color: rgba(16, 32, 29, 0.66);
       font-size: 2.18rem;
-      line-height: 0.92;
+      line-height: 1;
     }
 
-    .card.is-estimate .countdown span {
+    .card.is-estimate .countdown-metric > span {
       color: rgba(110, 104, 92, 0.78);
-      font-size: 0.74rem;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .card.is-estimate .countdown-metric.is-approx > span:first-child {
+      align-self: center;
+      font-size: 0.78rem;
     }
 
     .card.is-live .countdown {
@@ -540,75 +609,79 @@
       background:
         linear-gradient(135deg, rgba(255, 250, 239, 0.98), rgba(253, 227, 210, 0.82)),
         linear-gradient(90deg, rgba(195, 67, 47, 0.10), transparent);
-      min-height: 154px;
+      min-height: 76px;
     }
 
     .card.is-live .countdown strong {
       color: var(--rush);
-      font-size: 3.2rem;
+      font-size: 1.2rem;
       line-height: 1.02;
     }
 
     .live-countdown {
-      display: flex;
-      align-items: baseline;
-      gap: 5px;
-      white-space: nowrap;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
     }
 
     .live-unit {
-      display: inline-flex;
-      align-items: baseline;
+      min-width: 0;
+      display: grid;
+      place-items: center;
       gap: 2px;
+      border: 1px solid rgba(16, 32, 29, 0.16);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.46);
+      padding: 6px 3px 5px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
 
     .live-unit b {
       font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-      font-size: 2.36rem;
-      line-height: 0.95;
+      font-size: 1.2rem;
+      line-height: 1;
       font-weight: 900;
     }
 
     .live-unit i {
       font-family: "Avenir Next", "Segoe UI", "Microsoft YaHei", sans-serif;
-      font-size: 0.72rem;
+      font-size: 0.58rem;
       line-height: 1;
       font-style: normal;
       font-weight: 900;
       color: var(--ink);
     }
 
-    .countdown span {
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 750;
-    }
-
-    .deadline-note {
-      margin: 11px 0 0;
-      padding-top: 9px;
-      border-top: 1px solid rgba(16, 32, 29, 0.12);
-      color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.35;
-      font-weight: 750;
-    }
-
-    .deadline-note b {
+    .deadline-lines {
+      display: grid;
+      gap: 4px;
+      margin: 7px 0 2px;
       color: var(--ink);
+      font-size: 0.76rem;
+      line-height: 1.25;
+      font-weight: 850;
+    }
+
+    .deadline-line b {
+      display: inline-block;
+      min-width: 34px;
+      color: var(--muted);
+      font-size: 0.68rem;
       font-weight: 950;
     }
 
+    .deadline-line.is-paper {
+      color: var(--rush);
+    }
+
     .meta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 10px;
-      margin: 0;
+      display: none;
     }
 
     .meta-item {
       min-width: 0;
-      padding-top: 7px;
+      padding-top: 6px;
       border-top: 1px solid var(--line);
     }
 
@@ -618,7 +691,7 @@
 
     .meta-grid dt {
       color: var(--muted);
-      font-size: 0.71rem;
+      font-size: 0.66rem;
       font-weight: 850;
     }
 
@@ -626,7 +699,7 @@
       min-width: 0;
       margin: 3px 0 0;
       line-height: 1.28;
-      font-size: 0.8rem;
+      font-size: 0.74rem;
       word-break: break-word;
     }
 
@@ -640,9 +713,9 @@
     }
 
     .estimate-note {
-      margin-top: 9px;
+      margin-top: 7px;
       color: var(--amber);
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       line-height: 1.42;
       font-weight: 700;
     }
@@ -650,41 +723,177 @@
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
       margin-top: auto;
-      padding-top: 12px;
+      padding-top: 9px;
     }
 
+    .signal-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .signal-chip {
+      min-width: 0;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      border: 1px solid rgba(16, 32, 29, 0.13);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.34);
+      padding: 5px 7px;
+      color: var(--ink);
+      font-size: 0.72rem;
+      line-height: 1.15;
+      font-weight: 850;
+    }
+
+    .signal-chip b {
+      color: var(--muted);
+      font-size: 0.64rem;
+      font-weight: 900;
+    }
+
+    button.action-link,
     .action-link {
-      min-height: 32px;
+      min-height: 28px;
       display: inline-flex;
       align-items: center;
       border: 1px solid var(--line-strong);
       border-radius: 6px;
-      padding: 0 10px;
+      padding: 0 8px;
       color: var(--ink);
       background: rgba(255, 255, 255, 0.35);
-      font-size: 0.76rem;
+      font-size: 0.7rem;
       font-weight: 850;
+      cursor: pointer;
+    }
+
+    button.action-link {
+      font: inherit;
+    }
+
+    .info-button {
+      width: 20px;
+      height: 20px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(16, 32, 29, 0.34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.36);
+      color: var(--muted);
+      padding: 0;
+      font-size: 0.7rem;
+      line-height: 1;
+      font-weight: 950;
+      cursor: help;
+    }
+
+    .has-tip {
+      position: relative;
+    }
+
+    .has-tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      z-index: 20;
+      width: min(260px, 72vw);
+      padding: 8px 9px;
+      border: 1px solid rgba(16, 32, 29, 0.7);
+      border-radius: 7px;
+      background: rgba(255, 250, 240, 0.98);
+      color: var(--ink);
+      box-shadow: 0 14px 32px rgba(48, 35, 20, 0.18);
+      font-size: 0.72rem;
+      line-height: 1.35;
+      font-weight: 750;
+      white-space: normal;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, 4px);
+      transition: opacity 140ms ease, transform 140ms ease;
+    }
+
+    .has-tip:hover::after,
+    .has-tip:focus::after,
+    .has-tip:focus-visible::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
     }
 
     details.history {
       border-top: 1px solid var(--line);
-      padding: 0 14px 12px;
+      padding: 0 10px 10px;
     }
 
     details.history summary {
       cursor: pointer;
-      padding: 10px 0;
+      padding: 8px 0;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.74rem;
       font-weight: 850;
+    }
+
+    details.schedule {
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+      padding-top: 2px;
+    }
+
+    details.schedule summary {
+      cursor: pointer;
+      padding: 6px 0;
+      color: var(--ink);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .schedule-list {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0 0 2px;
+      list-style: none;
+      font-size: 0.72rem;
+    }
+
+    .schedule-list li {
+      display: grid;
+      grid-template-columns: minmax(70px, 0.72fr) minmax(0, 1.3fr);
+      gap: 8px;
+      align-items: baseline;
+      border-top: 1px solid rgba(16, 32, 29, 0.10);
+      padding-top: 6px;
+    }
+
+    .schedule-kind {
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .schedule-time {
+      min-width: 0;
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .schedule-comment {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      line-height: 1.25;
     }
 
     .history-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       table-layout: fixed;
     }
 
@@ -700,6 +909,75 @@
     .history-table th {
       color: var(--muted);
       font-weight: 850;
+    }
+
+    details.tool-popover {
+      position: static;
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    details.tool-popover summary {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      padding: 0 8px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.35);
+      font-size: 0.7rem;
+      font-weight: 850;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    details.tool-popover summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .popover-panel {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 42px;
+      z-index: 40;
+      max-height: 300px;
+      overflow: auto;
+      border: 1px solid rgba(16, 32, 29, 0.72);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.98);
+      box-shadow: 0 18px 40px rgba(48, 35, 20, 0.22);
+      padding: 10px;
+    }
+
+    .popover-title {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 0.78rem;
+      line-height: 1.2;
+      font-weight: 950;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      font-size: 0.74rem;
+      line-height: 1.35;
+    }
+
+    .detail-list dt {
+      color: var(--muted);
+      font-size: 0.66rem;
+      font-weight: 900;
+    }
+
+    .detail-list dd {
+      margin: 2px 0 0;
+      color: var(--ink);
+      word-break: break-word;
     }
 
     .empty {
@@ -774,44 +1052,54 @@
         box-shadow: 3px 3px 0 var(--black);
       }
 
-      .year-timeline {
-        overflow-x: auto;
-      }
-
-      .timeline-head,
       .timeline-body {
-        min-width: 840px;
+        display: none;
       }
 
-      .timeline-body {
-        --axis-top: 180px;
-        min-height: 252px;
-        overflow-x: auto;
-        padding-left: 14px;
-        padding-right: 14px;
+      .timeline-list {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+        padding: 10px 12px 12px;
+        list-style: none;
       }
 
-      .timeline-axis,
-      .timeline-now {
-        left: 14px;
+      .timeline-list li {
+        --event-accent: var(--green);
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr) auto;
+        gap: 9px;
+        align-items: center;
+        min-height: 42px;
+        border: 1px solid rgba(16, 32, 29, 0.14);
+        border-left: 5px solid var(--event-accent);
+        border-radius: 7px;
+        background: rgba(255, 250, 240, 0.74);
+        padding: 7px 8px;
       }
 
-      .timeline-axis,
-      .timeline-end {
-        right: 14px;
+      .timeline-list-name {
+        min-width: 0;
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 950;
       }
 
-      .timeline-now-label {
-        left: 14px;
+      .timeline-list-date,
+      .timeline-list-distance {
+        color: var(--muted);
+        font-size: 0.74rem;
+        line-height: 1.2;
+        font-weight: 850;
+        white-space: nowrap;
       }
 
-      .timeline-end-label {
-        right: 14px;
+      .timeline-list-date {
+        color: var(--ink);
       }
 
-      .timeline-event {
-        min-width: 84px;
-        max-width: 104px;
+      .timeline-list-distance {
+        text-align: right;
       }
 
       .board {
@@ -819,12 +1107,12 @@
       }
 
       .venue-identity {
-        grid-template-columns: 92px minmax(0, 1fr);
+        grid-template-columns: 64px minmax(0, 1fr);
       }
 
       .logo-box {
-        width: 92px;
-        height: 68px;
+        width: 64px;
+        height: 46px;
       }
 
       .countdown strong {
@@ -846,6 +1134,11 @@
       .meta-grid {
         grid-template-columns: 1fr;
       }
+
+      .countdown {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
     }
   </style>
 </head>
@@ -859,7 +1152,7 @@
         </div>
         <button class="refresh" id="refreshButton" type="button">刷新同步</button>
       </div>
-      <p class="subline">同步 CCFDDL 数据；仅展示 AAAI、CVPR、ICLR、ICML、ICCV、ACM MM、ECCV、NeurIPS 的下一次投稿截止，统一换算为新加坡时间 SGT / UTC+8。</p>
+      <p class="subline">同步 CCFDDL 数据；展示 AI / CV / 多媒体 / 具身智能常用会议的下一次投稿截止，统一换算为新加坡时间 SGT / UTC+8；官方日程可展开查看投稿、rebuttal / 出分、结果、终稿和会期。</p>
       <div class="status-line" id="statusLine">准备同步数据。</div>
     </section>
 
@@ -928,7 +1221,7 @@
         label: "ACM MM",
         path: "conference/CG/mm.yml",
         logo: "https://2026.acmmm.org/assets/LOGO-ACM-2026-V2.png",
-        bg: "#edf5ee",
+        bg: "#ffffff",
         accent: "#1f7b48",
         scale: "1.12"
       },
@@ -950,6 +1243,34 @@
         accent: "#432765",
         scale: "1.24",
         filter: "brightness(0) invert(1)"
+      },
+      {
+        key: "rss",
+        label: "RSS",
+        path: "conference/AI/rss.yml",
+        bg: "#192b2f",
+        accent: "#0b6f63"
+      },
+      {
+        key: "icra",
+        label: "ICRA",
+        path: "conference/AI/icra.yml",
+        bg: "#13263b",
+        accent: "#245f8f"
+      },
+      {
+        key: "iros",
+        label: "IROS",
+        path: "conference/AI/iros.yml",
+        bg: "#182a3c",
+        accent: "#316c9e"
+      },
+      {
+        key: "corl",
+        label: "CoRL",
+        path: "conference/AI/corl.yml",
+        bg: "#211a15",
+        accent: "#b86824"
       }
     ];
 
@@ -958,7 +1279,51 @@
       "https://cdn.jsdelivr.net/gh/ccfddl/ccf-deadlines@main/"
     ];
 
+    const OFFICIAL_SCHEDULES = {
+      acmm: {
+        2026: [
+          { label: "摘要注册", value: "2026-03-25 23:59:59", timezone: "AoE", source: "ACM MM 2026 Important Dates" },
+          { label: "投稿截止", value: "2026-04-01 23:59:59", timezone: "AoE", source: "ACM MM 2026 Important Dates" },
+          { label: "补充材料", value: "2026-04-08 23:59:59", timezone: "AoE", source: "ACM MM 2026 Important Dates" },
+          { label: "Rebuttal / 出分", value: "2026-06-04 23:59:59", timezone: "AoE", source: "ACM MM 2026 Important Dates" },
+          { label: "出结果", value: "2026-07-09 23:59:59", timezone: "AoE", source: "ACM MM 2026 Important Dates" },
+          { label: "终稿截止", value: "2026-08-06 23:59:59", timezone: "AoE", source: "ACM MM 2026 Important Dates" },
+          { label: "开会", value: "2026-11-14 18:00:00", timezone: "UTC-3", display: "2026-11-10 至 2026-11-14 · Rio de Janeiro, Brazil", source: "CCFDDL" }
+        ]
+      },
+      rss: {
+        2026: [
+          { label: "摘要截止", value: "2026-01-23 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "投稿截止", value: "2026-01-30 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "补充材料", value: "2026-02-06 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "Reviews released / 出分", value: "2026-03-20 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "Rebuttal 截止", value: "2026-03-27 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "出结果", value: "2026-04-27 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "终稿截止", value: "2026-05-11 23:59:00", timezone: "AoE", source: "RSS 2026 CFP" },
+          { label: "开会", value: "2026-07-17 18:00:00", timezone: "UTC+10", display: "2026-07-13 至 2026-07-17 · Sydney, Australia", source: "RSS 2026 CFP" }
+        ]
+      },
+      icra: {
+        2026: [
+          { label: "投稿开放", value: "2025-07-15 23:59:00", timezone: "UTC-8", source: "IEEE RAS ICRA 2026" },
+          { label: "投稿截止", value: "2025-09-15 23:59:00", timezone: "UTC-8", source: "IEEE RAS ICRA 2026" },
+          { label: "出结果", value: "2026-01-31 23:59:00", timezone: "UTC-8", source: "IEEE RAS ICRA 2026" },
+          { label: "终稿截止", value: "2026-03-06 23:59:00", timezone: "UTC-8", source: "IEEE RAS ICRA 2026" },
+          { label: "开会", value: "2026-06-05 18:00:00", timezone: "UTC+2", display: "2026-06-01 至 2026-06-05 · Vienna, Austria", source: "ICRA 2026" }
+        ]
+      },
+      corl: {
+        2026: [
+          { label: "摘要截止", value: "2026-05-25 23:59:59", timezone: "AoE", source: "CCFDDL / CoRL 2026" },
+          { label: "投稿截止", value: "2026-05-28 23:59:59", timezone: "AoE", source: "CCFDDL / CoRL 2026" },
+          { label: "终稿截止", value: "2026-10-12 23:59:00", timezone: "AoE", source: "CoRL 2026 Instructions" },
+          { label: "开会", value: "2026-11-12 18:00:00", timezone: "UTC-6", display: "2026-11-10 至 2026-11-12 · Austin, Texas, USA", source: "CCFDDL / CoRL 2026" }
+        ]
+      }
+    };
+
     const DAY = 24 * 60 * 60 * 1000;
+    const TIMELINE_FUTURE_DAYS = 365;
     const state = {
       conferences: [],
       errors: [],
@@ -1068,18 +1433,7 @@
 
       conference.confs = blocks.map((block) => {
         const timezone = readBlockField(block, "timezone") || "UTC+0";
-        const timeline = [];
-        block.split("\n").forEach((line) => {
-          const trimmed = line.trim();
-          if (!trimmed || trimmed.startsWith("#")) return;
-          const match = line.match(/^\s{8,}(?:-\s*)?([A-Za-z_]*deadline):\s*(.+?)\s*$/);
-          if (!match) return;
-          const value = cleanScalar(match[2]);
-          const date = parseDeadline(value, timezone);
-          if (date) {
-            timeline.push({ type: match[1], value, date });
-          }
-        });
+        const timeline = parseTimelineItems(block, timezone);
 
         return {
           year: Number(readBlockYear(block)),
@@ -1095,6 +1449,61 @@
       conference.events = buildEvents(conference);
       conference.cadence = inferCadence(conference.events);
       return conference;
+    }
+
+    function parseTimelineItems(block, timezone) {
+      const timeline = [];
+      let currentItemEvents = [];
+
+      block.split("\n").forEach((line) => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith("#")) return;
+
+        const itemStart = line.match(/^\s{8}-\s+(.+?)\s*$/);
+        if (itemStart) {
+          currentItemEvents = [];
+          readTimelineField(itemStart[1], timezone, currentItemEvents, timeline);
+          return;
+        }
+
+        const nestedField = line.match(/^\s{10,}([A-Za-z_][A-Za-z0-9_]*):\s*(.+?)\s*$/);
+        if (!nestedField) return;
+
+        if (nestedField[1] === "comment") {
+          const comment = cleanScalar(nestedField[2]);
+          currentItemEvents.forEach((event) => {
+            event.comment = comment;
+          });
+          return;
+        }
+
+        readTimelineField(nestedField[1] + ": " + nestedField[2], timezone, currentItemEvents, timeline);
+      });
+
+      return timeline.sort((a, b) => a.date - b.date);
+    }
+
+    function readTimelineField(text, timezone, currentItemEvents, timeline) {
+      const match = String(text || "").match(/^([A-Za-z_][A-Za-z0-9_]*):\s*(.+?)\s*$/);
+      if (!match || !isScheduleField(match[1])) return;
+
+      const value = cleanScalar(match[2]);
+      const date = parseDeadline(value, timezone);
+      if (!date) return;
+
+      const event = {
+        type: match[1],
+        label: scheduleLabel(match[1]),
+        value,
+        date,
+        comment: ""
+      };
+      timeline.push(event);
+      currentItemEvents.push(event);
+    }
+
+    function isScheduleField(key) {
+      return /(deadline|notification|rebuttal|camera|final|submission|decision)/i.test(key);
     }
 
     function readAnyField(text, key) {
@@ -1296,7 +1705,7 @@
         return;
       }
 
-      board.innerHTML = sorted.map((event, index) => renderCard(event, now, index === 0)).join("");
+      board.innerHTML = sorted.map((event) => renderCard(event, now)).join("");
       startLiveTicker();
     }
 
@@ -1312,9 +1721,12 @@
         return;
       }
 
-      const yearEnd = new Date(now.getTime() + 365 * DAY);
+      const yearStart = now;
+      const yearEnd = new Date(now.getTime() + TIMELINE_FUTURE_DAYS * DAY);
+      const windowMs = yearEnd.getTime() - yearStart.getTime();
+      const nowPercent = ((now.getTime() - yearStart.getTime()) / windowMs) * 100;
       const visibleEvents = events.slice().sort((a, b) => a.deadlineDate - b.deadlineDate);
-      const placements = placeTimelineEvents(visibleEvents, now);
+      const placements = placeTimelineEvents(visibleEvents, yearStart, yearEnd);
       const markers = placements.map(({ event, percent, laneTop }) => {
         const isOutside = event.deadlineDate > yearEnd;
         const alignClass = percent < 6 ? " align-start" : percent > 94 ? " align-end" : "";
@@ -1331,30 +1743,45 @@
           </div>
         `;
       }).join("");
+      const listItems = visibleEvents.map((event) => {
+        const days = daysUntil(event.deadlineDate, now);
+        const isOutside = event.deadlineDate > yearEnd;
+        const distance = isOutside ? ">1 年" : compactCountdownText(days);
+        const accent = event.conference.accent || event.conference.bg || "var(--green)";
+        return `
+          <li style="--event-accent:${escapeAttr(accent)}">
+            <span class="timeline-list-name">${escapeHtml(event.label)}</span>
+            <span class="timeline-list-date">${escapeHtml(formatMonthDaySGT(event.deadlineDate))}</span>
+            <span class="timeline-list-distance">${escapeHtml(distance)}</span>
+          </li>
+        `;
+      }).join("");
 
       yearTimeline.innerHTML = `
         <div class="timeline-head">
           <h2 class="timeline-title">未来一年截止分布</h2>
           <span class="timeline-window">${escapeHtml(formatCompactDateSGT(now))} 至 ${escapeHtml(formatCompactDateSGT(yearEnd))}</span>
         </div>
-        <div class="timeline-body">
+        <div class="timeline-body" style="--now-left:${escapeAttr(nowPercent.toFixed(2))}">
           <div class="timeline-axis" aria-hidden="true"></div>
           <div class="timeline-now" aria-hidden="true"></div>
           <div class="timeline-end" aria-hidden="true"></div>
           ${markers}
-          <div class="timeline-now-label">当前<span class="timeline-now-time">${escapeHtml(formatCompactDateTimeSGT(now))}</span></div>
+          <div class="timeline-now-label"><span class="timeline-now-tag"><i class="timeline-now-icon" aria-hidden="true"></i>当前</span><span class="timeline-now-time">${escapeHtml(formatCompactDateTimeSGT(now))}</span></div>
           <div class="timeline-end-label">一年后<span>${escapeHtml(formatCompactDateSGT(yearEnd))}</span></div>
         </div>
+        <ul class="timeline-list">${listItems}</ul>
       `;
     }
 
-    function placeTimelineEvents(events, now) {
+    function placeTimelineEvents(events, windowStart, windowEnd) {
       const lanes = [8, 72, 136];
       const lastPercentByLane = lanes.map(() => -Infinity);
       const minGap = 8.5;
+      const windowMs = windowEnd.getTime() - windowStart.getTime();
       return events.map((event) => {
-        const offset = event.deadlineDate.getTime() - now.getTime();
-        const percent = Math.max(0, Math.min(100, (offset / (365 * DAY)) * 100));
+        const offset = event.deadlineDate.getTime() - windowStart.getTime();
+        const percent = Math.max(0, Math.min(100, (offset / windowMs) * 100));
         let lane = lastPercentByLane.findIndex((lastPercent) => percent - lastPercent >= minGap);
         if (lane === -1) {
           lane = lastPercentByLane.indexOf(Math.min(...lastPercentByLane));
@@ -1373,32 +1800,49 @@
       ].join(" · ");
     }
 
-    function renderCard(event, now, isLive) {
+    function renderCard(event, now) {
       const days = daysUntil(event.deadlineDate, now);
-      const countdown = isLive ? liveCountdownParts(event.deadlineDate, now) : countdownParts(days);
+      const shouldTick = event.source === "official" && event.deadlineDate >= now;
+      const countdown = shouldTick ? liveCountdownParts(event.deadlineDate, now) : countdownParts(days);
       const isClosed = days < 0;
       const cardClass = [
         "card",
-        isLive ? "is-live" : "",
+        shouldTick ? "is-live" : "",
         event.source === "estimate" ? "is-estimate" : "",
         isClosed ? "is-closed" : ""
       ].filter(Boolean).join(" ");
-      const badgeClass = event.source === "estimate" ? "badge estimate" : isClosed ? "badge missed" : "badge official";
-      const badgeText = event.source === "estimate" ? "预估" : isClosed ? "官方已过" : "官方";
+      const badgeClass = event.source === "estimate" ? "badge estimate" : "badge official";
+      const badgeText = event.source === "estimate" ? "预估" : "官方";
       const note = estimateNote(event);
-      const history = renderHistory(event.conference.events || []);
+      const history = renderHistory(event);
+      const schedule = renderSchedule(event);
+      const details = renderDetails(event, note);
       const website = safeUrl(event.link);
       const rawUrl = safeUrl(event.conference.rawUrl || event.rawUrl);
       const logo = renderLogo(event);
       const accent = event.conference.accent || event.conference.bg || "var(--green)";
-      const countdownBody = isLive
-        ? `<strong class="live-countdown" data-deadline="${escapeAttr(event.deadlineDate.toISOString())}">
+      const confLine = event.description || event.title || event.label;
+      const signalItems = [
+        event.date ? `<span class="signal-chip"><b>会期</b>${escapeHtml(compactText(event.date, 22))}</span>` : ""
+      ].filter(Boolean).join("");
+      const countdownMetric = shouldTick
+        ? `<div class="countdown-metric">
+          <strong class="live-countdown" data-deadline="${escapeAttr(event.deadlineDate.toISOString())}">
             <span class="live-unit live-days"><b>${escapeHtml(countdown.days)}</b><i>天</i></span>
             <span class="live-unit live-hours"><b>${escapeHtml(countdown.hours)}</b><i>时</i></span>
             <span class="live-unit live-minutes"><b>${escapeHtml(countdown.minutes)}</b><i>分</i></span>
             <span class="live-unit live-seconds"><b>${escapeHtml(countdown.seconds)}</b><i>秒</i></span>
-          </strong>`
-        : `<strong>${escapeHtml(countdown.value)}</strong><span>${escapeHtml(countdown.label)}</span>`;
+          </strong>
+        </div>`
+        : event.source === "estimate" && days > 0
+          ? `<div class="countdown-metric is-approx"><span>约</span><strong>${escapeHtml(countdown.value)}</strong><span>${escapeHtml(countdown.label)}</span></div>`
+          : `<div class="countdown-metric"><strong>${escapeHtml(countdown.value)}</strong><span>${escapeHtml(countdown.label)}</span></div>`;
+      const deadlineLines = `
+        <div class="deadline-lines">
+          ${event.abstract ? `<div class="deadline-line"><b>摘要</b>${escapeHtml(formatDateTimeSGT(event.abstract.date))}</div>` : ""}
+          <div class="deadline-line is-paper"><b>投稿</b>${escapeHtml(formatDateTimeSGT(event.deadlineDate))}</div>
+        </div>
+      `;
 
       return `
         <article class="${cardClass}" style="--card-accent:${escapeAttr(accent)}">
@@ -1407,7 +1851,7 @@
               ${logo}
               <div>
                 <h2 class="venue-title">${escapeHtml(event.label)}</h2>
-                <p class="venue-desc">${escapeHtml(event.description || event.title)}</p>
+                <p class="venue-subline">${escapeHtml(confLine)}</p>
               </div>
             </div>
             <span class="${badgeClass}">${escapeHtml(badgeText)}</span>
@@ -1415,38 +1859,120 @@
           <div class="deadline-block">
             <div class="deadline-hero">
               <div class="countdown">
-                ${countdownBody}
-                <p class="deadline-note"><b>投稿截止</b> ${escapeHtml(formatDateTimeSGT(event.deadlineDate))}</p>
+                ${countdownMetric}
               </div>
             </div>
-            <dl class="meta-grid">
-              ${event.abstract ? `
-              <div class="meta-item">
-                <dt>摘要截止</dt>
-                <dd>
-                  <span class="meta-strong">${escapeHtml(formatDateTimeSGT(event.abstract.date))}</span>
-                </dd>
-              </div>` : ""}
-              <div class="meta-item">
-                <dt>原始投稿</dt>
-                <dd>
-                  <span class="meta-muted">${escapeHtml(event.main.value + " " + event.timezone)}</span>
-                </dd>
-              </div>
-              <div class="meta-item is-wide">
-                <dt>会期</dt>
-                <dd>${escapeHtml([event.date, event.place].filter(Boolean).join(" · ") || "-")}</dd>
-              </div>
-            </dl>
-            ${note ? `<div class="estimate-note">${escapeHtml(note)}</div>` : ""}
+            ${deadlineLines}
+            ${signalItems ? `<div class="signal-row">${signalItems}</div>` : ""}
             <div class="actions">
-              ${website ? `<a class="action-link" href="${escapeAttr(website)}" target="_blank" rel="noreferrer">会议页</a>` : ""}
-              ${rawUrl ? `<a class="action-link" href="${escapeAttr(rawUrl)}" target="_blank" rel="noreferrer">YAML</a>` : ""}
+              ${schedule}
+              ${details}
+              ${history}
+              ${website ? `<a class="action-link" href="${escapeAttr(website)}" target="_blank" rel="noreferrer">官网</a>` : ""}
+              ${rawUrl ? `<a class="action-link" href="${escapeAttr(rawUrl)}" target="_blank" rel="noreferrer">源</a>` : ""}
             </div>
           </div>
-          ${history}
         </article>
       `;
+    }
+
+    function renderTipButton(label, tip, className = "action-link", ariaLabel = "") {
+      if (!tip) return "";
+      return `<button class="${escapeAttr(className + " has-tip")}" type="button" data-tip="${escapeAttr(tip)}" aria-label="${escapeAttr(ariaLabel || label)}">${escapeHtml(label)}</button>`;
+    }
+
+    function renderSchedule(event) {
+      const items = buildScheduleItems(event);
+      if (event.source !== "official" || items.length <= 1) return "";
+      const rows = items.map((item) => `
+        <li>
+          <span class="schedule-kind">${escapeHtml(item.label || scheduleLabel(item.type))}</span>
+          <span class="schedule-time">
+            ${escapeHtml(item.display || formatDateTimeSGT(item.date))}
+            ${item.comment ? `<span class="schedule-comment">${escapeHtml(item.comment)}</span>` : ""}
+          </span>
+        </li>
+      `).join("");
+
+      return `
+        <details class="tool-popover schedule">
+          <summary>日程</summary>
+          <div class="popover-panel">
+            <p class="popover-title">官方时间节点</p>
+            <ul class="schedule-list">${rows}</ul>
+          </div>
+        </details>
+      `;
+    }
+
+    function renderDetails(event, note) {
+      const description = event.description || event.title || event.label;
+      const original = event.main.value + " " + event.timezone;
+      return `
+        <details class="tool-popover">
+          <summary>详情</summary>
+          <div class="popover-panel">
+            <p class="popover-title">${escapeHtml(event.label)} 详情</p>
+            <dl class="detail-list">
+              <div>
+                <dt>会议</dt>
+                <dd>${escapeHtml(description)}</dd>
+              </div>
+              <div>
+                <dt>地点</dt>
+                <dd>${escapeHtml(event.place || "-")}</dd>
+              </div>
+              <div>
+                <dt>原始投稿时间</dt>
+                <dd>${escapeHtml(original)}</dd>
+              </div>
+              ${note ? `
+              <div>
+                <dt>估算依据</dt>
+                <dd>${escapeHtml(note)}</dd>
+              </div>` : ""}
+            </dl>
+          </div>
+        </details>
+      `;
+    }
+
+    function buildScheduleItems(event) {
+      const items = [];
+      const seen = new Set();
+      const addItem = (item) => {
+        if (!item || !(item.date instanceof Date) || Number.isNaN(item.date.getTime())) return;
+        const key = String(item.date.getTime());
+        if (seen.has(key)) return;
+        seen.add(key);
+        items.push(item);
+      };
+
+      officialScheduleEntries(event).forEach(addItem);
+
+      (event.timeline || []).forEach((item) => addItem({
+        ...item,
+        source: "CCFDDL"
+      }));
+      return items.sort((a, b) => a.date - b.date);
+    }
+
+    function officialScheduleEntries(event) {
+      const byYear = OFFICIAL_SCHEDULES[event.key] || OFFICIAL_SCHEDULES[event.conference.key] || {};
+      const entries = byYear[event.confYear] || [];
+      return entries.map((item) => {
+        const timezone = item.timezone || event.timezone;
+        const date = parseDeadline(item.value, timezone);
+        return {
+          type: "official",
+          label: item.label,
+          value: item.value,
+          date,
+          display: item.display || "",
+          comment: item.comment || "",
+          source: item.source || ""
+        };
+      }).filter((item) => item.date);
     }
 
     function renderLogo(event) {
@@ -1456,7 +1982,7 @@
       const scale = event.conference.scale || "1";
       const filter = event.conference.filter || "none";
       if (!logo) {
-        return `<div class="logo-box" style="--venue-bg:${escapeAttr(background)};--logo-scale:${escapeAttr(scale)};--logo-filter:${escapeAttr(filter)}"><span class="logo-fallback" style="display:inline">${escapeHtml(label)}</span></div>`;
+        return `<div class="logo-box" aria-label="${escapeAttr(label + " identity mark")}" style="--venue-bg:${escapeAttr(background)};--logo-scale:${escapeAttr(scale)};--logo-filter:${escapeAttr(filter)}"><span class="logo-fallback" aria-hidden="true" style="display:inline"></span></div>`;
       }
       return `
         <div class="logo-box" style="--venue-bg:${escapeAttr(background)};--logo-scale:${escapeAttr(scale)};--logo-filter:${escapeAttr(filter)}">
@@ -1471,8 +1997,8 @@
       return "根据 " + event.basedOnYear + " 轮（截止日年份 " + event.basedOnDeadlineYear + "）平移估算。";
     }
 
-    function renderHistory(events) {
-      const rows = events
+    function renderHistory(event) {
+      const rows = (event.conference.events || [])
         .slice()
         .sort((a, b) => b.confYear - a.confYear)
         .map((event) => `
@@ -1485,19 +2011,22 @@
         `).join("");
 
       return `
-        <details class="history">
-          <summary>官方记录</summary>
-          <table class="history-table">
-            <thead>
-              <tr>
-                <th>轮次</th>
-                <th>摘要</th>
-                <th>投稿</th>
-                <th>时区</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
+        <details class="tool-popover history">
+          <summary>记录</summary>
+          <div class="popover-panel">
+            <p class="popover-title">CCFDDL 历史记录</p>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>轮次</th>
+                  <th>摘要</th>
+                  <th>投稿</th>
+                  <th>时区</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
         </details>
       `;
     }
@@ -1579,6 +2108,24 @@
       return "过 " + Math.abs(days) + "天";
     }
 
+    function scheduleLabel(type) {
+      const labels = {
+        abstract_deadline: "摘要截止",
+        deadline: "投稿截止",
+        notification: "录用通知",
+        notification_date: "录用通知",
+        rebuttal_start: "Rebuttal 开始",
+        rebuttal_end: "Rebuttal 结束",
+        camera_ready: "终稿截止",
+        final_deadline: "终稿截止",
+        submission_open: "投稿开放"
+      };
+      if (labels[type]) return labels[type];
+      return String(type || "")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
     function formatDateTimeSGT(date) {
       if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
       const parts = new Intl.DateTimeFormat("en-CA", {
@@ -1598,6 +2145,12 @@
       return parts.year + "-" + parts.month + "-" + parts.day + " " + parts.hour + ":" + parts.minute + ":" + parts.second + " SGT";
     }
 
+    function formatDateTimeMinuteSGT(date) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
+      const parts = getSGTParts(date);
+      return parts.year + "-" + parts.month + "-" + parts.day + " " + parts.hour + ":" + parts.minute + " SGT";
+    }
+
     function formatCompactDateSGT(date) {
       if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
       const parts = getSGTParts(date);
@@ -1613,7 +2166,19 @@
     function formatCompactDateTimeSGT(date) {
       if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
       const parts = getSGTParts(date);
-      return parts.year + "/" + parts.month + "/" + parts.day + " " + parts.hour + ":" + parts.minute + ":" + parts.second + " SGT";
+      return parts.year + "/" + parts.month + "/" + parts.day + " " + parts.hour + ":" + parts.minute + " SGT";
+    }
+
+    function formatShortDateTimeSGT(date) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "-";
+      const parts = getSGTParts(date);
+      return parts.month + "/" + parts.day + " " + parts.hour + ":" + parts.minute;
+    }
+
+    function compactText(value, maxLength) {
+      const text = String(value || "").trim();
+      if (text.length <= maxLength) return text;
+      return text.slice(0, Math.max(0, maxLength - 1)).trimEnd() + "…";
     }
 
     function getSGTParts(date) {
