@@ -88,6 +88,12 @@ subtitle = "终端美化"
 link = "https://github.com/romkatv/powerlevel10k"
 content = "高性能 Zsh 主题与命令行提示符定制工具。"
 
+[[groups.items]]
+title = "CapCap"
+subtitle = "截屏工具"
+link = "https://github.com/realskyrin/capcap"
+content = "轻量型 macOS 原生截屏工具，支持双击 Command 快速截图及标注。"
+
 [[groups]]
 title = "🔍 论文检索"
 
