@@ -5,11 +5,13 @@ import { parseBibTeX } from '@/lib/bibtexParser';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
+import CvSheet from '@/components/pages/CvSheet';
 import {
     BasePageConfig,
     PublicationPageConfig,
     TextPageConfig,
-    CardPageConfig
+    CardPageConfig,
+    CvPageConfig
 } from '@/types/page';
 
 import { Metadata } from 'next';
@@ -43,6 +45,14 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
 
     if (!pageConfig) {
         notFound();
+    }
+
+    if (pageConfig.type === 'cv') {
+        return (
+            <div className="px-4 sm:px-6 lg:px-8 py-10">
+                <CvSheet config={pageConfig as CvPageConfig} />
+            </div>
+        );
     }
 
     return (

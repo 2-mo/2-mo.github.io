@@ -1,3 +1,4 @@
-type = "text"
+type = "cv"
 title = "CV"
-source = "cv.md"
+description = "Curriculum Vitae"
+pdf = "/Mengjingcheng-Mo-CV.pdf"

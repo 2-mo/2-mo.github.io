@@ -258,3 +258,165 @@ body {
   /* Soften card borders in dark mode only */
   border-color: rgba(255, 255, 255, 0.12);
 }
+
+/* ============================ CV (paper replica) ===========================
+   The CV page intentionally renders as a printed document: an always-light
+   A4-style sheet using a Times-like serif, regardless of the site theme. */
+
+.cv-wrap {
+  --cv-ink: #242424;
+  --cv-muted: #555;
+  --cv-rule: #111;
+  --cv-link: #0f6cbd;
+  --cv-accent: #b8801f; /* gold descriptor tags */
+  --cv-title: #c9c9c9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.cv-toolbar {
+  width: 100%;
+  max-width: 8.27in;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--primary);
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease, transform 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+.cv-download:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+/* The sheet */
+.cv-sheet {
+  width: 100%;
+  max-width: 8.27in;            /* A4 width */
+  background: #ffffff;
+  color: var(--cv-ink);
+  font-family: 'Times New Roman', Times, 'Liberation Serif', Georgia, serif;
+  font-size: 11pt;
+  line-height: 1.42;
+  padding: 0.7in 0.7in 0.9in;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
+  position: relative;
+}
+
+.cv-title {
+  text-align: center;
+  font-size: 30pt;
+  font-weight: 700;
+  color: var(--cv-title);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.35rem;
+}
+
+/* Header */
+.cv-header { display: flex; gap: 0.6rem; align-items: flex-start; }
+.cv-header-cols {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  column-gap: 0.6rem;
+  row-gap: 0.12rem;
+}
+.cv-col { display: flex; flex-direction: column; gap: 0.12rem; }
+.cv-photo {
+  width: 1.05in;
+  height: auto;
+  align-self: flex-start;
+  border: 1px solid #ddd;
+}
+.cv-field { display: flex; gap: 0.4rem; align-items: baseline; }
+.cv-field-label { font-weight: 700; }
+.cv-star { color: var(--cv-ink); font-size: 0.85em; line-height: 1.4; }
+.cv-link { color: var(--cv-link); text-decoration: none; }
+.cv-link:hover { text-decoration: underline; }
+.cv-interests-fix { margin-bottom: 0.1rem; }
+
+/* Section headers with rule */
+.cv-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  border-bottom: 1.5px solid var(--cv-rule);
+  margin-top: 0.85rem;
+  margin-bottom: 0.35rem;
+  padding-bottom: 1px;
+}
+.cv-section-title { font-size: 13pt; font-weight: 700; color: var(--cv-ink); }
+.cv-section-sub {
+  font-style: italic;
+  color: var(--cv-accent);
+  font-size: 10.5pt;
+}
+.cv-subhead { font-weight: 700; margin: 0.1rem 0 0.15rem; }
+.cv-subhead-inline { font-weight: 700; }
+
+/* Education table */
+.cv-edu { width: 100%; border-collapse: collapse; }
+.cv-edu td { padding: 0.05rem 0; vertical-align: baseline; }
+.cv-edu-degree { white-space: nowrap; padding-right: 0.8rem; }
+.cv-edu-field { width: 100%; }
+.cv-edu-from { white-space: nowrap; text-align: right; color: var(--cv-muted); padding-left: 0.6rem; }
+.cv-edu-dash { color: var(--cv-muted); padding: 0 0.3rem; }
+.cv-edu-to { white-space: nowrap; text-align: right; color: var(--cv-muted); }
+.cv-exp { margin-top: 0.2rem; }
+.cv-num-circle { font-weight: 700; }
+
+/* Publication lists */
+.cv-publist, .cv-list { list-style: none; margin: 0; padding: 0; }
+.cv-pub { display: flex; gap: 0.4rem; margin-bottom: 0.28rem; text-align: justify; }
+.cv-pub-num { font-weight: 400; white-space: nowrap; }
+.cv-pub-body { flex: 1; }
+.cv-self { font-weight: 700; }
+.cv-pub-title { font-style: italic; }
+.cv-tag-accent { color: var(--cv-accent); font-weight: 700; }
+.cv-pub-note { font-style: italic; color: var(--cv-muted); }
+
+/* Generic ordered lists (projects, awards) */
+.cv-list { counter-reset: item; }
+.cv-list li {
+  counter-increment: item;
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.22rem;
+}
+.cv-list li::before { content: '[' counter(item) ']'; flex: none; }
+.cv-para { margin: 0.1rem 0; }
+
+.cv-watermark {
+  position: absolute;
+  right: 0.7in;
+  bottom: 0.4in;
+  font-size: 9pt;
+  color: #bdbdbd;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .cv-sheet { padding: 1.1rem 1rem 1.6rem; font-size: 10.5pt; }
+  .cv-header-cols { grid-template-columns: 1fr; }
+  .cv-photo { width: 0.95in; }
+  .cv-title { font-size: 24pt; }
+}
+
+/* Print: just the sheet, edge to edge */
+@media print {
+  .cv-toolbar, .cv-watermark { display: none !important; }
+  .cv-wrap { padding: 0; }
+  .cv-sheet { box-shadow: none; border: none; max-width: 100%; padding: 0.4in; }
+}
