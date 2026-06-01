@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Download } from 'lucide-react';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { CvPageConfig } from '@/types/page';
 
 /* ----------------------------- CV content data ---------------------------- */
@@ -226,7 +226,7 @@ export default function CvSheet({ config }: { config: CvPageConfig }) {
         <div className="cv-wrap">
             <div className="cv-toolbar">
                 <a href={pdf} download className="cv-download">
-                    <Download size={16} />
+                    <ArrowDownTrayIcon className="h-4 w-4" />
                     Download PDF
                 </a>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, FolderOpen } from 'lucide-react';
+import { ArrowTopRightOnSquareIcon, FolderOpenIcon } from '@heroicons/react/24/outline';
 import { CardItem, CardPageConfig } from '@/types/page';
 
 export default function CardPage({ config, embedded = false }: { config: CardPageConfig; embedded?: boolean }) {
@@ -44,7 +44,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                     <div className="flex items-start gap-1.5 min-w-0">
                         <h3 className={`${embedded ? "text-sm" : portalMode ? "text-sm" : "text-xl"} font-semibold text-primary leading-snug break-words`}>{item.title}</h3>
                         {portalMode && item.link && (
-                            <ExternalLink className="w-3 h-3 text-neutral-400 mt-0.5 shrink-0" aria-hidden="true" />
+                            <ArrowTopRightOnSquareIcon className="w-3 h-3 text-neutral-400 mt-0.5 shrink-0" aria-hidden="true" />
                         )}
                     </div>
                     {item.date && (
@@ -123,7 +123,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                     {Object.entries(groupedItems).map(([groupName, items]) => (
                         <section key={groupName} className={portalMode ? "space-y-2" : "space-y-4"}>
                             <h2 className={`${embedded ? "text-base" : portalMode ? "text-base" : "text-2xl"} font-serif font-bold text-primary flex items-center gap-2`}>
-                                {portalMode && <FolderOpen className="w-4 h-4 text-neutral-500" aria-hidden="true" />}
+                                {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500" aria-hidden="true" />}
                                 {groupName}
                             </h2>
                             <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>

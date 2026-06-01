@@ -3,3 +3,7 @@ node_modules
 .vscode
 .next
 .env
+
+# build output (CI builds and deploys this; never commit it)
+out/
+*.tsbuildinfo
