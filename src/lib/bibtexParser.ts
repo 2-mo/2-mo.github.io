@@ -1,8 +1,8 @@
 import { Publication, PublicationType, ResearchArea } from '@/types/publication';
 import { getConfig } from './config';
+import { getScholarData, normalizeTitle } from './scholar';
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const bibtexParse = require('bibtex-parse-js');
+import * as bibtexParse from '@orcid/bibtex-parse-js';
 
 // Map BibTeX entry types to our publication types
 const typeMapping: Record<string, PublicationType> = {
@@ -34,12 +34,24 @@ const monthMapping: Record<string, number> = {
   dec: 12, december: 12,
 };
 
+// Remove CCF rank markers (CCF-A/B/C) from a description, since they are not
+// shown on the cards. Returns undefined if nothing meaningful remains.
+function stripRankTokens(desc?: string): string | undefined {
+  if (!desc) return desc;
+  const cleaned = desc
+    .replace(/\bCCF-[ABC]\b/gi, '')
+    .replace(/\s*;\s*;\s*/g, '; ')
+    .replace(/^[\s;,]+|[\s;,]+$/g, '')
+    .trim();
+  return cleaned || undefined;
+}
+
 export function parseBibTeX(bibtexContent: string): Publication[] {
   const config = getConfig();
   const authorName = config.author.name;
   const entries = bibtexParse.toJSON(bibtexContent);
 
-  return entries.map((entry: { entryType: string; citationKey: string; entryTags: Record<string, string> }, index: number) => {
+  const publications = entries.map((entry: { entryType: string; citationKey: string; entryTags: Record<string, string> }, index: number) => {
     const tags = entry.entryTags;
 
     // Parse authors
@@ -83,14 +95,19 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
       pages: tags.pages,
       doi: tags.doi,
       url: tags.url,
+      arxivId: tags.arxiv,
       code: tags.code,
+      pdfUrl: tags.pdf,
+      projectUrl: tags.html,
+      demoUrl: tags.demo,
       abstract: cleanBibTeXString(tags.abstract),
-      description: cleanBibTeXString(tags.description || tags.note),
+      description: stripRankTokens(cleanBibTeXString(tags.description || tags.note)),
+      venue: tags.abbr ? cleanBibTeXString(tags.abbr) : undefined,
       selected,
       preview,
 
       // Store original BibTeX (excluding custom fields)
-      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code']),
+      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code', 'abbr', 'arxiv', 'html', 'pdf', 'demo']),
     };
 
     // Clean up undefined fields
@@ -116,6 +133,17 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
     // Sort by month descending (December to January)
     return monthB - monthA;
   });
+
+  // Merge per-paper citation counts from crawled Google Scholar data, if present.
+  const scholar = config.features.enable_scholar_citations ? getScholarData() : null;
+  if (scholar) {
+    for (const pub of publications) {
+      const citations = scholar.byTitle.get(normalizeTitle(pub.title));
+      if (typeof citations === 'number') pub.citations = citations;
+    }
+  }
+
+  return publications;
 }
 
 function parseAuthors(authorsStr: string, highlightName?: string): Array<{ name: string; isHighlighted?: boolean; isCorresponding?: boolean; isCoAuthor?: boolean }> {

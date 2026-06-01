@@ -36,6 +36,17 @@ export function getTomlContent<T>(filename: string): T | null {
     }
 }
 
+export function getJsonContent<T>(filename: string): T | null {
+    try {
+        const filePath = path.join(CONTENT_DIR, filename);
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(fileContent) as T;
+    } catch {
+        // Missing/invalid JSON is non-fatal — callers degrade gracefully.
+        return null;
+    }
+}
+
 export function getPageConfig<T = unknown>(pageName: string): T | null {
     return getTomlContent<T>(`${pageName}.toml`);
 }

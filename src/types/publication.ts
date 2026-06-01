@@ -28,6 +28,8 @@ export interface Publication {
   url?: string;
   code?: string;
   pdfUrl?: string;
+  projectUrl?: string;
+  demoUrl?: string;
   tags: string[];
   keywords?: string[];
   type: PublicationType;

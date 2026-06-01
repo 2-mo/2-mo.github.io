@@ -1,7 +1,13 @@
 export interface BasePageConfig {
-    type: 'about' | 'publication' | 'card' | 'text' | 'cv';
+    type: 'about' | 'publication' | 'card' | 'text' | 'cv' | 'embed';
     title: string;
     description?: string;
+}
+
+export interface EmbedPageConfig extends BasePageConfig {
+    type: 'embed';
+    src: string;
+    height?: string;
 }
 
 export interface CvPageConfig extends BasePageConfig {

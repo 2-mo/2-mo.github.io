@@ -1,0 +1,5 @@
+type = "embed"
+title = "Conference Deadlines"
+description = "顶会截止时间同步。"
+src = "/ccfddl_deadlines.html"
+height = "82vh"

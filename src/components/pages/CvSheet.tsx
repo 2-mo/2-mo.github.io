@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { CvPageConfig } from '@/types/page';
 
@@ -231,14 +230,7 @@ export default function CvSheet({ config }: { config: CvPageConfig }) {
                 </a>
             </div>
 
-            <motion.article
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="cv-sheet"
-            >
-                <h1 className="cv-title">Curriculum Vitae</h1>
-
+            <article className="cv-sheet">
                 {/* Header */}
                 <header className="cv-header">
                     <div className="cv-header-cols">
@@ -326,7 +318,7 @@ export default function CvSheet({ config }: { config: CvPageConfig }) {
                 <p className="cv-para">{HOBBIES}</p>
 
                 <div className="cv-watermark">2-mo.github.io</div>
-            </motion.article>
+            </article>
         </div>
     );
 }

@@ -269,7 +269,6 @@ body {
   --cv-rule: #111;
   --cv-link: #0f6cbd;
   --cv-accent: #b8801f; /* gold descriptor tags */
-  --cv-title: #c9c9c9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -304,7 +303,7 @@ body {
 .cv-sheet {
   width: 100%;
   max-width: 8.27in;            /* A4 width */
-  background: #ffffff;
+  background: #fdfbf4;          /* very light paper tint */
   color: var(--cv-ink);
   font-family: 'Times New Roman', Times, 'Liberation Serif', Georgia, serif;
   font-size: 11pt;
@@ -313,15 +312,12 @@ body {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e5e5;
   position: relative;
+  animation: cv-fade-in 0.5s ease-out both;
 }
 
-.cv-title {
-  text-align: center;
-  font-size: 30pt;
-  font-weight: 700;
-  color: var(--cv-title);
-  letter-spacing: 0.5px;
-  margin-bottom: 0.35rem;
+@keyframes cv-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Header */
@@ -368,8 +364,8 @@ body {
 
 /* Education table */
 .cv-edu { width: 100%; border-collapse: collapse; }
-.cv-edu td { padding: 0.05rem 0; vertical-align: baseline; }
-.cv-edu-degree { white-space: nowrap; padding-right: 0.8rem; }
+.cv-edu td { padding-block: 0.05rem; vertical-align: baseline; }
+.cv-edu-degree { white-space: nowrap; padding-right: 1.2rem; }
 .cv-edu-field { width: 100%; }
 .cv-edu-from { white-space: nowrap; text-align: right; color: var(--cv-muted); padding-left: 0.6rem; }
 .cv-edu-dash { color: var(--cv-muted); padding: 0 0.3rem; }
@@ -411,7 +407,13 @@ body {
   .cv-sheet { padding: 1.1rem 1rem 1.6rem; font-size: 10.5pt; }
   .cv-header-cols { grid-template-columns: 1fr; }
   .cv-photo { width: 0.95in; }
-  .cv-title { font-size: 24pt; }
+  /* let the long degree text wrap instead of forcing horizontal overflow */
+  .cv-edu-degree { white-space: normal; padding-right: 0.6rem; }
+}
+
+/* honor users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cv-sheet { animation: none; }
 }
 
 /* Print: just the sheet, edge to edge */
@@ -419,4 +421,23 @@ body {
   .cv-toolbar, .cv-watermark { display: none !important; }
   .cv-wrap { padding: 0; }
   .cv-sheet { box-shadow: none; border: none; max-width: 100%; padding: 0.4in; }
+}
+
+/* Scrolled navigation background — reliable across light/dark themes.
+   (Tailwind's bg-background/<opacity> did not render a background here.) */
+.nav-scrolled {
+  background-color: color-mix(in srgb, var(--background) 82%, transparent);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-scrolled { background-color: var(--background); }
+}
+
+/* Theme-toggle icon spin-in on change (CSS, no framer-motion dependency) */
+@keyframes theme-icon-in {
+  from { opacity: 0; transform: rotate(-180deg); }
+  to   { opacity: 1; transform: rotate(0); }
+}
+.theme-icon-anim { animation: theme-icon-in 0.3s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .theme-icon-anim { animation: none; }
 }

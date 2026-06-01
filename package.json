@@ -11,10 +11,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
-    "bibtex-parse-js": "^0.0.23",
+    "@orcid/bibtex-parse-js": "^0.0.25",
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
-    "next": "^15.5.7",
+    "next": "^16.2.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
@@ -28,9 +28,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "^16.2.6",
     "lightningcss": "^1",
-    "svg2ico": "^1.0.35",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

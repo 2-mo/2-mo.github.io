@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Publication } from '@/types/publication';
+import { morandiGradient } from '@/lib/utils';
 
 interface SelectedPublicationsProps {
     publications: Publication[];
@@ -38,19 +39,22 @@ export default function SelectedPublications({ publications, title = 'Selected P
                         className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
                     >
                         <div className="flex flex-col md:flex-row gap-4">
-                            {pub.preview && (
-                                <div className="w-full md:w-36 flex-shrink-0">
-                                    <div className="aspect-video md:aspect-[4/3] relative rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-700">
+                            <div className="w-full md:w-52 flex-shrink-0">
+                                <div
+                                    className="aspect-[4/3] relative rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-700"
+                                    style={pub.preview ? undefined : { backgroundImage: morandiGradient(pub.id) }}
+                                >
+                                    {pub.preview && (
                                         <Image
                                             src={`/papers/${pub.preview}`}
                                             alt={pub.title}
                                             fill
                                             className="object-cover"
-                                            sizes="(max-width: 768px) 100vw, 144px"
+                                            sizes="(max-width: 768px) 100vw, 208px"
                                         />
-                                    </div>
+                                    )}
                                 </div>
-                            )}
+                            </div>
                             <div className="flex-1">
                                 <h3 className="font-semibold text-primary mb-2 leading-tight">
                                     {pub.title}
@@ -71,9 +75,18 @@ export default function SelectedPublications({ publications, title = 'Selected P
                                         </span>
                                     ))}
                                 </p>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-500 mb-2">
-                                    {pub.journal || pub.conference}
-                                </p>
+                                <div className="flex flex-wrap items-center gap-2 mb-2">
+                                    {pub.venue ? (
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-800 text-white">
+                                            {pub.venue} {pub.year}
+                                        </span>
+                                    ) : (
+                                        <span className="text-sm text-neutral-600 dark:text-neutral-500">{pub.journal || pub.conference}</span>
+                                    )}
+                                    {typeof pub.citations === 'number' && pub.citations > 0 && (
+                                        <span className="text-xs text-accent">Cited by {pub.citations}</span>
+                                    )}
+                                </div>
                                 {pub.description && (
                                     <p className="text-sm text-neutral-500 dark:text-neutral-500 line-clamp-2">
                                         {pub.description}

@@ -6,14 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  /* config options here */
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.bib$/,
-      type: 'asset/source',
-    });
-    return config;
-  },
+  // Allow dev-server requests/HMR from LAN origins (e.g. testing on a phone).
+  // Dev-only — ignored by the static production build.
+  allowedDevOrigins: ['192.168.1.7'],
 };
 
 export default nextConfig;

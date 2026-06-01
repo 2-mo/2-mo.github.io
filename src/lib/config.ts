@@ -29,12 +29,14 @@ export interface SiteConfig {
     features: {
         enable_likes: boolean;
         enable_one_page_mode?: boolean;
+        enable_scholar_citations?: boolean;
     };
     navigation: Array<{
         title: string;
         type: 'section' | 'page' | 'link';
         target: string;
         href: string;
+        icon?: string;
     }>;
     sections: Array<{
         id: string;

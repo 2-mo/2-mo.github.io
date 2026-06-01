@@ -40,14 +40,27 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
+interface ScholarStats {
+    totalCitations: number;
+    hIndex: number;
+    updated?: string;
+}
+
+interface GithubStats {
+    stars: number;
+    url: string;
+}
+
 interface ProfileProps {
     author: SiteConfig['author'];
     social: SiteConfig['social'];
     features: SiteConfig['features'];
     researchInterests?: string[];
+    scholarStats?: ScholarStats;
+    githubStats?: GithubStats;
 }
 
-export default function Profile({ author, social, features, researchInterests }: ProfileProps) {
+export default function Profile({ author, social, features, researchInterests, scholarStats, githubStats }: ProfileProps) {
 
     const nameMatch = author.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
     const nameLinePrimary = nameMatch?.[1] || author.name;
@@ -154,6 +167,48 @@ export default function Profile({ author, social, features, researchInterests }:
                     {author.institution}
                 </p>
             </div>
+
+            {/* Profile stats: citations, h-index, GitHub stars */}
+            {(scholarStats || githubStats) && (
+                <div className="flex flex-wrap justify-center gap-3 mb-6">
+                    {scholarStats && (
+                        <>
+                            <a
+                                href={social.google_scholar || '#'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 min-w-[5rem] max-w-[7rem] text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 hover:shadow-md transition-all duration-200"
+                                aria-label="Google Scholar citations"
+                            >
+                                <div className="text-xl font-bold text-accent">{scholarStats.totalCitations.toLocaleString()}</div>
+                                <div className="text-xs text-neutral-600 dark:text-neutral-500">Citations</div>
+                            </a>
+                            <a
+                                href={social.google_scholar || '#'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 min-w-[5rem] max-w-[7rem] text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 hover:shadow-md transition-all duration-200"
+                                aria-label="Google Scholar h-index"
+                            >
+                                <div className="text-xl font-bold text-accent">{scholarStats.hIndex}</div>
+                                <div className="text-xs text-neutral-600 dark:text-neutral-500">h-index</div>
+                            </a>
+                        </>
+                    )}
+                    {githubStats && (
+                        <a
+                            href={githubStats.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 min-w-[5rem] max-w-[7rem] text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 hover:shadow-md transition-all duration-200"
+                            aria-label="GitHub stars"
+                        >
+                            <div className="text-xl font-bold text-accent">{githubStats.stars.toLocaleString()}</div>
+                            <div className="text-xs text-neutral-600 dark:text-neutral-500">Stars</div>
+                        </a>
+                    )}
+                </div>
+            )}
 
             {/* Contact Links */}
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6 relative px-2">

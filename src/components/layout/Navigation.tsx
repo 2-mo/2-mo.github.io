@@ -5,10 +5,54 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon, CalendarIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, CalendarIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { SiteConfig } from '@/lib/config';
+
+// Compass (no Heroicons equivalent) — used for the "Polaris" navigation portal.
+const CompassIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M14.8 9.2l-1.9 4.2-4.1 1.9 1.9-4.2z" />
+  </svg>
+);
+
+const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  calendar: CalendarIcon,
+  compass: CompassIcon,
+  globe: GlobeAltIcon,
+};
+const getNavIcon = (name?: string) => (name && NAV_ICONS[name]) || GlobeAltIcon;
+
+// Shared circular icon-button, matching ThemeToggle for a consistent nav cluster.
+const navIconBase = cn(
+  'flex items-center justify-center w-10 h-10 rounded-full border',
+  'bg-background hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700',
+  'transition-transform duration-200 hover:scale-105 active:scale-95',
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50'
+);
+
+function NavIconLink({ href, title, name, isActive, onClick }: { href: string; title: string; name?: string; isActive: boolean; onClick?: () => void }) {
+  const Icon = getNavIcon(name);
+  return (
+    <Link
+      href={href}
+      title={title}
+      aria-label={title}
+      prefetch={true}
+      onClick={onClick}
+      className={cn(
+        navIconBase,
+        isActive
+          ? 'border-accent/40 text-accent'
+          : 'border-neutral-200 dark:border-[rgba(148,163,184,0.24)] text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+      )}
+    >
+      <Icon className="h-4 w-4" />
+    </Link>
+  );
+}
 
 interface NavigationProps {
   items: SiteConfig['navigation'];
@@ -20,6 +64,11 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState('');
+
+  // Items with an `icon` render as icon buttons in the right cluster; the rest stay text links.
+  const textItems = items.filter((item) => !item.icon);
+  const iconItems = items.filter((item) => item.icon);
+  const isPageActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,10 +136,10 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
             animate={{ y: 0 }}
             transition={{ duration: 0.6 }}
             className={cn(
-              'transition-all duration-300 ease-out',
+              'transition-all duration-300 ease-out nav-scrolled backdrop-blur-xl',
               scrolled
-                ? 'bg-background/80 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg'
-                : 'bg-transparent'
+                ? 'border-b border-neutral-200/50 shadow-lg'
+                : ''
             )}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,7 +162,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                 <div className="hidden lg:block">
                   <div className="ml-10 flex items-center space-x-8">
                     <div className="flex items-baseline space-x-8">
-                      {items.map((item) => {
+                      {textItems.map((item) => {
                         const isActive = enableOnePageMode
                           ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
                           : (item.href === '/'
@@ -155,13 +204,16 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                       })}
                     </div>
                     <div className="flex items-center space-x-2">
-                      <a
-                        href="/ccfddl_deadlines.html"
-                        title="CCF DDL Deadlines"
-                        className="p-2 text-neutral-600 hover:text-primary transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg"
-                      >
-                        <CalendarIcon className="w-5 h-5" />
-                      </a>
+                      {iconItems.map((item) => (
+                        <NavIconLink
+                          key={item.title}
+                          href={enableOnePageMode ? `/#${item.target}` : item.href}
+                          title={item.title}
+                          name={item.icon}
+                          isActive={isPageActive(item.href)}
+                          onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                        />
+                      ))}
                       <ThemeToggle />
                     </div>
                   </div>
@@ -169,13 +221,16 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
-                  <a
-                    href="/ccfddl_deadlines.html"
-                    title="CCF DDL Deadlines"
-                    className="p-2 text-neutral-600 hover:text-primary transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg"
-                  >
-                    <CalendarIcon className="w-5 h-5" />
-                  </a>
+                  {iconItems.map((item) => (
+                    <NavIconLink
+                      key={item.title}
+                      href={enableOnePageMode ? `/#${item.target}` : item.href}
+                      title={item.title}
+                      name={item.icon}
+                      isActive={isPageActive(item.href)}
+                      onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                    />
+                  ))}
                   <ThemeToggle />
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
@@ -207,7 +262,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                   className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg"
                 >
                   <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    {items.map((item, index) => {
+                    {textItems.map((item, index) => {
                       const isActive = enableOnePageMode
                         ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
                         : (item.href === '/'

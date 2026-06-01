@@ -31,8 +31,12 @@ enable_likes = true
 # Display all subpages on a single page
 enable_one_page_mode = false
 
+# Show Google Scholar citation totals (profile) and per-paper counts.
+# Data is produced by the google_scholar_crawler GitHub Action.
+enable_scholar_citations = true
+
 [[navigation]]
-title = "About"
+title = "Home"
 type = "page"
 target = "about"
 href = "/"
@@ -42,12 +46,6 @@ title = "Publications"
 type = "page"
 target = "publications"
 href = "/publications"
-
-[[navigation]]
-title = "Activities"
-type = "page"
-target = "activities"
-href = "/activities"
 
 [[navigation]]
 title = "CV"
@@ -60,3 +58,11 @@ title = "Polaris"
 type = "page"
 target = "research-links"
 href = "/research-links"
+icon = "compass"
+
+[[navigation]]
+title = "Deadlines"
+type = "page"
+target = "deadlines"
+href = "/deadlines"
+icon = "calendar"

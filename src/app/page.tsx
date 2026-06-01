@@ -1,6 +1,8 @@
 import { getConfig } from '@/lib/config';
 import { getMarkdownContent, getBibtexContent, getTomlContent, getPageConfig, getTextPageContent } from '@/lib/content';
 import { parseBibTeX } from '@/lib/bibtexParser';
+import { getScholarData } from '@/lib/scholar';
+import { getGithubStars, githubProfileUrl } from '@/lib/github';
 import Profile from '@/components/home/Profile';
 import About from '@/components/home/About';
 import SelectedPublications from '@/components/home/SelectedPublications';
@@ -31,9 +33,18 @@ type PageData =
   | { type: 'text', id: string, config: TextPageConfig, content: string }
   | { type: 'card', id: string, config: CardPageConfig };
 
-export default function Home() {
+export default async function Home() {
   const config = getConfig();
   const enableOnePageMode = config.features.enable_one_page_mode;
+  const scholar = config.features.enable_scholar_citations ? getScholarData() : null;
+  const scholarStats = scholar && scholar.totalCitations > 0
+    ? { totalCitations: scholar.totalCitations, hIndex: scholar.hIndex, updated: scholar.updated }
+    : undefined;
+
+  const githubStars = await getGithubStars(config.social.github);
+  const githubStats = githubStars != null
+    ? { stars: githubStars, url: githubProfileUrl(config.social.github) || config.social.github || '#' }
+    : undefined;
 
   // Always load about page config for profile info
   const aboutConfig = getPageConfig('about');
@@ -139,6 +150,8 @@ export default function Home() {
             social={config.social}
             features={config.features}
             researchInterests={researchInterests}
+            scholarStats={scholarStats}
+            githubStats={githubStats}
           />
         </div>
 

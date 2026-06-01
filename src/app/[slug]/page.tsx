@@ -6,12 +6,14 @@ import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
 import CvSheet from '@/components/pages/CvSheet';
+import EmbedPage from '@/components/pages/EmbedPage';
 import {
     BasePageConfig,
     PublicationPageConfig,
     TextPageConfig,
     CardPageConfig,
-    CvPageConfig
+    CvPageConfig,
+    EmbedPageConfig
 } from '@/types/page';
 
 import { Metadata } from 'next';
@@ -51,6 +53,14 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
         return (
             <div className="px-4 sm:px-6 lg:px-8 py-10">
                 <CvSheet config={pageConfig as CvPageConfig} />
+            </div>
+        );
+    }
+
+    if (pageConfig.type === 'embed') {
+        return (
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <EmbedPage config={pageConfig as EmbedPageConfig} />
             </div>
         );
     }
