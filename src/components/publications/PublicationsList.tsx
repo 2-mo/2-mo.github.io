@@ -8,10 +8,10 @@ import {
     FunnelIcon,
     CalendarIcon,
     BookOpenIcon,
-    ClipboardDocumentIcon,
     DocumentTextIcon,
     DocumentArrowDownIcon,
-    GlobeAltIcon
+    GlobeAltIcon,
+    CheckIcon
 } from '@heroicons/react/24/outline';
 import { Publication } from '@/types/publication';
 import { PublicationPageConfig } from '@/types/page';
@@ -42,6 +42,38 @@ function LinkBadge({ href, label, className, icon }: { href: string; label: stri
     );
 }
 
+// Citation count with a wistful easter egg: click flips to ∞ and pops "if only…".
+function CitationBadge({ count }: { count: number }) {
+    const [flipped, setFlipped] = useState(false);
+    return (
+        <span className="relative inline-flex">
+            <button
+                type="button"
+                onClick={() => {
+                    setFlipped(true);
+                    setTimeout(() => setFlipped(false), 1600);
+                }}
+                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-accent/10 text-accent border border-accent/20 transition-transform hover:scale-105 cursor-pointer"
+            >
+                Cited by {flipped ? '∞' : count}
+            </button>
+            <AnimatePresence>
+                {flipped && (
+                    <motion.span
+                        initial={{ opacity: 0, y: 6, scale: 0.85 }}
+                        animate={{ opacity: 1, y: -8, scale: 1 }}
+                        exit={{ opacity: 0, y: -14, scale: 0.85 }}
+                        className="absolute bottom-full left-1/2 -translate-x-1/2 whitespace-nowrap bg-neutral-800 text-white text-xs font-medium px-2.5 py-1 rounded-md shadow-lg pointer-events-none"
+                    >
+                        if only…
+                        <span className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800" />
+                    </motion.span>
+                )}
+            </AnimatePresence>
+        </span>
+    );
+}
+
 interface PublicationsListProps {
     config: PublicationPageConfig;
     publications: Publication[];
@@ -55,6 +87,27 @@ export default function PublicationsList({ config, publications, embedded = fals
     const [showFilters, setShowFilters] = useState(false);
     const [expandedBibtexId, setExpandedBibtexId] = useState<string | null>(null);
     const [expandedAbstractId, setExpandedAbstractId] = useState<string | null>(null);
+    const [copiedId, setCopiedId] = useState<string | null>(null);
+
+    const copyBibtex = async (pub: Publication) => {
+        try {
+            await navigator.clipboard.writeText(pub.bibtex || '');
+            setCopiedId(pub.id);
+            setTimeout(() => setCopiedId((id) => (id === pub.id ? null : id)), 2000);
+        } catch {
+            // Clipboard API unavailable (e.g. non-secure context) — fail silently.
+        }
+    };
+
+    // Clicking BibTeX toggles the panel; opening it also copies to the clipboard.
+    const handleBibtexClick = (pub: Publication) => {
+        if (expandedBibtexId === pub.id) {
+            setExpandedBibtexId(null);
+            return;
+        }
+        setExpandedBibtexId(pub.id);
+        copyBibtex(pub);
+    };
 
     // Extract unique years and types for filters
     const years = useMemo(() => {
@@ -220,7 +273,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                             key={pub.id}
                             initial={false}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.1 * index }}
+                            transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
                             className={cn(
                                 "p-6 rounded-xl shadow-sm border hover:shadow-md transition-all duration-200",
                                 embedded
@@ -284,9 +337,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                             </span>
                                         )}
                                         {typeof pub.citations === 'number' && pub.citations > 0 && (
-                                            <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-accent/10 text-accent border border-accent/20">
-                                                Cited by {pub.citations}
-                                            </span>
+                                            <CitationBadge count={pub.citations} />
                                         )}
                                         {(pub.doi || pub.url) && (
                                             <LinkBadge
@@ -351,16 +402,26 @@ export default function PublicationsList({ config, publications, embedded = fals
                                         )}
                                         {pub.bibtex && (
                                             <button
-                                                onClick={() => setExpandedBibtexId(expandedBibtexId === pub.id ? null : pub.id)}
+                                                onClick={() => handleBibtexClick(pub)}
                                                 className={cn(
                                                     "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
                                                     expandedBibtexId === pub.id
                                                         ? "bg-accent text-white"
                                                         : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-700 border border-neutral-200 dark:border-neutral-600 hover:bg-accent hover:text-white hover:border-accent"
                                                 )}
+                                                title="Show BibTeX and copy to clipboard"
                                             >
-                                                <BookOpenIcon className="h-3 w-3 mr-1.5" />
-                                                BibTeX
+                                                {copiedId === pub.id ? (
+                                                    <>
+                                                        <CheckIcon className="h-3 w-3 mr-1.5" />
+                                                        Copied!
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <BookOpenIcon className="h-3 w-3 mr-1.5" />
+                                                        BibTeX
+                                                    </>
+                                                )}
                                             </button>
                                         )}
                                     </div>
@@ -389,20 +450,10 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 exit={{ opacity: 0, height: 0 }}
                                                 className="overflow-hidden mt-4"
                                             >
-                                                <div className="relative bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
+                                                <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
                                                     <pre className="text-xs text-neutral-600 dark:text-neutral-500 overflow-x-auto whitespace-pre-wrap font-mono">
                                                         {pub.bibtex}
                                                     </pre>
-                                                    <button
-                                                        onClick={() => {
-                                                            navigator.clipboard.writeText(pub.bibtex || '');
-                                                            // Optional: Show copied feedback
-                                                        }}
-                                                        className="absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-neutral-700 text-neutral-500 hover:text-accent shadow-sm border border-neutral-200 dark:border-neutral-600 transition-colors"
-                                                        title="Copy to clipboard"
-                                                    >
-                                                        <ClipboardDocumentIcon className="h-4 w-4" />
-                                                    </button>
                                                 </div>
                                             </motion.div>
                                         ) : null}

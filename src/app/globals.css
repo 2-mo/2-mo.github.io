@@ -441,3 +441,16 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .theme-icon-anim { animation: none; }
 }
+
+/* Double-click the name for a quick RGB-split glitch (easter egg) */
+@keyframes name-glitch {
+  0%, 100% { transform: translate(0, 0); text-shadow: none; }
+  20% { transform: translate(-2px, 1px);  text-shadow: 2px 0 #d97757, -2px 0 #0f6cbd; }
+  40% { transform: translate(2px, -1px);  text-shadow: -2px 0 #d97757, 2px 0 #0f6cbd; }
+  60% { transform: translate(-1px, 1px);  text-shadow: 1px 0 #d97757, -1px 0 #0f6cbd; }
+  80% { transform: translate(1px, -1px);  text-shadow: -1px 0 #d97757, 1px 0 #0f6cbd; }
+}
+.name-glitch { animation: name-glitch 0.6s steps(2, end); }
+@media (prefers-reduced-motion: reduce) {
+  .name-glitch { animation: none; }
+}

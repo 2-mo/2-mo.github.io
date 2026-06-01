@@ -35,7 +35,7 @@ export default function SelectedPublications({ publications, title = 'Selected P
                         key={pub.id}
                         initial={false}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1 * index }}
+                        transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
                         className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
                     >
                         <div className="flex flex-col md:flex-row gap-4">

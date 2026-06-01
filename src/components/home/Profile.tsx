@@ -66,6 +66,7 @@ export default function Profile({ author, social, features, researchInterests, s
     const nameLinePrimary = nameMatch?.[1] || author.name;
     const nameLineSecondary = nameMatch?.[2];
 
+    const [nameGlitch, setNameGlitch] = useState(false);
     const [hasLiked, setHasLiked] = useState(false);
     const [showThanks, setShowThanks] = useState(false);
     const [showAddress, setShowAddress] = useState(false);
@@ -140,8 +141,8 @@ export default function Profile({ author, social, features, researchInterests, s
             transition={{ duration: 0.6 }}
             className="sticky top-8"
         >
-            {/* Profile Image */}
-            <div className="w-64 h-64 mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
+            {/* Profile Image — hidden ✱ spark trigger; 5 quick clicks "levels up" the raccoon (see EasterEggs) */}
+            <div data-spark data-avatar className="w-64 h-64 mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
                 <Image
                     src={author.avatar}
                     alt={author.name}
@@ -154,7 +155,13 @@ export default function Profile({ author, social, features, researchInterests, s
 
             {/* Name and Title */}
             <div className="text-center mb-6">
-                <h1 className="text-3xl font-serif font-bold text-primary mb-2 leading-tight">
+                <h1
+                    onDoubleClick={() => {
+                        setNameGlitch(true);
+                        setTimeout(() => setNameGlitch(false), 700);
+                    }}
+                    className={`text-3xl font-serif font-bold text-primary mb-2 leading-tight select-none ${nameGlitch ? 'name-glitch' : ''}`}
+                >
                     <span className="block">{nameLinePrimary}</span>
                     {nameLineSecondary && (
                         <span className="block">{nameLineSecondary}</span>

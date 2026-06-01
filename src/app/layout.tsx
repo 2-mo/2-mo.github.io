@@ -3,6 +3,7 @@ import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import EasterEggs from "@/components/ui/EasterEggs";
 import { getConfig } from "@/lib/config";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -108,6 +109,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer lastUpdated={config.site.last_updated} />
+          <EasterEggs repo="https://github.com/2-mo/2-mo.github.io" />
         </ThemeProvider>
       </body>
     </html>
