@@ -638,6 +638,12 @@ link = "https://www.mingcute.com/"
 content = "开源图标字体与 SVG 图标。"
 
 [[groups.items]]
+title = "Codicon"
+subtitle = "Icon"
+link = "https://microsoft.github.io/vscode-codicons/dist/codicon.html"
+content = "VS Code 官方 Codicon 图标库。"
+
+[[groups.items]]
 title = "字节 IconPark"
 subtitle = "Icon"
 link = "https://iconpark.oceanengine.com/home"
