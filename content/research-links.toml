@@ -19,6 +19,18 @@ subtitle = "科研常用网站"
 link = "https://github.com/Lionelsy/Conference-Accepted-Paper-List"
 content = "会议录用论文汇总索引。"
 
+[[groups.items]]
+title = "Awesome-Video-Reasoning-Landscape"
+subtitle = "视频推理综述"
+link = "https://github.com/LJungang/Awesome-Video-Reasoning-Landscape"
+content = "视频推理相关论文、数据集与方法资源整理。"
+
+[[groups.items]]
+title = "Captum"
+subtitle = "模型可解释性"
+link = "https://github.com/meta-pytorch/captum"
+content = "PyTorch 模型解释与归因分析工具库。"
+
 [[groups]]
 title = "搜索引擎 🔎"
 
@@ -87,6 +99,12 @@ title = "Powerlevel10k"
 subtitle = "终端美化"
 link = "https://github.com/romkatv/powerlevel10k"
 content = "高性能 Zsh 主题与命令行提示符定制工具。"
+
+[[groups.items]]
+title = "Starship"
+subtitle = "终端美化"
+link = "https://starship.rs/zh-cn/"
+content = "跨平台、可高度定制的命令行提示符工具。"
 
 [[groups.items]]
 title = "CapCap"
@@ -552,6 +570,13 @@ subtitle = "通用格式转换"
 link = "https://convertio.co/zh/"
 content = "通用文件格式在线转换。"
 tags = ["格式转换"]
+
+[[groups.items]]
+title = "AgiRanker"
+subtitle = "在线工具"
+link = "https://www.agiranker.com/"
+content = "AgiRanker 网站入口。"
+tags = ["在线工具"]
 
 [[groups]]
 title = "🌈 绘图配色"
