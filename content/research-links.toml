@@ -112,6 +112,12 @@ subtitle = "截屏工具"
 link = "https://github.com/realskyrin/capcap"
 content = "轻量型 macOS 原生截屏工具，支持双击 Command 快速截图及标注。"
 
+[[groups.items]]
+title = "OpenScreen"
+subtitle = "录屏演示"
+link = "https://github.com/getopenscreen/openscreen"
+content = "开源屏幕录制、产品演示与 walkthrough 制作工具，支持缩放、光标效果、字幕、标注和导出。"
+
 [[groups]]
 title = "🔍 论文检索"
 
@@ -538,6 +544,12 @@ title = "佐糖"
 subtitle = "抠图"
 link = "https://picwish.cn/"
 content = "在线抠图与背景替换。"
+
+[[groups.items]]
+title = "Perfect Pixel"
+subtitle = "像素画修复"
+link = "https://github.com/theamusing/perfectPixel"
+content = "自动检测像素网格，将 AI 生成的像素风图像清理并量化为对齐的像素画。"
 
 [[groups.items]]
 title = "白描"
