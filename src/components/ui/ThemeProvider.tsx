@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useThemeStore, resolveTheme } from '@/lib/stores/themeStore';
+import { useThemeStore, resolveTheme } from '@/stores/themeStore';
 
 type MediaQueryListWithDeprecated = MediaQueryList & {
   addListener?: (listener: (this: MediaQueryList, ev: MediaQueryListEvent) => void) => void;

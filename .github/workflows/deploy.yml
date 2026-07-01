@@ -50,9 +50,9 @@ jobs:
             echo "GOOGLE_SCHOLAR_ID not set; using committed snapshot."
             exit 0
           fi
-          pip install -r google_scholar_crawler/requirements.txt
-          if (cd google_scholar_crawler && python3 main.py); then
-            cp google_scholar_crawler/results/gs_data.json content/gs_data.json
+          pip install -r tools/scholar-crawler/requirements.txt
+          if (cd tools/scholar-crawler && python3 main.py); then
+            cp tools/scholar-crawler/results/gs_data.json content/gs_data.json
             echo "Citation data refreshed."
           else
             echo "Scholar crawl failed; using committed snapshot."

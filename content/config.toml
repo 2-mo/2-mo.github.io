@@ -32,7 +32,7 @@ enable_likes = false
 enable_one_page_mode = false
 
 # Show Google Scholar citation totals (profile) and per-paper counts.
-# Data is produced by the google_scholar_crawler GitHub Action.
+# Data is produced by the tools/scholar-crawler GitHub Action step.
 enable_scholar_citations = true
 
 [[navigation]]

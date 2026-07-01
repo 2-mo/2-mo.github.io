@@ -4,7 +4,7 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import EasterEggs from "@/components/ui/EasterEggs";
-import { getConfig } from "@/lib/config";
+import { getConfig } from "@/content/config";
 
 const SITE_URL = "https://2-mo.github.io";
 

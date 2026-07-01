@@ -12,7 +12,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { MapPinIcon as MapPinSolidIcon, EnvelopeIcon as EnvelopeSolidIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
-import { SiteConfig } from '@/lib/config';
+import { SiteConfig } from '@/content/config';
 
 // Custom ORCID icon component
 const OrcidIcon = ({ className }: { className?: string }) => (

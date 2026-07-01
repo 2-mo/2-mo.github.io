@@ -1,5 +1,5 @@
 import { Publication, PublicationType, ResearchArea } from '@/types/publication';
-import { getConfig } from './config';
+import { getConfig } from '@/content/config';
 import { getScholarData, normalizeTitle } from './scholar';
 
 import * as bibtexParse from '@orcid/bibtex-parse-js';

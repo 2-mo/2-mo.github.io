@@ -4,6 +4,40 @@ export interface BasePageConfig {
     description?: string;
 }
 
+interface BaseAboutPageSectionConfig {
+    id: string;
+    source?: string;
+    title?: string;
+}
+
+export interface MarkdownAboutPageSectionConfig extends BaseAboutPageSectionConfig {
+    type: 'markdown';
+}
+
+export interface PublicationsAboutPageSectionConfig extends BaseAboutPageSectionConfig {
+    type: 'publications';
+    filter?: string;
+    limit?: number;
+}
+
+export interface ListAboutPageSectionConfig extends BaseAboutPageSectionConfig {
+    type: 'list';
+}
+
+export type AboutPageSectionConfig =
+    | MarkdownAboutPageSectionConfig
+    | PublicationsAboutPageSectionConfig
+    | ListAboutPageSectionConfig;
+
+export interface AboutPageConfig extends BasePageConfig {
+    type: 'about';
+    profile?: {
+        research_interests?: string[];
+        [key: string]: unknown;
+    };
+    sections: AboutPageSectionConfig[];
+}
+
 export interface EmbedPageConfig extends BasePageConfig {
     type: 'embed';
     src: string;
@@ -48,3 +82,11 @@ export interface CardPageConfig extends BasePageConfig {
     items?: CardItem[];
     groups?: CardGroup[];
 }
+
+export type PageConfig =
+    | AboutPageConfig
+    | PublicationPageConfig
+    | TextPageConfig
+    | CardPageConfig
+    | CvPageConfig
+    | EmbedPageConfig;

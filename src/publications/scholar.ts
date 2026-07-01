@@ -1,6 +1,6 @@
-import { getJsonContent } from './content';
+import { getJsonContent } from '@/content/files';
 
-// Shape of the JSON produced by google_scholar_crawler/main.py (subset we use).
+// Shape of the JSON produced by tools/scholar-crawler/main.py (subset we use).
 interface RawScholarPublication {
     num_citations?: number;
     bib?: { title?: string };

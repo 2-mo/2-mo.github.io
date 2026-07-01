@@ -4,7 +4,7 @@
 
 # PRISM
 
-[English](README.md) · **中文** · [在线演示](https://prism-demo.pages.dev) · [更新日志](CHANGELOG.md)
+[English](../README.md) · **中文** · [在线演示](https://prism-demo.pages.dev) · [更新日志](../CHANGELOG.md)
 
 **如果你喜欢这个项目，请给一个 Star ⭐️**
 
@@ -109,7 +109,7 @@ npm run build
 
 运行上述命令后，会生成一个 `out/` 目录，这就是你网站的全部静态文件。
 
-👉 **[点击阅读完整的部署指南](docs/deployment_cn.md)** （包含部署到 **GitHub Pages** 和 **Cloudflare Pages** 的详细教程）。
+👉 **[点击阅读完整的部署指南](deployment_cn.md)** （包含部署到 **GitHub Pages** 和 **Cloudflare Pages** 的详细教程）。
 
 ## 📂 项目结构概览
 
@@ -117,13 +117,19 @@ npm run build
 PRISM/
 ├── content/              # ✨ 用户内容区 (在此编辑 TOML, BibTeX, MD 文件)
 ├── public/               # 静态资源 (图片, PDF论文等)
+├── tools/                # 维护脚本和数据爬取工具
 ├── src/
 │   ├── app/              # Next.js App Router 核心逻辑
 │   ├── components/       # React 组件库
-│   ├── lib/              # 工具函数 (解析器, 配置加载器)
+│   ├── content/          # 内容加载、校验和页面模型
+│   ├── publications/     # BibTeX 解析和 Scholar 数据
+│   ├── integrations/     # 外部服务客户端
+│   ├── stores/           # 客户端状态
+│   ├── lib/              # 通用工具函数
 │   └── types/            # TypeScript 类型定义
 ├── next.config.ts        # Next.js 配置文件
-└── tailwind.config.ts    # Tailwind CSS 配置文件
+├── package.json          # 脚本和依赖
+└── tsconfig.json         # TypeScript 配置
 ```
 
 ## 🤝 参与贡献
@@ -132,4 +138,4 @@ PRISM/
 
 ## 📄 开源协议
 
-本项目遵循 MIT 开源协议 - 详情请参阅 [LICENSE](LICENSE) 文件。
+本项目遵循 MIT 开源协议 - 详情请参阅 [LICENSE](../LICENSE) 文件。

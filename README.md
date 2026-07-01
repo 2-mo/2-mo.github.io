@@ -4,7 +4,7 @@
 
 # PRISM
 
-**English** · [中文](README_cn.md) · [Demo](https://prism-demo.pages.dev)  · [Changelog](CHANGELOG.md)
+**English** · [中文](docs/README_cn.md) · [Demo](https://prism-demo.pages.dev)  · [Changelog](CHANGELOG.md)
 
 **If you like this project, please give it a star ⭐️**
 
@@ -17,7 +17,7 @@ PRISM stands for **P**ortfolio & **R**esearch **I**nterface **S**ite **M**aker. 
 *   **📄 Configuration-Driven**: Manage your entire site's content using simple `TOML`, `Markdown`, and `BibTeX` files in the `content/` directory. No code changes required for content updates!
 *   **📚 BibTeX Support**: Directly render your publications from a `.bib` file. Includes search, filtering (Year, Type), and automatic citation generation.
 *   **🎨 Modern Design**: Clean, responsive UI with a beautiful serif/sans-serif typography pairing, smooth animations (Framer Motion), and Dark Mode support.
-*   **⚡️ High Performance**: Built on Next.js 20 with Turbopack. Static export ensures blazing fast load times and easy deployment.
+*   **⚡️ High Performance**: Built on Next.js 16 with Turbopack. Static export ensures blazing fast load times and easy deployment.
 *   **🔍 SEO Optimized**: Dynamic metadata generation for every page.
 *   **🧩 Dynamic Routing**: Easily add new pages by simply creating a config file.
 
@@ -107,13 +107,19 @@ This generates a static `out/` directory that can be hosted anywhere.
 PRISM/
 ├── content/              # All user-editable content (TOML, BibTeX, MD)
 ├── public/               # Static assets (images, papers)
+├── tools/                # Maintenance scripts and data crawlers
 ├── src/
 │   ├── app/              # Next.js App Router
 │   ├── components/       # React components
-│   ├── lib/              # Utility functions (parsers, config loaders)
+│   ├── content/          # Content loading, validation, and page models
+│   ├── publications/     # BibTeX parsing and Scholar data
+│   ├── integrations/     # External service clients
+│   ├── stores/           # Client state stores
+│   ├── lib/              # Shared generic utilities
 │   └── types/            # TypeScript definitions
 ├── next.config.ts        # Next.js configuration
-└── tailwind.config.ts    # Tailwind CSS configuration
+├── package.json          # Scripts and dependencies
+└── tsconfig.json         # TypeScript configuration
 ```
 
 ## 🤝 Contributing

@@ -1,7 +1,7 @@
 'use client';
 
 import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
-import { useThemeStore, type Theme } from '@/lib/stores/themeStore';
+import { useThemeStore, type Theme } from '@/stores/themeStore';
 import { cn } from '@/lib/utils';
 
 const themes: { value: Theme; label: string }[] = [

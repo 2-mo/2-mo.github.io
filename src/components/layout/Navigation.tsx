@@ -8,7 +8,7 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, CalendarIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { SiteConfig } from '@/lib/config';
+import { SiteConfig } from '@/content/config';
 
 // Compass (no Heroicons equivalent) — used for the "Polaris" navigation portal.
 const CompassIcon = ({ className }: { className?: string }) => (

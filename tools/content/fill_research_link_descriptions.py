@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-FILE_PATH = Path("/Users/2-mo/Projects/2-mo.github.io/content/research-links.toml")
+ROOT_DIR = Path(__file__).resolve().parents[2]
+FILE_PATH = ROOT_DIR / "content" / "research-links.toml"
 
 
 def build_description(group: str, subtitle: str, title: str) -> str:

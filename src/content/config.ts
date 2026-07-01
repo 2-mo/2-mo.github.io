@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'smol-toml';
+import { ContentValidationError, assertValidSiteConfig } from './validation';
 
 export interface SiteConfig {
     site: {
@@ -38,7 +39,7 @@ export interface SiteConfig {
         href: string;
         icon?: string;
     }>;
-    sections: Array<{
+    sections?: Array<{
         id: string;
         type: 'markdown' | 'publications' | 'list' | 'cards';
         source?: string;
@@ -54,10 +55,15 @@ export function getConfig(): SiteConfig {
     try {
         const fileContent = fs.readFileSync(CONFIG_PATH, 'utf-8');
         const config = parse(fileContent) as unknown as SiteConfig;
+        assertValidSiteConfig(config);
         return config;
     } catch (error) {
+        if (error instanceof ContentValidationError) {
+            throw error;
+        }
+
         console.error('Error loading config:', error);
         // Return a default config or throw
-        throw new Error('Failed to load content/config.toml');
+        throw new Error('Failed to load content/config.toml', { cause: error });
     }
 }
