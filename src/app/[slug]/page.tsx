@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
 import RenderablePage from '@/components/pages/RenderablePage';
 import {
+    getRenderablePageAsync,
     getRenderablePage,
     getStaticPageSlugs,
 } from '@/content/pages';
+import { absoluteUrl, getPagePath } from '@/site/urls';
 
 import { Metadata } from 'next';
 
@@ -13,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const page = getRenderablePage(slug);
+    const page = await getRenderablePageAsync(slug);
 
     if (!page) {
         return {};
@@ -22,6 +24,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
         title: page.config.title,
         description: page.config.description,
+        alternates: {
+            canonical: getPagePath(slug),
+        },
+        openGraph: {
+            title: page.config.title,
+            description: page.config.description,
+            url: absoluteUrl(getPagePath(slug)),
+            type: 'website',
+        },
     };
 }
 

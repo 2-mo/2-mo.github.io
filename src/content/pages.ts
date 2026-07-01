@@ -11,6 +11,7 @@ import {
     AboutPageConfig,
     AboutPageSectionConfig,
     CardPageConfig,
+    CardItem,
     CvPageConfig,
     EmbedPageConfig,
     PageConfig,
@@ -22,6 +23,7 @@ import {
     assertValidPageConfig,
     validateNavigationPages,
 } from './validation';
+import { getGithubRepoStats } from '@/integrations/github';
 
 export interface NewsItemModel {
     date: string;
@@ -224,6 +226,51 @@ export function getRenderablePage(slug: string): RenderablePageModel | null {
     }
 }
 
+async function enrichShowcaseConfig(config: CardPageConfig): Promise<CardPageConfig> {
+    if (config.variant !== 'showcase') return config;
+
+    const enrichItem = async (item: CardItem): Promise<CardItem> => {
+        const stats = await getGithubRepoStats(item.repo);
+        if (!stats) return item;
+
+        const metrics = new Map((item.metrics || []).map((metric) => [metric.label, metric.value]));
+        metrics.set('Stars', String(stats.stars));
+        metrics.set('Forks', String(stats.forks));
+        if (stats.updatedAt) metrics.set('Updated', stats.updatedAt.slice(0, 10));
+
+        return {
+            ...item,
+            metrics: Array.from(metrics, ([label, value]) => ({ label, value })),
+        };
+    };
+
+    const items = config.items
+        ? await Promise.all(config.items.map(enrichItem))
+        : config.items;
+    const groups = config.groups
+        ? await Promise.all(config.groups.map(async (group) => ({
+            ...group,
+            items: await Promise.all(group.items.map(enrichItem)),
+        })))
+        : config.groups;
+
+    return { ...config, items, groups };
+}
+
+export async function getRenderablePageAsync(slug: string): Promise<RenderablePageModel | null> {
+    const page = getRenderablePage(slug);
+    if (!page) return null;
+
+    if (page.type === 'card') {
+        return {
+            ...page,
+            config: await enrichShowcaseConfig(page.config),
+        };
+    }
+
+    return page;
+}
+
 export function getOnePageModels(config: SiteConfig = getConfig()): RenderablePageModel[] {
     validateNavigationPages(config, getPageConfig);
 
@@ -231,6 +278,18 @@ export function getOnePageModels(config: SiteConfig = getConfig()): RenderablePa
         .filter(item => item.type === 'page')
         .map(item => getRenderablePage(item.target))
         .filter((page): page is RenderablePageModel => page !== null);
+}
+
+export async function getOnePageModelsAsync(config: SiteConfig = getConfig()): Promise<RenderablePageModel[]> {
+    validateNavigationPages(config, getPageConfig);
+
+    const pages = await Promise.all(
+        config.navigation
+            .filter(item => item.type === 'page')
+            .map(item => getRenderablePageAsync(item.target))
+    );
+
+    return pages.filter((page): page is RenderablePageModel => page !== null);
 }
 
 export function getHomePageModel(config: SiteConfig = getConfig()): HomePageModel {
@@ -246,6 +305,25 @@ export function getHomePageModel(config: SiteConfig = getConfig()): HomePageMode
         researchInterests: aboutConfig?.profile?.research_interests,
         pages: onePageMode
             ? getOnePageModels(config)
+            : aboutPage
+                ? [aboutPage]
+                : [],
+    };
+}
+
+export async function getHomePageModelAsync(config: SiteConfig = getConfig()): Promise<HomePageModel> {
+    validateNavigationPages(config, getPageConfig);
+
+    const onePageMode = config.features.enable_one_page_mode === true;
+    const aboutPage = await getRenderablePageAsync('about');
+    const aboutConfig = aboutPage?.type === 'about' ? aboutPage.config : null;
+
+    return {
+        onePageMode,
+        aboutConfig,
+        researchInterests: aboutConfig?.profile?.research_interests,
+        pages: onePageMode
+            ? await getOnePageModelsAsync(config)
             : aboutPage
                 ? [aboutPage]
                 : [],

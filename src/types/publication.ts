@@ -30,6 +30,9 @@ export interface Publication {
   pdfUrl?: string;
   projectUrl?: string;
   demoUrl?: string;
+  datasetUrl?: string;
+  slidesUrl?: string;
+  videoUrl?: string;
   tags: string[];
   keywords?: string[];
   type: PublicationType;
@@ -79,4 +82,3 @@ export type ResearchArea =
   | 'transformer-architectures'
   | 'biomedical-engineering'
   | 'other';
-

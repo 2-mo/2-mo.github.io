@@ -1,5 +1,5 @@
 import { getConfig } from '@/content/config';
-import { getHomePageModel } from '@/content/pages';
+import { getHomePageModelAsync } from '@/content/pages';
 import { getScholarData } from '@/publications/scholar';
 import { getGithubStars, githubProfileUrl } from '@/integrations/github';
 import Profile from '@/components/home/Profile';
@@ -7,7 +7,7 @@ import RenderablePage from '@/components/pages/RenderablePage';
 
 export default async function Home() {
   const config = getConfig();
-  const home = getHomePageModel(config);
+  const home = await getHomePageModelAsync(config);
   const scholar = config.features.enable_scholar_citations ? getScholarData() : null;
   const scholarStats = scholar && scholar.totalCitations > 0
     ? { totalCitations: scholar.totalCitations, hIndex: scholar.hIndex, updated: scholar.updated }

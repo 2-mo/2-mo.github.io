@@ -1,0 +1,59 @@
+type = "card"
+title = "Showcase"
+description = "Research projects, curated surveys, and open resources around agentic visual reasoning and anomaly understanding."
+variant = "showcase"
+
+[[items]]
+title = "Awesome Thinking with VAD"
+subtitle = "Reasoning-centric video anomaly understanding"
+source = "Awesome List"
+status = "Active"
+date = "2025-2026"
+image = "/DALL.svg"
+link = "https://github.com/2-mo/Awesome-Thinking-with-VAD"
+repo = "https://github.com/2-mo/Awesome-Thinking-with-VAD"
+content = "A curated collection of papers, datasets, and resources tracking the shift from frame-level video anomaly detection to LLM/VLM-enabled anomaly understanding."
+tags = ["Video Anomaly Detection", "VLM", "LLM", "Dataset Catalog"]
+metrics = [
+    { label = "Stars", value = "15" },
+    { label = "Updated", value = "2026-05-26" },
+]
+
+[[items]]
+title = "Awesome Thinking with PI"
+subtitle = "Perception and interaction for visual reasoning"
+source = "Awesome List"
+status = "Active"
+date = "2025-2026"
+image = "/DALL.svg"
+link = "https://github.com/2-mo/Awesome-Thinking-with-PI"
+repo = "https://github.com/2-mo/Awesome-Thinking-with-PI"
+content = "A structured resource map for visual reasoning, perception-driven interaction, tool-augmented multimodal reasoning, and embodied intelligence."
+tags = ["Visual Reasoning", "Perception", "Interaction", "Embodied AI"]
+metrics = [
+    { label = "Stars", value = "6" },
+    { label = "Updated", value = "2026-04-15" },
+]
+
+[[items]]
+title = "A2Seek"
+subtitle = "Reasoning-centric benchmark for aerial anomaly understanding"
+source = "Benchmark"
+status = "NeurIPS 2025 Datasets & Benchmarks"
+date = "2025"
+image = "/papers/cover-a2seek.png"
+link = "https://hayneyday.github.io/A2Seek/"
+content = "A benchmark and project page for active evidence acquisition and reasoning-centric aerial anomaly understanding."
+tags = ["Aerial Anomaly", "Benchmark", "Active Reasoning"]
+
+[[items]]
+title = "NexusAD"
+subtitle = "Corner-case perception and comprehension for autonomous driving"
+source = "Research Project"
+status = "ECCVW 2024"
+date = "2024"
+image = "/DALL.svg"
+link = "https://github.com/OpenVisualLab/NexusAD"
+repo = "https://github.com/OpenVisualLab/NexusAD"
+content = "A multimodal autonomous driving corner-case comprehension project built around perception, explanation, and scenario understanding."
+tags = ["Autonomous Driving", "Corner Cases", "Multimodal Understanding"]

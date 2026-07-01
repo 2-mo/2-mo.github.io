@@ -2,6 +2,11 @@ import type {
     AboutPageSectionConfig,
     CardGroup,
     CardItem,
+    CvEducationItem,
+    CvExperienceItem,
+    CvFieldConfig,
+    CvPublication,
+    CvPublicationTag,
     PageConfig,
 } from '@/types/page';
 
@@ -32,7 +37,7 @@ const PAGE_TYPES = ['about', 'publication', 'card', 'text', 'cv', 'embed'] as co
 const NAV_TYPES = ['section', 'page', 'link'] as const;
 const SITE_SECTION_TYPES = ['markdown', 'publications', 'list', 'cards'] as const;
 const ABOUT_SECTION_TYPES = ['markdown', 'publications', 'list'] as const;
-const CARD_VARIANTS = ['default', 'portal'] as const;
+const CARD_VARIANTS = ['default', 'portal', 'showcase'] as const;
 
 const DEFAULT_CONFIG_FILE = 'content/config.toml';
 
@@ -412,6 +417,18 @@ function validateCardItem(
     validateOptionalString(errors, file, `${path}.content`, item.content, slug);
     validateOptionalString(errors, file, `${path}.link`, item.link, slug);
     validateOptionalString(errors, file, `${path}.image`, item.image, slug);
+    validateOptionalString(errors, file, `${path}.status`, item.status, slug);
+    validateOptionalString(errors, file, `${path}.source`, item.source, slug);
+    validateOptionalString(errors, file, `${path}.repo`, item.repo, slug);
+    if (item.metrics !== undefined) {
+        if (requireArray(errors, file, `${path}.metrics`, item.metrics, slug)) {
+            item.metrics.forEach((metric, index) => {
+                if (!requireObject(errors, file, `${path}.metrics[${index}]`, metric, slug)) return;
+                requireNonEmptyString(errors, file, `${path}.metrics[${index}].label`, metric.label, slug);
+                requireNonEmptyString(errors, file, `${path}.metrics[${index}].value`, metric.value, slug);
+            });
+        }
+    }
     if (item.tags !== undefined) {
         validateStringArrayField(errors, file, `${path}.tags`, item.tags, slug);
     }
@@ -474,6 +491,158 @@ function validateCardPage(errors: string[], file: string, slug: string, page: Un
 
 function validateCvPage(errors: string[], file: string, slug: string, page: UnknownRecord): void {
     validatePublicPath(errors, file, 'pdf', page.pdf, slug);
+
+    if (requireObject(errors, file, 'profile', page.profile, slug)) {
+        requireNonEmptyString(errors, file, 'profile.name', page.profile.name, slug);
+        requireNonEmptyString(errors, file, 'profile.name_cn', page.profile.name_cn, slug);
+        if (requireNonEmptyString(errors, file, 'profile.photo', page.profile.photo, slug)) {
+            validatePublicPath(errors, file, 'profile.photo', page.profile.photo, slug);
+        }
+        validateCvFields(errors, file, slug, 'profile.left', page.profile.left);
+        validateCvFields(errors, file, slug, 'profile.right', page.profile.right);
+        requireNonEmptyString(errors, file, 'profile.interests', page.profile.interests, slug);
+    }
+
+    if (requireArray(errors, file, 'education', page.education, slug)) {
+        page.education.forEach((item, index) => {
+            validateCvEducationItem(errors, file, slug, `education[${index}]`, item);
+        });
+    }
+
+    if (requireArray(errors, file, 'experience', page.experience, slug)) {
+        page.experience.forEach((item, index) => {
+            validateCvExperienceItem(errors, file, slug, `experience[${index}]`, item);
+        });
+    }
+
+    if (requireObject(errors, file, 'publications', page.publications, slug)) {
+        validateOptionalString(errors, file, 'publications.selected_subtitle', page.publications.selected_subtitle, slug);
+        validateCvPublications(errors, file, slug, 'publications.primary', page.publications.primary);
+        validateCvPublications(errors, file, slug, 'publications.additional', page.publications.additional);
+    }
+
+    validateStringArrayField(errors, file, 'projects', page.projects, slug);
+    validateStringArrayField(errors, file, 'awards', page.awards, slug);
+    requireNonEmptyString(errors, file, 'service', page.service, slug);
+    requireNonEmptyString(errors, file, 'hobbies', page.hobbies, slug);
+}
+
+function validateCvField(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    field: unknown
+): field is CvFieldConfig {
+    if (!requireObject(errors, file, path, field, slug)) return false;
+
+    validateOptionalString(errors, file, `${path}.label`, field.label, slug);
+    requireNonEmptyString(errors, file, `${path}.value`, field.value, slug);
+    validateOptionalString(errors, file, `${path}.href`, field.href, slug);
+
+    return true;
+}
+
+function validateCvFields(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    fields: unknown
+): void {
+    if (requireArray(errors, file, path, fields, slug)) {
+        fields.forEach((field, index) => {
+            validateCvField(errors, file, slug, `${path}[${index}]`, field);
+        });
+    }
+}
+
+function validateCvEducationItem(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    item: unknown
+): item is CvEducationItem {
+    if (!requireObject(errors, file, path, item, slug)) return false;
+
+    requireNonEmptyString(errors, file, `${path}.degree`, item.degree, slug);
+    requireNonEmptyString(errors, file, `${path}.field`, item.field, slug);
+    requireNonEmptyString(errors, file, `${path}.from`, item.from, slug);
+    requireNonEmptyString(errors, file, `${path}.to`, item.to, slug);
+
+    return true;
+}
+
+function validateCvExperienceItem(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    item: unknown
+): item is CvExperienceItem {
+    if (!requireObject(errors, file, path, item, slug)) return false;
+
+    requireNonEmptyString(errors, file, `${path}.organization`, item.organization, slug);
+    requireNonEmptyString(errors, file, `${path}.role`, item.role, slug);
+    requireNonEmptyString(errors, file, `${path}.year`, item.year, slug);
+
+    return true;
+}
+
+function validateCvPublicationTag(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    tag: unknown
+): tag is CvPublicationTag {
+    if (!requireObject(errors, file, path, tag, slug)) return false;
+
+    requireNonEmptyString(errors, file, `${path}.label`, tag.label, slug);
+    if (tag.accent !== undefined && typeof tag.accent !== 'boolean') {
+        addError(errors, file, `${path}.accent`, 'expected boolean when provided.', slug);
+    }
+
+    return true;
+}
+
+function validateCvPublication(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    publication: unknown
+): publication is CvPublication {
+    if (!requireObject(errors, file, path, publication, slug)) return false;
+
+    requireNonEmptyString(errors, file, `${path}.authors`, publication.authors, slug);
+    requireNonEmptyString(errors, file, `${path}.title`, publication.title, slug);
+    requireNonEmptyString(errors, file, `${path}.venue`, publication.venue, slug);
+    validateOptionalString(errors, file, `${path}.year`, publication.year, slug);
+    validateOptionalString(errors, file, `${path}.note`, publication.note, slug);
+
+    if (requireArray(errors, file, `${path}.tags`, publication.tags, slug)) {
+        publication.tags.forEach((tag, index) => {
+            validateCvPublicationTag(errors, file, slug, `${path}.tags[${index}]`, tag);
+        });
+    }
+
+    return true;
+}
+
+function validateCvPublications(
+    errors: string[],
+    file: string,
+    slug: string,
+    path: string,
+    publications: unknown
+): void {
+    if (requireArray(errors, file, path, publications, slug)) {
+        publications.forEach((publication, index) => {
+            validateCvPublication(errors, file, slug, `${path}[${index}]`, publication);
+        });
+    }
 }
 
 function validateEmbedPage(errors: string[], file: string, slug: string, page: UnknownRecord): void {

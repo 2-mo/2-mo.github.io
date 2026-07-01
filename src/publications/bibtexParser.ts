@@ -46,6 +46,18 @@ function stripRankTokens(desc?: string): string | undefined {
   return cleaned || undefined;
 }
 
+function parseListField(value?: string): string[] | undefined {
+  const cleaned = cleanBibTeXString(value);
+  if (!cleaned) return undefined;
+
+  const parts = cleaned
+    .split(/\s*(?:;|\|)\s*/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  return parts.length > 0 ? parts : undefined;
+}
+
 export function parseBibTeX(bibtexContent: string): Publication[] {
   const config = getConfig();
   const authorName = config.author.name;
@@ -100,14 +112,19 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
       pdfUrl: tags.pdf,
       projectUrl: tags.html,
       demoUrl: tags.demo,
+      datasetUrl: tags.dataset || tags.data,
+      slidesUrl: tags.slides,
+      videoUrl: tags.video,
       abstract: cleanBibTeXString(tags.abstract),
       description: stripRankTokens(cleanBibTeXString(tags.description || tags.note)),
+      summary: cleanBibTeXString(tags.tldr || tags.summary),
+      awards: parseListField(tags.award || tags.awards),
       venue: tags.abbr ? cleanBibTeXString(tags.abbr) : undefined,
       selected,
       preview,
 
       // Store original BibTeX (excluding custom fields)
-      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code', 'abbr', 'arxiv', 'html', 'pdf', 'demo']),
+      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code', 'abbr', 'arxiv', 'html', 'pdf', 'demo', 'dataset', 'data', 'slides', 'video', 'tldr', 'summary', 'award', 'awards']),
     };
 
     // Clean up undefined fields

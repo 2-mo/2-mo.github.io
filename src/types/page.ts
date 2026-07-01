@@ -47,6 +47,62 @@ export interface EmbedPageConfig extends BasePageConfig {
 export interface CvPageConfig extends BasePageConfig {
     type: 'cv';
     pdf?: string;
+    profile: CvProfileConfig;
+    education: CvEducationItem[];
+    experience: CvExperienceItem[];
+    publications: CvPublicationsConfig;
+    projects: string[];
+    awards: string[];
+    service: string;
+    hobbies: string;
+}
+
+export interface CvFieldConfig {
+    label: string;
+    value: string;
+    href?: string;
+}
+
+export interface CvProfileConfig {
+    name: string;
+    name_cn: string;
+    photo: string;
+    left: CvFieldConfig[];
+    right: CvFieldConfig[];
+    interests: string;
+}
+
+export interface CvEducationItem {
+    degree: string;
+    field: string;
+    from: string;
+    to: string;
+}
+
+export interface CvExperienceItem {
+    organization: string;
+    role: string;
+    year: string;
+}
+
+export interface CvPublicationTag {
+    label: string;
+    accent?: boolean;
+}
+
+export interface CvPublication {
+    authors: string;
+    title: string;
+    venue: string;
+    year?: string;
+    note?: string;
+    tags: CvPublicationTag[];
+}
+
+export interface CvPublicationsConfig {
+    selected_subtitle?: string;
+    primary: CvPublication[];
+    additional: CvPublication[];
 }
 
 export interface PublicationPageConfig extends BasePageConfig {
@@ -68,6 +124,13 @@ export interface CardItem {
     tags?: string[];
     link?: string;
     image?: string;
+    status?: string;
+    source?: string;
+    repo?: string;
+    metrics?: Array<{
+        label: string;
+        value: string;
+    }>;
 }
 
 export interface CardGroup {
@@ -78,7 +141,7 @@ export interface CardGroup {
 export interface CardPageConfig extends BasePageConfig {
     type: 'card';
     grouped?: boolean;
-    variant?: 'default' | 'portal';
+    variant?: 'default' | 'portal' | 'showcase';
     items?: CardItem[];
     groups?: CardGroup[];
 }

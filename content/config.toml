@@ -48,6 +48,12 @@ target = "publications"
 href = "/publications"
 
 [[navigation]]
+title = "Showcase"
+type = "page"
+target = "showcase"
+href = "/showcase"
+
+[[navigation]]
 title = "CV"
 type = "page"
 target = "cv"

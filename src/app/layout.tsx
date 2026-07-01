@@ -5,8 +5,7 @@ import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import EasterEggs from "@/components/ui/EasterEggs";
 import { getConfig } from "@/content/config";
-
-const SITE_URL = "https://2-mo.github.io";
+import { SITE_URL } from "@/site/urls";
 
 const BING_WALLPAPER_ENDPOINT =
   "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN";
@@ -61,6 +60,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: "/",
+      types: {
+        "application/rss+xml": "/rss.xml",
+      },
     },
     openGraph: {
       type: "website",

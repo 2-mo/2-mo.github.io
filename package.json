@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "python3 -m http.server 3000 --directory out",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate:content": "node tools/content/validate_content.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
