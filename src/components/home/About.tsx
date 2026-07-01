@@ -8,6 +8,10 @@ interface AboutProps {
     title?: string;
 }
 
+function isExternalHttpUrl(href?: string) {
+    return /^https?:\/\//i.test(href ?? '');
+}
+
 export default function About({ content, title = 'About' }: AboutProps) {
     return (
         <motion.section
@@ -26,14 +30,19 @@ export default function About({ content, title = 'About' }: AboutProps) {
                         ul: ({ children }) => <ul className="list-disc list-inside mb-4 space-y-1 ml-4">{children}</ul>,
                         ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-1 ml-4">{children}</ol>,
                         li: ({ children }) => <li className="mb-1">{children}</li>,
-                        a: ({ ...props }) => (
-                            <a
-                                {...props}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-accent font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
-                            />
-                        ),
+                        a: ({ href, ...props }) => {
+                            const isExternal = isExternalHttpUrl(href);
+
+                            return (
+                                <a
+                                    {...props}
+                                    href={href}
+                                    target={isExternal ? '_blank' : undefined}
+                                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                                    className="text-accent font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
+                                />
+                            );
+                        },
                         blockquote: ({ children }) => (
                             <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-500">
                                 {children}

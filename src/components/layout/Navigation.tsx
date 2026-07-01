@@ -23,7 +23,11 @@ const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   compass: CompassIcon,
   globe: GlobeAltIcon,
 };
-const getNavIcon = (name?: string) => (name && NAV_ICONS[name]) || GlobeAltIcon;
+
+function NavIcon({ name, className }: { name?: string; className?: string }) {
+  const Icon = (name && NAV_ICONS[name]) || GlobeAltIcon;
+  return <Icon className={className} />;
+}
 
 // Shared circular icon-button, matching ThemeToggle for a consistent nav cluster.
 const navIconBase = cn(
@@ -34,7 +38,6 @@ const navIconBase = cn(
 );
 
 function NavIconLink({ href, title, name, isActive, onClick }: { href: string; title: string; name?: string; isActive: boolean; onClick?: () => void }) {
-  const Icon = getNavIcon(name);
   return (
     <Link
       href={href}
@@ -49,7 +52,7 @@ function NavIconLink({ href, title, name, isActive, onClick }: { href: string; t
           : 'border-neutral-200 dark:border-[rgba(148,163,184,0.24)] text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
       )}
     >
-      <Icon className="h-4 w-4" />
+      <NavIcon name={name} className="h-4 w-4" />
     </Link>
   );
 }
@@ -69,6 +72,12 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
   const textItems = items.filter((item) => !item.icon);
   const iconItems = items.filter((item) => item.icon);
   const isPageActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+  const isNavItemActive = (item: SiteConfig['navigation'][number]) => {
+    if (enableOnePageMode) {
+      return activeHash === `#${item.target}` || (!activeHash && item.target === 'about');
+    }
+    return isPageActive(item.href);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,8 +91,8 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
   useEffect(() => {
     if (enableOnePageMode) {
-      // Set initial hash on client-side to avoid hydration mismatch
-      setActiveHash(window.location.hash);
+      const setCurrentHash = () => setActiveHash(window.location.hash);
+      const initialHashTimer = window.setTimeout(setCurrentHash, 0);
       const handleHashChange = () => setActiveHash(window.location.hash);
       window.addEventListener('hashchange', handleHashChange);
 
@@ -121,6 +130,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
       });
 
       return () => {
+        window.clearTimeout(initialHashTimer);
         window.removeEventListener('hashchange', handleHashChange);
         observer.disconnect();
       };
@@ -210,7 +220,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                           href={enableOnePageMode ? `/#${item.target}` : item.href}
                           title={item.title}
                           name={item.icon}
-                          isActive={isPageActive(item.href)}
+                          isActive={isNavItemActive(item)}
                           onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                         />
                       ))}
@@ -221,16 +231,6 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
-                  {iconItems.map((item) => (
-                    <NavIconLink
-                      key={item.title}
-                      href={enableOnePageMode ? `/#${item.target}` : item.href}
-                      title={item.title}
-                      name={item.icon}
-                      isActive={isPageActive(item.href)}
-                      onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
-                    />
-                  ))}
                   <ThemeToggle />
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
@@ -292,6 +292,34 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
                             )}
                           >
+                            {item.title}
+                          </Disclosure.Button>
+                        </motion.div>
+                      );
+                    })}
+                    {iconItems.map((item, index) => {
+                      const isActive = isNavItemActive(item);
+                      const href = enableOnePageMode ? `/#${item.target}` : item.href;
+                      return (
+                        <motion.div
+                          key={item.title}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: (textItems.length + index) * 0.1 }}
+                        >
+                          <Disclosure.Button
+                            as={Link}
+                            href={href}
+                            prefetch={true}
+                            onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                            className={cn(
+                              'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
+                              isActive
+                                ? 'text-primary bg-accent/10 border-l-4 border-accent'
+                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
+                            )}
+                          >
+                            <NavIcon name={item.icon} className="h-5 w-5" />
                             {item.title}
                           </Disclosure.Button>
                         </motion.div>

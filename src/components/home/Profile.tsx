@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import {
@@ -65,25 +65,20 @@ export default function Profile({ author, social, features, researchInterests, s
     const nameMatch = author.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
     const nameLinePrimary = nameMatch?.[1] || author.name;
     const nameLineSecondary = nameMatch?.[2];
+    const emailTooltipId = 'profile-email-tooltip';
+    const addressTooltipId = 'profile-address-tooltip';
 
     const [nameGlitch, setNameGlitch] = useState(false);
-    const [hasLiked, setHasLiked] = useState(false);
+    const [hasLiked, setHasLiked] = useState(() => {
+        if (!features.enable_likes || typeof window === 'undefined') return false;
+        return localStorage.getItem('jiale-website-user-liked') === 'true';
+    });
     const [showThanks, setShowThanks] = useState(false);
     const [showAddress, setShowAddress] = useState(false);
     const [isAddressPinned, setIsAddressPinned] = useState(false);
     const [showEmail, setShowEmail] = useState(false);
     const [isEmailPinned, setIsEmailPinned] = useState(false);
     const [lastClickedTooltip, setLastClickedTooltip] = useState<'email' | 'address' | null>(null);
-
-    // Check local storage for user's like status
-    useEffect(() => {
-        if (!features.enable_likes) return;
-
-        const userHasLiked = localStorage.getItem('jiale-website-user-liked');
-        if (userHasLiked === 'true') {
-            setHasLiked(true);
-        }
-    }, [features.enable_likes]);
 
     const handleLike = () => {
         const newLikedState = !hasLiked;
@@ -139,10 +134,10 @@ export default function Profile({ author, social, features, researchInterests, s
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="sticky top-8"
+            className="lg:sticky lg:top-24"
         >
             {/* Profile Image — hidden ✱ spark trigger; 5 quick clicks "levels up" the raccoon (see EasterEggs) */}
-            <div data-spark data-avatar className="w-64 h-64 mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
+            <div data-spark data-avatar className="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 mx-auto mb-4 sm:mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
                 <Image
                     src={author.avatar}
                     alt={author.name}
@@ -154,20 +149,20 @@ export default function Profile({ author, social, features, researchInterests, s
             </div>
 
             {/* Name and Title */}
-            <div className="text-center mb-6">
+            <div className="text-center mb-4 sm:mb-6">
                 <h1
                     onDoubleClick={() => {
                         setNameGlitch(true);
                         setTimeout(() => setNameGlitch(false), 700);
                     }}
-                    className={`text-3xl font-serif font-bold text-primary mb-2 leading-tight select-none ${nameGlitch ? 'name-glitch' : ''}`}
+                    className={`text-2xl sm:text-3xl font-serif font-bold text-primary mb-2 leading-tight select-none ${nameGlitch ? 'name-glitch' : ''}`}
                 >
                     <span className="block">{nameLinePrimary}</span>
                     {nameLineSecondary && (
                         <span className="block">{nameLineSecondary}</span>
                     )}
                 </h1>
-                <p className="text-lg text-accent font-medium mb-1">
+                <p className="text-base sm:text-lg text-accent font-medium mb-1">
                     {author.title}
                 </p>
                 <p className="text-neutral-600 mb-2">
@@ -177,7 +172,7 @@ export default function Profile({ author, social, features, researchInterests, s
 
             {/* Profile stats: citations, h-index, GitHub stars */}
             {(scholarStats || githubStats) && (
-                <div className="flex flex-wrap justify-center gap-3 mb-6">
+                <div className="flex flex-wrap justify-center gap-3 mb-4 sm:mb-6">
                     {scholarStats && (
                         <>
                             <a
@@ -218,13 +213,26 @@ export default function Profile({ author, social, features, researchInterests, s
             )}
 
             {/* Contact Links */}
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6 relative px-2">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4 sm:mb-6 relative px-2">
                 {socialLinks.map((link) => {
                     const IconComponent = link.icon;
                     if (link.isLocation) {
                         return (
-                            <div key={link.name} className="relative">
+                            <div
+                                key={link.name}
+                                className="relative"
+                                onFocus={() => {
+                                    if (!isAddressPinned) setShowAddress(true);
+                                    setLastClickedTooltip('address');
+                                }}
+                                onBlur={(event) => {
+                                    if (!isAddressPinned && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                                        setShowAddress(false);
+                                    }
+                                }}
+                            >
                                 <button
+                                    type="button"
                                     onMouseEnter={() => {
                                         if (!isAddressPinned) setShowAddress(true);
                                         setLastClickedTooltip('address');
@@ -235,11 +243,19 @@ export default function Profile({ author, social, features, researchInterests, s
                                         setShowAddress(!isAddressPinned);
                                         setLastClickedTooltip('address');
                                     }}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Escape') {
+                                            setIsAddressPinned(false);
+                                            setShowAddress(false);
+                                        }
+                                    }}
                                     className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isAddressPinned
                                         ? 'text-accent bg-accent/10'
                                         : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
                                         }`}
                                     aria-label={link.name}
+                                    aria-expanded={showAddress || isAddressPinned}
+                                    aria-controls={addressTooltipId}
                                 >
                                     {isAddressPinned ? (
                                         <MapPinSolidIcon className="h-5 w-5" />
@@ -252,6 +268,8 @@ export default function Profile({ author, social, features, researchInterests, s
                                 <AnimatePresence>
                                     {(showAddress || isAddressPinned) && (
                                         <motion.div
+                                            id={addressTooltipId}
+                                            role="tooltip"
                                             initial={{ opacity: 0, y: 10, scale: 0.8 }}
                                             animate={{ opacity: 1, y: -10, scale: 1 }}
                                             exit={{ opacity: 0, y: -20, scale: 0.8 }}
@@ -300,8 +318,21 @@ export default function Profile({ author, social, features, researchInterests, s
                     }
                     if (link.isEmail) {
                         return (
-                            <div key={link.name} className="relative">
+                            <div
+                                key={link.name}
+                                className="relative"
+                                onFocus={() => {
+                                    if (!isEmailPinned) setShowEmail(true);
+                                    setLastClickedTooltip('email');
+                                }}
+                                onBlur={(event) => {
+                                    if (!isEmailPinned && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                                        setShowEmail(false);
+                                    }
+                                }}
+                            >
                                 <button
+                                    type="button"
                                     onMouseEnter={() => {
                                         if (!isEmailPinned) setShowEmail(true);
                                         setLastClickedTooltip('email');
@@ -312,11 +343,19 @@ export default function Profile({ author, social, features, researchInterests, s
                                         setShowEmail(!isEmailPinned);
                                         setLastClickedTooltip('email');
                                     }}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Escape') {
+                                            setIsEmailPinned(false);
+                                            setShowEmail(false);
+                                        }
+                                    }}
                                     className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isEmailPinned
                                         ? 'text-accent bg-accent/10'
                                         : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
                                         }`}
                                     aria-label={link.name}
+                                    aria-expanded={showEmail || isEmailPinned}
+                                    aria-controls={emailTooltipId}
                                 >
                                     {isEmailPinned ? (
                                         <EnvelopeSolidIcon className="h-5 w-5" />
@@ -329,6 +368,8 @@ export default function Profile({ author, social, features, researchInterests, s
                                 <AnimatePresence>
                                     {(showEmail || isEmailPinned) && (
                                         <motion.div
+                                            id={emailTooltipId}
+                                            role="tooltip"
                                             initial={{ opacity: 0, y: 10, scale: 0.8 }}
                                             animate={{ opacity: 1, y: -10, scale: 1 }}
                                             exit={{ opacity: 0, y: -20, scale: 0.8 }}
@@ -386,7 +427,7 @@ export default function Profile({ author, social, features, researchInterests, s
 
             {/* Research Interests */}
             {researchInterests && researchInterests.length > 0 && (
-                <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4 mb-6 hover:shadow-lg transition-all duration-200 hover:scale-[1.02]">
+                <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4 mb-4 sm:mb-6 hover:shadow-lg transition-all duration-200 hover:scale-[1.02]">
                     <h3 className="font-semibold text-primary mb-3">Research Interests</h3>
                     <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-500">
                         {researchInterests.map((interest, index) => (

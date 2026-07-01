@@ -101,9 +101,14 @@ export default function EasterEggs({ repo }: EasterEggsProps) {
         const hour = new Date().getHours();
         if (hour < 0 || hour >= 5) return;
         console.log(`%c🌙 Working late? The raccoon approves.`, `color:${CLAY};font-weight:700`);
-        setNightToast(true);
-        const t = window.setTimeout(() => setNightToast(false), 6000);
-        return () => window.clearTimeout(t);
+        const showTimer = window.setTimeout(() => {
+            setNightToast(true);
+        }, 0);
+        const hideTimer = window.setTimeout(() => setNightToast(false), 6000);
+        return () => {
+            window.clearTimeout(showTimer);
+            window.clearTimeout(hideTimer);
+        };
     }, []);
 
     // (5) Raccoon idle peek.

@@ -14,9 +14,9 @@
   --primary: #0f6cbd;
   --primary-light: #2886de;
   --primary-dark: #115ea3;
-  --accent: #d4a562;
-  --accent-light: #e4b976;
-  --accent-dark: #b8914d;
+  --accent: #8a5a12;
+  --accent-light: #d4a562;
+  --accent-dark: #6f470e;
   
   /* Neutral colors */
   --neutral-50: #f8fafc;
@@ -168,7 +168,7 @@ html::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url("https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN");
+  background-image: var(--bing-wallpaper-image, none);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
