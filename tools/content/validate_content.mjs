@@ -17,7 +17,7 @@ const configFile = 'content/config.toml';
 const pageTypes = new Set(['about', 'publication', 'card', 'text', 'cv', 'embed']);
 const navTypes = new Set(['section', 'page', 'link']);
 const aboutSectionTypes = new Set(['markdown', 'publications', 'list']);
-const cardVariants = new Set(['default', 'portal', 'showcase']);
+const cardVariants = new Set(['default', 'portal', 'projects']);
 const customBibFields = new Set([
   'abbr',
   'arxiv',

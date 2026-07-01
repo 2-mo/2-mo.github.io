@@ -141,7 +141,7 @@ export interface CardGroup {
 export interface CardPageConfig extends BasePageConfig {
     type: 'card';
     grouped?: boolean;
-    variant?: 'default' | 'portal' | 'showcase';
+    variant?: 'default' | 'portal' | 'projects';
     items?: CardItem[];
     groups?: CardGroup[];
 }

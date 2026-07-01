@@ -9,7 +9,7 @@ import { morandiGradient } from '@/lib/utils';
 export default function CardPage({ config, embedded = false }: { config: CardPageConfig; embedded?: boolean }) {
     const groupedMode = config.grouped === true || (config.groups?.length || 0) > 0;
     const portalMode = config.variant === 'portal';
-    const showcaseMode = config.variant === 'showcase';
+    const projectsMode = config.variant === 'projects';
 
     const groupedItems = groupedMode
         ? (() => {
@@ -39,11 +39,11 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
         const tags = config.groups && groupName ? item.tags : (groupName ? item.tags?.filter(tag => tag !== groupName) : item.tags);
         const cardClassName = portalMode
             ? `group ${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-2.5" : "p-3"} rounded-lg border hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-200`
-            : showcaseMode
+            : projectsMode
                 ? `group ${embedded ? "bg-white dark:bg-neutral-900" : "bg-neutral-50/95 dark:bg-neutral-800/90"} border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-accent/40 hover:shadow-md transition-all duration-200`
             : `${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`;
 
-        if (showcaseMode) {
+        if (projectsMode) {
             const projectLink = item.link || item.repo;
             const repoLink = item.repo || (item.link?.includes('github.com') ? item.link : undefined);
             const metrics = item.metrics || [];
@@ -230,7 +230,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
             transition={{ duration: 0.6, delay: 0.4 }}
         >
             <div className={embedded ? "mb-4" : portalMode ? "mb-4" : "mb-8"}>
-                <h1 className={`${embedded ? "text-2xl" : portalMode ? "text-2xl" : showcaseMode ? "text-3xl" : "text-4xl"} font-serif font-bold text-primary mb-2`}>{config.title}</h1>
+                <h1 className={`${embedded ? "text-2xl" : portalMode ? "text-2xl" : projectsMode ? "text-3xl" : "text-4xl"} font-serif font-bold text-primary mb-2`}>{config.title}</h1>
                 {config.description && (
                     <p className={`${embedded ? "text-sm" : portalMode ? "text-sm" : "text-lg"} text-neutral-600 dark:text-neutral-600 max-w-2xl`}>
                         {config.description}
@@ -245,14 +245,14 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                                 {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500" aria-hidden="true" />}
                                 {groupName}
                             </h2>
-                            <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : showcaseMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
+                            <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
                                 {items.map((item, index) => renderCard(item, index, groupName))}
                             </div>
                         </section>
                     ))}
                 </div>
             ) : (
-                <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : showcaseMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
+                <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
                     {(config.items || []).map((item, index) => renderCard(item, index))}
                 </div>
             )}

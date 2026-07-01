@@ -226,8 +226,8 @@ export function getRenderablePage(slug: string): RenderablePageModel | null {
     }
 }
 
-async function enrichShowcaseConfig(config: CardPageConfig): Promise<CardPageConfig> {
-    if (config.variant !== 'showcase') return config;
+async function enrichProjectsConfig(config: CardPageConfig): Promise<CardPageConfig> {
+    if (config.variant !== 'projects') return config;
 
     const enrichItem = async (item: CardItem): Promise<CardItem> => {
         const stats = await getGithubRepoStats(item.repo);
@@ -264,7 +264,7 @@ export async function getRenderablePageAsync(slug: string): Promise<RenderablePa
     if (page.type === 'card') {
         return {
             ...page,
-            config: await enrichShowcaseConfig(page.config),
+            config: await enrichProjectsConfig(page.config),
         };
     }
 

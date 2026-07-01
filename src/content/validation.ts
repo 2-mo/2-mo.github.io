@@ -37,7 +37,7 @@ const PAGE_TYPES = ['about', 'publication', 'card', 'text', 'cv', 'embed'] as co
 const NAV_TYPES = ['section', 'page', 'link'] as const;
 const SITE_SECTION_TYPES = ['markdown', 'publications', 'list', 'cards'] as const;
 const ABOUT_SECTION_TYPES = ['markdown', 'publications', 'list'] as const;
-const CARD_VARIANTS = ['default', 'portal', 'showcase'] as const;
+const CARD_VARIANTS = ['default', 'portal', 'projects'] as const;
 
 const DEFAULT_CONFIG_FILE = 'content/config.toml';
 
