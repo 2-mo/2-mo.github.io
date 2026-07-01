@@ -136,8 +136,8 @@ export default function Profile({ author, social, features, researchInterests, s
             transition={{ duration: 0.6 }}
             className="lg:sticky lg:top-24"
         >
-            {/* Profile Image — hidden ✱ spark trigger; 5 quick clicks "levels up" the raccoon (see EasterEggs) */}
-            <div data-spark data-avatar className="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 mx-auto mb-4 sm:mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
+            {/* Profile Image — hidden ✱ spark trigger (see EasterEggs) */}
+            <div data-spark className="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 mx-auto mb-4 sm:mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
                 <Image
                     src={author.avatar}
                     alt={author.name}
