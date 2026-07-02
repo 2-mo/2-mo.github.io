@@ -681,6 +681,12 @@ link = "https://microsoft.github.io/vscode-codicons/dist/codicon.html"
 content = "VS Code 官方 Codicon 图标库。"
 
 [[groups.items]]
+title = "21st.dev"
+subtitle = "UI 组件"
+link = "https://21st.dev/"
+content = "面向设计工程师的 React 组件、模板与主题资源平台。"
+
+[[groups.items]]
 title = "字节 IconPark"
 subtitle = "Icon"
 link = "https://iconpark.oceanengine.com/home"
