@@ -39,5 +39,5 @@ limit = 4
 [[sections]]
 id = "highlights"
 type = "timeline"
-title = "Highlights"
+title = "Service & Awards"
 source = "highlights.toml"

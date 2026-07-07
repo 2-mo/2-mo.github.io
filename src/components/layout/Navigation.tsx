@@ -159,7 +159,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
             className={cn(
               'transition-all duration-300 ease-out nav-scrolled backdrop-blur-xl',
               scrolled
-                ? 'border-b border-neutral-200/50 shadow-lg'
+                ? 'border-b border-neutral-200/50 shadow-lg dark:border-neutral-800/80 dark:shadow-black/30'
                 : ''
             )}
           >
@@ -270,7 +270,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg"
+                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg dark:border-neutral-800/80 dark:shadow-black/30"
                 >
                   <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     {textItems.map((item, index) => {
@@ -300,7 +300,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                               'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
                               isActive
                                 ? 'text-primary bg-accent/10 border-l-4 border-accent'
-                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
+                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
                             )}
                           >
                             {item.title}
@@ -327,7 +327,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                               'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
                               isActive
                                 ? 'text-primary bg-accent/10 border-l-4 border-accent'
-                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
+                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
                             )}
                           >
                             <NavIcon name={item.icon} className="h-5 w-5 stroke-2" />
