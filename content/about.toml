@@ -22,14 +22,6 @@ title = "News"
 source = "news.toml"
 
 [[sections]]
-id = "experience"
-type = "cards"
-title = "Experience"
-source = "experience.toml"
-variant = "experience"
-limit = 5
-
-[[sections]]
 id = "featured_publications"
 type = "publications"
 title = "Selected Publications"

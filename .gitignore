@@ -1,9 +1,32 @@
-node_modules
+node_modules/
 .DS_Store
-.vscode
-.next
+.vscode/
+.claude/settings.local.json
+.next/
 .env
+.env*.local
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# local caches / deploy metadata
+coverage/
+.cache/
+.turbo/
+.vercel/
 
 # build output (CI builds and deploys this; never commit it)
 out/
 *.tsbuildinfo
+
+# Python local artifacts
+.venv/
+__pycache__/
+*.py[cod]
+
+# local duplicate crawler output; the deployed site uses tracked content data
+google_scholar_crawler/
