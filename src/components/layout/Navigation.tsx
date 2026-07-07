@@ -52,7 +52,7 @@ function NavIconLink({ href, title, name, isActive, onClick }: { href: string; t
           navIconBase,
           isActive
             ? 'bg-accent/10 text-accent'
-            : 'text-neutral-800 hover:text-primary dark:text-neutral-100 dark:hover:text-white'
+            : 'text-foreground hover:text-primary'
         )}
       >
         <NavIcon name={name} className="h-5 w-5 stroke-2" />
@@ -243,7 +243,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex h-9 w-9 items-center justify-center rounded-md text-neutral-800 hover:bg-accent/10 hover:text-primary dark:text-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
+                  <Disclosure.Button className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-accent/10 hover:text-primary dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
                     <motion.div
                       animate={{ rotate: open ? 180 : 0 }}

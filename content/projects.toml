@@ -32,25 +32,3 @@ metrics = [
     { label = "Stars", value = "6" },
     { label = "Updated", value = "2026-04-15" },
 ]
-
-[[items]]
-title = "A2Seek"
-subtitle = "Reasoning-centric benchmark for aerial anomaly understanding"
-source = "Benchmark"
-status = "NeurIPS 2025 Datasets & Benchmarks"
-date = "2025"
-image = "/papers/cover-a2seek.png"
-link = "https://hayneyday.github.io/A2Seek/"
-content = "A benchmark and project page for active evidence acquisition and reasoning-centric aerial anomaly understanding."
-tags = ["Aerial Anomaly", "Benchmark", "Active Reasoning"]
-
-[[items]]
-title = "NexusAD"
-subtitle = "Corner-case perception and comprehension for autonomous driving"
-source = "Research Project"
-status = "ECCVW 2024"
-date = "2024"
-link = "https://github.com/OpenVisualLab/NexusAD"
-repo = "https://github.com/OpenVisualLab/NexusAD"
-content = "A multimodal autonomous driving corner-case comprehension project built around perception, explanation, and scenario understanding."
-tags = ["Autonomous Driving", "Corner Cases", "Multimodal Understanding"]

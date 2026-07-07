@@ -45,7 +45,7 @@ export function ThemeToggle() {
           'bg-transparent hover:bg-accent/10 dark:hover:bg-neutral-800',
           'transition-colors duration-200',
           'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-          'text-neutral-800 hover:text-primary dark:text-neutral-100 dark:hover:text-white'
+          'text-foreground hover:text-primary'
         )}
       >
         <span key={theme} className="theme-icon-anim inline-flex">

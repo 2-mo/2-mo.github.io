@@ -8,8 +8,7 @@ import {
     AcademicCapIcon,
     HeartIcon,
     MapPinIcon,
-    BookmarkIcon,
-    ChatBubbleLeftRightIcon
+    BookmarkIcon
 } from '@heroicons/react/24/outline';
 import { MapPinIcon as MapPinSolidIcon, EnvelopeIcon as EnvelopeSolidIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -38,6 +37,14 @@ const GithubIcon = ({ className }: { className?: string }) => (
 const LinkedinIcon = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+    </svg>
+);
+
+// Custom WeChat icon (brand logos are not part of Heroicons)
+const WeChatIcon = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9.08 3.5C4.62 3.5 1 6.38 1 9.94c0 2.04 1.19 3.85 3.04 5.03l-.7 2.1c-.06.18.13.33.3.25l2.55-1.3c.9.23 1.88.36 2.89.36.32 0 .64-.01.95-.04a5.33 5.33 0 0 1-.33-1.86c0-3.27 3.15-5.93 7.04-5.93.27 0 .54.01.8.04-.79-2.9-4.2-5.09-8.46-5.09ZM6.5 8.54a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm5.15 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" />
+        <path d="M23 14.48c0-2.73-2.8-4.94-6.26-4.94s-6.26 2.21-6.26 4.94 2.8 4.94 6.26 4.94c.72 0 1.4-.1 2.04-.3l2.08 1.04c.15.08.32-.06.27-.22l-.56-1.72C22.05 17.32 23 15.97 23 14.48Zm-8.27-1.05a.78.78 0 1 1 0-1.56.78.78 0 0 1 0 1.56Zm4.02 0a.78.78 0 1 1 0-1.56.78.78 0 0 1 0 1.56Z" />
     </svg>
 );
 
@@ -139,7 +146,7 @@ export default function Profile({ author, social, features, researchInterests, s
         ...(social.wechat ? [{
             name: 'WeChat',
             value: social.wechat,
-            icon: ChatBubbleLeftRightIcon,
+            icon: WeChatIcon,
             isWeChat: true,
         }] : []),
         ...(social.google_scholar ? [{

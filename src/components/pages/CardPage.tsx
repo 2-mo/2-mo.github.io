@@ -200,18 +200,18 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                     )}
                     <div className="mt-5 flex flex-wrap items-center gap-2">
                         {tags?.map(tag => (
-                            <span key={tag} className="text-xs text-neutral-600 dark:text-neutral-600 bg-white dark:bg-neutral-900 px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700">
+                            <span key={tag} className="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">
                                 {tag}
                             </span>
                         ))}
                         {repoLink && (
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-700 bg-neutral-100 dark:bg-neutral-900 px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold text-white bg-[#24292f] shadow-sm">
                                 <CodeBracketIcon className="w-3.5 h-3.5" aria-hidden="true" />
                                 GitHub
                             </span>
                         )}
                     </div>
-                    {metrics.length > 0 && (
+                    {!embedded && metrics.length > 0 && (
                         <div className="mt-5 grid grid-cols-3 gap-2 border-t border-neutral-200 dark:border-neutral-700 pt-4">
                             {metrics.slice(0, 3).map((metric) => (
                                 <div key={`${metric.label}-${metric.value}`} className="min-w-0">

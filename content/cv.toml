@@ -104,7 +104,7 @@ tags = [
 ]
 
 [[publications.primary]]
-authors = "Mengjingcheng Mo, Jiankang Zheng, Jiaxu Leng, and Xinbo Gao*,"
+authors = "Mengjingcheng Mo, Jiankang Zheng, Jiaxu Leng*, and Xinbo Gao,"
 title = "Retrieval-Guided Contextual Inference for Training-Free Video Anomaly Detection in Low-Light Scenarios,"
 venue = "ACM International Conference on Multimedia Retrieval (ICMR)"
 year = "2026"

@@ -30,7 +30,7 @@ Expected graduation: Jun. 2027
 
 1. Mengjingcheng Mo, Jiaxu Leng, and Xinbo Gao*, "Learning to Watch: Active Video Anomaly Understanding via Interleaved Policy Optimization," International Conference on Machine Learning (ICML), 2026. CCF-A; Active Evidence Acquisition.
 2. Mengjingcheng Mo, Xinyang Tong, Mingpi Tan, Jiaxu Leng*, Jiankang Zheng, Yiran Liu, Haosheng Chen, Ji Gan, Weisheng Li, and Xinbo Gao*, "A2Seek: Towards Reasoning-Centric Benchmark for Aerial Anomaly Understanding," Advances in Neural Information Processing Systems, Datasets and Benchmarks Track (NeurIPS D&B), 2025. CCF-A; Reasoning-Centric Benchmark.
-3. Mengjingcheng Mo, Jiankang Zheng, Jiaxu Leng, and Xinbo Gao*, "Retrieval-Guided Contextual Inference for Training-Free Video Anomaly Detection in Low-Light Scenarios," ACM International Conference on Multimedia Retrieval (ICMR), 2026. CCF-B; In-Context Learning.
+3. Mengjingcheng Mo, Jiankang Zheng, Jiaxu Leng*, and Xinbo Gao, "Retrieval-Guided Contextual Inference for Training-Free Video Anomaly Detection in Low-Light Scenarios," ACM International Conference on Multimedia Retrieval (ICMR), 2026. CCF-B; In-Context Learning.
 4. Jiaxu Leng, Jiankang Zheng, Mengjingcheng Mo, Zhanjie Wu, Haosheng Chen, Ji Gan, and Xinbo Gao*, "Linguistic Relative Policy Optimization for Video Anomaly Reasoning," International Conference on Machine Learning (ICML), 2026. CCF-A.
 
 ### Additional Selected Publications
