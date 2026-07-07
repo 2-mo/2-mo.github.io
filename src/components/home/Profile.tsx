@@ -8,7 +8,8 @@ import {
     AcademicCapIcon,
     HeartIcon,
     MapPinIcon,
-    BookmarkIcon
+    BookmarkIcon,
+    ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
 import { MapPinIcon as MapPinSolidIcon, EnvelopeIcon as EnvelopeSolidIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
@@ -60,6 +61,16 @@ interface ProfileProps {
     githubStats?: GithubStats;
 }
 
+type ContactLink = {
+    name: string;
+    href?: string;
+    value?: string;
+    icon: React.ComponentType<{ className?: string }>;
+    isEmail?: boolean;
+    isLocation?: boolean;
+    isWeChat?: boolean;
+};
+
 export default function Profile({ author, social, features, researchInterests, scholarStats, githubStats }: ProfileProps) {
 
     const nameMatch = author.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
@@ -67,6 +78,7 @@ export default function Profile({ author, social, features, researchInterests, s
     const nameLineSecondary = nameMatch?.[2];
     const emailTooltipId = 'profile-email-tooltip';
     const addressTooltipId = 'profile-address-tooltip';
+    const wechatTooltipId = 'profile-wechat-tooltip';
 
     const [nameGlitch, setNameGlitch] = useState(false);
     const [hasLiked, setHasLiked] = useState(() => {
@@ -78,7 +90,9 @@ export default function Profile({ author, social, features, researchInterests, s
     const [isAddressPinned, setIsAddressPinned] = useState(false);
     const [showEmail, setShowEmail] = useState(false);
     const [isEmailPinned, setIsEmailPinned] = useState(false);
-    const [lastClickedTooltip, setLastClickedTooltip] = useState<'email' | 'address' | null>(null);
+    const [showWeChat, setShowWeChat] = useState(false);
+    const [isWeChatPinned, setIsWeChatPinned] = useState(false);
+    const [lastClickedTooltip, setLastClickedTooltip] = useState<'email' | 'address' | 'wechat' | null>(null);
 
     const handleLike = () => {
         const newLikedState = !hasLiked;
@@ -94,7 +108,7 @@ export default function Profile({ author, social, features, researchInterests, s
         }
     };
 
-    const socialLinks = [
+    const socialLinks: ContactLink[] = [
         ...(social.email ? [{
             name: 'Email',
             href: `mailto:${social.email}`,
@@ -106,6 +120,12 @@ export default function Profile({ author, social, features, researchInterests, s
             href: social.location_url || '#',
             icon: MapPinIcon,
             isLocation: true,
+        }] : []),
+        ...(social.wechat ? [{
+            name: 'WeChat',
+            value: social.wechat,
+            icon: ChatBubbleLeftRightIcon,
+            isWeChat: true,
         }] : []),
         ...(social.google_scholar ? [{
             name: 'Google Scholar',
@@ -410,10 +430,89 @@ export default function Profile({ author, social, features, researchInterests, s
                             </div>
                         );
                     }
+                    if (link.isWeChat) {
+                        return (
+                            <div
+                                key={link.name}
+                                className="relative"
+                                onFocus={() => {
+                                    if (!isWeChatPinned) setShowWeChat(true);
+                                    setLastClickedTooltip('wechat');
+                                }}
+                                onBlur={(event) => {
+                                    if (!isWeChatPinned && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                                        setShowWeChat(false);
+                                    }
+                                }}
+                            >
+                                <button
+                                    type="button"
+                                    onMouseEnter={() => {
+                                        if (!isWeChatPinned) setShowWeChat(true);
+                                        setLastClickedTooltip('wechat');
+                                    }}
+                                    onMouseLeave={() => !isWeChatPinned && setShowWeChat(false)}
+                                    onClick={() => {
+                                        setIsWeChatPinned(!isWeChatPinned);
+                                        setShowWeChat(!isWeChatPinned);
+                                        setLastClickedTooltip('wechat');
+                                    }}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Escape') {
+                                            setIsWeChatPinned(false);
+                                            setShowWeChat(false);
+                                        }
+                                    }}
+                                    className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isWeChatPinned
+                                        ? 'text-accent bg-accent/10'
+                                        : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
+                                        }`}
+                                    aria-label={`${link.name}: ${link.value}`}
+                                    aria-expanded={showWeChat || isWeChatPinned}
+                                    aria-controls={wechatTooltipId}
+                                >
+                                    <IconComponent className="h-5 w-5" />
+                                </button>
+
+                                <AnimatePresence>
+                                    {(showWeChat || isWeChatPinned) && (
+                                        <motion.div
+                                            id={wechatTooltipId}
+                                            role="tooltip"
+                                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                            animate={{ opacity: 1, y: -10, scale: 1 }}
+                                            exit={{ opacity: 0, y: -20, scale: 0.8 }}
+                                            className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-neutral-800 text-white px-4 py-3 rounded-lg text-sm font-medium shadow-lg max-w-[calc(100vw-2rem)] sm:max-w-none sm:whitespace-nowrap ${lastClickedTooltip === 'wechat' ? 'z-20' : 'z-10'
+                                                }`}
+                                            onMouseEnter={() => {
+                                                if (!isWeChatPinned) setShowWeChat(true);
+                                                setLastClickedTooltip('wechat');
+                                            }}
+                                            onMouseLeave={() => !isWeChatPinned && setShowWeChat(false)}
+                                        >
+                                            <div className="text-center">
+                                                <div className="flex items-center justify-center space-x-2 mb-1">
+                                                    <p className="font-semibold">WeChat</p>
+                                                    {!isWeChatPinned && (
+                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 opacity-60">
+                                                            <BookmarkIcon className="h-2.5 w-2.5" />
+                                                            <span className="hidden sm:inline">Click</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <p className="break-words">{link.value}</p>
+                                            </div>
+                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800"></div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        );
+                    }
                     return (
                         <a
                             key={link.name}
-                            href={link.href}
+                            href={link.href || '#'}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 sm:p-2 rounded-md text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent transition-colors duration-200"

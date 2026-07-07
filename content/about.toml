@@ -16,14 +16,36 @@ source = "bio.md"
 title = "About"
 
 [[sections]]
-id = "featured_publications"
-type = "publications"
-title = "Selected Publications"
-filter = "selected"
-limit = 5
-
-[[sections]]
 id = "news"
 type = "list"
 title = "News"
 source = "news.toml"
+
+[[sections]]
+id = "experience"
+type = "cards"
+title = "Experience"
+source = "experience.toml"
+variant = "experience"
+limit = 5
+
+[[sections]]
+id = "featured_publications"
+type = "publications"
+title = "Selected Publications"
+filter = "selected"
+limit = 6
+
+[[sections]]
+id = "projects"
+type = "cards"
+title = "Projects"
+source = "projects.toml"
+variant = "projects"
+limit = 4
+
+[[sections]]
+id = "highlights"
+type = "timeline"
+title = "Highlights"
+source = "highlights.toml"

@@ -43,10 +43,10 @@ export default function SelectedPublications({ publications, title = 'Selected P
                             transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
                             className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
                         >
-                            <div className="flex flex-col md:flex-row gap-4">
-                                <div className="w-full md:w-52 flex-shrink-0">
+                            <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                                <div className="w-full md:w-72 flex-shrink-0">
                                     <div
-                                        className="aspect-[4/3] relative rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-700"
+                                        className="aspect-video relative rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-700"
                                         style={pub.preview ? undefined : { backgroundImage: morandiGradient(pub.id) }}
                                     >
                                         {pub.preview && (
@@ -55,7 +55,7 @@ export default function SelectedPublications({ publications, title = 'Selected P
                                                 alt={pub.title}
                                                 fill
                                                 className="object-cover"
-                                                sizes="(max-width: 768px) 100vw, 208px"
+                                                sizes="(max-width: 768px) 100vw, 288px"
                                             />
                                         )}
                                     </div>

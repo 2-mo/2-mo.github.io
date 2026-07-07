@@ -14,6 +14,7 @@ avatar = "/raccoon.webp"
 # Contact information (leave blank or delete to hide)
 
 email = "tiurgee@gmail.com"
+wechat = "tiumo-"
 location = "Chongqing, China"
 location_url = "https://maps.google.com/?q=Chongqing"
 location_details = [
@@ -21,7 +22,7 @@ location_details = [
 ]
 google_scholar = "https://scholar.google.com/citations?hl=en&user=m6wKAtcAAAAJ&view_op=list_works&sortby=pubdate"
 orcid = ""
-github = "https://2-mo.github.io/"
+github = "https://github.com/2-mo"
 linkedin = ""
 
 [features]

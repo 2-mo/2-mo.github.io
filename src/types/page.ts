@@ -24,10 +24,23 @@ export interface ListAboutPageSectionConfig extends BaseAboutPageSectionConfig {
     type: 'list';
 }
 
+export interface CardsAboutPageSectionConfig extends BaseAboutPageSectionConfig {
+    type: 'cards';
+    variant?: CardPageConfig['variant'];
+    limit?: number;
+}
+
+export interface TimelineAboutPageSectionConfig extends BaseAboutPageSectionConfig {
+    type: 'timeline';
+    limit?: number;
+}
+
 export type AboutPageSectionConfig =
     | MarkdownAboutPageSectionConfig
     | PublicationsAboutPageSectionConfig
-    | ListAboutPageSectionConfig;
+    | ListAboutPageSectionConfig
+    | CardsAboutPageSectionConfig
+    | TimelineAboutPageSectionConfig;
 
 export interface AboutPageConfig extends BasePageConfig {
     type: 'about';
@@ -124,6 +137,7 @@ export interface CardItem {
     tags?: string[];
     link?: string;
     image?: string;
+    logo?: string;
     status?: string;
     source?: string;
     repo?: string;
@@ -141,7 +155,7 @@ export interface CardGroup {
 export interface CardPageConfig extends BasePageConfig {
     type: 'card';
     grouped?: boolean;
-    variant?: 'default' | 'portal' | 'projects';
+    variant?: 'default' | 'portal' | 'projects' | 'experience';
     items?: CardItem[];
     groups?: CardGroup[];
 }

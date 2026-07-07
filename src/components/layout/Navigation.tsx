@@ -38,22 +38,33 @@ const navIconBase = cn(
 );
 
 function NavIconLink({ href, title, name, isActive, onClick }: { href: string; title: string; name?: string; isActive: boolean; onClick?: () => void }) {
+  const tooltipId = `nav-tooltip-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
   return (
-    <Link
-      href={href}
-      title={title}
-      aria-label={title}
-      prefetch={true}
-      onClick={onClick}
-      className={cn(
-        navIconBase,
-        isActive
-          ? 'border-accent/40 text-accent'
-          : 'border-neutral-200 dark:border-[rgba(148,163,184,0.24)] text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
-      )}
-    >
-      <NavIcon name={name} className="h-4 w-4" />
-    </Link>
+    <span className="group relative flex">
+      <Link
+        href={href}
+        aria-label={title}
+        aria-describedby={tooltipId}
+        prefetch={true}
+        onClick={onClick}
+        className={cn(
+          navIconBase,
+          isActive
+            ? 'border-accent/40 text-accent'
+            : 'border-neutral-200 dark:border-[rgba(148,163,184,0.24)] text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+        )}
+      >
+        <NavIcon name={name} className="h-4 w-4" />
+      </Link>
+      <span
+        id={tooltipId}
+        role="tooltip"
+        className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 rounded-md bg-neutral-800 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
+      >
+        {title}
+      </span>
+    </span>
   );
 }
 

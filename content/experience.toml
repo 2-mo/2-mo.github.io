@@ -1,0 +1,45 @@
+type = "card"
+title = "Experience"
+description = "Education, research training, and product-design experience."
+variant = "experience"
+
+[[items]]
+title = "Chongqing University of Posts and Telecommunications"
+subtitle = "Ph.D. Candidate, Computer Science and Technology"
+source = "Education"
+status = "Current"
+date = "Sep. 2023 - Present"
+content = "Researching agentic anomaly understanding, active visual reasoning, and multimodal video analysis."
+tags = ["Ph.D.", "Computer Science", "Agentic Anomaly Understanding"]
+
+[[items]]
+title = "Chongqing University of Posts and Telecommunications"
+subtitle = "M.Eng., Computer Science and Technology"
+source = "Education"
+date = "Sep. 2020 - Jun. 2023"
+content = "Completed master's research in computer vision and intelligent visual understanding."
+tags = ["M.Eng.", "Computer Vision"]
+
+[[items]]
+title = "Undergraduate Study"
+subtitle = "LL.B., Law"
+source = "Education"
+date = "Sep. 2015 - Jun. 2019"
+content = "Built a cross-disciplinary foundation in legal reasoning, writing, and structured analysis."
+tags = ["LL.B.", "Law"]
+
+[[items]]
+title = "Information Technology Office, CQUPT"
+subtitle = "Product Designer"
+source = "Experience"
+date = "2020"
+content = "Worked on product design workflows for campus information systems and user-facing digital services."
+tags = ["Product Design", "UX"]
+
+[[items]]
+title = "Zhubajie Co., Ltd."
+subtitle = "User Interface Design Intern"
+source = "Experience"
+date = "2019"
+content = "Contributed to interface design and visual iteration for web product experiences."
+tags = ["UI Design", "Internship"]

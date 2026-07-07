@@ -18,6 +18,7 @@ export interface SiteConfig {
     };
     social: {
         email?: string;
+        wechat?: string;
         location?: string;
         location_url?: string;
         location_details?: string[];
@@ -41,10 +42,11 @@ export interface SiteConfig {
     }>;
     sections?: Array<{
         id: string;
-        type: 'markdown' | 'publications' | 'list' | 'cards';
+        type: 'markdown' | 'publications' | 'list' | 'cards' | 'timeline';
         source?: string;
         title?: string;
         filter?: string;
+        variant?: 'default' | 'portal' | 'projects' | 'experience';
         limit?: number;
     }>;
 }

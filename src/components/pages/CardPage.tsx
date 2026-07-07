@@ -10,6 +10,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
     const groupedMode = config.grouped === true || (config.groups?.length || 0) > 0;
     const portalMode = config.variant === 'portal';
     const projectsMode = config.variant === 'projects';
+    const experienceMode = config.variant === 'experience';
 
     const groupedItems = groupedMode
         ? (() => {
@@ -37,11 +38,107 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
         const subtitle = item.subtitle;
         const previewText = item.content?.trim();
         const tags = config.groups && groupName ? item.tags : (groupName ? item.tags?.filter(tag => tag !== groupName) : item.tags);
+        const initials = item.title
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map(word => word[0]?.toUpperCase())
+            .join('');
         const cardClassName = portalMode
             ? `group ${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-2.5" : "p-3"} rounded-lg border hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-200`
             : projectsMode
                 ? `group ${embedded ? "bg-white dark:bg-neutral-900" : "bg-neutral-50/95 dark:bg-neutral-800/90"} border border-neutral-200 dark:border-neutral-700 rounded-xl p-5 hover:border-accent/40 hover:shadow-md transition-all duration-200`
-            : `${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`;
+                : experienceMode
+                    ? `group ${embedded ? "bg-white dark:bg-neutral-900" : "bg-neutral-50/95 dark:bg-neutral-800/90"} border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 hover:border-accent/35 hover:shadow-md transition-all duration-200`
+                    : `${embedded ? "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800" : "bg-neutral-50/95 dark:bg-neutral-800/90 border-neutral-200 dark:border-neutral-500"} ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`;
+
+        if (experienceMode) {
+            const inner = (
+                <div className="flex gap-4">
+                    <div
+                        className="relative h-14 w-14 flex-none overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800"
+                        style={item.logo ? undefined : { backgroundImage: morandiGradient(item.title) }}
+                    >
+                        {item.logo ? (
+                            <Image
+                                src={item.logo}
+                                alt=""
+                                fill
+                                className="object-contain p-2"
+                                sizes="56px"
+                            />
+                        ) : (
+                            <div className="flex h-full w-full items-center justify-center text-sm font-bold text-white">
+                                {initials || '*'}
+                            </div>
+                        )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                            {item.source && (
+                                <span className="text-[11px] font-semibold uppercase tracking-wide text-accent bg-accent/10 px-2 py-0.5 rounded">
+                                    {item.source}
+                                </span>
+                            )}
+                            {item.date && (
+                                <span className="text-[11px] font-medium text-neutral-500 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+                                    {item.date}
+                                </span>
+                            )}
+                        </div>
+                        <h3 className="mt-2 text-base font-semibold text-primary leading-snug">
+                            {item.title}
+                        </h3>
+                        {subtitle && (
+                            <p className="mt-1 text-sm font-medium text-accent">{subtitle}</p>
+                        )}
+                        {item.status && (
+                            <p className="mt-1 text-xs font-medium text-neutral-500 dark:text-neutral-500">{item.status}</p>
+                        )}
+                        {item.content && (
+                            <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed">{item.content}</p>
+                        )}
+                        {tags && tags.length > 0 && (
+                            <div className="mt-3 flex flex-wrap gap-2">
+                                {tags.map(tag => (
+                                    <span key={tag} className="text-xs text-neutral-600 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800/60 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-700">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    {item.link && (
+                        <ArrowTopRightOnSquareIcon className="mt-1 h-4 w-4 flex-none text-neutral-400 group-hover:text-accent transition-colors" aria-hidden="true" />
+                    )}
+                </div>
+            );
+
+            return item.link ? (
+                <motion.a
+                    key={`${groupName || 'default'}-${index}`}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={false}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.06 * index }}
+                    className={`block ${cardClassName}`}
+                >
+                    {inner}
+                </motion.a>
+            ) : (
+                <motion.div
+                    key={`${groupName || 'default'}-${index}`}
+                    initial={false}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.06 * index }}
+                    className={cardClassName}
+                >
+                    {inner}
+                </motion.div>
+            );
+        }
 
         if (projectsMode) {
             const projectLink = item.link || item.repo;
@@ -245,14 +342,14 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                                 {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500" aria-hidden="true" />}
                                 {groupName}
                             </h2>
-                            <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
+                            <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode || experienceMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
                                 {items.map((item, index) => renderCard(item, index, groupName))}
                             </div>
                         </section>
                     ))}
                 </div>
             ) : (
-                <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
+                <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode || experienceMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
                     {(config.items || []).map((item, index) => renderCard(item, index))}
                 </div>
             )}

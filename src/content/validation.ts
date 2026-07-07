@@ -35,9 +35,9 @@ export class ContentValidationError extends Error {
 
 const PAGE_TYPES = ['about', 'publication', 'card', 'text', 'cv', 'embed'] as const;
 const NAV_TYPES = ['section', 'page', 'link'] as const;
-const SITE_SECTION_TYPES = ['markdown', 'publications', 'list', 'cards'] as const;
-const ABOUT_SECTION_TYPES = ['markdown', 'publications', 'list'] as const;
-const CARD_VARIANTS = ['default', 'portal', 'projects'] as const;
+const SITE_SECTION_TYPES = ['markdown', 'publications', 'list', 'cards', 'timeline'] as const;
+const ABOUT_SECTION_TYPES = ['markdown', 'publications', 'list', 'cards', 'timeline'] as const;
+const CARD_VARIANTS = ['default', 'portal', 'projects', 'experience'] as const;
 
 const DEFAULT_CONFIG_FILE = 'content/config.toml';
 
@@ -281,6 +281,9 @@ function validateSiteSection(errors: string[], file: string, path: string, secti
     validateOptionalString(errors, file, `${path}.title`, section.title);
     validateContentSource(errors, file, `${path}.source`, section.source);
     validateOptionalString(errors, file, `${path}.filter`, section.filter);
+    if (section.variant !== undefined && !isAllowedValue(section.variant, CARD_VARIANTS)) {
+        addError(errors, file, `${path}.variant`, `expected one of ${CARD_VARIANTS.map((variant) => `"${variant}"`).join(', ')}.`);
+    }
     validateOptionalNumber(errors, file, `${path}.limit`, section.limit);
 }
 
@@ -366,9 +369,12 @@ function validateAboutSection(
     validateOptionalString(errors, file, `${path}.title`, section.title, slug);
     validateContentSource(errors, file, `${path}.source`, section.source, slug);
     validateOptionalString(errors, file, `${path}.filter`, section.filter, slug);
+    if (section.variant !== undefined && !isAllowedValue(section.variant, CARD_VARIANTS)) {
+        addError(errors, file, `${path}.variant`, `expected one of ${CARD_VARIANTS.map((variant) => `"${variant}"`).join(', ')}.`, slug);
+    }
     validateOptionalNumber(errors, file, `${path}.limit`, section.limit, slug);
 
-    if (section.type === 'markdown' || section.type === 'list') {
+    if (section.type === 'markdown' || section.type === 'list' || section.type === 'cards' || section.type === 'timeline') {
         requireNonEmptyString(errors, file, `${path}.source`, section.source, slug);
     }
 
@@ -417,6 +423,7 @@ function validateCardItem(
     validateOptionalString(errors, file, `${path}.content`, item.content, slug);
     validateOptionalString(errors, file, `${path}.link`, item.link, slug);
     validateOptionalString(errors, file, `${path}.image`, item.image, slug);
+    validateOptionalString(errors, file, `${path}.logo`, item.logo, slug);
     validateOptionalString(errors, file, `${path}.status`, item.status, slug);
     validateOptionalString(errors, file, `${path}.source`, item.source, slug);
     validateOptionalString(errors, file, `${path}.repo`, item.repo, slug);

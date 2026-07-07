@@ -56,10 +56,37 @@ export interface ListSectionModel {
     items: NewsItemModel[];
 }
 
+export interface CardsSectionModel {
+    id: string;
+    type: 'cards';
+    title?: string;
+    source?: string;
+    config: CardPageConfig;
+}
+
+export interface TimelineItemModel {
+    date: string;
+    title?: string;
+    content: string;
+    href?: string;
+    source?: string;
+    kind?: string;
+}
+
+export interface TimelineSectionModel {
+    id: string;
+    type: 'timeline';
+    title?: string;
+    source?: string;
+    items: TimelineItemModel[];
+}
+
 export type AboutSectionModel =
     | MarkdownSectionModel
     | PublicationsSectionModel
-    | ListSectionModel;
+    | ListSectionModel
+    | CardsSectionModel
+    | TimelineSectionModel;
 
 export interface AboutPageModel {
     id: string;
@@ -123,12 +150,32 @@ interface NewsContent {
     news?: NewsItemModel[];
 }
 
+interface TimelineContent {
+    items?: TimelineItemModel[];
+}
+
 function assertNever(value: never): never {
     throw new Error(`Unsupported page type: ${JSON.stringify(value)}`);
 }
 
 function loadPublications(source: string): Publication[] {
     return parseBibTeX(getBibtexContent(source));
+}
+
+function applyItemLimit<T extends { items?: CardItem[]; groups?: Array<{ title: string; items: CardItem[] }> }>(
+    config: T,
+    limit?: number
+): T {
+    if (!limit) return config;
+
+    return {
+        ...config,
+        items: config.items?.slice(0, limit),
+        groups: config.groups?.map(group => ({
+            ...group,
+            items: group.items.slice(0, limit),
+        })),
+    };
 }
 
 function loadSection(section: AboutPageSectionConfig): AboutSectionModel {
@@ -155,6 +202,34 @@ function loadSection(section: AboutPageSectionConfig): AboutSectionModel {
             return {
                 ...section,
                 items: newsData?.news || [],
+            };
+        }
+        case 'cards': {
+            const cardConfig = section.source
+                ? getTomlContent<CardPageConfig>(section.source)
+                : null;
+            const config = applyItemLimit({
+                type: 'card' as const,
+                title: section.title || cardConfig?.title || '',
+                description: cardConfig?.description,
+                grouped: cardConfig?.grouped,
+                variant: section.variant || cardConfig?.variant,
+                items: cardConfig?.items || [],
+                groups: cardConfig?.groups,
+            }, section.limit);
+
+            return {
+                ...section,
+                config,
+            };
+        }
+        case 'timeline': {
+            const timelineData = section.source ? getTomlContent<TimelineContent>(section.source) : null;
+            const items = timelineData?.items || [];
+
+            return {
+                ...section,
+                items: section.limit ? items.slice(0, section.limit) : items,
             };
         }
         default:
@@ -257,9 +332,27 @@ async function enrichProjectsConfig(config: CardPageConfig): Promise<CardPageCon
     return { ...config, items, groups };
 }
 
+async function enrichAboutSections(sections: AboutSectionModel[]): Promise<AboutSectionModel[]> {
+    return Promise.all(sections.map(async (section) => {
+        if (section.type !== 'cards') return section;
+
+        return {
+            ...section,
+            config: await enrichProjectsConfig(section.config),
+        };
+    }));
+}
+
 export async function getRenderablePageAsync(slug: string): Promise<RenderablePageModel | null> {
     const page = getRenderablePage(slug);
     if (!page) return null;
+
+    if (page.type === 'about') {
+        return {
+            ...page,
+            sections: await enrichAboutSections(page.sections),
+        };
+    }
 
     if (page.type === 'card') {
         return {

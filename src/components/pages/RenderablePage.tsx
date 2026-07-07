@@ -1,6 +1,7 @@
 import About from '@/components/home/About';
 import News from '@/components/home/News';
 import SelectedPublications from '@/components/home/SelectedPublications';
+import Timeline from '@/components/home/Timeline';
 import CardPage from '@/components/pages/CardPage';
 import CvSheet from '@/components/pages/CvSheet';
 import EmbedPage from '@/components/pages/EmbedPage';
@@ -37,6 +38,20 @@ function AboutSection({
         case 'list':
             return (
                 <News
+                    items={section.items}
+                    title={section.title}
+                />
+            );
+        case 'cards':
+            return (
+                <CardPage
+                    config={section.config}
+                    embedded={true}
+                />
+            );
+        case 'timeline':
+            return (
+                <Timeline
                     items={section.items}
                     title={section.title}
                 />

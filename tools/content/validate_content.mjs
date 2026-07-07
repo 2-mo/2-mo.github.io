@@ -16,8 +16,8 @@ const configFile = 'content/config.toml';
 
 const pageTypes = new Set(['about', 'publication', 'card', 'text', 'cv', 'embed']);
 const navTypes = new Set(['section', 'page', 'link']);
-const aboutSectionTypes = new Set(['markdown', 'publications', 'list']);
-const cardVariants = new Set(['default', 'portal', 'projects']);
+const aboutSectionTypes = new Set(['markdown', 'publications', 'list', 'cards', 'timeline']);
+const cardVariants = new Set(['default', 'portal', 'projects', 'experience']);
 const customBibFields = new Set([
   'abbr',
   'arxiv',
@@ -351,9 +351,12 @@ function validateAboutPage(file, page) {
     }
     validateOptionalString(file, `${location}.title`, section.title);
     validateOptionalString(file, `${location}.filter`, section.filter);
+    if (section.variant !== undefined && !cardVariants.has(section.variant)) {
+      addError(file, `${location}.variant`, `expected one of ${[...cardVariants].join(', ')}.`);
+    }
     validateFiniteNumber(file, `${location}.limit`, section.limit);
     validateContentSource(file, `${location}.source`, section.source, {
-      required: section.type === 'markdown' || section.type === 'list',
+      required: section.type === 'markdown' || section.type === 'list' || section.type === 'cards' || section.type === 'timeline',
     });
   }
 }
@@ -404,6 +407,7 @@ function validateCardItem(file, location, item) {
   validateOptionalString(file, `${location}.content`, item.content);
   validateOptionalString(file, `${location}.status`, item.status);
   validateOptionalString(file, `${location}.source`, item.source);
+  validateOptionalString(file, `${location}.logo`, item.logo);
   if (item.tags !== undefined) validateStringArray(file, `${location}.tags`, item.tags);
   if (item.metrics !== undefined) {
     if (requireArray(file, `${location}.metrics`, item.metrics)) {
@@ -417,6 +421,7 @@ function validateCardItem(file, location, item) {
   }
   for (const field of urlCardFields) validateHttpUrl(file, `${location}.${field}`, item[field]);
   validatePublicAsset(file, `${location}.image`, item.image, { imageOnly: true });
+  validatePublicAsset(file, `${location}.logo`, item.logo, { imageOnly: true });
 }
 
 function cleanBibValue(value) {
