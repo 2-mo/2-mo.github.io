@@ -91,7 +91,7 @@ export default function Profile({ author, social, features, researchInterests, s
     const [showEmail, setShowEmail] = useState(false);
     const [isEmailPinned, setIsEmailPinned] = useState(false);
     const [showWeChat, setShowWeChat] = useState(false);
-    const [isWeChatPinned, setIsWeChatPinned] = useState(false);
+    const [copiedWeChat, setCopiedWeChat] = useState(false);
     const [lastClickedTooltip, setLastClickedTooltip] = useState<'email' | 'address' | 'wechat' | null>(null);
 
     const handleLike = () => {
@@ -106,6 +106,21 @@ export default function Profile({ author, social, features, researchInterests, s
             localStorage.removeItem('jiale-website-user-liked');
             setShowThanks(false);
         }
+    };
+
+    const handleWeChatCopy = async (value?: string) => {
+        if (!value) return;
+
+        try {
+            await navigator.clipboard.writeText(value);
+        } catch {
+            // Clipboard may be unavailable in non-secure contexts; keep the ID visible.
+        }
+
+        setShowWeChat(true);
+        setCopiedWeChat(true);
+        setLastClickedTooltip('wechat');
+        setTimeout(() => setCopiedWeChat(false), 1600);
     };
 
     const socialLinks: ContactLink[] = [
@@ -203,7 +218,7 @@ export default function Profile({ author, social, features, researchInterests, s
                                 aria-label="Google Scholar citations"
                             >
                                 <div className="text-xl font-bold text-accent">{scholarStats.totalCitations.toLocaleString()}</div>
-                                <div className="text-xs text-neutral-600 dark:text-neutral-500">Citations</div>
+                                <div className="text-xs text-neutral-600 dark:text-neutral-600">Citations</div>
                             </a>
                             <a
                                 href={social.google_scholar || '#'}
@@ -213,7 +228,7 @@ export default function Profile({ author, social, features, researchInterests, s
                                 aria-label="Google Scholar h-index"
                             >
                                 <div className="text-xl font-bold text-accent">{scholarStats.hIndex}</div>
-                                <div className="text-xs text-neutral-600 dark:text-neutral-500">h-index</div>
+                                <div className="text-xs text-neutral-600 dark:text-neutral-600">h-index</div>
                             </a>
                         </>
                     )}
@@ -226,7 +241,7 @@ export default function Profile({ author, social, features, researchInterests, s
                             aria-label="GitHub stars"
                         >
                             <div className="text-xl font-bold text-accent">{githubStats.stars.toLocaleString()}</div>
-                            <div className="text-xs text-neutral-600 dark:text-neutral-500">Stars</div>
+                            <div className="text-xs text-neutral-600 dark:text-neutral-600">Stars</div>
                         </a>
                     )}
                 </div>
@@ -305,7 +320,7 @@ export default function Profile({ author, social, features, researchInterests, s
                                                 <div className="flex items-center justify-center space-x-2 mb-1">
                                                     <p className="font-semibold">Work Address</p>
                                                     {!isAddressPinned && (
-                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 opacity-60">
+                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 dark:text-neutral-600 opacity-70">
                                                             <BookmarkIcon className="h-2.5 w-2.5" />
                                                             <span className="hidden sm:inline">Click</span>
                                                         </div>
@@ -405,7 +420,7 @@ export default function Profile({ author, social, features, researchInterests, s
                                                 <div className="flex items-center justify-center space-x-2 mb-1">
                                                     <p className="font-semibold">Email</p>
                                                     {!isEmailPinned && (
-                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 opacity-60">
+                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 dark:text-neutral-600 opacity-70">
                                                             <BookmarkIcon className="h-2.5 w-2.5" />
                                                             <span className="hidden sm:inline">Click</span>
                                                         </div>
@@ -436,46 +451,45 @@ export default function Profile({ author, social, features, researchInterests, s
                                 key={link.name}
                                 className="relative"
                                 onFocus={() => {
-                                    if (!isWeChatPinned) setShowWeChat(true);
+                                    setShowWeChat(true);
                                     setLastClickedTooltip('wechat');
                                 }}
                                 onBlur={(event) => {
-                                    if (!isWeChatPinned && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
                                         setShowWeChat(false);
+                                        setCopiedWeChat(false);
                                     }
                                 }}
                             >
                                 <button
                                     type="button"
                                     onMouseEnter={() => {
-                                        if (!isWeChatPinned) setShowWeChat(true);
+                                        setShowWeChat(true);
                                         setLastClickedTooltip('wechat');
                                     }}
-                                    onMouseLeave={() => !isWeChatPinned && setShowWeChat(false)}
+                                    onMouseLeave={() => {
+                                        setShowWeChat(false);
+                                        setCopiedWeChat(false);
+                                    }}
                                     onClick={() => {
-                                        setIsWeChatPinned(!isWeChatPinned);
-                                        setShowWeChat(!isWeChatPinned);
-                                        setLastClickedTooltip('wechat');
+                                        void handleWeChatCopy(link.value);
                                     }}
                                     onKeyDown={(event) => {
                                         if (event.key === 'Escape') {
-                                            setIsWeChatPinned(false);
                                             setShowWeChat(false);
+                                            setCopiedWeChat(false);
                                         }
                                     }}
-                                    className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isWeChatPinned
-                                        ? 'text-accent bg-accent/10'
-                                        : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
-                                        }`}
+                                    className="p-2 sm:p-2 rounded-md transition-colors duration-200 text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent focus:text-accent focus:bg-accent/10"
                                     aria-label={`${link.name}: ${link.value}`}
-                                    aria-expanded={showWeChat || isWeChatPinned}
+                                    aria-expanded={showWeChat}
                                     aria-controls={wechatTooltipId}
                                 >
                                     <IconComponent className="h-5 w-5" />
                                 </button>
 
                                 <AnimatePresence>
-                                    {(showWeChat || isWeChatPinned) && (
+                                    {showWeChat && (
                                         <motion.div
                                             id={wechatTooltipId}
                                             role="tooltip"
@@ -485,22 +499,22 @@ export default function Profile({ author, social, features, researchInterests, s
                                             className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-neutral-800 text-white px-4 py-3 rounded-lg text-sm font-medium shadow-lg max-w-[calc(100vw-2rem)] sm:max-w-none sm:whitespace-nowrap ${lastClickedTooltip === 'wechat' ? 'z-20' : 'z-10'
                                                 }`}
                                             onMouseEnter={() => {
-                                                if (!isWeChatPinned) setShowWeChat(true);
+                                                setShowWeChat(true);
                                                 setLastClickedTooltip('wechat');
                                             }}
-                                            onMouseLeave={() => !isWeChatPinned && setShowWeChat(false)}
+                                            onMouseLeave={() => {
+                                                setShowWeChat(false);
+                                                setCopiedWeChat(false);
+                                            }}
                                         >
                                             <div className="text-center">
                                                 <div className="flex items-center justify-center space-x-2 mb-1">
                                                     <p className="font-semibold">WeChat</p>
-                                                    {!isWeChatPinned && (
-                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 opacity-60">
-                                                            <BookmarkIcon className="h-2.5 w-2.5" />
-                                                            <span className="hidden sm:inline">Click</span>
-                                                        </div>
-                                                    )}
                                                 </div>
                                                 <p className="break-words">{link.value}</p>
+                                                {copiedWeChat && (
+                                                    <p className="mt-1 text-xs text-neutral-300">Copied</p>
+                                                )}
                                             </div>
                                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800"></div>
                                         </motion.div>
@@ -528,7 +542,7 @@ export default function Profile({ author, social, features, researchInterests, s
             {researchInterests && researchInterests.length > 0 && (
                 <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4 mb-4 sm:mb-6 hover:shadow-lg transition-all duration-200 hover:scale-[1.02]">
                     <h3 className="font-semibold text-primary mb-3">Research Interests</h3>
-                    <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-500">
+                    <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-600">
                         {researchInterests.map((interest, index) => (
                             <div key={index}>{interest}</div>
                         ))}
@@ -546,7 +560,7 @@ export default function Profile({ author, social, features, researchInterests, s
                             whileTap={{ scale: 0.95 }}
                             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${hasLiked
                                 ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400'
-                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer'
+                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-600 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer'
                                 }`}
                         >
                             {hasLiked ? (

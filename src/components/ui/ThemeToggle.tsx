@@ -1,7 +1,8 @@
 'use client';
 
-import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
-import { useThemeStore, type Theme } from '@/stores/themeStore';
+import { useSyncExternalStore } from 'react';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
+import { resolveTheme, useThemeStore, type Theme } from '@/stores/themeStore';
 import { cn } from '@/lib/utils';
 
 const themes: { value: Theme; label: string }[] = [
@@ -10,15 +11,25 @@ const themes: { value: Theme; label: string }[] = [
   { value: 'dark', label: 'Dark' },
 ];
 
+const subscribeToHydration = () => () => { };
+const getHydratedSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export function ThemeToggle() {
   const { theme, setTheme } = useThemeStore();
+  const mounted = useSyncExternalStore(
+    subscribeToHydration,
+    getHydratedSnapshot,
+    getServerSnapshot
+  );
 
-  const currentTheme = themes.find(t => t.value === theme) || themes[0];
+  const displayTheme = mounted ? theme : 'system';
+  const currentTheme = themes.find(t => t.value === displayTheme) || themes[0];
+  const effectiveTheme = mounted ? resolveTheme(theme) : 'light';
+  const nextTheme = effectiveTheme === 'dark' ? 'light' : 'dark';
 
-  const cycle = () => {
-    const order: Theme[] = ['system', 'light', 'dark'];
-    const index = order.indexOf(theme);
-    setTheme(order[(index + 1) % order.length]);
+  const toggle = () => {
+    setTheme(nextTheme);
   };
 
   return (
@@ -26,25 +37,22 @@ export function ThemeToggle() {
       <button
         type="button"
         onMouseDown={(e) => e.preventDefault()}
-        onClick={cycle}
-        aria-label={`Current theme: ${currentTheme.label}. Click to cycle theme.`}
-        title={`Current theme: ${currentTheme.label}. Click to cycle theme.`}
+        onClick={toggle}
+        aria-label={`Current theme: ${currentTheme.label}. Switch to ${nextTheme} theme.`}
+        title={`Switch to ${nextTheme} theme`}
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-full',
-          'border border-neutral-200 bg-background hover:bg-neutral-50',
-          'dark:border-[rgba(148,163,184,0.24)] dark:bg-neutral-800 dark:hover:bg-neutral-700',
-          'transition-transform duration-200 hover:scale-105 active:scale-95',
+          'flex h-9 w-9 items-center justify-center rounded-md',
+          'bg-transparent hover:bg-accent/10 dark:hover:bg-neutral-800',
+          'transition-colors duration-200',
           'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-          'text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+          'text-neutral-800 hover:text-primary dark:text-neutral-100 dark:hover:text-white'
         )}
       >
         <span key={theme} className="theme-icon-anim inline-flex">
-          {theme === 'system' ? (
-            <ComputerDesktopIcon className="h-4 w-4" />
-          ) : theme === 'dark' ? (
-            <MoonIcon className="h-4 w-4" />
+          {effectiveTheme === 'dark' ? (
+            <MoonIcon className="h-5 w-5 stroke-2" />
           ) : (
-            <SunIcon className="h-4 w-4" />
+            <SunIcon className="h-5 w-5 stroke-2" />
           )}
         </span>
       </button>

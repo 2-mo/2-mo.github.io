@@ -81,7 +81,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                                 </span>
                             )}
                             {item.date && (
-                                <span className="text-[11px] font-medium text-neutral-500 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+                                <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
                                     {item.date}
                                 </span>
                             )}
@@ -93,15 +93,15 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                             <p className="mt-1 text-sm font-medium text-accent">{subtitle}</p>
                         )}
                         {item.status && (
-                            <p className="mt-1 text-xs font-medium text-neutral-500 dark:text-neutral-500">{item.status}</p>
+                            <p className="mt-1 text-xs font-medium text-neutral-500 dark:text-neutral-600">{item.status}</p>
                         )}
                         {item.content && (
-                            <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed">{item.content}</p>
+                            <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-600 leading-relaxed">{item.content}</p>
                         )}
                         {tags && tags.length > 0 && (
                             <div className="mt-3 flex flex-wrap gap-2">
                                 {tags.map(tag => (
-                                    <span key={tag} className="text-xs text-neutral-600 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800/60 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-700">
+                                    <span key={tag} className="text-xs text-neutral-600 dark:text-neutral-600 bg-neutral-50 dark:bg-neutral-800/60 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-700">
                                         {tag}
                                     </span>
                                 ))}
@@ -109,7 +109,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                         )}
                     </div>
                     {item.link && (
-                        <ArrowTopRightOnSquareIcon className="mt-1 h-4 w-4 flex-none text-neutral-400 group-hover:text-accent transition-colors" aria-hidden="true" />
+                        <ArrowTopRightOnSquareIcon className="mt-1 h-4 w-4 flex-none text-neutral-400 dark:text-neutral-600 group-hover:text-accent transition-colors" aria-hidden="true" />
                     )}
                 </div>
             );
@@ -172,12 +172,12 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                                     </span>
                                 )}
                                 {item.status && (
-                                    <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                                    <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
                                         {item.status}
                                     </span>
                                 )}
                                 {item.date && (
-                                    <span className="text-[11px] font-medium text-neutral-500 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                                    <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-600 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
                                         {item.date}
                                     </span>
                                 )}
@@ -190,22 +190,22 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                             )}
                         </div>
                         {projectLink && (
-                            <ArrowTopRightOnSquareIcon className="w-5 h-5 text-neutral-400 group-hover:text-accent transition-colors shrink-0" aria-hidden="true" />
+                            <ArrowTopRightOnSquareIcon className="w-5 h-5 text-neutral-400 dark:text-neutral-600 group-hover:text-accent transition-colors shrink-0" aria-hidden="true" />
                         )}
                     </div>
                     {item.content && (
-                        <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed">
+                        <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-600 leading-relaxed">
                             {item.content}
                         </p>
                     )}
                     <div className="mt-5 flex flex-wrap items-center gap-2">
                         {tags?.map(tag => (
-                            <span key={tag} className="text-xs text-neutral-600 dark:text-neutral-400 bg-white dark:bg-neutral-900 px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700">
+                            <span key={tag} className="text-xs text-neutral-600 dark:text-neutral-600 bg-white dark:bg-neutral-900 px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700">
                                 {tag}
                             </span>
                         ))}
                         {repoLink && (
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-900 px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700">
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-neutral-700 dark:text-neutral-700 bg-neutral-100 dark:bg-neutral-900 px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700">
                                 <CodeBracketIcon className="w-3.5 h-3.5" aria-hidden="true" />
                                 GitHub
                             </span>
@@ -215,7 +215,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                         <div className="mt-5 grid grid-cols-3 gap-2 border-t border-neutral-200 dark:border-neutral-700 pt-4">
                             {metrics.slice(0, 3).map((metric) => (
                                 <div key={`${metric.label}-${metric.value}`} className="min-w-0">
-                                    <div className="text-[11px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500 truncate">
+                                    <div className="text-[11px] uppercase tracking-wide text-neutral-500 dark:text-neutral-600 truncate">
                                         {metric.label}
                                     </div>
                                     <div className="mt-0.5 text-sm font-semibold text-primary truncate">
@@ -260,11 +260,11 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                     <div className="flex items-start gap-1.5 min-w-0">
                         <h3 className={`${embedded ? "text-sm" : portalMode ? "text-sm" : "text-xl"} font-semibold text-primary leading-snug break-words`}>{item.title}</h3>
                         {portalMode && item.link && (
-                            <ArrowTopRightOnSquareIcon className="w-3 h-3 text-neutral-400 mt-0.5 shrink-0" aria-hidden="true" />
+                            <ArrowTopRightOnSquareIcon className="w-3 h-3 text-neutral-400 dark:text-neutral-600 mt-0.5 shrink-0" aria-hidden="true" />
                         )}
                     </div>
                     {item.date && (
-                        <span className="text-xs text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded shrink-0">
+                        <span className="text-xs text-neutral-500 dark:text-neutral-600 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded shrink-0">
                             {item.date}
                         </span>
                     )}
@@ -285,7 +285,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                 {tags && tags.length > 0 && !portalMode && (
                     <div className="flex flex-wrap gap-2 mt-4">
                         {tags.map(tag => (
-                            <span key={tag} className="text-xs text-neutral-500 bg-neutral-50 dark:bg-neutral-800/50 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-800">
+                            <span key={tag} className="text-xs text-neutral-500 dark:text-neutral-600 bg-neutral-50 dark:bg-neutral-800/50 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-800">
                                 {tag}
                             </span>
                         ))}
@@ -339,7 +339,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                     {Object.entries(groupedItems).map(([groupName, items]) => (
                         <section key={groupName} className={portalMode ? "space-y-2" : "space-y-4"}>
                             <h2 className={`${embedded ? "text-base" : portalMode ? "text-base" : "text-2xl"} font-serif font-bold text-primary flex items-center gap-2`}>
-                                {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500" aria-hidden="true" />}
+                                {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-600" aria-hidden="true" />}
                                 {groupName}
                             </h2>
                             <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode || experienceMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>

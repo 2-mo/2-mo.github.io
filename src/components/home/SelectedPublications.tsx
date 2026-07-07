@@ -86,7 +86,7 @@ export default function SelectedPublications({ publications, title = 'Selected P
                                                 {pub.venue} {pub.year}
                                             </span>
                                         ) : (
-                                            <span className="text-sm text-neutral-600 dark:text-neutral-500">{pub.journal || pub.conference}</span>
+                                            <span className="text-sm text-neutral-600 dark:text-neutral-600">{pub.journal || pub.conference}</span>
                                         )}
                                         {typeof pub.citations === 'number' && pub.citations > 0 && (
                                             <span className="text-xs text-accent">Cited by {pub.citations}</span>
@@ -101,7 +101,7 @@ export default function SelectedPublications({ publications, title = 'Selected P
                                         ))}
                                     </div>
                                     {shortDescription && (
-                                        <p className="text-sm text-neutral-500 dark:text-neutral-500 line-clamp-2">
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-600 line-clamp-2">
                                             {pub.summary ? `TL;DR: ${shortDescription}` : shortDescription}
                                         </p>
                                     )}

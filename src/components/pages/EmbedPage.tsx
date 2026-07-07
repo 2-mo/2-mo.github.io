@@ -15,7 +15,7 @@ export default function EmbedPage({ config }: { config: EmbedPageConfig }) {
                 <div>
                     <h1 className="text-2xl font-serif font-bold text-primary">{config.title}</h1>
                     {config.description && (
-                        <p className="text-sm text-neutral-600 dark:text-neutral-500 mt-1">{config.description}</p>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-600 mt-1">{config.description}</p>
                     )}
                 </div>
                 <a

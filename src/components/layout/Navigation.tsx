@@ -29,11 +29,11 @@ function NavIcon({ name, className }: { name?: string; className?: string }) {
   return <Icon className={className} />;
 }
 
-// Shared circular icon-button, matching ThemeToggle for a consistent nav cluster.
+// Shared icon-button, matching ThemeToggle for a consistent nav cluster.
 const navIconBase = cn(
-  'flex items-center justify-center w-10 h-10 rounded-full border',
-  'bg-background hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700',
-  'transition-transform duration-200 hover:scale-105 active:scale-95',
+  'flex h-9 w-9 items-center justify-center rounded-md',
+  'bg-transparent hover:bg-accent/10 dark:hover:bg-neutral-800',
+  'transition-colors duration-200',
   'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50'
 );
 
@@ -51,11 +51,11 @@ function NavIconLink({ href, title, name, isActive, onClick }: { href: string; t
         className={cn(
           navIconBase,
           isActive
-            ? 'border-accent/40 text-accent'
-            : 'border-neutral-200 dark:border-[rgba(148,163,184,0.24)] text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+            ? 'bg-accent/10 text-accent'
+            : 'text-neutral-800 hover:text-primary dark:text-neutral-100 dark:hover:text-white'
         )}
       >
-        <NavIcon name={name} className="h-4 w-4" />
+        <NavIcon name={name} className="h-5 w-5 stroke-2" />
       </Link>
       <span
         id={tooltipId}
@@ -243,16 +243,16 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
+                  <Disclosure.Button className="inline-flex h-9 w-9 items-center justify-center rounded-md text-neutral-800 hover:bg-accent/10 hover:text-primary dark:text-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
                     <motion.div
                       animate={{ rotate: open ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
                     >
                       {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="block h-6 w-6 stroke-2" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon className="block h-6 w-6 stroke-2" aria-hidden="true" />
                       )}
                     </motion.div>
                   </Disclosure.Button>
@@ -330,7 +330,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
                             )}
                           >
-                            <NavIcon name={item.icon} className="h-5 w-5" />
+                            <NavIcon name={item.icon} className="h-5 w-5 stroke-2" />
                             {item.title}
                           </Disclosure.Button>
                         </motion.div>

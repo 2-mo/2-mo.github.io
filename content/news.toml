@@ -3,9 +3,5 @@ date = "2026-07"
 content = "Two ICML 2026 papers on active video anomaly understanding and video anomaly reasoning are now available on arXiv."
 
 [[news]]
-date = "2026-05"
-content = "Released A2Seek, an active anomaly-seeking benchmark and project page for aerial anomaly understanding."
-
-[[news]]
 date = "2026-02"
 content = "Updated the research profile around agentic anomaly understanding, active visual reasoning, and multimodal video analysis."

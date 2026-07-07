@@ -20,8 +20,7 @@ export const useThemeStore = create<ThemeStore>()(
       },
       toggleTheme: () => {
         const current = get().theme;
-        // When in system mode, first toggle explicitly to light
-        const newTheme = current === 'dark' ? 'light' : 'dark';
+        const newTheme = resolveTheme(current) === 'dark' ? 'light' : 'dark';
         set({ theme: newTheme });
         updateTheme(newTheme);
       },

@@ -119,7 +119,7 @@ export default function PublicationsList({ config, publications, embedded = fals
             <div className="mb-8">
                 <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
                 {config.description && (
-                    <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl`}>
+                    <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-600 max-w-2xl`}>
                         {config.description}
                     </p>
                 )}
@@ -130,7 +130,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                 {/* ... (keep existing controls) ... */}
                 <div className="flex flex-col sm:flex-row gap-4">
                     <div className="relative flex-grow">
-                        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-neutral-600" />
                         <input
                             type="text"
                             placeholder="Search publications..."
@@ -164,7 +164,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                             <div className="p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-6">
                                 {/* Year Filter */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300 flex items-center">
+                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-700 flex items-center">
                                         <CalendarIcon className="h-4 w-4 mr-1" /> Year
                                     </label>
                                     <div className="flex flex-wrap gap-2">
@@ -174,7 +174,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 "px-3 py-1 text-xs rounded-full transition-colors",
                                                 selectedYear === 'all'
                                                     ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
                                             )}
                                         >
                                             All
@@ -187,7 +187,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                     "px-3 py-1 text-xs rounded-full transition-colors",
                                                     selectedYear === year
                                                         ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
                                                 )}
                                             >
                                                 {year}
@@ -198,7 +198,7 @@ export default function PublicationsList({ config, publications, embedded = fals
 
                                 {/* Type Filter */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300 flex items-center">
+                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-700 flex items-center">
                                         <BookOpenIcon className="h-4 w-4 mr-1" /> Type
                                     </label>
                                     <div className="flex flex-wrap gap-2">
@@ -208,7 +208,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 "px-3 py-1 text-xs rounded-full transition-colors",
                                                 selectedType === 'all'
                                                     ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
                                             )}
                                         >
                                             All
@@ -221,7 +221,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                     "px-3 py-1 text-xs rounded-full capitalize transition-colors",
                                                     selectedType === type
                                                         ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
                                                 )}
                                             >
                                                 {type.replace('-', ' ')}
@@ -238,7 +238,7 @@ export default function PublicationsList({ config, publications, embedded = fals
             {/* Publications Grid */}
             <div className="space-y-6">
                 {filteredPublications.length === 0 ? (
-                    <div className="text-center py-12 text-neutral-500">
+                    <div className="text-center py-12 text-neutral-500 dark:text-neutral-600">
                         No publications found matching your criteria.
                     </div>
                 ) : (
@@ -299,13 +299,13 @@ export default function PublicationsList({ config, publications, embedded = fals
                                     )}
 
                                     {pub.summary && (
-                                        <p className="text-sm text-neutral-700 dark:text-neutral-500 mb-3 leading-relaxed">
+                                        <p className="text-sm text-neutral-700 dark:text-neutral-600 mb-3 leading-relaxed">
                                             <span className="font-semibold text-accent">TL;DR:</span> {pub.summary}
                                         </p>
                                     )}
 
                                     {pub.description && !pub.summary && (
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-500 mb-4 line-clamp-3">
+                                        <p className="text-sm text-neutral-600 dark:text-neutral-600 mb-4 line-clamp-3">
                                             {pub.description}
                                         </p>
                                     )}
@@ -377,7 +377,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 className="overflow-hidden mt-4"
                                             >
                                                 <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <p className="text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed">
+                                                    <p className="text-sm text-neutral-600 dark:text-neutral-600 leading-relaxed">
                                                         {pub.abstract}
                                                     </p>
                                                 </div>
@@ -392,7 +392,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 className="overflow-hidden mt-4"
                                             >
                                                 <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <pre className="text-xs text-neutral-600 dark:text-neutral-500 overflow-x-auto whitespace-pre-wrap font-mono">
+                                                    <pre className="text-xs text-neutral-600 dark:text-neutral-600 overflow-x-auto whitespace-pre-wrap font-mono">
                                                         {pub.bibtex}
                                                     </pre>
                                                 </div>

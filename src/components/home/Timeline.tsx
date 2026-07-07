@@ -31,7 +31,7 @@ export default function Timeline({ items, title = 'Highlights' }: TimelineProps)
                                 )}
                                 <span>{item.content}</span>
                                 {item.source && (
-                                    <span className="ml-2 text-xs text-neutral-500">{item.source}</span>
+                                    <span className="ml-2 text-xs text-neutral-500 dark:text-neutral-600">{item.source}</span>
                                 )}
                             </span>
                         </>
@@ -43,14 +43,14 @@ export default function Timeline({ items, title = 'Highlights' }: TimelineProps)
                             href={item.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-start gap-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/70 p-3 text-sm text-neutral-700 dark:text-neutral-500 transition-all duration-200 hover:border-accent/30 hover:shadow-sm"
+                            className="flex items-start gap-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/70 p-3 text-sm text-neutral-700 dark:text-neutral-600 transition-all duration-200 hover:border-accent/30 hover:shadow-sm"
                         >
                             {content}
                         </a>
                     ) : (
                         <div
                             key={`${item.date}-${index}`}
-                            className="flex items-start gap-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/70 p-3 text-sm text-neutral-700 dark:text-neutral-500"
+                            className="flex items-start gap-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/70 p-3 text-sm text-neutral-700 dark:text-neutral-600"
                         >
                             {content}
                         </div>

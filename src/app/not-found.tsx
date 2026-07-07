@@ -16,7 +16,7 @@ export default function NotFound() {
             <h1 className="text-3xl font-serif font-bold text-primary mb-4">
                 This page wandered off.
             </h1>
-            <p className="text-neutral-600 dark:text-neutral-500 mb-8 leading-relaxed">
+            <p className="text-neutral-600 dark:text-neutral-600 mb-8 leading-relaxed">
                 I looked, but there&apos;s nothing here — the raccoon may have made off
                 with it. Let&apos;s get you back to somewhere real.
             </p>
