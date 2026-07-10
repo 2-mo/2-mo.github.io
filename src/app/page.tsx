@@ -29,7 +29,6 @@ export default async function Home() {
             author={config.author}
             social={config.social}
             features={config.features}
-            headline={home.profileHeadline}
             researchInterests={home.researchInterests}
             scholarStats={scholarStats}
             githubStats={githubStats}

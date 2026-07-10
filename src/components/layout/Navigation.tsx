@@ -31,13 +31,13 @@ function NavIcon({ name, className }: { name?: string; className?: string }) {
 
 // Shared icon-button, matching ThemeToggle for a consistent nav cluster.
 const navIconBase = cn(
-  'flex h-11 w-11 items-center justify-center rounded-md',
+  'flex h-9 w-9 items-center justify-center rounded-md',
   'bg-transparent hover:bg-accent/10 dark:hover:bg-neutral-800',
   'transition-colors duration-200',
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50'
 );
 
-function NavIconLink({ href, title, name, isActive, ariaCurrent, onClick }: { href: string; title: string; name?: string; isActive: boolean; ariaCurrent?: 'page' | 'location'; onClick?: () => void }) {
+function NavIconLink({ href, title, name, isActive, onClick }: { href: string; title: string; name?: string; isActive: boolean; onClick?: () => void }) {
   const tooltipId = `nav-tooltip-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
   return (
@@ -46,7 +46,6 @@ function NavIconLink({ href, title, name, isActive, ariaCurrent, onClick }: { hr
         href={href}
         aria-label={title}
         aria-describedby={tooltipId}
-        aria-current={ariaCurrent}
         prefetch={true}
         onClick={onClick}
         className={cn(
@@ -150,7 +149,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
   }, [enableOnePageMode, items]);
 
   return (
-    <Disclosure as="nav" aria-label="Primary navigation" className="fixed top-0 left-0 right-0 z-50">
+    <Disclosure as="nav" className="fixed top-0 left-0 right-0 z-50">
       {({ open }) => (
         <>
           <motion.div
@@ -167,14 +166,18 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16 lg:h-20">
                 {/* Logo/Name */}
-                <div className="flex-shrink-0">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex-shrink-0"
+                >
                   <Link
                     href="/"
-                    className="rounded-sm text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
                   >
                     {siteTitle}
                   </Link>
-                </div>
+                </motion.div>
 
                 {/* Desktop Navigation */}
                 <div className="hidden lg:block">
@@ -195,11 +198,10 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                           <Link
                             key={item.title}
                             href={href}
-                            aria-current={isActive ? (enableOnePageMode ? 'location' : 'page') : undefined}
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                             className={cn(
-                              'relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                              'relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm',
                               isActive
                                 ? 'text-primary'
                                 : 'text-neutral-600 hover:text-primary'
@@ -230,7 +232,6 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                           title={item.title}
                           name={item.icon}
                           isActive={isNavItemActive(item)}
-                          ariaCurrent={isNavItemActive(item) ? (enableOnePageMode ? 'location' : 'page') : undefined}
                           onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                         />
                       ))}
@@ -242,8 +243,8 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                 {/* Mobile menu button and theme toggle */}
                 <div className="lg:hidden flex items-center space-x-2">
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground hover:bg-accent/10 hover:text-primary dark:hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors duration-200">
-                    <span className="sr-only">{open ? 'Close main menu' : 'Open main menu'}</span>
+                  <Disclosure.Button className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-accent/10 hover:text-primary dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
+                    <span className="sr-only">Open main menu</span>
                     <motion.div
                       animate={{ rotate: open ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
@@ -293,11 +294,10 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                           <Disclosure.Button
                             as={Link}
                             href={href}
-                            aria-current={isActive ? (enableOnePageMode ? 'location' : 'page') : undefined}
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
                             className={cn(
-                              'block min-h-11 px-3 py-2 rounded-md text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset',
+                              'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
                               isActive
                                 ? 'text-primary bg-accent/10 border-l-4 border-accent'
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
@@ -321,11 +321,10 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                           <Disclosure.Button
                             as={Link}
                             href={href}
-                            aria-current={isActive ? (enableOnePageMode ? 'location' : 'page') : undefined}
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                             className={cn(
-                              'flex min-h-11 items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset',
+                              'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
                               isActive
                                 ? 'text-primary bg-accent/10 border-l-4 border-accent'
                                 : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'

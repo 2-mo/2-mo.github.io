@@ -7,6 +7,38 @@ import EasterEggs from "@/components/ui/EasterEggs";
 import { getConfig } from "@/content/config";
 import { SITE_URL } from "@/site/urls";
 
+const BING_WALLPAPER_ENDPOINT =
+  "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN";
+
+interface BingWallpaperResponse {
+  images?: Array<{
+    url?: string;
+  }>;
+}
+
+async function getBingWallpaperImage(): Promise<string | undefined> {
+  try {
+    const response = await fetch(BING_WALLPAPER_ENDPOINT, {
+      headers: {
+        Accept: "application/json",
+      },
+      cache: "force-cache",
+    });
+
+    if (!response.ok) return undefined;
+
+    const data = (await response.json()) as BingWallpaperResponse;
+    const imagePath = data.images?.[0]?.url;
+    if (!imagePath) return undefined;
+
+    return imagePath.startsWith("http")
+      ? imagePath
+      : `https://www.bing.com${imagePath}`;
+  } catch {
+    return undefined;
+  }
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig();
   const siteUrl = new URL(SITE_URL);
@@ -55,17 +87,47 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const config = getConfig();
+  const bingWallpaperImage = await getBingWallpaperImage();
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href={config.site.favicon} type="image/svg+xml" />
+        {bingWallpaperImage && (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `:root{--bing-wallpaper-image:url(${JSON.stringify(bingWallpaperImage)});}`,
+            }}
+          />
+        )}
+        {/* Speed up font connections */}
+        <link rel="dns-prefetch" href="https://google-fonts.jialeliu.com" />
+        <link rel="preconnect" href="https://google-fonts.jialeliu.com" crossOrigin="" />
+        {/* Google Fonts: preload + stylesheet. Keep attributes stable for hydration. */}
+        <link
+          rel="preload"
+          as="style"
+          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          id="gfonts-css"
+          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          media="all"
+        />
+        <noscript>
+          {/* Fallback for no-JS environments */}
+          <link
+            rel="stylesheet"
+            href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          />
+        </noscript>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -88,19 +150,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
-        <a
-          href="#main-content"
-          className="fixed left-4 top-3 z-[60] -translate-y-20 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-light"
-        >
-          Skip to main content
-        </a>
         <ThemeProvider>
           <Navigation
             items={config.navigation}
             siteTitle={config.site.title}
             enableOnePageMode={config.features.enable_one_page_mode}
           />
-          <main id="main-content" tabIndex={-1} className="min-h-screen pt-16 lg:pt-20">
+          <main className="min-h-screen pt-16 lg:pt-20">
             {children}
           </main>
           <Footer lastUpdated={config.site.last_updated} />

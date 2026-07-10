@@ -383,11 +383,8 @@ function validateAboutSection(
 
 function validateAboutPage(errors: string[], file: string, slug: string, page: UnknownRecord): void {
     if (page.profile !== undefined) {
-        if (requireObject(errors, file, 'profile', page.profile, slug)) {
-            validateOptionalString(errors, file, 'profile.headline', page.profile.headline, slug);
-            if (page.profile.research_interests !== undefined) {
-                validateStringArrayField(errors, file, 'profile.research_interests', page.profile.research_interests, slug);
-            }
+        if (requireObject(errors, file, 'profile', page.profile, slug) && page.profile.research_interests !== undefined) {
+            validateStringArrayField(errors, file, 'profile.research_interests', page.profile.research_interests, slug);
         }
     }
 

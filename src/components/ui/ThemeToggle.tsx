@@ -41,10 +41,10 @@ export function ThemeToggle() {
         aria-label={`Current theme: ${currentTheme.label}. Switch to ${nextTheme} theme.`}
         title={`Switch to ${nextTheme} theme`}
         className={cn(
-          'flex h-11 w-11 items-center justify-center rounded-md',
+          'flex h-9 w-9 items-center justify-center rounded-md',
           'bg-transparent hover:bg-accent/10 dark:hover:bg-neutral-800',
           'transition-colors duration-200',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
           'text-foreground hover:text-primary'
         )}
       >

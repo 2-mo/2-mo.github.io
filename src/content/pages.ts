@@ -138,7 +138,6 @@ export type RenderablePageModel =
 export interface HomePageModel {
     onePageMode: boolean;
     aboutConfig: AboutPageConfig | null;
-    profileHeadline?: string;
     researchInterests?: string[];
     pages: RenderablePageModel[];
 }
@@ -396,7 +395,6 @@ export function getHomePageModel(config: SiteConfig = getConfig()): HomePageMode
     return {
         onePageMode,
         aboutConfig,
-        profileHeadline: aboutConfig?.profile?.headline,
         researchInterests: aboutConfig?.profile?.research_interests,
         pages: onePageMode
             ? getOnePageModels(config)
@@ -416,7 +414,6 @@ export async function getHomePageModelAsync(config: SiteConfig = getConfig()): P
     return {
         onePageMode,
         aboutConfig,
-        profileHeadline: aboutConfig?.profile?.headline,
         researchInterests: aboutConfig?.profile?.research_interests,
         pages: onePageMode
             ? await getOnePageModelsAsync(config)

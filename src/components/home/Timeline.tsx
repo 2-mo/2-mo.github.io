@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import type { TimelineItemModel } from '@/content/pages';
 
 interface TimelineProps {
@@ -9,7 +12,11 @@ export default function Timeline({ items, title = 'Highlights' }: TimelineProps)
     if (items.length === 0) return null;
 
     return (
-        <section>
+        <motion.section
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+        >
             <h2 className="text-2xl font-serif font-bold text-primary mb-4">{title}</h2>
             <div className="space-y-3">
                 {items.map((item, index) => {
@@ -50,6 +57,6 @@ export default function Timeline({ items, title = 'Highlights' }: TimelineProps)
                     );
                 })}
             </div>
-        </section>
+        </motion.section>
     );
 }

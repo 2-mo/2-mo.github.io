@@ -73,12 +73,11 @@ export default function RenderablePage({
             return (
                 <>
                     {page.sections.map((section) => (
-                        <div key={section.id} id={section.id} className="scroll-mt-24">
-                            <AboutSection
-                                section={section}
-                                enableOnePageMode={enableOnePageMode}
-                            />
-                        </div>
+                        <AboutSection
+                            key={section.id}
+                            section={section}
+                            enableOnePageMode={enableOnePageMode}
+                        />
                     ))}
                 </>
             );

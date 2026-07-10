@@ -77,6 +77,12 @@ content = "IEEE 投稿规范、版权与模板入口。"
 title = "mac 软件集合 🍎"
 
 [[groups.items]]
+title = "AppsTorrent"
+subtitle = "Mac 软件集合"
+link = "https://appstorrent.ru/"
+content = "Mac 应用下载与更新信息站。"
+
+[[groups.items]]
 title = "LaTeXLive"
 subtitle = "公式编辑器"
 link = "https://www.latexlive.com/"
@@ -218,10 +224,34 @@ content = "Elsevier LaTeX 模板与投稿说明。"
 title = "⚓️ 论文下载"
 
 [[groups.items]]
+title = "OCEANOF"
+subtitle = "PDF"
+link = "https://oceanofpdf.com"
+content = "英文电子书与 PDF 检索下载。"
+
+[[groups.items]]
+title = "浅论天下"
+subtitle = "中文论文"
+link = "http://xiazai.lunwenfw.com"
+content = "中文论文下载与检索入口。"
+
+[[groups.items]]
 title = "纬度重邮"
 subtitle = "文献互助群(QQ群:700078187)"
 link = "http://spis.hnlat.com/"
 content = "文献互助与资料求助入口。"
+
+[[groups.items]]
+title = "Sci-Hub"
+subtitle = "英文论文"
+link = "https://sci-hub.shop/"
+content = "通过 DOI 获取英文论文全文。"
+
+[[groups.items]]
+title = "企鹅论文"
+subtitle = "英文论文"
+link = "https://doi.qqsci.com"
+content = "DOI 检索与论文下载入口。"
 
 [[groups]]
 title = "🏠 研究机构"
@@ -320,6 +350,20 @@ subtitle = "LLM 项目"
 link = "https://github.com/jingyaogong/minimind-o"
 content = "轻量级大语言模型项目与实践仓库。"
 tags = ["实用软件"]
+
+[[groups.items]]
+title = "海豚湾机场"
+subtitle = "VPN指南"
+link = "https://help.hitun.io/zh/"
+content = "科学上网客户端使用文档。"
+tags = ["科学上网"]
+
+[[groups.items]]
+title = "vpnfast"
+subtitle = "VPN指南"
+link = "https://github.com/vpnfast/vpnfast.github.io"
+content = "VPNFast 相关仓库与使用资源。"
+tags = ["科学上网"]
 
 [[groups.items]]
 title = "SwanLab"

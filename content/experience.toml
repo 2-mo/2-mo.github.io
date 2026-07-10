@@ -9,8 +9,8 @@ subtitle = "Ph.D. Candidate, Computer Science and Technology"
 source = "Education"
 status = "Current"
 date = "Sep. 2023 - Present"
-content = "Researching Active Anomaly Understanding, active visual reasoning, and multimodal video analysis."
-tags = ["Ph.D.", "Computer Science", "Active Anomaly Understanding"]
+content = "Researching agentic anomaly understanding, active visual reasoning, and multimodal video analysis."
+tags = ["Ph.D.", "Computer Science", "Agentic Anomaly Understanding"]
 
 [[items]]
 title = "Chongqing University of Posts and Telecommunications"
