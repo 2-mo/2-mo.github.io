@@ -7,39 +7,7 @@ import EasterEggs from "@/components/ui/EasterEggs";
 import { getConfig } from "@/content/config";
 import { SITE_URL } from "@/site/urls";
 
-const BING_WALLPAPER_ENDPOINT =
-  "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN";
-
-interface BingWallpaperResponse {
-  images?: Array<{
-    url?: string;
-  }>;
-}
-
-async function getBingWallpaperImage(): Promise<string | undefined> {
-  try {
-    const response = await fetch(BING_WALLPAPER_ENDPOINT, {
-      headers: {
-        Accept: "application/json",
-      },
-      cache: "force-cache",
-    });
-
-    if (!response.ok) return undefined;
-
-    const data = (await response.json()) as BingWallpaperResponse;
-    const imagePath = data.images?.[0]?.url;
-    if (!imagePath) return undefined;
-
-    return imagePath.startsWith("http")
-      ? imagePath
-      : `https://www.bing.com${imagePath}`;
-  } catch {
-    return undefined;
-  }
-}
-
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   const config = getConfig();
   const siteUrl = new URL(SITE_URL);
   const previewImage = new URL(config.author.avatar, siteUrl).toString();
@@ -87,47 +55,31 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const config = getConfig();
-  const bingWallpaperImage = await getBingWallpaperImage();
 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href={config.site.favicon} type="image/svg+xml" />
-        {bingWallpaperImage && (
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `:root{--bing-wallpaper-image:url(${JSON.stringify(bingWallpaperImage)});}`,
-            }}
-          />
-        )}
-        {/* Speed up font connections */}
-        <link rel="dns-prefetch" href="https://google-fonts.jialeliu.com" />
-        <link rel="preconnect" href="https://google-fonts.jialeliu.com" crossOrigin="" />
-        {/* Google Fonts: preload + stylesheet. Keep attributes stable for hydration. */}
         <link
-          rel="preload"
-          as="style"
-          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          rel="preconnect"
+          href="https://google-fonts.jialeliu.com"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
         />
         <link
           rel="stylesheet"
           id="gfonts-css"
-          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
-          media="all"
+          href="https://google-fonts.jialeliu.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
         />
-        <noscript>
-          {/* Fallback for no-JS environments */}
-          <link
-            rel="stylesheet"
-            href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
-          />
-        </noscript>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -156,12 +108,12 @@ export default async function RootLayout({
             siteTitle={config.site.title}
             enableOnePageMode={config.features.enable_one_page_mode}
           />
-          <main className="min-h-screen pt-16 lg:pt-20">
-            {children}
-          </main>
-          <Footer lastUpdated={config.site.last_updated} />
-          <EasterEggs repo="https://github.com/2-mo/2-mo.github.io" />
         </ThemeProvider>
+        <main className="min-h-screen pt-16 lg:pt-20">
+          {children}
+        </main>
+        <Footer lastUpdated={config.site.last_updated} />
+        <EasterEggs repo="https://github.com/2-mo/2-mo.github.io" />
       </body>
     </html>
   );

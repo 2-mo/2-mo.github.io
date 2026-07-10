@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 
 interface AboutProps {
@@ -14,11 +11,7 @@ function isExternalHttpUrl(href?: string) {
 
 export default function About({ content, title = 'About' }: AboutProps) {
     return (
-        <motion.section
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <section>
             <h2 className="text-2xl font-serif font-bold text-primary mb-4">{title}</h2>
             <div className="text-neutral-700 dark:text-neutral-600 leading-relaxed">
                 <ReactMarkdown
@@ -30,17 +23,19 @@ export default function About({ content, title = 'About' }: AboutProps) {
                         ul: ({ children }) => <ul className="list-disc list-inside mb-4 space-y-1 ml-4">{children}</ul>,
                         ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-1 ml-4">{children}</ol>,
                         li: ({ children }) => <li className="mb-1">{children}</li>,
-                        a: ({ href, ...props }) => {
+                        a: ({ href, children, title }) => {
                             const isExternal = isExternalHttpUrl(href);
 
                             return (
                                 <a
-                                    {...props}
                                     href={href}
+                                    title={title}
                                     target={isExternal ? '_blank' : undefined}
                                     rel={isExternal ? 'noopener noreferrer' : undefined}
                                     className="text-accent font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
-                                />
+                                >
+                                    {children}
+                                </a>
                             );
                         },
                         blockquote: ({ children }) => (
@@ -55,6 +50,6 @@ export default function About({ content, title = 'About' }: AboutProps) {
                     {content}
                 </ReactMarkdown>
             </div>
-        </motion.section>
+        </section>
     );
 }

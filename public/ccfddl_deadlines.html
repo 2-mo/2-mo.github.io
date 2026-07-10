@@ -1323,6 +1323,8 @@
     };
 
     const DAY = 24 * 60 * 60 * 1000;
+    const VENUE_CACHE_TTL = 12 * 60 * 60 * 1000;
+    const VENUE_CACHE_PREFIX = "ccfddl-deadlines:venue:v1:";
     const TIMELINE_FUTURE_DAYS = 365;
     const state = {
       conferences: [],
@@ -1349,7 +1351,7 @@
       yearTimeline.innerHTML = '<div class="empty">正在生成未来一年时间轴。</div>';
       board.innerHTML = '<div class="empty">正在从 ccfddl/ccf-deadlines 拉取会议 YAML。</div>';
 
-      const results = await Promise.allSettled(VENUES.map(fetchVenue));
+      const results = await Promise.allSettled(VENUES.map((venue) => fetchVenue(venue, force)));
       state.conferences = [];
       state.errors = [];
 
@@ -1368,14 +1370,20 @@
       render();
     }
 
-    async function fetchVenue(venue) {
+    async function fetchVenue(venue, force) {
+      if (!force) {
+        const cached = readVenueCache(venue);
+        if (cached) return cached;
+      }
+
       let lastError = null;
       for (const base of RAW_BASES) {
-        const url = base + venue.path + "?sync=" + Date.now();
+        const url = base + venue.path;
         try {
-          const yaml = await fetchText(url);
+          const yaml = await fetchText(url, force);
           const parsed = parseConferenceYaml(yaml, venue);
           parsed.rawUrl = RAW_BASES[0] + venue.path;
+          writeVenueCache(venue, yaml);
           return parsed;
         } catch (error) {
           lastError = error;
@@ -1384,12 +1392,64 @@
       throw lastError || new Error("同步失败");
     }
 
-    async function fetchText(url) {
+    function readVenueCache(venue) {
+      const cacheKey = VENUE_CACHE_PREFIX + venue.key;
+      try {
+        const serialized = window.localStorage.getItem(cacheKey);
+        if (!serialized) return null;
+
+        const cached = JSON.parse(serialized);
+        const age = Date.now() - cached.cachedAt;
+        if (
+          cached.path !== venue.path ||
+          typeof cached.yaml !== "string" ||
+          !Number.isFinite(cached.cachedAt) ||
+          age < 0 ||
+          age >= VENUE_CACHE_TTL
+        ) {
+          removeVenueCache(cacheKey);
+          return null;
+        }
+
+        const parsed = parseConferenceYaml(cached.yaml, venue);
+        if (!parsed.confs.length) {
+          removeVenueCache(cacheKey);
+          return null;
+        }
+        parsed.rawUrl = RAW_BASES[0] + venue.path;
+        return parsed;
+      } catch {
+        removeVenueCache(cacheKey);
+        return null;
+      }
+    }
+
+    function removeVenueCache(cacheKey) {
+      try {
+        window.localStorage.removeItem(cacheKey);
+      } catch {
+        return;
+      }
+    }
+
+    function writeVenueCache(venue, yaml) {
+      try {
+        window.localStorage.setItem(VENUE_CACHE_PREFIX + venue.key, JSON.stringify({
+          path: venue.path,
+          cachedAt: Date.now(),
+          yaml
+        }));
+      } catch {
+        return;
+      }
+    }
+
+    async function fetchText(url, force) {
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 12000);
       try {
         const response = await fetch(url, {
-          cache: "no-store",
+          cache: force ? "no-cache" : "default",
           signal: controller.signal
         });
         if (!response.ok) {

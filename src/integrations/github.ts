@@ -3,11 +3,16 @@
 
 let cachedStars: number | null | undefined;
 const cachedRepoStats = new Map<string, GithubRepoStats | null>();
+const GITHUB_REQUEST_TIMEOUT_MS = 5000;
 
 export interface GithubRepoStats {
     stars: number;
     forks: number;
     updatedAt: string;
+}
+
+function githubRequestSignal(): AbortSignal {
+    return AbortSignal.timeout(GITHUB_REQUEST_TIMEOUT_MS);
 }
 
 /** Extract a GitHub username from either a github.com URL or a user.github.io URL. */
@@ -71,7 +76,11 @@ export async function getGithubStars(url?: string): Promise<number | null> {
         for (let page = 1; page <= 4; page++) {
             const res = await fetch(
                 `https://api.github.com/users/${user}/repos?per_page=100&page=${page}&type=owner&sort=updated`,
-                { headers }
+                {
+                    headers,
+                    cache: 'force-cache',
+                    signal: githubRequestSignal(),
+                }
             );
             if (!res.ok) {
                 if (page === 1) {
@@ -107,7 +116,11 @@ export async function getGithubRepoStats(url?: string): Promise<GithubRepoStats 
     try {
         const response = await fetch(
             `https://api.github.com/repos/${repoRef.owner}/${repoRef.repo}`,
-            { headers: githubHeaders(), cache: 'force-cache' }
+            {
+                headers: githubHeaders(),
+                cache: 'force-cache',
+                signal: githubRequestSignal(),
+            }
         );
         if (!response.ok) {
             cachedRepoStats.set(cacheKey, null);

@@ -1,5 +1,3 @@
-'use client';
-
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { CvPageConfig, CvPublication } from '@/types/page';
 

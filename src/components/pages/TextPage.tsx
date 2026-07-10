@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { TextPageConfig } from '@/types/page';
 
@@ -16,12 +13,7 @@ function isExternalHttpUrl(href?: string) {
 
 export default function TextPage({ config, content, embedded = false }: TextPageProps) {
     return (
-        <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className={embedded ? "" : "max-w-3xl mx-auto"}
-        >
+        <div className={embedded ? "" : "max-w-3xl mx-auto"}>
             <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
             {config.description && (
                 <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-600 mb-8 max-w-2xl`}>
@@ -38,17 +30,19 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                         ul: ({ children }) => <ul className="list-disc list-inside mb-4 space-y-1 ml-4">{children}</ul>,
                         ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-1 ml-4">{children}</ol>,
                         li: ({ children }) => <li className="mb-1">{children}</li>,
-                        a: ({ href, ...props }) => {
+                        a: ({ href, children, title }) => {
                             const isExternal = isExternalHttpUrl(href);
 
                             return (
                                 <a
-                                    {...props}
                                     href={href}
+                                    title={title}
                                     target={isExternal ? '_blank' : undefined}
                                     rel={isExternal ? 'noopener noreferrer' : undefined}
                                     className="text-accent font-medium hover:underline transition-colors"
-                                />
+                                >
+                                    {children}
+                                </a>
                             );
                         },
                         blockquote: ({ children }) => (
@@ -63,6 +57,6 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                     {content}
                 </ReactMarkdown>
             </div>
-        </motion.div>
+        </div>
     );
 }

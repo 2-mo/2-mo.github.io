@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowTopRightOnSquareIcon, FolderOpenIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/20/solid';
@@ -122,28 +119,22 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
             );
 
             return item.link ? (
-                <motion.a
+                <a
                     key={`${groupName || 'default'}-${index}`}
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.06 * index }}
                     className={`block ${cardClassName}`}
                 >
                     {inner}
-                </motion.a>
+                </a>
             ) : (
-                <motion.div
+                <div
                     key={`${groupName || 'default'}-${index}`}
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.06 * index }}
                     className={cardClassName}
                 >
                     {inner}
-                </motion.div>
+                </div>
             );
         }
 
@@ -230,7 +221,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                         {tags?.map(tag => (
                             <span
                                 key={tag}
-                                className="inline-flex cursor-default items-center rounded-md border border-neutral-200/80 bg-neutral-100/70 px-2.5 py-1 text-xs font-medium text-neutral-500 shadow-none dark:border-neutral-700/70 dark:bg-neutral-800/60 dark:text-neutral-500"
+                                className="inline-flex cursor-default items-center rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600 transition-colors duration-200 hover:bg-accent/10 hover:text-accent dark:bg-neutral-400/50 dark:text-neutral-700 dark:hover:bg-accent/15 dark:hover:text-accent-light"
                             >
                                 {tag}
                             </span>
@@ -266,15 +257,12 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
             );
 
             return (
-                <motion.div
+                <div
                     key={`${groupName || 'default'}-${index}`}
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.08 * index }}
                     className={cardClassName}
                 >
                     {inner}
-                </motion.div>
+                </div>
             );
         }
 
@@ -319,37 +307,27 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
         );
 
         return item.link ? (
-            <motion.a
+            <a
                 key={`${groupName || 'default'}-${index}`}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 * index }}
                 className={`block ${cardClassName}`}
             >
                 {cardContent}
-            </motion.a>
+            </a>
         ) : (
-            <motion.div
+            <div
                 key={`${groupName || 'default'}-${index}`}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 * index }}
                 className={cardClassName}
             >
                 {cardContent}
-            </motion.div>
+            </div>
         );
     };
 
     return (
-        <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-        >
+        <div>
             <div className={embedded ? "mb-4" : portalMode ? "mb-4" : "mb-8"}>
                 <h1 className={`${embedded ? "text-2xl" : portalMode ? "text-2xl" : projectsMode ? "text-3xl" : "text-4xl"} font-serif font-bold text-primary mb-2`}>{config.title}</h1>
                 {config.description && (
@@ -361,7 +339,10 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
             {groupedMode && groupedItems ? (
                 <div className={portalMode ? "space-y-4" : "space-y-8"}>
                     {Object.entries(groupedItems).map(([groupName, items]) => (
-                        <section key={groupName} className={portalMode ? "space-y-2" : "space-y-4"}>
+                        <section
+                            key={groupName}
+                            className={portalMode ? "space-y-2 [content-visibility:auto] [contain-intrinsic-size:auto_320px]" : "space-y-4"}
+                        >
                             <h2 className={`${embedded ? "text-base" : portalMode ? "text-base" : "text-2xl"} font-serif font-bold text-primary flex items-center gap-2`}>
                                 {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-600" aria-hidden="true" />}
                                 {groupName}
@@ -377,6 +358,6 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                     {(config.items || []).map((item, index) => renderCard(item, index))}
                 </div>
             )}
-        </motion.div>
+        </div>
     );
 }

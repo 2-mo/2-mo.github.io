@@ -40,6 +40,10 @@
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: rgba(0, 0, 0, 0.1);
+
+  --surface-glow-primary: rgba(15, 108, 189, 0.08);
+  --surface-glow-accent: rgba(138, 90, 18, 0.06);
+  --surface-texture: rgba(36, 36, 36, 0.035);
 }
 
 @theme inline {
@@ -157,6 +161,10 @@
   --neutral-700: #d1d1d1;
   --neutral-800: #242424;
   --neutral-900: #141414;
+
+  --surface-glow-primary: rgba(143, 184, 216, 0.07);
+  --surface-glow-accent: rgba(228, 185, 118, 0.05);
+  --surface-texture: rgba(255, 255, 255, 0.025);
 }
 
 
@@ -168,11 +176,11 @@ html::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: var(--bing-wallpaper-image, none);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.05;
+  background-image:
+    radial-gradient(circle at 12% 0%, var(--surface-glow-primary), transparent 34rem),
+    radial-gradient(circle at 92% 28%, var(--surface-glow-accent), transparent 30rem),
+    radial-gradient(circle, var(--surface-texture) 0.7px, transparent 0.8px);
+  background-size: auto, auto, 18px 18px;
   pointer-events: none;
   z-index: 0;
 }
@@ -440,6 +448,30 @@ body {
 .theme-icon-anim { animation: theme-icon-in 0.3s ease-out; }
 @media (prefers-reduced-motion: reduce) {
   .theme-icon-anim { animation: none; }
+}
+
+@keyframes easter-egg-spark-burst {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg);
+  }
+  to {
+    opacity: 0;
+    transform:
+      translate3d(var(--spark-dx), var(--spark-dy), 0)
+      scale(1.1)
+      rotate(var(--spark-rotation));
+  }
+}
+
+.easter-egg-spark {
+  animation: easter-egg-spark-burst 0.8s ease-out forwards;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .easter-egg-spark { display: none; }
 }
 
 /* Double-click the name for a quick RGB-split glitch (easter egg) */

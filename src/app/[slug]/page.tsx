@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const page = await getRenderablePageAsync(slug);
+    const page = getRenderablePage(slug);
 
     if (!page) {
         return {};
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const page = getRenderablePage(slug);
+    const page = await getRenderablePageAsync(slug);
 
     if (!page) {
         notFound();

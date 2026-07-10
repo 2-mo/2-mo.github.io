@@ -3,12 +3,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, CalendarIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { SiteConfig } from '@/content/config';
+import type { SiteConfig } from '@/content/config';
 
 // Compass (no Heroicons equivalent) — used for the "Polaris" navigation portal.
 const CompassIcon = ({ className }: { className?: string }) => (
@@ -46,7 +44,7 @@ function NavIconLink({ href, title, name, isActive, onClick }: { href: string; t
         href={href}
         aria-label={title}
         aria-describedby={tooltipId}
-        prefetch={true}
+        prefetch={false}
         onClick={onClick}
         className={cn(
           navIconBase,
@@ -78,6 +76,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState('');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   // Items with an `icon` render as icon buttons in the right cluster; the rest stay text links.
   const textItems = items.filter((item) => !item.icon);
@@ -96,7 +95,8 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
       setScrolled(isScrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -148,201 +148,188 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
     }
   }, [enableOnePageMode, items]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
+
   return (
-    <Disclosure as="nav" className="fixed top-0 left-0 right-0 z-50">
-      {({ open }) => (
-        <>
-          <motion.div
-            initial={false}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6 }}
-            className={cn(
-              'transition-all duration-300 ease-out nav-scrolled backdrop-blur-xl',
-              scrolled
-                ? 'border-b border-neutral-200/50 shadow-lg dark:border-neutral-800/80 dark:shadow-black/30'
-                : ''
-            )}
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-16 lg:h-20">
-                {/* Logo/Name */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-shrink-0"
-                >
-                  <Link
-                    href="/"
-                    className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
-                  >
-                    {siteTitle}
-                  </Link>
-                </motion.div>
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      <div
+        className={cn(
+          'transition-all duration-300 ease-out nav-scrolled backdrop-blur-xl',
+          scrolled
+            ? 'border-b border-neutral-200/50 shadow-lg dark:border-neutral-800/80 dark:shadow-black/30'
+            : ''
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 lg:h-20">
+            {/* Logo/Name */}
+            <div className="flex-shrink-0 transition-transform duration-200 hover:scale-105 active:scale-95 motion-reduce:transform-none">
+              <Link
+                href="/"
+                onClick={() => setMobileOpen(false)}
+                className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
+              >
+                {siteTitle}
+              </Link>
+            </div>
 
-                {/* Desktop Navigation */}
-                <div className="hidden lg:block">
-                  <div className="ml-10 flex items-center space-x-8">
-                    <div className="flex items-baseline space-x-8">
-                      {textItems.map((item) => {
-                        const isActive = enableOnePageMode
-                          ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
-                          : (item.href === '/'
-                            ? pathname === '/'
-                            : pathname.startsWith(item.href));
+            {/* Desktop Navigation */}
+            <div className="hidden lg:block">
+              <div className="ml-10 flex items-center space-x-8">
+                <div className="flex items-baseline space-x-8">
+                  {textItems.map((item) => {
+                    const isActive = enableOnePageMode
+                      ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
+                      : (item.href === '/'
+                        ? pathname === '/'
+                        : pathname.startsWith(item.href));
 
-                        const href = enableOnePageMode
-                          ? `/#${item.target}`
-                          : item.href;
+                    const href = enableOnePageMode
+                      ? `/#${item.target}`
+                      : item.href;
 
-                        return (
-                          <Link
-                            key={item.title}
-                            href={href}
-                            prefetch={true}
-                            onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
-                            className={cn(
-                              'relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm',
-                              isActive
-                                ? 'text-primary'
-                                : 'text-neutral-600 hover:text-primary'
-                            )}
-                          >
-                            <span className="relative z-10">{item.title}</span>
-                            {isActive && (
-                              <motion.div
-                                layoutId="activeTab"
-                                className="absolute inset-0 bg-accent/10 rounded-lg"
-                                initial={false}
-                                transition={{
-                                  type: 'spring',
-                                  stiffness: 500,
-                                  damping: 30
-                                }}
-                              />
-                            )}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      {iconItems.map((item) => (
-                        <NavIconLink
-                          key={item.title}
-                          href={enableOnePageMode ? `/#${item.target}` : item.href}
-                          title={item.title}
-                          name={item.icon}
-                          isActive={isNavItemActive(item)}
-                          onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
-                        />
-                      ))}
-                      <ThemeToggle />
-                    </div>
-                  </div>
+                    return (
+                      <Link
+                        key={item.title}
+                        href={href}
+                        prefetch={true}
+                        onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                        className={cn(
+                          'relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm',
+                          isActive
+                            ? 'text-primary'
+                            : 'text-neutral-600 hover:text-primary'
+                        )}
+                      >
+                        <span className="relative z-10">{item.title}</span>
+                        {isActive && (
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0 bg-accent/10 rounded-lg"
+                          />
+                        )}
+                      </Link>
+                    );
+                  })}
                 </div>
-
-                {/* Mobile menu button and theme toggle */}
-                <div className="lg:hidden flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
+                  {iconItems.map((item) => (
+                    <NavIconLink
+                      key={item.title}
+                      href={enableOnePageMode ? `/#${item.target}` : item.href}
+                      title={item.title}
+                      name={item.icon}
+                      isActive={isNavItemActive(item)}
+                      onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                    />
+                  ))}
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-accent/10 hover:text-primary dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
-                    <span className="sr-only">Open main menu</span>
-                    <motion.div
-                      animate={{ rotate: open ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {open ? (
-                        <XMarkIcon className="block h-6 w-6 stroke-2" aria-hidden="true" />
-                      ) : (
-                        <Bars3Icon className="block h-6 w-6 stroke-2" aria-hidden="true" />
-                      )}
-                    </motion.div>
-                  </Disclosure.Button>
                 </div>
               </div>
             </div>
-          </motion.div>
 
-          {/* Mobile Navigation Menu */}
-          <AnimatePresence>
-            {open && (
-              <Disclosure.Panel static>
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg dark:border-neutral-800/80 dark:shadow-black/30"
-                >
-                  <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    {textItems.map((item, index) => {
-                      const isActive = enableOnePageMode
-                        ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
-                        : (item.href === '/'
-                          ? pathname === '/'
-                          : pathname.startsWith(item.href));
+            {/* Mobile menu button and theme toggle */}
+            <div className="lg:hidden flex items-center space-x-2">
+              <ThemeToggle />
+              <button
+                type="button"
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-navigation"
+                onClick={() => setMobileOpen((open) => !open)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-accent/10 hover:text-primary dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200"
+              >
+                <span className="sr-only">{mobileOpen ? 'Close main menu' : 'Open main menu'}</span>
+                <span className={cn('transition-transform duration-200 motion-reduce:transition-none', mobileOpen && 'rotate-180')}>
+                  {mobileOpen ? (
+                    <XMarkIcon className="block h-6 w-6 stroke-2" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6 stroke-2" aria-hidden="true" />
+                  )}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-                      const href = enableOnePageMode
-                        ? (item.href === '/' ? '/' : `/#${item.target}`)
-                        : item.href;
+      {/* Mobile Navigation Menu */}
+      {mobileOpen && (
+        <div
+          id="mobile-navigation"
+          className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg dark:border-neutral-800/80 dark:shadow-black/30"
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {textItems.map((item) => {
+              const isActive = enableOnePageMode
+                ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
+                : (item.href === '/'
+                  ? pathname === '/'
+                  : pathname.startsWith(item.href));
 
-                      return (
-                        <motion.div
-                          key={item.title}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <Disclosure.Button
-                            as={Link}
-                            href={href}
-                            prefetch={true}
-                            onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
-                            className={cn(
-                              'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
-                              isActive
-                                ? 'text-primary bg-accent/10 border-l-4 border-accent'
-                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
-                            )}
-                          >
-                            {item.title}
-                          </Disclosure.Button>
-                        </motion.div>
-                      );
-                    })}
-                    {iconItems.map((item, index) => {
-                      const isActive = isNavItemActive(item);
-                      const href = enableOnePageMode ? `/#${item.target}` : item.href;
-                      return (
-                        <motion.div
-                          key={item.title}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: (textItems.length + index) * 0.1 }}
-                        >
-                          <Disclosure.Button
-                            as={Link}
-                            href={href}
-                            prefetch={true}
-                            onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
-                            className={cn(
-                              'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
-                              isActive
-                                ? 'text-primary bg-accent/10 border-l-4 border-accent'
-                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
-                            )}
-                          >
-                            <NavIcon name={item.icon} className="h-5 w-5 stroke-2" />
-                            {item.title}
-                          </Disclosure.Button>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              </Disclosure.Panel>
-            )}
-          </AnimatePresence>
-        </>
+              const href = enableOnePageMode
+                ? (item.href === '/' ? '/' : `/#${item.target}`)
+                : item.href;
+
+              return (
+                <div key={item.title}>
+                  <Link
+                    href={href}
+                    prefetch={true}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      if (enableOnePageMode) {
+                        setActiveHash(item.href === '/' ? '' : `#${item.target}`);
+                      }
+                    }}
+                    className={cn(
+                      'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
+                      isActive
+                        ? 'text-primary bg-accent/10 border-l-4 border-accent'
+                        : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                </div>
+              );
+            })}
+            {iconItems.map((item) => {
+              const isActive = isNavItemActive(item);
+              const href = enableOnePageMode ? `/#${item.target}` : item.href;
+              return (
+                <div key={item.title}>
+                  <Link
+                    href={href}
+                    prefetch={false}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      if (enableOnePageMode) setActiveHash(`#${item.target}`);
+                    }}
+                    className={cn(
+                      'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
+                      isActive
+                        ? 'text-primary bg-accent/10 border-l-4 border-accent'
+                        : 'text-neutral-600 hover:text-primary hover:bg-neutral-50 dark:text-neutral-100 dark:hover:text-white dark:hover:bg-neutral-800/80'
+                    )}
+                  >
+                    <NavIcon name={item.icon} className="h-5 w-5 stroke-2" />
+                    {item.title}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       )}
-    </Disclosure>
+    </nav>
   );
 }

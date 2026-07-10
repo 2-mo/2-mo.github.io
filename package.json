@@ -11,17 +11,14 @@
     "validate:content": "node tools/content/validate_content.mjs"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "@orcid/bibtex-parse-js": "^0.0.25",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.18.1",
     "next": "^16.2.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
-    "smol-toml": "^1.5.2",
-    "zustand": "^5.0.5"
+    "smol-toml": "^1.5.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

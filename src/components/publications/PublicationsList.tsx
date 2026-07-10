@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import {
     MagnifyingGlassIcon,
@@ -31,19 +30,12 @@ function CitationBadge({ count }: { count: number }) {
             >
                 Cited by {flipped ? '∞' : count}
             </button>
-            <AnimatePresence>
-                {flipped && (
-                    <motion.span
-                        initial={{ opacity: 0, y: 6, scale: 0.85 }}
-                        animate={{ opacity: 1, y: -8, scale: 1 }}
-                        exit={{ opacity: 0, y: -14, scale: 0.85 }}
-                        className="absolute bottom-full left-1/2 -translate-x-1/2 whitespace-nowrap bg-neutral-800 text-white text-xs font-medium px-2.5 py-1 rounded-md shadow-lg pointer-events-none"
-                    >
-                        if only…
-                        <span className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800" />
-                    </motion.span>
-                )}
-            </AnimatePresence>
+            {flipped && (
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 whitespace-nowrap bg-neutral-800 text-white text-xs font-medium px-2.5 py-1 rounded-md shadow-lg pointer-events-none">
+                    if only…
+                    <span className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800" />
+                </span>
+            )}
         </span>
     );
 }
@@ -111,11 +103,7 @@ export default function PublicationsList({ config, publications, embedded = fals
     }, [publications, searchQuery, selectedYear, selectedType]);
 
     return (
-        <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-        >
+        <div>
             <div className="mb-8">
                 <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
                 {config.description && (
@@ -153,86 +141,79 @@ export default function PublicationsList({ config, publications, embedded = fals
                     </button>
                 </div>
 
-                <AnimatePresence>
-                    {showFilters && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden"
-                        >
-                            <div className="p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-6">
-                                {/* Year Filter */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-700 flex items-center">
-                                        <CalendarIcon className="h-4 w-4 mr-1" /> Year
-                                    </label>
-                                    <div className="flex flex-wrap gap-2">
+                {showFilters && (
+                    <div className="overflow-hidden">
+                        <div className="p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-6">
+                            {/* Year Filter */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-neutral-700 dark:text-neutral-700 flex items-center">
+                                    <CalendarIcon className="h-4 w-4 mr-1" /> Year
+                                </label>
+                                <div className="flex flex-wrap gap-2">
+                                    <button
+                                        onClick={() => setSelectedYear('all')}
+                                        className={cn(
+                                            "px-3 py-1 text-xs rounded-full transition-colors",
+                                            selectedYear === 'all'
+                                                ? "bg-accent text-white"
+                                                : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
+                                        )}
+                                    >
+                                        All
+                                    </button>
+                                    {years.map(year => (
                                         <button
-                                            onClick={() => setSelectedYear('all')}
+                                            key={year}
+                                            onClick={() => setSelectedYear(year)}
                                             className={cn(
                                                 "px-3 py-1 text-xs rounded-full transition-colors",
-                                                selectedYear === 'all'
+                                                selectedYear === year
                                                     ? "bg-accent text-white"
                                                     : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
                                             )}
                                         >
-                                            All
+                                            {year}
                                         </button>
-                                        {years.map(year => (
-                                            <button
-                                                key={year}
-                                                onClick={() => setSelectedYear(year)}
-                                                className={cn(
-                                                    "px-3 py-1 text-xs rounded-full transition-colors",
-                                                    selectedYear === year
-                                                        ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
-                                                )}
-                                            >
-                                                {year}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Type Filter */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-700 flex items-center">
-                                        <BookOpenIcon className="h-4 w-4 mr-1" /> Type
-                                    </label>
-                                    <div className="flex flex-wrap gap-2">
-                                        <button
-                                            onClick={() => setSelectedType('all')}
-                                            className={cn(
-                                                "px-3 py-1 text-xs rounded-full transition-colors",
-                                                selectedType === 'all'
-                                                    ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
-                                            )}
-                                        >
-                                            All
-                                        </button>
-                                        {types.map(type => (
-                                            <button
-                                                key={type}
-                                                onClick={() => setSelectedType(type)}
-                                                className={cn(
-                                                    "px-3 py-1 text-xs rounded-full capitalize transition-colors",
-                                                    selectedType === type
-                                                        ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
-                                                )}
-                                            >
-                                                {type.replace('-', ' ')}
-                                            </button>
-                                        ))}
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+
+                            {/* Type Filter */}
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-neutral-700 dark:text-neutral-700 flex items-center">
+                                    <BookOpenIcon className="h-4 w-4 mr-1" /> Type
+                                </label>
+                                <div className="flex flex-wrap gap-2">
+                                    <button
+                                        onClick={() => setSelectedType('all')}
+                                        className={cn(
+                                            "px-3 py-1 text-xs rounded-full transition-colors",
+                                            selectedType === 'all'
+                                                ? "bg-accent text-white"
+                                                : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
+                                        )}
+                                    >
+                                        All
+                                    </button>
+                                    {types.map(type => (
+                                        <button
+                                            key={type}
+                                            onClick={() => setSelectedType(type)}
+                                            className={cn(
+                                                "px-3 py-1 text-xs rounded-full capitalize transition-colors",
+                                                selectedType === type
+                                                    ? "bg-accent text-white"
+                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-white/10"
+                                            )}
+                                        >
+                                            {type.replace('-', ' ')}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Publications Grid */}
@@ -242,12 +223,9 @@ export default function PublicationsList({ config, publications, embedded = fals
                         No publications found matching your criteria.
                     </div>
                 ) : (
-                    filteredPublications.map((pub, index) => (
-                        <motion.div
+                    filteredPublications.map((pub) => (
+                        <div
                             key={pub.id}
-                            initial={false}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
                             className={cn(
                                 "p-6 rounded-xl shadow-sm border hover:shadow-md transition-all duration-200",
                                 embedded
@@ -367,44 +345,30 @@ export default function PublicationsList({ config, publications, embedded = fals
                                         )}
                                     </div>
 
-                                    <AnimatePresence>
-                                        {expandedAbstractId === pub.id && pub.abstract ? (
-                                            <motion.div
-                                                key="abstract"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="overflow-hidden mt-4"
-                                            >
-                                                <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <p className="text-sm text-neutral-600 dark:text-neutral-600 leading-relaxed">
-                                                        {pub.abstract}
-                                                    </p>
-                                                </div>
-                                            </motion.div>
-                                        ) : null}
-                                        {expandedBibtexId === pub.id && pub.bibtex ? (
-                                            <motion.div
-                                                key="bibtex"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="overflow-hidden mt-4"
-                                            >
-                                                <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <pre className="text-xs text-neutral-600 dark:text-neutral-600 overflow-x-auto whitespace-pre-wrap font-mono">
-                                                        {pub.bibtex}
-                                                    </pre>
-                                                </div>
-                                            </motion.div>
-                                        ) : null}
-                                    </AnimatePresence>
+                                    {expandedAbstractId === pub.id && pub.abstract ? (
+                                        <div className="overflow-hidden mt-4">
+                                            <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
+                                                <p className="text-sm text-neutral-600 dark:text-neutral-600 leading-relaxed">
+                                                    {pub.abstract}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ) : null}
+                                    {expandedBibtexId === pub.id && pub.bibtex ? (
+                                        <div className="overflow-hidden mt-4">
+                                            <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
+                                                <pre className="text-xs text-neutral-600 dark:text-neutral-600 overflow-x-auto whitespace-pre-wrap font-mono">
+                                                    {pub.bibtex}
+                                                </pre>
+                                            </div>
+                                        </div>
+                                    ) : null}
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))
                 )}
             </div>
-        </motion.div>
+        </div>
     );
 }

@@ -1,8 +1,7 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
 import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
-import { resolveTheme, useThemeStore, type Theme } from '@/stores/themeStore';
+import { resolveTheme, useTheme, type Theme } from '@/components/ui/ThemeProvider';
 import { cn } from '@/lib/utils';
 
 const themes: { value: Theme; label: string }[] = [
@@ -11,33 +10,19 @@ const themes: { value: Theme; label: string }[] = [
   { value: 'dark', label: 'Dark' },
 ];
 
-const subscribeToHydration = () => () => { };
-const getHydratedSnapshot = () => true;
-const getServerSnapshot = () => false;
-
 export function ThemeToggle() {
-  const { theme, setTheme } = useThemeStore();
-  const mounted = useSyncExternalStore(
-    subscribeToHydration,
-    getHydratedSnapshot,
-    getServerSnapshot
-  );
-
-  const displayTheme = mounted ? theme : 'system';
-  const currentTheme = themes.find(t => t.value === displayTheme) || themes[0];
-  const effectiveTheme = mounted ? resolveTheme(theme) : 'light';
+  const { theme, hydrated, setTheme } = useTheme();
+  const displayTheme = hydrated ? theme : 'system';
+  const currentTheme = themes.find((item) => item.value === displayTheme) || themes[0];
+  const effectiveTheme = hydrated ? resolveTheme(theme) : 'light';
   const nextTheme = effectiveTheme === 'dark' ? 'light' : 'dark';
-
-  const toggle = () => {
-    setTheme(nextTheme);
-  };
 
   return (
     <div className="relative">
       <button
         type="button"
-        onMouseDown={(e) => e.preventDefault()}
-        onClick={toggle}
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={() => setTheme(nextTheme)}
         aria-label={`Current theme: ${currentTheme.label}. Switch to ${nextTheme} theme.`}
         title={`Switch to ${nextTheme} theme`}
         className={cn(

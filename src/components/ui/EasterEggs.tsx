@@ -1,7 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 
 // Anthropic "clay" — Claude's signature warm accent.
 const CLAY = '#D97757';
@@ -81,22 +80,24 @@ export default function EasterEggs({ repo }: EasterEggsProps) {
         <>
             {/* ✱ spark overlay */}
             <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
-                <AnimatePresence>
-                    {sparks.map((s) => (
-                        <motion.span
-                            key={s.id}
-                            initial={{ x: s.x, y: s.y, opacity: 1, scale: 0.6, rotate: 0 }}
-                            animate={{ x: s.x + s.dx, y: s.y + s.dy, opacity: 0, scale: 1.1, rotate: s.rot }}
-                            transition={{ duration: 0.8, ease: 'easeOut' }}
-                            style={{ position: 'absolute', left: 0, top: 0, color: CLAY }}
-                            className="text-lg font-bold select-none leading-none"
-                        >
-                            ✱
-                        </motion.span>
-                    ))}
-                </AnimatePresence>
+                {sparks.map((spark) => (
+                    <span
+                        key={spark.id}
+                        style={{
+                            position: 'absolute',
+                            left: spark.x,
+                            top: spark.y,
+                            color: CLAY,
+                            '--spark-dx': `${spark.dx}px`,
+                            '--spark-dy': `${spark.dy}px`,
+                            '--spark-rotation': `${spark.rot}deg`,
+                        } as CSSProperties}
+                        className="easter-egg-spark text-lg font-bold select-none leading-none"
+                    >
+                        ✱
+                    </span>
+                ))}
             </div>
-
         </>
     );
 }

@@ -58,6 +58,9 @@ jobs:
             echo "Scholar crawl failed; using committed snapshot."
           fi
 
+      - name: Validate content
+        run: npm run validate:content
+
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
