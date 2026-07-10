@@ -23,17 +23,13 @@ photo = "/cv-photo.webp"
 interests = "Video Anomaly Understanding, Active Visual Reasoning, Multimodal Large Language Models"
 
 [[profile.left]]
-label = "Date of Birth"
-value = "October 1997"
-
-[[profile.left]]
 label = "Google Scholar"
 value = "m6wKAtcAAAAJ"
 href = "https://scholar.google.com/citations?hl=en&user=m6wKAtcAAAAJ&view_op=list_works&sortby=pubdate"
 
 [[profile.left]]
 label = "Current Focus"
-value = "Agentic Anomaly Understanding"
+value = "Active Anomaly Understanding"
 
 [[profile.right]]
 label = "Supervisor"
@@ -47,10 +43,6 @@ value = "A.P. Jiaxu Leng (冷佳旭)"
 label = "Email"
 value = "tiurgee@gmail.com"
 href = "mailto:tiurgee@gmail.com"
-
-[[profile.right]]
-label = "Phone / WeChat"
-value = "(+86) 151 2315 1342"
 
 [[education]]
 degree = "Ph.D. Candidate (Expected June 2027)"

@@ -18,6 +18,8 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
     const portalMode = config.variant === 'portal';
     const projectsMode = config.variant === 'projects';
     const experienceMode = config.variant === 'experience';
+    const PageHeading = embedded ? 'h2' : 'h1';
+    const GroupHeading = embedded ? 'h3' : 'h2';
 
     const groupedItems = groupedMode
         ? (() => {
@@ -230,7 +232,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                         {tags?.map(tag => (
                             <span
                                 key={tag}
-                                className="inline-flex cursor-default items-center rounded-md border border-neutral-200/80 bg-neutral-100/70 px-2.5 py-1 text-xs font-medium text-neutral-500 shadow-none dark:border-neutral-700/70 dark:bg-neutral-800/60 dark:text-neutral-500"
+                                className="inline-flex cursor-default items-center rounded-md border border-neutral-200/80 bg-neutral-100/70 px-2.5 py-1 text-xs font-medium text-neutral-500 shadow-none dark:border-neutral-700/70 dark:bg-neutral-800/60 dark:text-neutral-600"
                             >
                                 {tag}
                             </span>
@@ -351,7 +353,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
             transition={{ duration: 0.6, delay: 0.4 }}
         >
             <div className={embedded ? "mb-4" : portalMode ? "mb-4" : "mb-8"}>
-                <h1 className={`${embedded ? "text-2xl" : portalMode ? "text-2xl" : projectsMode ? "text-3xl" : "text-4xl"} font-serif font-bold text-primary mb-2`}>{config.title}</h1>
+                <PageHeading className={`${embedded ? "text-2xl" : portalMode ? "text-2xl" : projectsMode ? "text-3xl" : "text-4xl"} font-serif font-bold text-primary mb-2`}>{config.title}</PageHeading>
                 {config.description && (
                     <p className={`${embedded ? "text-sm" : portalMode ? "text-sm" : "text-lg"} text-neutral-600 dark:text-neutral-600 max-w-2xl`}>
                         {config.description}
@@ -362,10 +364,10 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                 <div className={portalMode ? "space-y-4" : "space-y-8"}>
                     {Object.entries(groupedItems).map(([groupName, items]) => (
                         <section key={groupName} className={portalMode ? "space-y-2" : "space-y-4"}>
-                            <h2 className={`${embedded ? "text-base" : portalMode ? "text-base" : "text-2xl"} font-serif font-bold text-primary flex items-center gap-2`}>
+                            <GroupHeading className={`${embedded ? "text-base" : portalMode ? "text-base" : "text-2xl"} font-serif font-bold text-primary flex items-center gap-2`}>
                                 {portalMode && <FolderOpenIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-600" aria-hidden="true" />}
                                 {groupName}
-                            </h2>
+                            </GroupHeading>
                             <div className={`grid ${portalMode ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : projectsMode || experienceMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"} ${embedded ? "gap-4" : portalMode ? "gap-2" : "gap-6"}`}>
                                 {items.map((item, index) => renderCard(item, index, groupName))}
                             </div>

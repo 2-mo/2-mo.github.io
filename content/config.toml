@@ -1,8 +1,8 @@
 [site]
 title = "Mengjingcheng Mo"
-description = "PhD candidate at Chongqing University of Posts and Telecommunications focusing on agentic anomaly understanding."
+description = "PhD candidate at Chongqing University of Posts and Telecommunications focusing on Active Anomaly Understanding."
 favicon = "/DALL.svg"
-last_updated = "May 25, 2026"
+last_updated = "July 10, 2026"
 
 [author]
 name = "Mengjingcheng Mo (莫梦竟成)"
@@ -14,7 +14,6 @@ avatar = "/raccoon.webp"
 # Contact information (leave blank or delete to hide)
 
 email = "tiurgee@gmail.com"
-wechat = "tiumo-"
 location = "Chongqing, China"
 location_url = "https://maps.google.com/?q=Chongqing"
 location_details = [
@@ -59,13 +58,6 @@ title = "CV"
 type = "page"
 target = "cv"
 href = "/cv"
-
-[[navigation]]
-title = "Polaris"
-type = "page"
-target = "research-links"
-href = "/research-links"
-icon = "compass"
 
 [[navigation]]
 title = "Deadlines"

@@ -1,6 +1,6 @@
 type = "card"
 title = "Projects"
-description = "Research projects, curated surveys, and open resources around agentic visual reasoning and anomaly understanding."
+description = "Research projects, curated surveys, and open resources around Active Anomaly Understanding and active visual reasoning."
 variant = "projects"
 
 [[items]]

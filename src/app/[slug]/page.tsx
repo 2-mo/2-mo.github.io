@@ -5,6 +5,7 @@ import {
     getRenderablePage,
     getStaticPageSlugs,
 } from '@/content/pages';
+import { getConfig } from '@/content/config';
 import { absoluteUrl, getPagePath } from '@/site/urls';
 
 import { Metadata } from 'next';
@@ -21,6 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         return {};
     }
 
+    const config = getConfig();
+    const previewImage = absoluteUrl(config.author.avatar);
+
     return {
         title: page.config.title,
         description: page.config.description,
@@ -32,6 +36,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             description: page.config.description,
             url: absoluteUrl(getPagePath(slug)),
             type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: page.config.title,
+            description: page.config.description,
+            images: [previewImage],
         },
     };
 }

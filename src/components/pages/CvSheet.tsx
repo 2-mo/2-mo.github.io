@@ -105,6 +105,7 @@ export default function CvSheet({ config }: { config: CvPageConfig }) {
             </div>
 
             <article className="cv-sheet">
+                <h1 className="sr-only">{profile.name} - Curriculum Vitae</h1>
                 {/* Header */}
                 <header className="cv-header">
                     <div className="cv-header-cols">

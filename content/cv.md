@@ -6,7 +6,7 @@ Supervisor: Prof. Xinbo Gao (高新波); Associate Prof. Jiaxu Leng (冷佳旭)
 Email: tiurgee@gmail.com  
 Google Scholar: [m6wKAtcAAAAJ](https://scholar.google.com/citations?hl=en&user=m6wKAtcAAAAJ&view_op=list_works&sortby=pubdate)
 
-Current focus: Agentic Anomaly Understanding  
+Current focus: Active Anomaly Understanding
 Interests: Video Anomaly Understanding, Active Visual Reasoning, Multimodal Large Language Models
 
 ## Education

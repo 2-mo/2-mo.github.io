@@ -45,6 +45,7 @@ export type AboutPageSectionConfig =
 export interface AboutPageConfig extends BasePageConfig {
     type: 'about';
     profile?: {
+        headline?: string;
         research_interests?: string[];
         [key: string]: unknown;
     };

@@ -2,8 +2,9 @@ type = "about"
 title = "About"
 
 [profile]
+headline = "I build vision-language agents that actively select evidence and explain anomalous events in challenging real-world conditions."
 research_interests = [
-  "Agentic Anomaly Understanding",
+  "Active Anomaly Understanding",
   "Video Anomaly Understanding",
   "Active Visual Reasoning",
   "Multimodal Large Language Models"
@@ -26,7 +27,7 @@ id = "featured_publications"
 type = "publications"
 title = "Selected Publications"
 filter = "selected"
-limit = 6
+limit = 3
 
 [[sections]]
 id = "projects"

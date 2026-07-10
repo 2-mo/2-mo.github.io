@@ -1,50 +1,40 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
-    EnvelopeIcon,
     AcademicCapIcon,
+    BookOpenIcon,
+    DocumentTextIcon,
+    EnvelopeIcon,
     HeartIcon,
     MapPinIcon,
-    BookmarkIcon
 } from '@heroicons/react/24/outline';
-import { MapPinIcon as MapPinSolidIcon, EnvelopeIcon as EnvelopeSolidIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { SiteConfig } from '@/content/config';
 
-// Custom ORCID icon component
 const OrcidIcon = ({ className }: { className?: string }) => (
     <svg
         viewBox="0 0 24 24"
         fill="currentColor"
         className={className}
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
     >
         <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z" />
     </svg>
 );
 
-// Custom GitHub icon (brand logos are not part of Heroicons)
 const GithubIcon = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
     </svg>
 );
 
-// Custom LinkedIn icon (brand logos are not part of Heroicons)
 const LinkedinIcon = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
-    </svg>
-);
-
-// Custom WeChat icon (brand logos are not part of Heroicons)
-const WeChatIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M9.08 3.5C4.62 3.5 1 6.38 1 9.94c0 2.04 1.19 3.85 3.04 5.03l-.7 2.1c-.06.18.13.33.3.25l2.55-1.3c.9.23 1.88.36 2.89.36.32 0 .64-.01.95-.04a5.33 5.33 0 0 1-.33-1.86c0-3.27 3.15-5.93 7.04-5.93.27 0 .54.01.8.04-.79-2.9-4.2-5.09-8.46-5.09ZM6.5 8.54a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm5.15 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" />
-        <path d="M23 14.48c0-2.73-2.8-4.94-6.26-4.94s-6.26 2.21-6.26 4.94 2.8 4.94 6.26 4.94c.72 0 1.4-.1 2.04-.3l2.08 1.04c.15.08.32-.06.27-.22l-.56-1.72C22.05 17.32 23 15.97 23 14.48Zm-8.27-1.05a.78.78 0 1 1 0-1.56.78.78 0 0 1 0 1.56Zm4.02 0a.78.78 0 1 1 0-1.56.78.78 0 0 1 0 1.56Z" />
     </svg>
 );
 
@@ -63,6 +53,7 @@ interface ProfileProps {
     author: SiteConfig['author'];
     social: SiteConfig['social'];
     features: SiteConfig['features'];
+    headline?: string;
     researchInterests?: string[];
     scholarStats?: ScholarStats;
     githubStats?: GithubStats;
@@ -70,158 +61,116 @@ interface ProfileProps {
 
 type ContactLink = {
     name: string;
-    href?: string;
-    value?: string;
+    href: string;
     icon: React.ComponentType<{ className?: string }>;
-    isEmail?: boolean;
-    isLocation?: boolean;
-    isWeChat?: boolean;
+    external?: boolean;
 };
 
-export default function Profile({ author, social, features, researchInterests, scholarStats, githubStats }: ProfileProps) {
+const iconLinkClass = 'inline-flex h-11 w-11 items-center justify-center rounded-md bg-neutral-100/80 text-neutral-600 transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 dark:bg-neutral-800/80 dark:text-neutral-600';
 
+export default function Profile({
+    author,
+    social,
+    features,
+    headline,
+    researchInterests,
+    scholarStats,
+    githubStats,
+}: ProfileProps) {
     const nameMatch = author.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
     const nameLinePrimary = nameMatch?.[1] || author.name;
     const nameLineSecondary = nameMatch?.[2];
-    const emailTooltipId = 'profile-email-tooltip';
-    const addressTooltipId = 'profile-address-tooltip';
-    const wechatTooltipId = 'profile-wechat-tooltip';
-
-    const [nameGlitch, setNameGlitch] = useState(false);
-    const [hasLiked, setHasLiked] = useState(() => {
-        if (!features.enable_likes || typeof window === 'undefined') return false;
-        return localStorage.getItem('jiale-website-user-liked') === 'true';
-    });
+    const [hasLiked, setHasLiked] = useState(() => (
+        features.enable_likes
+        && typeof window !== 'undefined'
+        && localStorage.getItem('jiale-website-user-liked') === 'true'
+    ));
     const [showThanks, setShowThanks] = useState(false);
-    const [showAddress, setShowAddress] = useState(false);
-    const [isAddressPinned, setIsAddressPinned] = useState(false);
-    const [showEmail, setShowEmail] = useState(false);
-    const [isEmailPinned, setIsEmailPinned] = useState(false);
-    const [showWeChat, setShowWeChat] = useState(false);
-    const [copiedWeChat, setCopiedWeChat] = useState(false);
-    const [lastClickedTooltip, setLastClickedTooltip] = useState<'email' | 'address' | 'wechat' | null>(null);
 
     const handleLike = () => {
-        const newLikedState = !hasLiked;
-        setHasLiked(newLikedState);
+        const nextLiked = !hasLiked;
+        setHasLiked(nextLiked);
 
-        if (newLikedState) {
+        if (nextLiked) {
             localStorage.setItem('jiale-website-user-liked', 'true');
             setShowThanks(true);
-            setTimeout(() => setShowThanks(false), 2000);
+            window.setTimeout(() => setShowThanks(false), 1800);
         } else {
             localStorage.removeItem('jiale-website-user-liked');
             setShowThanks(false);
         }
     };
 
-    const handleWeChatCopy = async (value?: string) => {
-        if (!value) return;
-
-        try {
-            await navigator.clipboard.writeText(value);
-        } catch {
-            // Clipboard may be unavailable in non-secure contexts; keep the ID visible.
-        }
-
-        setShowWeChat(true);
-        setCopiedWeChat(true);
-        setLastClickedTooltip('wechat');
-        setTimeout(() => setCopiedWeChat(false), 1600);
-    };
-
     const socialLinks: ContactLink[] = [
-        ...(social.email ? [{
-            name: 'Email',
-            href: `mailto:${social.email}`,
-            icon: EnvelopeIcon,
-            isEmail: true,
-        }] : []),
-        ...(social.location || social.location_details ? [{
-            name: 'Location',
-            href: social.location_url || '#',
-            icon: MapPinIcon,
-            isLocation: true,
-        }] : []),
-        ...(social.wechat ? [{
-            name: 'WeChat',
-            value: social.wechat,
-            icon: WeChatIcon,
-            isWeChat: true,
-        }] : []),
-        ...(social.google_scholar ? [{
-            name: 'Google Scholar',
-            href: social.google_scholar,
-            icon: AcademicCapIcon,
-        }] : []),
-        ...(social.orcid ? [{
-            name: 'ORCID',
-            href: social.orcid,
-            icon: OrcidIcon,
-        }] : []),
-        ...(social.github ? [{
-            name: 'GitHub',
-            href: social.github,
-            icon: GithubIcon,
-        }] : []),
-        ...(social.linkedin ? [{
-            name: 'LinkedIn',
-            href: social.linkedin,
-            icon: LinkedinIcon,
-        }] : []),
+        ...(social.location_url ? [{ name: social.location || 'Location', href: social.location_url, icon: MapPinIcon, external: true }] : []),
+        ...(social.google_scholar ? [{ name: 'Google Scholar', href: social.google_scholar, icon: AcademicCapIcon, external: true }] : []),
+        ...(social.orcid ? [{ name: 'ORCID', href: social.orcid, icon: OrcidIcon, external: true }] : []),
+        ...(social.github ? [{ name: 'GitHub', href: social.github, icon: GithubIcon, external: true }] : []),
+        ...(social.linkedin ? [{ name: 'LinkedIn', href: social.linkedin, icon: LinkedinIcon, external: true }] : []),
     ];
 
     return (
-        <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:sticky lg:top-24"
-        >
-            {/* Profile Image — hidden ✱ spark trigger (see EasterEggs) */}
-            <div data-spark className="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 mx-auto mb-4 sm:mb-6 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
+        <div className="lg:sticky lg:top-24">
+            <div data-spark className="mx-auto mb-3 h-32 w-32 overflow-hidden rounded-xl shadow-lg sm:mb-5 sm:h-44 sm:w-44 lg:h-64 lg:w-64 lg:rounded-2xl">
                 <Image
                     src={author.avatar}
                     alt={author.name}
                     width={256}
                     height={256}
-                    className="w-full h-full object-cover object-[32%_center]"
+                    fetchPriority="high"
+                    className="h-full w-full object-cover object-[32%_center]"
                     priority
                 />
             </div>
 
-            {/* Name and Title */}
-            <div className="text-center mb-4 sm:mb-6">
-                <h1
-                    onDoubleClick={() => {
-                        setNameGlitch(true);
-                        setTimeout(() => setNameGlitch(false), 700);
-                    }}
-                    className={`text-2xl sm:text-3xl font-serif font-bold text-primary mb-2 leading-tight select-none ${nameGlitch ? 'name-glitch' : ''}`}
-                >
+            <div className="mb-4 text-center sm:mb-5">
+                <h1 className="mb-2 select-none font-serif text-2xl font-bold leading-tight text-primary sm:text-3xl">
                     <span className="block">{nameLinePrimary}</span>
-                    {nameLineSecondary && (
-                        <span className="block">{nameLineSecondary}</span>
-                    )}
+                    {nameLineSecondary && <span className="block">{nameLineSecondary}</span>}
                 </h1>
-                <p className="text-base sm:text-lg text-accent font-medium mb-1">
-                    {author.title}
-                </p>
-                <p className="text-neutral-600 mb-2">
-                    {author.institution}
-                </p>
+                <p className="mb-1 text-base font-medium text-accent sm:text-lg">{author.title}</p>
+                <p className="mx-auto max-w-sm text-sm leading-relaxed text-neutral-600 sm:text-base">{author.institution}</p>
+                {headline && (
+                    <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-neutral-700 dark:text-neutral-600">
+                        {headline}
+                    </p>
+                )}
             </div>
 
-            {/* Profile stats: citations, h-index, GitHub stars */}
+            <div className="mb-4 grid grid-cols-3 gap-2 sm:mb-5">
+                <a
+                    href="#featured_publications"
+                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md bg-accent px-2 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-accent-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 dark:text-neutral-900 dark:hover:bg-accent-light"
+                >
+                    <BookOpenIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>Selected Work</span>
+                </a>
+                <Link
+                    href="/cv"
+                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 px-2 py-2 text-center text-xs font-semibold text-primary transition-colors hover:border-accent/50 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 dark:border-neutral-700 dark:bg-neutral-800"
+                >
+                    <DocumentTextIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>CV</span>
+                </Link>
+                <a
+                    href={social.email ? `mailto:${social.email}` : '#'}
+                    aria-disabled={!social.email}
+                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 px-2 py-2 text-center text-xs font-semibold text-primary transition-colors hover:border-accent/50 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 dark:border-neutral-700 dark:bg-neutral-800"
+                >
+                    <EnvelopeIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span>Email</span>
+                </a>
+            </div>
+
             {(scholarStats || githubStats) && (
-                <div className="flex flex-wrap justify-center gap-3 mb-4 sm:mb-6">
+                <div className="mb-4 flex flex-wrap justify-center gap-2 sm:mb-5 sm:gap-3">
                     {scholarStats && (
                         <>
                             <a
                                 href={social.google_scholar || '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 min-w-[5rem] max-w-[7rem] text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 hover:shadow-md transition-all duration-200"
+                                className="min-w-[5rem] flex-1 rounded-md bg-neutral-100 py-2 text-center transition-shadow hover:shadow-md dark:bg-neutral-800"
                                 aria-label="Google Scholar citations"
                             >
                                 <div className="text-xl font-bold text-accent">{scholarStats.totalCitations.toLocaleString()}</div>
@@ -231,7 +180,7 @@ export default function Profile({ author, social, features, researchInterests, s
                                 href={social.google_scholar || '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 min-w-[5rem] max-w-[7rem] text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 hover:shadow-md transition-all duration-200"
+                                className="min-w-[5rem] flex-1 rounded-md bg-neutral-100 py-2 text-center transition-shadow hover:shadow-md dark:bg-neutral-800"
                                 aria-label="Google Scholar h-index"
                             >
                                 <div className="text-xl font-bold text-accent">{scholarStats.hIndex}</div>
@@ -244,7 +193,7 @@ export default function Profile({ author, social, features, researchInterests, s
                             href={githubStats.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 min-w-[5rem] max-w-[7rem] text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 hover:shadow-md transition-all duration-200"
+                            className="min-w-[5rem] flex-1 rounded-md bg-neutral-100 py-2 text-center transition-shadow hover:shadow-md dark:bg-neutral-800"
                             aria-label="GitHub stars"
                         >
                             <div className="text-xl font-bold text-accent">{githubStats.stars.toLocaleString()}</div>
@@ -254,347 +203,56 @@ export default function Profile({ author, social, features, researchInterests, s
                 </div>
             )}
 
-            {/* Contact Links */}
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4 sm:mb-6 relative px-2">
+            <div className="relative mb-4 flex flex-wrap justify-center gap-2 sm:mb-5">
                 {socialLinks.map((link) => {
-                    const IconComponent = link.icon;
-                    if (link.isLocation) {
-                        return (
-                            <div
-                                key={link.name}
-                                className="relative"
-                                onFocus={() => {
-                                    if (!isAddressPinned) setShowAddress(true);
-                                    setLastClickedTooltip('address');
-                                }}
-                                onBlur={(event) => {
-                                    if (!isAddressPinned && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                                        setShowAddress(false);
-                                    }
-                                }}
-                            >
-                                <button
-                                    type="button"
-                                    onMouseEnter={() => {
-                                        if (!isAddressPinned) setShowAddress(true);
-                                        setLastClickedTooltip('address');
-                                    }}
-                                    onMouseLeave={() => !isAddressPinned && setShowAddress(false)}
-                                    onClick={() => {
-                                        setIsAddressPinned(!isAddressPinned);
-                                        setShowAddress(!isAddressPinned);
-                                        setLastClickedTooltip('address');
-                                    }}
-                                    onKeyDown={(event) => {
-                                        if (event.key === 'Escape') {
-                                            setIsAddressPinned(false);
-                                            setShowAddress(false);
-                                        }
-                                    }}
-                                    className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isAddressPinned
-                                        ? 'text-accent bg-accent/10'
-                                        : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
-                                        }`}
-                                    aria-label={link.name}
-                                    aria-expanded={showAddress || isAddressPinned}
-                                    aria-controls={addressTooltipId}
-                                >
-                                    {isAddressPinned ? (
-                                        <MapPinSolidIcon className="h-5 w-5" />
-                                    ) : (
-                                        <MapPinIcon className="h-5 w-5" />
-                                    )}
-                                </button>
-
-                                {/* Address tooltip */}
-                                <AnimatePresence>
-                                    {(showAddress || isAddressPinned) && (
-                                        <motion.div
-                                            id={addressTooltipId}
-                                            role="tooltip"
-                                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                            animate={{ opacity: 1, y: -10, scale: 1 }}
-                                            exit={{ opacity: 0, y: -20, scale: 0.8 }}
-                                            className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-neutral-800 text-white px-4 py-3 rounded-lg text-sm font-medium shadow-lg max-w-[calc(100vw-2rem)] sm:max-w-none sm:whitespace-nowrap ${lastClickedTooltip === 'address' ? 'z-20' : 'z-10'
-                                                }`}
-                                            onMouseEnter={() => {
-                                                if (!isAddressPinned) setShowAddress(true);
-                                                setLastClickedTooltip('address');
-                                            }}
-                                            onMouseLeave={() => !isAddressPinned && setShowAddress(false)}
-                                        >
-                                            <div className="text-center">
-                                                <div className="flex items-center justify-center space-x-2 mb-1">
-                                                    <p className="font-semibold">Work Address</p>
-                                                    {!isAddressPinned && (
-                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 dark:text-neutral-600 opacity-70">
-                                                            <BookmarkIcon className="h-2.5 w-2.5" />
-                                                            <span className="hidden sm:inline">Click</span>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                                {social.location_details?.map((line, i) => (
-                                                    <p key={i} className="break-words">{line}</p>
-                                                ))}
-                                                <div className="mt-2 flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2 justify-center">
-                                                    {social.location_url && (
-                                                        <a
-                                                            href={social.location_url}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="inline-flex items-center justify-center space-x-2 bg-accent hover:bg-accent-dark text-white px-3 py-1 rounded-md text-xs font-medium transition-colors duration-200 w-full sm:w-auto"
-                                                        >
-                                                            <MapPinIcon className="h-4 w-4" />
-                                                            <span>Google Map</span>
-                                                        </a>
-                                                    )}
-                                                </div>
-
-                                            </div>
-                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800"></div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        );
-                    }
-                    if (link.isEmail) {
-                        return (
-                            <div
-                                key={link.name}
-                                className="relative"
-                                onFocus={() => {
-                                    if (!isEmailPinned) setShowEmail(true);
-                                    setLastClickedTooltip('email');
-                                }}
-                                onBlur={(event) => {
-                                    if (!isEmailPinned && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                                        setShowEmail(false);
-                                    }
-                                }}
-                            >
-                                <button
-                                    type="button"
-                                    onMouseEnter={() => {
-                                        if (!isEmailPinned) setShowEmail(true);
-                                        setLastClickedTooltip('email');
-                                    }}
-                                    onMouseLeave={() => !isEmailPinned && setShowEmail(false)}
-                                    onClick={() => {
-                                        setIsEmailPinned(!isEmailPinned);
-                                        setShowEmail(!isEmailPinned);
-                                        setLastClickedTooltip('email');
-                                    }}
-                                    onKeyDown={(event) => {
-                                        if (event.key === 'Escape') {
-                                            setIsEmailPinned(false);
-                                            setShowEmail(false);
-                                        }
-                                    }}
-                                    className={`p-2 sm:p-2 rounded-md transition-colors duration-200 ${isEmailPinned
-                                        ? 'text-accent bg-accent/10'
-                                        : 'text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent'
-                                        }`}
-                                    aria-label={link.name}
-                                    aria-expanded={showEmail || isEmailPinned}
-                                    aria-controls={emailTooltipId}
-                                >
-                                    {isEmailPinned ? (
-                                        <EnvelopeSolidIcon className="h-5 w-5" />
-                                    ) : (
-                                        <EnvelopeIcon className="h-5 w-5" />
-                                    )}
-                                </button>
-
-                                {/* Email tooltip */}
-                                <AnimatePresence>
-                                    {(showEmail || isEmailPinned) && (
-                                        <motion.div
-                                            id={emailTooltipId}
-                                            role="tooltip"
-                                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                            animate={{ opacity: 1, y: -10, scale: 1 }}
-                                            exit={{ opacity: 0, y: -20, scale: 0.8 }}
-                                            className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-neutral-800 text-white px-4 py-3 rounded-lg text-sm font-medium shadow-lg max-w-[calc(100vw-2rem)] sm:max-w-none sm:whitespace-nowrap ${lastClickedTooltip === 'email' ? 'z-20' : 'z-10'
-                                                }`}
-                                            onMouseEnter={() => {
-                                                if (!isEmailPinned) setShowEmail(true);
-                                                setLastClickedTooltip('email');
-                                            }}
-                                            onMouseLeave={() => !isEmailPinned && setShowEmail(false)}
-                                        >
-                                            <div className="text-center">
-                                                <div className="flex items-center justify-center space-x-2 mb-1">
-                                                    <p className="font-semibold">Email</p>
-                                                    {!isEmailPinned && (
-                                                        <div className="flex items-center space-x-0.5 text-xs text-neutral-400 dark:text-neutral-600 opacity-70">
-                                                            <BookmarkIcon className="h-2.5 w-2.5" />
-                                                            <span className="hidden sm:inline">Click</span>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                                <p className="break-words">{social.email}</p>
-                                                <div className="mt-2">
-                                                    <a
-                                                        href={link.href}
-                                                        className="inline-flex items-center justify-center space-x-2 bg-accent hover:bg-accent-dark text-white px-3 py-1 rounded-md text-xs font-medium transition-colors duration-200 w-full sm:w-auto"
-                                                    >
-                                                        <EnvelopeIcon className="h-4 w-4" />
-                                                        <span className="sm:hidden">Send</span>
-                                                        <span className="hidden sm:inline">Send Email</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800"></div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        );
-                    }
-                    if (link.isWeChat) {
-                        return (
-                            <div
-                                key={link.name}
-                                className="relative"
-                                onFocus={() => {
-                                    setShowWeChat(true);
-                                    setLastClickedTooltip('wechat');
-                                }}
-                                onBlur={(event) => {
-                                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                                        setShowWeChat(false);
-                                        setCopiedWeChat(false);
-                                    }
-                                }}
-                            >
-                                <button
-                                    type="button"
-                                    onMouseEnter={() => {
-                                        setShowWeChat(true);
-                                        setLastClickedTooltip('wechat');
-                                    }}
-                                    onMouseLeave={() => {
-                                        setShowWeChat(false);
-                                        setCopiedWeChat(false);
-                                    }}
-                                    onClick={() => {
-                                        void handleWeChatCopy(link.value);
-                                    }}
-                                    onKeyDown={(event) => {
-                                        if (event.key === 'Escape') {
-                                            setShowWeChat(false);
-                                            setCopiedWeChat(false);
-                                        }
-                                    }}
-                                    className="p-2 sm:p-2 rounded-md transition-colors duration-200 text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent focus:text-accent focus:bg-accent/10"
-                                    aria-label={`${link.name}: ${link.value}`}
-                                    aria-expanded={showWeChat}
-                                    aria-controls={wechatTooltipId}
-                                >
-                                    <IconComponent className="h-5 w-5" />
-                                </button>
-
-                                <AnimatePresence>
-                                    {showWeChat && (
-                                        <motion.div
-                                            id={wechatTooltipId}
-                                            role="tooltip"
-                                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                            animate={{ opacity: 1, y: -10, scale: 1 }}
-                                            exit={{ opacity: 0, y: -20, scale: 0.8 }}
-                                            className={`absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-neutral-800 text-white px-4 py-3 rounded-lg text-sm font-medium shadow-lg max-w-[calc(100vw-2rem)] sm:max-w-none sm:whitespace-nowrap ${lastClickedTooltip === 'wechat' ? 'z-20' : 'z-10'
-                                                }`}
-                                            onMouseEnter={() => {
-                                                setShowWeChat(true);
-                                                setLastClickedTooltip('wechat');
-                                            }}
-                                            onMouseLeave={() => {
-                                                setShowWeChat(false);
-                                                setCopiedWeChat(false);
-                                            }}
-                                        >
-                                            <div className="text-center">
-                                                <div className="flex items-center justify-center space-x-2 mb-1">
-                                                    <p className="font-semibold">WeChat</p>
-                                                </div>
-                                                <p className="break-words">{link.value}</p>
-                                                {copiedWeChat && (
-                                                    <p className="mt-1 text-xs text-neutral-300">Copied</p>
-                                                )}
-                                            </div>
-                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800"></div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        );
-                    }
+                    const Icon = link.icon;
                     return (
                         <a
                             key={link.name}
-                            href={link.href || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 sm:p-2 rounded-md text-neutral-600 dark:text-neutral-600 bg-neutral-100/70 dark:bg-neutral-800/70 hover:text-accent transition-colors duration-200"
+                            href={link.href}
+                            target={link.external ? '_blank' : undefined}
+                            rel={link.external ? 'noopener noreferrer' : undefined}
+                            className={iconLinkClass}
                             aria-label={link.name}
+                            title={link.name}
                         >
-                            <IconComponent className="h-5 w-5" />
+                            <Icon className="h-5 w-5" />
                         </a>
                     );
                 })}
             </div>
 
-            {/* Research Interests */}
             {researchInterests && researchInterests.length > 0 && (
-                <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4 mb-4 sm:mb-6 hover:shadow-lg transition-all duration-200 hover:scale-[1.02]">
-                    <h3 className="font-semibold text-primary mb-3">Research Interests</h3>
+                <section className="mb-4 hidden rounded-md bg-neutral-100 p-4 lg:block dark:bg-neutral-800" aria-labelledby="research-interests-title">
+                    <h2 id="research-interests-title" className="mb-3 font-semibold text-primary">Research Interests</h2>
                     <div className="space-y-2 text-sm text-neutral-700 dark:text-neutral-600">
-                        {researchInterests.map((interest, index) => (
-                            <div key={index}>{interest}</div>
-                        ))}
+                        {researchInterests.map((interest) => <div key={interest}>{interest}</div>)}
                     </div>
-                </div>
+                </section>
             )}
 
-            {/* Like Button */}
             {features.enable_likes && (
                 <div className="flex justify-center">
                     <div className="relative">
-                        <motion.button
+                        <button
+                            type="button"
                             onClick={handleLike}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${hasLiked
-                                ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400'
-                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-600 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer'
+                            className={`flex min-h-11 items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors ${hasLiked
+                                ? 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400'
+                                : 'bg-neutral-100 text-neutral-700 hover:bg-red-50 hover:text-red-600 dark:bg-neutral-800 dark:text-neutral-600 dark:hover:bg-red-900/20 dark:hover:text-red-400'
                                 }`}
                         >
-                            {hasLiked ? (
-                                <HeartSolidIcon className="h-4 w-4" />
-                            ) : (
-                                <HeartIcon className="h-4 w-4" />
-                            )}
+                            {hasLiked ? <HeartSolidIcon className="h-4 w-4" /> : <HeartIcon className="h-4 w-4" />}
                             <span>{hasLiked ? 'Liked' : 'Like'}</span>
-                        </motion.button>
-
-                        {/* Thanks bubble */}
-                        <AnimatePresence>
-                            {showThanks && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                    animate={{ opacity: 1, y: -10, scale: 1 }}
-                                    exit={{ opacity: 0, y: -20, scale: 0.8 }}
-                                    className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg whitespace-nowrap"
-                                >
-                                    Thanks! 😊
-                                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-accent"></div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                        </button>
+                        {showThanks && (
+                            <div role="status" className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-accent px-3 py-2 text-sm font-medium text-white shadow-lg">
+                                Thanks
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
-        </motion.div>
+        </div>
     );
 }

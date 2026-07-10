@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Publication } from '@/types/publication';
@@ -15,11 +12,7 @@ interface SelectedPublicationsProps {
 
 export default function SelectedPublications({ publications, title = 'Selected Publications', enableOnePageMode = false }: SelectedPublicationsProps) {
     return (
-        <motion.section
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-        >
+        <section>
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-serif font-bold text-primary">{title}</h2>
                 <Link
@@ -31,16 +24,13 @@ export default function SelectedPublications({ publications, title = 'Selected P
                 </Link>
             </div>
             <div className="space-y-4">
-                {publications.map((pub, index) => {
+                {publications.map((pub) => {
                     const resourceLinks = getPublicationResources(pub).slice(0, 5);
                     const shortDescription = pub.summary || pub.description;
 
                     return (
-                        <motion.div
+                        <div
                             key={pub.id}
-                            initial={false}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
                             className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
                         >
                             <div className="flex flex-col md:flex-row gap-4 md:gap-6">
@@ -107,10 +97,10 @@ export default function SelectedPublications({ publications, title = 'Selected P
                                     )}
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     );
                 })}
             </div>
-        </motion.section>
+        </section>
     );
 }
