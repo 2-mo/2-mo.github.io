@@ -694,6 +694,12 @@ link = "https://21st.dev/"
 content = "面向设计工程师的 React 组件、模板与主题资源平台。"
 
 [[groups.items]]
+title = "UI-Prompt"
+subtitle = "UI 设计提示词"
+link = "https://github.com/TonnyWong1052/UI-Prompt"
+content = "面向 AI 编程的中英双语 UI 风格提示词模板库，支持样式卡片、一键复制与即时预览。"
+
+[[groups.items]]
 title = "字节 IconPark"
 subtitle = "Icon"
 link = "https://iconpark.oceanengine.com/home"
