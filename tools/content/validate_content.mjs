@@ -389,6 +389,7 @@ function validateCardPage(file, page) {
         const location = `groups[${groupIndex}]`;
         if (!requireRecord(file, location, group)) return;
         requireNonEmptyString(file, `${location}.title`, group.title);
+        validateOptionalString(file, `${location}.category`, group.category);
         if (requireArray(file, `${location}.items`, group.items)) {
           group.items.forEach((item, itemIndex) => validateCardItem(file, `${location}.items[${itemIndex}]`, item));
         }

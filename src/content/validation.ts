@@ -453,6 +453,7 @@ function validateCardGroup(
     if (!requireObject(errors, file, path, group, slug)) return false;
 
     requireNonEmptyString(errors, file, `${path}.title`, group.title, slug);
+    validateOptionalString(errors, file, `${path}.category`, group.category, slug);
     if (requireArray(errors, file, `${path}.items`, group.items, slug)) {
         group.items.forEach((item, index) => {
             validateCardItem(errors, file, slug, `${path}.items[${index}]`, item);

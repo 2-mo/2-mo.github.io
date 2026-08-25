@@ -149,6 +149,7 @@ export interface CardItem {
 
 export interface CardGroup {
     title: string;
+    category?: string;
     items: CardItem[];
 }
 

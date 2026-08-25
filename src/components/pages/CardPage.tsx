@@ -3,6 +3,7 @@ import { ArrowTopRightOnSquareIcon, FolderOpenIcon } from '@heroicons/react/24/o
 import { StarIcon } from '@heroicons/react/20/solid';
 import { CardItem, CardPageConfig } from '@/types/page';
 import { morandiGradient } from '@/lib/utils';
+import PortalPage from '@/components/pages/PortalPage';
 
 const GithubIcon = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -15,6 +16,10 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
     const portalMode = config.variant === 'portal';
     const projectsMode = config.variant === 'projects';
     const experienceMode = config.variant === 'experience';
+
+    if (portalMode) {
+        return <PortalPage config={config} embedded={embedded} />;
+    }
 
     const groupedItems = groupedMode
         ? (() => {

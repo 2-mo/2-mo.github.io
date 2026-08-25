@@ -60,6 +60,14 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
         );
     }
 
+    if (page.type === 'card' && page.config.variant === 'portal') {
+        return (
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <RenderablePage page={page} />
+            </div>
+        );
+    }
+
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <RenderablePage page={page} />

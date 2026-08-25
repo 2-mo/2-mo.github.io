@@ -1,11 +1,12 @@
 type = "card"
-title = "常用导航"
-description = "常用的科研检索、写作、工具与资源导航。"
+title = "Polaris · 科研导航"
+description = "面向科研与创作的检索、写作、开发工具和资源导航。"
 grouped = true
 variant = "portal"
 
 [[groups]]
 title = "科研常用网站"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "Github-Student-Certification-Guide"
@@ -33,6 +34,7 @@ content = "PyTorch 模型解释与归因分析工具库。"
 
 [[groups]]
 title = "搜索引擎 🔎"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "CVPR Author Kit Releases"
@@ -48,6 +50,7 @@ content = "AI 驱动的中文检索与问答。"
 
 [[groups]]
 title = "⏰ DEADLINE"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "AI-DL"
@@ -75,6 +78,7 @@ content = "IEEE 投稿规范、版权与模板入口。"
 
 [[groups]]
 title = "mac 软件集合 🍎"
+category = "系统与软件"
 
 [[groups.items]]
 title = "AppsTorrent"
@@ -120,6 +124,7 @@ content = "开源屏幕录制、产品演示与 walkthrough 制作工具，支�
 
 [[groups]]
 title = "🔍 论文检索"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "AI Paper Collector"
@@ -189,6 +194,7 @@ content = "论文检索与学术工具聚合入口。"
 
 [[groups]]
 title = "模版下载"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "NSFC-LaTeX"
@@ -222,6 +228,7 @@ content = "Elsevier LaTeX 模板与投稿说明。"
 
 [[groups]]
 title = "⚓️ 论文下载"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "OCEANOF"
@@ -255,6 +262,7 @@ content = "DOI 检索与论文下载入口。"
 
 [[groups]]
 title = "🏠 研究机构"
+category = "数据与机构"
 
 [[groups.items]]
 title = "Distill"
@@ -294,6 +302,7 @@ content = "OpenAI 官方研究与产品动态。"
 
 [[groups]]
 title = "🔨 科研工具"
+category = "AI / 开发工具"
 
 [[groups.items]]
 title = "BetterDisplay"
@@ -444,6 +453,7 @@ tags = ["实用软件"]
 
 [[groups]]
 title = "基座工作"
+category = "AI / 开发工具"
 
 [[groups.items]]
 title = "Phy-Agent OS"
@@ -460,6 +470,7 @@ tags = ["实用软件"]
 
 [[groups]]
 title = "🔧 在线工具"
+category = "文档与效率"
 
 [[groups.items]]
 title = "表格生成器"
@@ -599,6 +610,7 @@ tags = ["在线工具"]
 
 [[groups]]
 title = "🌈 绘图配色"
+category = "绘图与设计"
 
 [[groups.items]]
 title = "Seaborn Examples"
@@ -668,6 +680,7 @@ content = "数据可视化项目案例参考。"
 
 [[groups]]
 title = "🧱 常用素材"
+category = "绘图与设计"
 
 [[groups.items]]
 title = "Flaticon"
@@ -761,6 +774,7 @@ content = "特殊符号速查与复制。"
 
 [[groups]]
 title = "📜 辅助写作"
+category = "论文与投稿"
 
 [[groups.items]]
 title = "Overleaf-Workshop"
@@ -818,6 +832,7 @@ content = "英文语法检查与润色。"
 
 [[groups]]
 title = "📟 公众号编辑"
+category = "文档与效率"
 
 [[groups.items]]
 title = "公众号后台"
@@ -845,6 +860,7 @@ content = "公众号排版模板与编辑器。"
 
 [[groups]]
 title = "补充资源"
+category = "文档与效率"
 
 [[groups.items]]
 title = "词云生成参数"
@@ -920,6 +936,7 @@ content = "重庆市科技项目申报与查询入口。"
 
 [[groups]]
 title = "AI / 演示"
+category = "AI / 开发工具"
 
 [[groups.items]]
 title = "minimind-v"
@@ -959,6 +976,7 @@ content = "Naver AI 多模态项目仓库。"
 
 [[groups]]
 title = "数据集"
+category = "数据与机构"
 
 [[groups.items]]
 title = "格物钛"
@@ -986,6 +1004,7 @@ content = "自动驾驶仿真与评测数据集。"
 
 [[groups]]
 title = "画图参考"
+category = "绘图与设计"
 
 [[groups.items]]
 title = "MPL在线手册-2025"
@@ -1006,6 +1025,7 @@ content = "图表设计案例与样式参考。"
 
 [[groups]]
 title = "研究者主页"
+category = "数据与机构"
 
 [[groups.items]]
 title = "Xiaogang Peng"
