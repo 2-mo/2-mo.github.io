@@ -301,6 +301,70 @@ link = "https://openai.com/"
 content = "OpenAI 官方研究与产品动态。"
 
 [[groups]]
+title = "🧰 常用 Skills"
+category = "AI / 开发工具"
+
+[[groups.items]]
+title = "avoid-overkill"
+subtitle = "工程与写作克制"
+link = "https://github.com/yeahjack/avoid-overkill"
+content = "让 Agent 围绕明确问题做最小且可泛化的改动，并用证据组织测试、实验与论文表达。"
+
+[[groups.items]]
+title = "no-negative-echo"
+subtitle = "交付文案收口"
+link = "https://github.com/LB623/no-negative-echo"
+content = "根据最终结果生成标题、注释、commit、PR 与交付说明，避免残留已否决方案。"
+
+[[groups.items]]
+title = "Academic Research Skills (ARS)"
+subtitle = "科研全流程 Pipeline"
+link = "https://github.com/Imbad0202/academic-research-skills"
+content = "覆盖深度研究、论文写作、同行评审与迭代定稿的端到端学术研究工作流。"
+
+[[groups.items]]
+title = "Nature Skills"
+subtitle = "科研 Workbench"
+link = "https://github.com/Yuan1z0825/nature-skills"
+content = "面向 Nature 风格的论文阅读、润色、写作、审稿回复与出版级科研绘图工具集。"
+
+[[groups.items]]
+title = "Scientific Agent Skills"
+subtitle = "科学计算与数据分析"
+link = "https://github.com/K-Dense-AI/scientific-agent-skills"
+content = "覆盖科学数据库、专业 Python 工具和多领域分析流程的即用型 Agent Skills 合集。"
+
+[[groups.items]]
+title = "Auto-Research-In-Sleep (ARIS)"
+subtitle = "自主科研 Autopilot"
+link = "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep"
+content = "通过跨模型评审、创意发现与实验自动化，让 AI Agent 持续推进长时程机器学习研究。"
+
+[[groups.items]]
+title = "AI Research Skills"
+subtitle = "研究工程工具箱"
+link = "https://github.com/Orchestra-Research/AI-Research-SKILLs"
+content = "覆盖数据准备、训练、评测、推理、部署与研究写作的 AI 研究工程 Skills 库。"
+
+[[groups.items]]
+title = "Research Paper Writing Skills"
+subtitle = "论文写作与自审"
+link = "https://github.com/Master-cai/Research-Paper-Writing-Skills"
+content = "为 ML、CV、NLP 论文提供章节结构、段落衔接、证据对齐和审稿人视角的写作指南。"
+
+[[groups.items]]
+title = "PaperSpine"
+subtitle = "论文论证主线"
+link = "https://github.com/WUBING2023/PaperSpine"
+content = "从参考论文与研究证据中提炼中心论点，用蓝图和修订矩阵梳理、重写完整论文。"
+
+[[groups.items]]
+title = "Paper Craft Skills"
+subtitle = "论文制图与解读"
+link = "https://github.com/zsyggg/paper-craft-skills"
+content = "把论文转成出版级方法图、可视化幻灯片和深度解读文章的一站式 Skills 套件。"
+
+[[groups]]
 title = "🔨 科研工具"
 category = "AI / 开发工具"
 
@@ -323,6 +387,13 @@ title = "VS Code"
 subtitle = "IDE"
 link = "https://code.visualstudio.com/"
 content = "跨平台代码编辑与调试环境。"
+tags = ["实用软件"]
+
+[[groups.items]]
+title = "ReDock"
+subtitle = "移动 SSH 终端"
+link = "https://redock.dev/"
+content = "面向 Claude Code、Codex 等终端编程智能体的 iOS SSH/Mosh 客户端，支持 tmux 会话续接。"
 tags = ["实用软件"]
 
 [[groups.items]]
