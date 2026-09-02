@@ -103,6 +103,7 @@ export default function CvSheet({ config }: { config: CvPageConfig }) {
             </div>
 
             <article className="cv-sheet">
+                <h1 className="cv-title">Curriculum Vitae</h1>
                 {/* Header */}
                 <header className="cv-header">
                     <div className="cv-header-cols">
@@ -162,12 +163,14 @@ export default function CvSheet({ config }: { config: CvPageConfig }) {
                     ))}
                 </ol>
 
-                <SectionTitle>Additional Selected Publications</SectionTitle>
-                <ol className="cv-publist">
-                    {config.publications.additional.map((p, i) => (
-                        <PubItem key={i} index={i + 1} pub={p} />
-                    ))}
-                </ol>
+                <section className="cv-additional-publications">
+                    <SectionTitle>Additional Selected Publications</SectionTitle>
+                    <ol className="cv-publist">
+                        {config.publications.additional.map((p, i) => (
+                            <PubItem key={i} index={i + 1} pub={p} />
+                        ))}
+                    </ol>
+                </section>
 
                 {/* Projects */}
                 <SectionTitle>Selected Research Projects</SectionTitle>
