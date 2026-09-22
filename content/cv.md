@@ -32,6 +32,7 @@ Expected graduation: Jun. 2027
 2. Mengjingcheng Mo, Xinyang Tong, Mingpi Tan, Jiaxu Leng*, Jiankang Zheng, Yiran Liu, Haosheng Chen, Ji Gan, Weisheng Li, and Xinbo Gao*, "A2Seek: Towards Reasoning-Centric Benchmark for Aerial Anomaly Understanding," Advances in Neural Information Processing Systems, Datasets and Benchmarks Track (NeurIPS D&B), 2025. CCF-A; Reasoning-Centric Benchmark.
 3. Mengjingcheng Mo, Jiankang Zheng, Jiaxu Leng*, and Xinbo Gao, "Retrieval-Guided Contextual Inference for Training-Free Video Anomaly Detection in Low-Light Scenarios," ACM International Conference on Multimedia Retrieval (ICMR), 2026. CCF-B; In-Context Learning.
 4. Jiaxu Leng, Jiankang Zheng, Mengjingcheng Mo, Zhanjie Wu, Haosheng Chen, Ji Gan, and Xinbo Gao*, "Linguistic Relative Policy Optimization for Video Anomaly Reasoning," International Conference on Machine Learning (ICML), 2026. CCF-A.
+5. Jiankang Zheng, Mengjingcheng Mo* (corresponding author, project lead), Jiaxu Leng, Mingpi Tan, Zhanjie Wu, Ji Gan, Haosheng Chen, and Xinbo Gao, "Training-Free Video Anomaly Detection via Uncertainty-Guided Hierarchical Retrieval with Vision-Language Models," IEEE Transactions on Multimedia (TMM), 2026. Accepted; Hierarchical Retrieval.
 
 ### Additional Selected Publications
 

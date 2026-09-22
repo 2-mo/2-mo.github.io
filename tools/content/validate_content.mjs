@@ -471,7 +471,7 @@ function validateBibFile(file) {
       }
     }
     for (const field of urlBibFields) {
-      if (tags[field] !== undefined) validateHttpUrl(file, `${location}.${field}`, cleanBibValue(tags[field]));
+      if (tags[field] !== undefined) validateHttpUrl(file, `${location}.${field}`, cleanBibValue(tags[field]), { allowRootRelative: field === 'pdf' });
     }
     if (tags.selected !== undefined && !['true', 'false', 'yes', 'no'].includes(cleanBibValue(tags.selected).toLowerCase())) {
       addError(file, `${location}.selected`, 'expected boolean-like value true/false/yes/no.');
