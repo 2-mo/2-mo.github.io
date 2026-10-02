@@ -15,11 +15,13 @@ const RECENT_STORAGE_KEY = 'prism:polaris:recent:v1';
 const RECENT_LIMIT = 8;
 const CATEGORY_ORDER = [
     '论文与投稿',
-    'AI / 开发工具',
+    '教程与指南',
+    'AI 与开发',
     '文档与效率',
     '绘图与设计',
-    '数据与机构',
+    '数据与学术动态',
     '系统与软件',
+    '其他',
 ] as const;
 
 interface PortalCategory {
