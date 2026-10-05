@@ -188,13 +188,14 @@ function validatePublicAsset(file, location, value, options = {}) {
 }
 
 function validateHttpUrl(file, location, value, options = {}) {
-  const { required = false, allowRootRelative = false, allowMailto = false } = options;
+  const { required = false, allowRootRelative = false, allowMailto = false, allowAppRoute = false } = options;
   if (value === undefined || value === '') {
     if (required) addError(file, location, 'expected URL.');
     return;
   }
   if (!requireNonEmptyString(file, location, value)) return;
   if (allowRootRelative && value.startsWith('/')) {
+    if (allowAppRoute && !hasPathTraversal(value) && existsSync(path.join(repoRoot, 'src/app', value, 'page.tsx'))) return;
     validatePublicAsset(file, location, value);
     return;
   }
@@ -314,7 +315,7 @@ function validateNavigation(config) {
         }
       }
     } else if (item.type === 'link') {
-      validateHttpUrl(file, `${location}.href`, item.href, { allowRootRelative: true, allowMailto: true });
+      validateHttpUrl(file, `${location}.href`, item.href, { allowRootRelative: true, allowMailto: true, allowAppRoute: true });
     }
   }
 }
@@ -487,6 +488,50 @@ function validateBibFile(file) {
   }
 }
 
+function validateNotes() {
+  const file = 'content/notes.toml';
+  const data = parseTomlFile(file);
+  if (!data || !requireArray(file, 'notes', data.notes)) return;
+  const slugs = new Set();
+  const routes = new Set(['/notes/', '/projects/', '/research-links/']);
+  const documents = [];
+  for (const [index, note] of data.notes.entries()) {
+    const location = `notes[${index}]`;
+    if (!requireRecord(file, location, note)) continue;
+    for (const field of ['slug', 'title', 'summary', 'category', 'period', 'published', 'updated']) {
+      requireNonEmptyString(file, `${location}.${field}`, note[field]);
+    }
+    if (typeof note.slug !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(note.slug)) {
+      addError(file, `${location}.slug`, 'expected a lowercase hyphenated slug.');
+      continue;
+    }
+    if (slugs.has(note.slug)) addError(file, `${location}.slug`, 'duplicate note slug.');
+    slugs.add(note.slug);
+    routes.add(`/notes/${note.slug}/`);
+    for (const field of ['published', 'updated']) {
+      const value = note[field];
+      const date = new Date(`${value}T00:00:00Z`);
+      if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value) || Number.isNaN(date.valueOf()) || date.toISOString().slice(0, 10) !== value) {
+        addError(file, `${location}.${field}`, 'expected a valid YYYY-MM-DD date.');
+      }
+    }
+    if (note.updated < note.published) addError(file, location, 'updated date precedes publication.');
+    const source = `notes/${note.slug}.md`;
+    validateContentSource(file, `${location}.slug`, source, { required: true });
+    if (contentFileExists(source)) documents.push([`content/${source}`, readText(`content/${source}`)]);
+  }
+  for (const [source, markdown] of documents) {
+    if (!markdown.trim()) addError(source, 'body', 'empty article.');
+    // All local article links use simple root-relative URLs.
+    for (const [, url] of markdown.matchAll(/\]\((\/[^\s)]+)\)/g)) {
+      const pathname = decodeURIComponent(url.split(/[?#]/)[0]);
+      if (!routes.has(pathname) && !existsSync(path.join(repoRoot, 'public', pathname))) {
+        addError(source, 'link', `missing local destination "${url}".`);
+      }
+    }
+  }
+}
+
 const parsedConfig = parseTomlFile(configFile);
 if (parsedConfig) {
   validateNavigation(parsedConfig);
@@ -501,6 +546,7 @@ if (parsedConfig) {
 }
 
 validateBibFile('content/publications.bib');
+validateNotes();
 
 if (errors.length > 0) {
   console.error(`Content validation failed with ${errors.length} error${errors.length === 1 ? '' : 's'}:`);

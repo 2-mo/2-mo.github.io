@@ -849,6 +849,18 @@ link = "https://picwish.cn/"
 content = "在线抠图与背景替换。"
 
 [[groups.items]]
+title = "AGPicCompress"
+subtitle = "图片压缩"
+link = "https://github.com/aoguai/AGPicCompress"
+content = "支持 JPEG 与 PNG 图片压缩的开源 Python 工具。"
+
+[[groups.items]]
+title = "LiYing"
+subtitle = "证件照处理"
+link = "https://github.com/aoguai/LiYing"
+content = "自动化证件照后期处理工具，支持抠图、换背景与尺寸调整。"
+
+[[groups.items]]
 title = "Perfect Pixel"
 subtitle = "像素画修复"
 link = "https://github.com/theamusing/perfectPixel"

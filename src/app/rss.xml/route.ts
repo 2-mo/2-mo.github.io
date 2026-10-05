@@ -2,6 +2,7 @@ import { getConfig } from '@/content/config';
 import { getBibtexContent, getTomlContent } from '@/content/files';
 import { parseBibTeX } from '@/publications/bibtexParser';
 import { absoluteUrl } from '@/site/urls';
+import { getNotes, getNotePath } from '@/content/notes';
 
 export const dynamic = 'force-static';
 
@@ -76,7 +77,15 @@ export function GET() {
             guid: `publication-${publication.id}`,
         }));
 
-    const body = buildRss([...newsItems, ...publicationItems].slice(0, 20));
+    const noteItems: FeedItem[] = getNotes().map((note) => ({
+        title: note.title,
+        description: note.summary,
+        link: absoluteUrl(getNotePath(note.slug)),
+        date: `${note.published}T00:00:00+08:00`,
+        guid: absoluteUrl(getNotePath(note.slug)),
+    }));
+
+    const body = buildRss([...noteItems, ...newsItems, ...publicationItems].slice(0, 20));
 
     return new Response(body, {
         headers: {

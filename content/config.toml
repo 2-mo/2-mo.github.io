@@ -2,7 +2,7 @@
 title = "Mengjingcheng Mo"
 description = "PhD candidate at Chongqing University of Posts and Telecommunications focusing on agentic anomaly understanding."
 favicon = "/DALL.svg"
-last_updated = "May 25, 2026"
+last_updated = "October 6, 2026"
 
 [author]
 name = "Mengjingcheng Mo (莫梦竟成)"
@@ -53,6 +53,12 @@ title = "Projects"
 type = "page"
 target = "projects"
 href = "/projects"
+
+[[navigation]]
+title = "Notes"
+type = "link"
+target = "notes"
+href = "/notes"
 
 [[navigation]]
 title = "CV"

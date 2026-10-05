@@ -89,6 +89,10 @@ Supported page types:
 *   `card`: Renders a list of cards (Great for Projects, Awards).
 *   `publication`: Renders the full publications list with filters.
 
+### 5. Research notes
+
+`/notes/` lists the articles registered in `content/notes.toml`. Each entry has a unique hyphenated `slug`, title, summary, category, original note period, and ISO publication/update dates. Store its Markdown at `content/notes/<slug>.md` and figures under `public/notes/<slug>/`. Level-two headings form the article contents; tables and LaTeX math are supported. Notes have independent static routes, sitemap entries, and RSS items, so only the index needs a navigation link. Run `npm run validate:content` and `npm run build` after adding an article.
+
 ## 📦 Deployment
 
 PRISM is optimized for static deployment.

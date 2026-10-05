@@ -1,0 +1,53 @@
+[[notes]]
+slug = "revisiting-papers"
+title = "与论文重修旧好"
+summary = "小目标检测阅读单、领域调研和论文汇报提纲。"
+category = "与 ×× 重修旧好"
+period = "2022–2024"
+published = "2026-10-06"
+updated = "2026-10-06"
+
+[[notes]]
+slug = "revisiting-documents"
+title = "与文档重修旧好"
+summary = "LaTeX、Markdown 编辑与版本管理工具。"
+category = "与 ×× 重修旧好"
+period = "2024"
+published = "2026-10-06"
+updated = "2026-10-06"
+
+[[notes]]
+slug = "revisiting-code"
+title = "与代码重修旧好"
+summary = "VS Code 插件、Python 环境检查和复现要点。"
+category = "与 ×× 重修旧好"
+period = "2024–2025"
+published = "2026-10-06"
+updated = "2026-10-06"
+
+[[notes]]
+slug = "revisiting-figures"
+title = "与绘图重修旧好"
+summary = "配色与背景工具，框架图的信息组织。"
+category = "与 ×× 重修旧好"
+period = "2024"
+published = "2026-10-06"
+updated = "2026-10-06"
+
+[[notes]]
+slug = "paper-reading-and-sharing"
+title = "论文分享中的几个问题"
+summary = "图表讲解、提问方式和自己的工作怎么汇报。"
+category = "组会札记"
+period = "2023–2025"
+published = "2026-10-05"
+updated = "2026-10-06"
+
+[[notes]]
+slug = "video-anomaly-detection-guide"
+title = "视频异常检测与理解：入门、数据集与 LLM/VLM 阅读路线"
+summary = "任务设置、数据集、评价协议，以及经典方法和 LLM/VLM 工作对照。"
+category = "研究入门与论文笔记"
+period = "2024–2025"
+published = "2026-10-05"
+updated = "2026-10-06"

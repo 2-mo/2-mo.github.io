@@ -83,7 +83,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
   const iconItems = items.filter((item) => item.icon);
   const isPageActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
   const isNavItemActive = (item: SiteConfig['navigation'][number]) => {
-    if (enableOnePageMode) {
+    if (enableOnePageMode && item.type !== 'link') {
       return activeHash === `#${item.target}` || (!activeHash && item.target === 'about');
     }
     return isPageActive(item.href);
@@ -187,13 +187,9 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
               <div className="ml-10 flex items-center space-x-8">
                 <div className="flex items-baseline space-x-8">
                   {textItems.map((item) => {
-                    const isActive = enableOnePageMode
-                      ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
-                      : (item.href === '/'
-                        ? pathname === '/'
-                        : pathname.startsWith(item.href));
+                    const isActive = isNavItemActive(item);
 
-                    const href = enableOnePageMode
+                    const href = enableOnePageMode && item.type !== 'link'
                       ? `/#${item.target}`
                       : item.href;
 
@@ -202,7 +198,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         key={item.title}
                         href={href}
                         prefetch={true}
-                        onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                        onClick={() => enableOnePageMode && item.type !== 'link' && setActiveHash(`#${item.target}`)}
                         className={cn(
                           'relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm',
                           isActive
@@ -225,11 +221,11 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                   {iconItems.map((item) => (
                     <NavIconLink
                       key={item.title}
-                      href={enableOnePageMode ? `/#${item.target}` : item.href}
+                      href={enableOnePageMode && item.type !== 'link' ? `/#${item.target}` : item.href}
                       title={item.title}
                       name={item.icon}
                       isActive={isNavItemActive(item)}
-                      onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
+                      onClick={() => enableOnePageMode && item.type !== 'link' && setActiveHash(`#${item.target}`)}
                     />
                   ))}
                   <ThemeToggle />
@@ -269,13 +265,9 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {textItems.map((item) => {
-              const isActive = enableOnePageMode
-                ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
-                : (item.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(item.href));
+              const isActive = isNavItemActive(item);
 
-              const href = enableOnePageMode
+              const href = enableOnePageMode && item.type !== 'link'
                 ? (item.href === '/' ? '/' : `/#${item.target}`)
                 : item.href;
 
@@ -286,7 +278,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                     prefetch={true}
                     onClick={() => {
                       setMobileOpen(false);
-                      if (enableOnePageMode) {
+                      if (enableOnePageMode && item.type !== 'link') {
                         setActiveHash(item.href === '/' ? '' : `#${item.target}`);
                       }
                     }}
@@ -304,7 +296,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
             })}
             {iconItems.map((item) => {
               const isActive = isNavItemActive(item);
-              const href = enableOnePageMode ? `/#${item.target}` : item.href;
+              const href = enableOnePageMode && item.type !== 'link' ? `/#${item.target}` : item.href;
               return (
                 <div key={item.title}>
                   <Link
@@ -312,7 +304,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                     prefetch={false}
                     onClick={() => {
                       setMobileOpen(false);
-                      if (enableOnePageMode) setActiveHash(`#${item.target}`);
+                      if (enableOnePageMode && item.type !== 'link') setActiveHash(`#${item.target}`);
                     }}
                     className={cn(
                       'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
