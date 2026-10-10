@@ -7,7 +7,7 @@ import {
     FolderOpenIcon,
     StarIcon as StarOutlineIcon,
 } from '@heroicons/react/24/outline';
-import { StarIcon as StarSolidIcon } from '@heroicons/react/20/solid';
+import { CheckBadgeIcon, StarIcon as StarSolidIcon } from '@heroicons/react/20/solid';
 import { CardGroup, CardItem, CardPageConfig } from '@/types/page';
 
 const FAVORITES_STORAGE_KEY = 'prism:polaris:favorites:v1';
@@ -114,6 +114,14 @@ function PortalCard({
                 <h4 className="line-clamp-2 text-sm font-semibold leading-snug text-primary">
                     {item.title}
                 </h4>
+                {item.recommended && (
+                    <span
+                        className="mt-0.5 shrink-0 text-amber-500 dark:text-amber-400"
+                        title="站长推荐"
+                    >
+                        <CheckBadgeIcon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                )}
                 {link && (
                     <ArrowTopRightOnSquareIcon
                         className="mt-0.5 h-3.5 w-3.5 shrink-0 text-neutral-400 transition-colors group-hover:text-accent dark:text-neutral-600"
@@ -148,7 +156,7 @@ function PortalCard({
                     rel="noopener noreferrer"
                     onClick={() => onVisit(link)}
                     className="block h-full rounded-lg focus-visible:outline-none"
-                    aria-label={`打开 ${item.title}（新窗口）`}
+                    aria-label={`打开 ${item.title}${item.recommended ? '（推荐）' : ''}（新窗口）`}
                 >
                     {body}
                 </a>

@@ -124,10 +124,11 @@ function validateOptionalBoolean(
     errors: string[],
     file: string,
     path: string,
-    value: unknown
+    value: unknown,
+    slug?: string
 ): void {
     if (value !== undefined && typeof value !== 'boolean') {
-        addError(errors, file, path, 'expected boolean when provided.');
+        addError(errors, file, path, 'expected boolean when provided.', slug);
     }
 }
 
@@ -427,6 +428,7 @@ function validateCardItem(
     validateOptionalString(errors, file, `${path}.status`, item.status, slug);
     validateOptionalString(errors, file, `${path}.source`, item.source, slug);
     validateOptionalString(errors, file, `${path}.repo`, item.repo, slug);
+    validateOptionalBoolean(errors, file, `${path}.recommended`, item.recommended, slug);
     if (item.metrics !== undefined) {
         if (requireArray(errors, file, `${path}.metrics`, item.metrics, slug)) {
             item.metrics.forEach((metric, index) => {

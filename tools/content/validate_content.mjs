@@ -410,6 +410,7 @@ function validateCardItem(file, location, item) {
   validateOptionalString(file, `${location}.status`, item.status);
   validateOptionalString(file, `${location}.source`, item.source);
   validateOptionalString(file, `${location}.logo`, item.logo);
+  validateOptionalBoolean(file, `${location}.recommended`, item.recommended);
   if (item.tags !== undefined) validateStringArray(file, `${location}.tags`, item.tags);
   if (item.metrics !== undefined) {
     if (requireArray(file, `${location}.metrics`, item.metrics)) {

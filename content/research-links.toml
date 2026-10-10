@@ -900,6 +900,7 @@ title = "Ray.so"
 subtitle = "代码截图"
 link = "https://ray.so/"
 content = "简洁风格代码截图工具。"
+recommended = true
 tags = ["格式转换"]
 
 [[groups.items]]

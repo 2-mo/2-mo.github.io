@@ -135,6 +135,7 @@ export interface CardItem {
     date?: string;
     content?: string;
     tags?: string[];
+    recommended?: boolean;
     link?: string;
     image?: string;
     logo?: string;
