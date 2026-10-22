@@ -944,6 +944,22 @@ link = "https://818ps.com/"
 content = "新媒体封面与海报设计。"
 
 [[groups]]
+title = "动效与交互"
+category = "绘图与设计"
+
+[[groups.items]]
+title = "MotionPromptGallery"
+subtitle = "动态图形画廊"
+link = "https://github.com/mikenevermiss/motionpromptgallery"
+content = "AI 动态图形作品与原始提示词画廊，提供动效灵感与创作参考。"
+
+[[groups.items]]
+title = "Motion Prompt"
+subtitle = "动效名称字典"
+link = "https://github.com/showheyohtaki/motion-prompt"
+content = "收录 144 个动效与视觉术语，配动态示例、含义和提问范例，帮助准确描述动画。"
+
+[[groups]]
 title = "数据集与采集"
 category = "数据与学术动态"
 
@@ -1159,3 +1175,37 @@ subtitle = "在线工具"
 link = "https://www.agiranker.com/"
 content = "AgiRanker 网站入口。"
 tags = ["在线工具"]
+
+[[groups]]
+title = "站内研究笔记"
+category = "研究阅读"
+
+[[groups.items]]
+title = "视频异常检测与理解"
+subtitle = "个人主页研究笔记"
+link = "https://2-mo.github.io/notes/video-anomaly-detection-guide/"
+content = "任务设置、数据集与 LLM/VLM 阅读路线。"
+
+[[groups.items]]
+title = "语言模型与自动驾驶"
+subtitle = "个人主页研究笔记"
+link = "https://2-mo.github.io/notes/driving-with-language-reading-list/"
+content = "2022–2025 年文献整理，保留原整理者署名。"
+
+[[groups.items]]
+title = "世界模型与自动驾驶"
+subtitle = "个人主页研究笔记"
+link = "https://2-mo.github.io/notes/world-model-reading-list/"
+content = "驾驶场景生成与通用世界模型历史阅读清单。"
+
+[[groups.items]]
+title = "医学图像与主动学习"
+subtitle = "个人主页研究笔记"
+link = "https://2-mo.github.io/notes/medical-active-learning-reading-list/"
+content = "主动学习与任务适配的早期阅读札记。"
+
+[[groups.items]]
+title = "组会与论文分享"
+subtitle = "个人主页研究笔记"
+link = "https://2-mo.github.io/notes/paper-reading-and-sharing/"
+content = "汇报准备与 2024–2025 年八次论文分享索引。"

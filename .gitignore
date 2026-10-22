@@ -30,3 +30,6 @@ __pycache__/
 
 # local duplicate crawler output; the deployed site uses tracked content data
 google_scholar_crawler/
+
+# Local source history and snapshots; never publish or commit.
+.local-archive/

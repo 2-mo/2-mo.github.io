@@ -135,6 +135,10 @@ LAVAD 使用预训练模型生成帧描述，通过跨模态相似性清理噪�
 
 MCANet 将音频语言模型也纳入流程，对视觉和音频描述分别进行清理，再用语言模型整合时间动态并细化分数。它延续了描述到评分的思路，同时引入额外模态。[MCANet 原文](https://link.springer.com/chapter/10.1007/978-3-031-78125-4_25)
 
+![MCANet 方法示意图](/notes/video-anomaly-detection-guide/mcanet-fig.png)
+
+*方法图来自 OpenVisualLab 原阅读记录，与本节方法条目对应。*
+
 ### VERA：用语言交互优化指导性问题
 
 VERA 把指导模型判断异常的问题视为可优化的对象。它利用带粗标签的数据，通过学习者与优化器模型之间的语言交互改进问题，再把这些问题放进推理提示，生成片段分数并结合上下文细化。[VERA 原文](https://arxiv.org/abs/2412.01095)
@@ -201,3 +205,9 @@ VANE-Bench 包含生成视频中的异常变化、外观不一致、穿透、消
 | CUVA | [arXiv](https://arxiv.org/abs/2405.00181) | [GitHub](https://github.com/fesvhtr/CUVA) |
 | VANE-Bench | [arXiv](https://arxiv.org/abs/2406.10326) | [项目页](https://hananshafi.github.io/vane-benchmark/) |
 | AnomalyCLIP（图像方向） | [arXiv](https://arxiv.org/abs/2310.18961) | [GitHub](https://github.com/zqhang/AnomalyCLIP) |
+
+## 记录来源与延伸阅读
+
+本文已吸收 OpenVisualLab 的 VAD、UVAD 与 LLM4AD 阅读记录；2026-10-22 整合时补入 MCANet 原图，继续复用已有的 LAVAD、HAWK 与 VERA 图。图示与方法判断对应原笔记时期。
+
+来源：[LLM4AD 原记录](https://github.com/OpenVisualLab/openvisuallab.github.io/blob/fb1c6c144b87894535f112871d887db0e6af72d4/src/archiver/video_anomaly_detection/LLM4AD.md)。相关主题可接着看[世界模型](/notes/world-model-reading-list/)与[语言模型用于自动驾驶](/notes/driving-with-language-reading-list/)。

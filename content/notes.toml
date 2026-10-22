@@ -23,7 +23,7 @@ summary = "VS Code 插件、Python 环境检查和复现要点。"
 category = "与 ×× 重修旧好"
 period = "2024–2025"
 published = "2026-10-06"
-updated = "2026-10-06"
+updated = "2026-10-22"
 
 [[notes]]
 slug = "revisiting-figures"
@@ -41,7 +41,7 @@ summary = "图表讲解、提问方式和自己的工作怎么汇报。"
 category = "组会札记"
 period = "2023–2025"
 published = "2026-10-05"
-updated = "2026-10-06"
+updated = "2026-10-22"
 
 [[notes]]
 slug = "video-anomaly-detection-guide"
@@ -50,4 +50,103 @@ summary = "任务设置、数据集、评价协议，以及经典方法和 LLM/V
 category = "研究入门与论文笔记"
 period = "2024–2025"
 published = "2026-10-05"
-updated = "2026-10-06"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-clover-20241028"
+title = "CLOVER：生成预期与闭环视觉运动控制"
+summary = "CLOVER 论文分享摘要与方法图。"
+category = "组会论文分享"
+period = "2024-10-28"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-drivelm-20241104"
+title = "DriveLM：以图结构问答连接感知、预测与规划"
+summary = "DriveLM 论文分享记录与图结构推理笔记。"
+category = "组会论文分享"
+period = "2024-11-04"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-vista-20241111"
+title = "VISTA：通用驾驶世界模型"
+summary = "VISTA 驾驶世界模型论文分享与相关阅读。"
+category = "组会论文分享"
+period = "2024-11-11"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-sparsedrive-20241118"
+title = "SparseDrive：稀疏场景表示与端到端自动驾驶"
+summary = "SparseDrive 的对称稀疏感知、并行运动规划与分享摘要。"
+category = "组会论文分享"
+period = "2024-11-18"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-deer-vla-20241202"
+title = "DeeR-VLA：动态推理的视觉语言动作模型"
+summary = "DeeR-VLA 论文分享与动态推理笔记。"
+category = "组会论文分享"
+period = "2024-12-02"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-causal-cog-20241216"
+title = "Causal-CoG：用于多模态推理的因果上下文生成"
+summary = "Causal-CoG 论文分享摘要、方法图与相关工作。"
+category = "组会论文分享"
+period = "2024-12-16"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-drive-wm-20241230"
+title = "Drive-WM：面向自动驾驶的多视角世界模型"
+summary = "Drive-WM 世界模型、可控视频生成与规划评估的分享笔记。"
+category = "组会论文分享"
+period = "2024-12-30"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "reading-ecot-20250106"
+title = "ECoT：机器人控制中的具身思维链"
+summary = "ECoT 论文分享与具身推理链笔记。"
+category = "组会论文分享"
+period = "2025-01-06"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "driving-with-language-reading-list"
+title = "语言模型与自动驾驶：历史阅读清单"
+summary = "2022–2025 年语言模型、视觉语言模型与自动驾驶文献整理。"
+category = "专题阅读清单"
+period = "2024"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "world-model-reading-list"
+title = "世界模型与自动驾驶：历史阅读清单"
+summary = "世界模型基础、驾驶场景生成、评估与通用模型补充阅读。"
+category = "专题阅读清单"
+period = "2024–2025"
+published = "2026-10-22"
+updated = "2026-10-22"
+
+[[notes]]
+slug = "medical-active-learning-reading-list"
+title = "医学图像与主动学习：阅读札记"
+summary = "医学图像分割、主动学习与任务适配的早期文献记录。"
+category = "专题阅读清单"
+period = "2024"
+published = "2026-10-22"
+updated = "2026-10-22"
