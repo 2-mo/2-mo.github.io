@@ -419,6 +419,12 @@ link = "https://github.com/zsyggg/paper-craft-skills"
 content = "把论文转成出版级方法图、可视化幻灯片和深度解读文章的一站式 Skills 套件。"
 
 [[groups.items]]
+title = "Lieflat Charts"
+subtitle = "交互图表与报告"
+link = "https://github.com/larashero3-dotcom/lieflat-charts"
+content = "面向 AI Agent 的数据可视化 Skill，可生成交互式 HTML 图表、演示文稿和整页报告。"
+
+[[groups.items]]
 title = "caveman"
 subtitle = "LLM Token 压缩"
 link = "https://github.com/JuliusBrussee/caveman"
