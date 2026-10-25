@@ -5,7 +5,7 @@ const eslintConfig = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: [".next/**", "out/**", "google_scholar_crawler/.venv/**"],
+    ignores: [".next/**", "out/**", ".local-archive/**", "google_scholar_crawler/.venv/**"],
   },
 ];
 
